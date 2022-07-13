@@ -1,0 +1,8 @@
+<!--index.wxml-->
+<view class="container">
+
+  <view>
+    <button bindtap="open">打开日历</button>
+    <calendar id="calendar" isOpen="{{false}}" selected="{{selectedDays}}" lockDay="{{lockday}}" bind:select="cmfclick" bind:checkall="checkall"></calendar>
+  </view>
+</view>
