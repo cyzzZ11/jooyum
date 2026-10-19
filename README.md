@@ -43,6 +43,16 @@ npm run pack       # 将 dist/ 打包为部署 zip
 > 生产部署：先 `npm run build`，再部署 `dist/` 目录；或直接 `npm run start`。
 > 端口可通过环境变量 `PORT` / `DEPLOY_RUN_PORT` 覆盖。
 
+## 首页首屏
+
+- 首屏由「轮播 + 新闻资讯」独占一屏（高度 = 视口高度 − 吸顶导航高度），
+  顶部导航保持吸顶；不使用 `scroll-snap` 或滚轮劫持，滚动行为保持原生。
+- 首屏高度通过 `--home-viewport-h` / `--home-nav-h` 两个 CSS 变量由 JS 测量后下发，
+  窗口尺寸变化时自动更新；窗口较矮（≤700px）时自动精简资讯条数，保证首屏仍是一屏。
+- 科技感视觉层（均为 CSS 实现，并支持 `prefers-reduced-motion`）：
+  顶部滚动进度条、首屏极光光晕 + 科技网格 + 扫描线、轮播 HUD 边角、
+  科技关键词跑马灯、活动/数据卡片光标跟随光斑、标题渐变与动效分隔线。
+
 ## 路由与旧链接
 
 - 新路由为无扩展名路径，例如 `/gaochuangyuan`、`/platforms/tongji`、

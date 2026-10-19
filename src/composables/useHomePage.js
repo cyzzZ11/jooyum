@@ -12,7 +12,9 @@ export function useHomePage() {
   const appVisible = ref(false)
   const splashSeconds = ref(Math.ceil(SPLASH_AUTO_HIDE / 1000))
   const splashProgress = ref(0)
+  const scrollProgress = ref(0)
 
+  let scrollFrame = null
   let countdownTimer = null
   let revealTimer = null
   let hideDisplayTimer = null
@@ -320,6 +322,33 @@ export function useHomePage() {
     }
   }
 
+  // ===== 首屏高度：扣掉吸顶导航 =====
+  function initViewportFit() {
+    const nav = document.querySelector('.nav')
+    const sync = () => {
+      const height = nav ? nav.offsetHeight : 64
+      document.documentElement.style.setProperty('--home-nav-h', `${height}px`)
+      document.documentElement.style.setProperty('--home-viewport-h', `${document.documentElement.clientHeight}px`)
+    }
+    sync()
+    on(window, 'resize', sync)
+  }
+
+  // ===== 顶部滚动进度条 =====
+  function initScrollProgress() {
+    const update = () => {
+      scrollFrame = null
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      scrollProgress.value = max > 0 ? Math.min(window.scrollY / max, 1) : 0
+    }
+    const schedule = () => {
+      if (!scrollFrame) scrollFrame = requestAnimationFrame(update)
+    }
+    on(window, 'scroll', schedule, { passive: true })
+    on(window, 'resize', schedule)
+    update()
+  }
+
   // ===== 平滑滚动 =====
   function initSmoothScroll() {
     on(document, 'click', (event) => {
@@ -349,6 +378,8 @@ export function useHomePage() {
     const grid = document.getElementById('activityGrid')
     if (grid) grid.innerHTML += grid.innerHTML
 
+    initViewportFit()
+    initScrollProgress()
     initCarousel()
     initMobileNav()
     initDropdowns()
@@ -372,6 +403,9 @@ export function useHomePage() {
   })
 
   onBeforeUnmount(() => {
+    if (scrollFrame) cancelAnimationFrame(scrollFrame)
+    document.documentElement.style.removeProperty('--home-nav-h')
+    document.documentElement.style.removeProperty('--home-viewport-h')
     clearInterval(countdownTimer)
     clearTimeout(revealTimer)
     clearTimeout(hideDisplayTimer)
@@ -386,5 +420,5 @@ export function useHomePage() {
     document.removeEventListener('keydown', onKeydown)
   })
 
-  return { splashVisible, appVisible, splashSeconds, splashProgress, hideSplash }
+  return { splashVisible, appVisible, splashSeconds, splashProgress, scrollProgress, hideSplash }
 }

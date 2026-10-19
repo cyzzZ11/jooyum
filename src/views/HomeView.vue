@@ -1,6 +1,10 @@
 <template>
-  <div class="page page--home">
+  <div class="page page--home" :class="{ 'fp-on': fpEnabled }">
 <!-- 首屏弹窗 -->
+    <div class="scroll-progress" aria-hidden="true">
+      <span :style="{ transform: `scaleX(${progressValue})` }"></span>
+    </div>
+
     <div class="splash-modal" id="splashModal" :class="{ 'is-hidden': !splashVisible }" :aria-hidden="String(!splashVisible)">
       <div class="splash-modal__overlay" @click="hideSplash"></div>
       <div class="splash-modal__content">
@@ -13,27 +17,29 @@
         <div class="splash-modal__image-wrap">
           <div class="splash-modal__image"></div>
           <div class="splash-modal__gradient"></div>
-          <button
-            type="button"
-            class="splash-countdown"
-            :aria-label="splashSeconds + ' 秒后自动进入，点击立即进入'"
-            @click="hideSplash"
-          >
-            <span class="splash-countdown__ring">
-              <svg viewBox="0 0 44 44" aria-hidden="true">
-                <circle class="splash-countdown__track" cx="22" cy="22" r="18"></circle>
-                <circle class="splash-countdown__bar" cx="22" cy="22" r="18" :style="{ strokeDashoffset: 113.1 * splashProgress }"></circle>
-              </svg>
-              <span class="splash-countdown__num">{{ splashSeconds }}</span>
-            </span>
-            <span class="splash-countdown__text">秒后自动进入</span>
-          </button>
           <div class="splash-modal__text">
             <p class="splash-modal__sub">TECHNOLOGY INNOVATION PLATFORM</p>
             <h2 class="splash-modal__title">赋能创新 · 链接未来</h2>
             <p class="splash-modal__desc">聚焦产学研融合，助力科技成果转化</p>
           </div>
         </div>
+        <button
+          type="button"
+          class="splash-countdown"
+          :aria-label="splashSeconds + ' 秒后自动进入，点击立即进入'"
+          @click="hideSplash"
+        >
+          <span class="splash-countdown__ring">
+            <svg viewBox="0 0 44 44" aria-hidden="true">
+              <circle class="splash-countdown__track" cx="22" cy="22" r="18"></circle>
+              <circle class="splash-countdown__bar" cx="22" cy="22" r="18" :style="{ strokeDashoffset: 113.1 * splashProgress }"></circle>
+            </svg>
+            <span class="splash-countdown__num">{{ splashSeconds }}</span>
+          </span>
+          <span class="splash-countdown__main">{{ splashSeconds }} 秒后自动进入</span>
+          <span class="splash-countdown__divider" aria-hidden="true"></span>
+          <span class="splash-countdown__skip">点击跳过</span>
+        </button>
       </div>
     </div>
 
@@ -118,7 +124,13 @@
 
       <main>
         <!-- 新闻轮播区 -->
-        <section class="news-section" id="innovation">
+        <section class="news-section fp-section" id="innovation">
+          <div class="tech-backdrop" aria-hidden="true">
+            <span class="tech-backdrop__grid"></span>
+            <span class="tech-backdrop__glow tech-backdrop__glow--1"></span>
+            <span class="tech-backdrop__glow tech-backdrop__glow--2"></span>
+            <span class="tech-backdrop__scan"></span>
+          </div>
           <div class="container">
             <div class="news-wrap">
               <!-- 左侧轮播（70%） -->
@@ -213,6 +225,11 @@
                   <button class="carousel__dot" data-index="2" aria-label="第3张"></button>
                   <button class="carousel__dot" data-index="3" aria-label="第4张"></button>
                 </div>
+
+                <!-- HUD 边角装饰 -->
+                <div class="carousel-hud" aria-hidden="true">
+                  <i></i><i></i><i></i><i></i>
+                </div>
               </div>
 
               <!-- 右侧新闻资讯（30%） -->
@@ -251,10 +268,19 @@
               </div>
             </div>
           </div>
+
+          <!-- 科技关键词跑马灯 -->
+          <div class="tech-ticker" aria-hidden="true">
+            <div class="tech-ticker__track">
+              <template v-for="copy in 2" :key="copy">
+                <span v-for="word in techKeywords" :key="`${copy}-${word}`" class="tech-ticker__item">{{ word }}</span>
+              </template>
+            </div>
+          </div>
         </section>
 
         <!-- 活动报名 -->
-        <section class="activities-section" id="startup">
+        <section class="activities-section fp-section" id="startup">
           <div class="container" style="position: relative;">
             <div class="section-header" style="margin-bottom: 0;">
               <span class="section-header__eyebrow">STARTUP</span>
@@ -732,7 +758,7 @@
         </section>
 
         <!-- 公司简介与合作伙伴 -->
-        <section class="about-section" id="about">
+        <section class="about-section fp-section" id="about">
           <div class="container">
             <div class="about-header">
               <!-- <span class="section-tag">关于我们</span> -->
@@ -900,8 +926,24 @@
 
 <script setup>
 import { useHomePage } from '@/composables/useHomePage'
+import { useTiltCards } from '@/composables/useTiltCards'
 
-const { splashVisible, appVisible, splashSeconds, splashProgress, hideSplash } = useHomePage()
+const { splashVisible, appVisible, splashSeconds, splashProgress, scrollProgress, hideSplash } = useHomePage()
+
+const techKeywords = [
+  '人工智能',
+  '集成电路',
+  '生物医药',
+  '智能制造',
+  '新材料',
+  '新能源',
+  '空天科技',
+  '量子信息',
+  '6G 通信',
+  '低碳技术',
+]
+
+useTiltCards('.activity-card, .stat-card')
 </script>
 
 <style scoped src="../assets/styles/home.css"></style>
@@ -966,6 +1008,15 @@ const { splashVisible, appVisible, splashSeconds, splashProgress, hideSplash } =
         border-left: 1px solid var(--border-light, #e2e8f0);
         border-top: 1px solid var(--border-light, #e2e8f0);
         border-radius: 2px;
+      }
+      /* 透明连接桥：填满触发项与面板之间 10px 的间隙，避免 hover 中断 */
+      .nav__dropdown-menu::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -12px;
+        height: 12px;
       }
 
       .nav__item--dropdown:hover > .nav__dropdown-menu,
@@ -1074,13 +1125,22 @@ const { splashVisible, appVisible, splashSeconds, splashProgress, hideSplash } =
         transform: rotate(45deg);
         border-radius: 2px;
       }
+      /* 透明连接桥：填满二级项与三级面板之间 6px 的间隙，避免 hover 中断 */
+      .nav__submenu::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: -10px;
+        width: 10px;
+      }
       .nav__dropdown-item--has-sub:hover > .nav__submenu,
       .nav__dropdown-item--has-sub.is-open > .nav__submenu {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
         transform: translateX(0);
-        transition-delay: .12s;
+        transition-delay: 0s;
       }
 
       .nav__submenu-item {
@@ -1200,32 +1260,34 @@ const { splashVisible, appVisible, splashSeconds, splashProgress, hideSplash } =
 
       /* ===== 首屏倒计时 ===== */
       .splash-countdown {
-        position: absolute;
-        top: var(--space-5);
-        left: var(--space-5);
-        z-index: 10;
-        display: inline-flex;
+        display: flex;
         align-items: center;
-        gap: 10px;
-        padding: 6px 14px 6px 6px;
+        justify-content: center;
+        gap: 12px;
+        width: fit-content;
+        margin: 18px auto 0;
+        padding: 10px 24px 10px 10px;
         border-radius: 999px;
-        color: var(--text-white);
-        background: rgba(15, 23, 42, 0.35);
-        border: 1px solid rgba(255, 255, 255, 0.22);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        color: #fff;
+        background: rgba(15, 23, 42, 0.72);
+        border: 1px solid rgba(56, 189, 248, 0.45);
+        box-shadow: 0 8px 32px rgba(56, 189, 248, 0.22);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         transition:
           background var(--duration-fast) var(--ease-default),
+          border-color var(--duration-fast) var(--ease-default),
           transform var(--duration-fast) var(--ease-default);
       }
       .splash-countdown:hover {
-        background: rgba(15, 23, 42, 0.55);
-        transform: translateY(-1px);
+        background: rgba(15, 23, 42, 0.88);
+        border-color: var(--accent-ice, #38bdf8);
+        transform: translateY(-2px);
       }
       .splash-countdown__ring {
         position: relative;
-        width: 34px;
-        height: 34px;
+        width: 40px;
+        height: 40px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -1241,9 +1303,9 @@ const { splashVisible, appVisible, splashSeconds, splashProgress, hideSplash } =
       .splash-countdown__track,
       .splash-countdown__bar {
         fill: none;
-        stroke-width: 3;
+        stroke-width: 3.5;
       }
-      .splash-countdown__track { stroke: rgba(255, 255, 255, 0.25); }
+      .splash-countdown__track { stroke: rgba(255, 255, 255, 0.22); }
       .splash-countdown__bar {
         stroke: var(--accent-ice, #38bdf8);
         stroke-linecap: round;
@@ -1252,25 +1314,365 @@ const { splashVisible, appVisible, splashSeconds, splashProgress, hideSplash } =
       }
       .splash-countdown__num {
         position: relative;
-        font-size: 13px;
+        font-size: 15px;
         font-weight: 700;
         line-height: 1;
         color: #fff;
         font-variant-numeric: tabular-nums;
       }
-      .splash-countdown__text {
-        font-size: 12px;
-        color: rgba(255, 255, 255, 0.85);
+      .splash-countdown__main {
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        color: #fff;
+        white-space: nowrap;
+      }
+      .splash-countdown__divider {
+        width: 1px;
+        height: 16px;
+        background: rgba(255, 255, 255, 0.25);
+      }
+      .splash-countdown__skip {
+        font-size: 13px;
+        color: var(--accent-ice, #38bdf8);
         white-space: nowrap;
       }
 
       @media (max-width: 480px) {
         .splash-countdown {
-          top: var(--space-3);
-          left: var(--space-3);
-          padding-right: 10px;
+          gap: 10px;
+          padding: 8px 18px 8px 8px;
         }
-        .splash-countdown__text { font-size: 11px; }
+        .splash-countdown__ring {
+          width: 36px;
+          height: 36px;
+        }
+        .splash-countdown__main { font-size: 13px; }
+        .splash-countdown__skip { font-size: 12px; }
+      }
+
+      /* ============================================================
+       * 科技感视觉层
+       * 1. 顶部滚动进度条
+       * 2. 首屏（轮播 + 新闻）独占一屏：极光 / 网格 / 扫描线
+       * 3. 轮播 HUD 边角
+       * 4. 科技关键词跑马灯
+       * 5. 卡片光标光斑
+       * 6. 标题渐变与动效分隔线
+       * ============================================================ */
+
+      /* ---- 滚动进度条 ---- */
+      .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        z-index: 400;
+        pointer-events: none;
+        background: rgba(148, 163, 184, 0.12);
+      }
+      .scroll-progress span {
+        display: block;
+        height: 100%;
+        transform-origin: left center;
+        background: linear-gradient(90deg, var(--accent-ice, #38bdf8), var(--accent-purple, #6366f1));
+        box-shadow: 0 0 12px rgba(56, 189, 248, 0.65);
+        transition: transform 120ms linear;
+      }
+
+      /* 用 clip 代替 hidden：避免创建滚动容器导致吸顶导航失效 */
+      .page--home { overflow-x: clip; }
+
+      /* ---- 首屏独占一屏 ---- */
+      .page--home .news-section {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        min-height: calc(100vh - var(--home-nav-h, 64px));
+        min-height: calc(var(--home-viewport-h, 100vh) - var(--home-nav-h, 64px));
+        padding: clamp(20px, 4vh, 48px) 0 0;
+        overflow: hidden;
+      }
+      .page--home .news-section > .container {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        flex: 1;
+        width: 100%;
+      }
+      .page--home .news-section .news-wrap {
+        width: 100%;
+        min-height: 0;
+      }
+      .page--home .news-section .carousel { height: clamp(320px, 56vh, 620px); }
+      .page--home .news-section .news-list { min-height: 0; }
+      .page--home .news-section .news-list__items { overflow-y: auto; }
+
+      /* ---- 极光 / 网格 / 扫描线 ---- */
+      .tech-backdrop {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .tech-backdrop__grid {
+        position: absolute;
+        inset: -25% -12%;
+        background-image:
+          linear-gradient(rgba(56, 189, 248, 0.09) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(56, 189, 248, 0.09) 1px, transparent 1px);
+        background-size: 56px 56px;
+        -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, #000 0%, transparent 78%);
+        mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, #000 0%, transparent 78%);
+        animation: techGridDrift 26s linear infinite;
+      }
+      .tech-backdrop__glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.55;
+      }
+      .tech-backdrop__glow--1 {
+        width: 46vw;
+        height: 46vw;
+        max-width: 620px;
+        max-height: 620px;
+        top: -18%;
+        left: -8%;
+        background: radial-gradient(circle, rgba(56, 189, 248, 0.35), transparent 70%);
+        animation: techGlowFloat 18s ease-in-out infinite alternate;
+      }
+      .tech-backdrop__glow--2 {
+        width: 42vw;
+        height: 42vw;
+        max-width: 560px;
+        max-height: 560px;
+        right: -6%;
+        bottom: -22%;
+        background: radial-gradient(circle, rgba(99, 102, 241, 0.28), transparent 72%);
+        animation: techGlowFloat 22s ease-in-out infinite alternate-reverse;
+      }
+      .tech-backdrop__scan {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 180px;
+        opacity: 0;
+        background: linear-gradient(180deg, transparent, rgba(125, 211, 252, 0.16), transparent);
+        animation: techScan 11s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      }
+      @keyframes techGridDrift {
+        to { background-position: 56px 56px, 56px 56px; }
+      }
+      @keyframes techGlowFloat {
+        from { transform: translate3d(0, 0, 0) scale(1); }
+        to { transform: translate3d(4%, 6%, 0) scale(1.12); }
+      }
+      @keyframes techScan {
+        0% { transform: translateY(-180px); opacity: 0; }
+        12% { opacity: 0.9; }
+        70% { transform: translateY(calc(100vh)); opacity: 0.9; }
+        100% { transform: translateY(calc(100vh)); opacity: 0; }
+      }
+
+      /* ---- 轮播 HUD 边角 ---- */
+      .carousel-hud {
+        position: absolute;
+        inset: 12px;
+        z-index: 3;
+        pointer-events: none;
+      }
+      .carousel-hud i {
+        position: absolute;
+        width: 26px;
+        height: 26px;
+        border: 2px solid rgba(186, 230, 253, 0.85);
+        filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.55));
+      }
+      .carousel-hud i:nth-child(1) {
+        top: 0;
+        left: 0;
+        border-right: 0;
+        border-bottom: 0;
+        border-top-left-radius: 8px;
+      }
+      .carousel-hud i:nth-child(2) {
+        top: 0;
+        right: 0;
+        border-left: 0;
+        border-bottom: 0;
+        border-top-right-radius: 8px;
+      }
+      .carousel-hud i:nth-child(3) {
+        bottom: 0;
+        left: 0;
+        border-right: 0;
+        border-top: 0;
+        border-bottom-left-radius: 8px;
+      }
+      .carousel-hud i:nth-child(4) {
+        right: 0;
+        bottom: 0;
+        border-top: 0;
+        border-left: 0;
+        border-bottom-right-radius: 8px;
+      }
+
+      /* ---- 科技关键词跑马灯 ---- */
+      .tech-ticker {
+        position: relative;
+        z-index: 1;
+        margin-top: auto;
+        overflow: hidden;
+        border-top: 1px solid rgba(226, 232, 240, 0.9);
+        background: linear-gradient(90deg, rgba(56, 189, 248, 0.06), rgba(99, 102, 241, 0.06));
+        -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+        mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      }
+      .tech-ticker__track {
+        display: flex;
+        align-items: center;
+        width: max-content;
+        padding: 11px 0;
+        animation: techTickerScroll 34s linear infinite;
+      }
+      .tech-ticker:hover .tech-ticker__track { animation-play-state: paused; }
+      .tech-ticker__item {
+        position: relative;
+        margin-right: 44px;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        color: var(--text-secondary, #64748b);
+        white-space: nowrap;
+      }
+      .tech-ticker__item::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: -26px;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--accent-ice, #38bdf8);
+        opacity: 0.6;
+        transform: translateY(-50%);
+      }
+      @keyframes techTickerScroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+      }
+
+      /* ---- 卡片光标光斑 ---- */
+      .page--home .activity-card::after,
+      .page--home .stat-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: radial-gradient(260px circle at var(--x, 50%) var(--y, 50%), rgba(56, 189, 248, 0.16), transparent 70%);
+        opacity: 0;
+        transition: opacity var(--duration-base, 300ms) var(--ease-default);
+        pointer-events: none;
+      }
+      .page--home .stat-card { overflow: hidden; border-radius: 12px; }
+      .page--home .activity-card:hover::after,
+      .page--home .stat-card:hover::after { opacity: 1; }
+
+      /* ---- 标题渐变 / 动效分隔线 ---- */
+      .page--home .about-header .section-title {
+        background: linear-gradient(115deg, #0f172a 0%, #0284c7 48%, #6366f1 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+      }
+      .page--home .about-header::after {
+        content: '';
+        display: block;
+        width: 96px;
+        height: 3px;
+        margin: 22px auto 0;
+        border-radius: 2px;
+        background: linear-gradient(90deg, transparent, var(--accent-ice, #38bdf8) 35%, var(--accent-purple, #6366f1) 65%, transparent);
+        animation: aboutUnderline 3.2s ease-in-out infinite;
+      }
+      @keyframes aboutUnderline {
+        0%, 100% { opacity: 0.55; transform: scaleX(0.8); }
+        50% { opacity: 1; transform: scaleX(1); }
+      }
+
+      /* ---- 小节标题脉冲点 ---- */
+      .page--home .section-header__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .page--home .section-header__eyebrow::before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent-deep, #0ea5e9);
+        animation: eyebrowPulse 2.2s ease-in-out infinite;
+      }
+      @keyframes eyebrowPulse {
+        0%, 100% { box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.12); opacity: 0.8; }
+        50% { box-shadow: 0 0 0 7px rgba(56, 189, 248, 0.03); opacity: 1; }
+      }
+
+      /* ---- 区块分隔流光 ---- */
+      .page--home .activities-section::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 30%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.9), transparent);
+        animation: sectionShimmer 7s linear infinite;
+        pointer-events: none;
+      }
+      @keyframes sectionShimmer {
+        from { transform: translateX(-100%); }
+        to { transform: translateX(430%); }
+      }
+
+      @media (max-width: 768px) {
+        .page--home .news-section {
+          padding-top: 16px;
+        }
+        .page--home .news-section .carousel {
+          height: clamp(220px, 40vh, 340px);
+        }
+        .carousel-hud { display: none; }
+        .tech-ticker__item { margin-right: 32px; font-size: 12px; }
+        .tech-ticker__item::after { right: -19px; }
+      }
+
+      /* 矮窗口：精简资讯条数，保证首屏仍是一屏 */
+      @media (min-width: 769px) and (max-height: 700px) {
+        .page--home .news-section .carousel { height: clamp(240px, 46vh, 400px); }
+        .page--home .news-item:nth-child(n + 4) { display: none; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .tech-backdrop__grid,
+        .tech-backdrop__glow,
+        .tech-backdrop__scan,
+        .tech-ticker__track,
+        .page--home .about-header::after,
+        .page--home .section-header__eyebrow::before,
+        .page--home .activities-section::after {
+          animation: none;
+        }
+        .tech-backdrop__scan { display: none; }
+        .scroll-progress span { transition: none; }
       }
     
 </style>
