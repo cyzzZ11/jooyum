@@ -122,8 +122,13 @@
         </div>
       </header>
 
-      <main>
-        <!-- 新闻轮播区 -->
+      <div class="fp-viewport">
+        <main
+          class="fp-track"
+          :class="{ 'is-settling': fpSettling }"
+          :style="fpEnabled ? { transform: `translate3d(0, -${fpIndex * 100}%, 0)` } : null"
+        >
+          <!-- 新闻轮播区 -->
         <section class="news-section fp-section" id="innovation">
           <div class="tech-backdrop" aria-hidden="true">
             <span class="tech-backdrop__grid"></span>
@@ -847,10 +852,9 @@
             </div> -->
           </div>
         </section>
-      </main>
 
-      <!-- 页脚 -->
-      <footer class="footer" id="contact">
+        <!-- 页脚 -->
+        <footer class="footer fp-section" id="contact">
         <div class="container">
           <div class="footer__grid">
             <div class="footer__brand">
@@ -919,16 +923,55 @@
             <p>© 2026 科技服务平台 版权所有 | 京ICP备XXXXXXXX号</p>
           </div>
         </div>
-      </footer>
+        </footer>
+        </main>
+      </div>
+
+      <!-- 整屏分页导航 -->
+      <nav v-if="fpEnabled" class="fp-nav" aria-label="整屏分页导航">
+        <button
+          v-for="(section, i) in fpSections"
+          :key="section.id"
+          type="button"
+          class="fp-nav__dot"
+          :class="{ 'is-active': i === fpIndex }"
+          :aria-label="`第 ${i + 1} 屏：${section.label}`"
+          :aria-current="i === fpIndex ? 'true' : undefined"
+          @click="fpGoTo(i)"
+        >
+          <span class="fp-nav__label">{{ section.label }}</span>
+        </button>
+      </nav>
     </div>
   </div>
 </template>
 
 <script setup>
+import { computed, watch } from 'vue'
+import { useFullPage } from '@/composables/useFullPage'
 import { useHomePage } from '@/composables/useHomePage'
 import { useTiltCards } from '@/composables/useTiltCards'
 
 const { splashVisible, appVisible, splashSeconds, splashProgress, scrollProgress, hideSplash } = useHomePage()
+
+const { index: fpIndex, enabled: fpEnabled, settling: fpSettling, goTo: fpGoTo } = useFullPage()
+
+const fpSections = [
+  { id: 'innovation', label: '新闻资讯' },
+  { id: 'startup', label: '活动报名' },
+  { id: 'about', label: '关于我们' },
+  { id: 'contact', label: '联系我们' },
+]
+
+const progressValue = computed(() => {
+  if (!fpEnabled.value) return scrollProgress.value
+  return (fpIndex.value + 1) / fpSections.length
+})
+
+// 整屏切换时把焦点移出可能被裁切的元素，避免键盘 Tab 落到屏幕外
+watch(fpIndex, () => {
+  if (fpEnabled.value) document.activeElement?.blur?.()
+})
 
 const techKeywords = [
   '人工智能',
@@ -1661,7 +1704,158 @@ useTiltCards('.activity-card, .stat-card')
         .page--home .news-item:nth-child(n + 4) { display: none; }
       }
 
+      /* ============================================================
+       * 整屏滚动（full-page scroll）
+       * 仅在 .fp-on 下生效，小屏自动回退为普通滚动
+       * ============================================================ */
+      .page--home.fp-on .fp-viewport {
+        height: calc(100vh - var(--home-nav-h, 64px));
+        height: calc(var(--home-viewport-h, 100vh) - var(--home-nav-h, 64px));
+        overflow: hidden;
+      }
+      .page--home.fp-on .fp-track {
+        height: 100%;
+        transition: transform 820ms cubic-bezier(0.76, 0, 0.24, 1);
+      }
+      .page--home.fp-on .fp-track.is-settling { transition: none; }
+      .page--home.fp-on .fp-track > .fp-section {
+        height: 100%;
+        min-height: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scrollbar-width: none;
+      }
+      .page--home.fp-on .fp-track > .fp-section::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
+
+      /* 装饰光晕改为背景，避免伪元素撑大滚动高度 */
+      .page--home .about-section::before,
+      .page--home .about-section::after { content: none; }
+      .page--home .about-section {
+        background-image:
+          radial-gradient(circle at 100% 0%, rgba(56, 189, 248, 0.07) 0%, transparent 32%),
+          radial-gradient(circle at 0% 100%, rgba(99, 102, 241, 0.06) 0%, transparent 30%);
+        background-repeat: no-repeat;
+      }
+
+      /* 各屏在整屏模式下垂直居中 */
+      .page--home.fp-on .activities-section.fp-section,
+      .page--home.fp-on .about-section.fp-section,
+      .page--home.fp-on .footer.fp-section {
+        display: flex;
+        align-items: flex-start;
+      }
+      .page--home.fp-on .activities-section .activity-grid-scroll {
+        max-height: calc(var(--home-viewport-h, 100vh) - var(--home-nav-h, 64px) - 230px);
+      }
+      @media (max-height: 800px) {
+        .page--home.fp-on .activities-section .activity-grid { grid-template-rows: auto; }
+      }
+      /* margin:auto 居中，内容超高时自动退化为顶部对齐，避免顶部被裁掉 */
+      .page--home.fp-on .activities-section > .container,
+      .page--home.fp-on .about-section > .container,
+      .page--home.fp-on .footer.fp-section > .container {
+        width: 100%;
+        margin: auto 0;
+      }
+      /* 整屏模式下每屏一进入就完整可见，避免滚动渐显动画在切屏时卡住 */
+      .page--home.fp-on .fade-in-up {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .page--home.fp-on .stat-card,
+      .page--home.fp-on .partner-logo {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .page--home.fp-on .about-header { margin-bottom: clamp(18px, 4vh, 40px); }
+      .page--home.fp-on .about-header::after { margin-top: 14px; }
+      .page--home.fp-on .about-stats { margin-bottom: 0; }
+      .page--home.fp-on .footer.fp-section {
+        margin-top: 0;
+        padding: 0;
+      }
+
+      /* 分页导航 */
+      .fp-nav {
+        position: fixed;
+        right: 26px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 150;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+      .fp-nav__dot {
+        position: relative;
+        width: 10px;
+        height: 10px;
+        padding: 0;
+        border: none;
+        border-radius: 50%;
+        background: rgba(148, 163, 184, 0.5);
+        cursor: pointer;
+        transition:
+          background var(--duration-base, 300ms) var(--ease-default),
+          box-shadow var(--duration-base, 300ms) var(--ease-default),
+          transform var(--duration-base, 300ms) var(--ease-default);
+      }
+      .fp-nav__dot::before {
+        content: '';
+        position: absolute;
+        inset: -8px;
+        border-radius: 50%;
+      }
+      .fp-nav__dot:hover {
+        background: rgba(14, 165, 233, 0.7);
+        transform: scale(1.2);
+      }
+      .fp-nav__dot.is-active {
+        background: linear-gradient(135deg, var(--accent-ice, #38bdf8), var(--accent-purple, #6366f1));
+        box-shadow:
+          0 0 0 4px rgba(56, 189, 248, 0.14),
+          0 0 14px rgba(56, 189, 248, 0.65);
+        transform: scale(1.25);
+      }
+      .fp-nav__label {
+        position: absolute;
+        right: 24px;
+        top: 50%;
+        padding: 4px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+        color: var(--text-secondary, #64748b);
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid var(--border-light, #e2e8f0);
+        box-shadow: var(--shadow-soft, 0 4px 24px rgba(14, 165, 233, 0.08));
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-50%) translateX(6px);
+        transition:
+          opacity var(--duration-fast, 150ms) var(--ease-default),
+          transform var(--duration-fast, 150ms) var(--ease-default);
+      }
+      .fp-nav__dot:hover .fp-nav__label,
+      .fp-nav__dot:focus-visible .fp-nav__label {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+      }
+      .fp-nav__dot:focus-visible {
+        outline: 2px solid var(--accent-deep, #0ea5e9);
+        outline-offset: 4px;
+      }
+
       @media (prefers-reduced-motion: reduce) {
+        .page--home.fp-on .fp-track { transition-duration: 1ms; }
         .tech-backdrop__grid,
         .tech-backdrop__glow,
         .tech-backdrop__scan,
