@@ -1,0 +1,1181 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>松江区就业服务中心 — 上海市松江区人力资源和社会保障局</title>
+<meta name="description" content="上海市松江区就业促进中心官方服务平台，提供求职招聘、职业指导、技能培训、政策补贴、创业扶持等一站式公共就业服务。">
+<style>
+/* ===== Visual System Tokens ===== */
+:root {
+  --color-canvas: #EFF7FC;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #D9EBF6;
+  --color-surface-deep: #B8D8ED;
+  --color-signal: #1472B4;
+  --color-signal-dark: #0C5A8F;
+  --color-signal-darker: #084670;
+  --color-signal-light: #4A9BD9;
+  --color-signal-tint: #E8F3FA;
+  --color-ink: #12273A;
+  --color-muted: #4A6B82;
+  --color-muted-light: #7A9BB2;
+  --color-rule: #C4DAE8;
+  --color-rule-light: #DEEDF6;
+  --color-accent-warm: #D4763A;
+  --color-accent-green: #2E8B57;
+  --color-accent-ink: #FFFFFF;
+
+  --font-display: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-lg: 1.0625rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+
+  --leading-tight: 1.3;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  --shadow-sm: 0 1px 3px rgba(18,39,58,0.06);
+  --shadow-md: 0 2px 8px rgba(18,39,58,0.08);
+  --shadow-lg: 0 4px 16px rgba(18,39,58,0.1);
+
+  --focus-ring: 0 0 0 3px rgba(20,114,180,0.35);
+
+  --page-max: 80vw;
+  --page-pad: clamp(1rem, 4vw, 3rem);
+}
+
+/* ===== Reset & Base ===== */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-ink);
+  background: var(--color-canvas);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--color-signal); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: var(--radius-sm); }
+img { max-width: 100%; height: auto; display: block; }
+h1, h2, h3, h4 { margin: 0; line-height: var(--leading-tight); font-weight: 600; }
+
+/* ===== Utilities ===== */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.container {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding-left: var(--page-pad);
+  padding-right: var(--page-pad);
+}
+
+/* ===== Top Bar ===== */
+.top-bar {
+  background: var(--color-signal-darker);
+  color: rgba(255,255,255,0.8);
+  font-size: var(--text-sm);
+  padding: 0.4rem 0;
+}
+.top-bar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+.top-bar a { color: rgba(255,255,255,0.9); }
+.top-bar a:hover { color: #fff; }
+.top-bar-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Header ===== */
+.site-header {
+  background: var(--color-signal);
+  color: #fff;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  gap: var(--space-md);
+}
+.site-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: #fff;
+}
+.site-brand:hover { text-decoration: none; }
+.brand-icon {
+  width: 40px; height: 40px;
+  background: rgba(255,255,255,0.15);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.brand-text h1 {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.brand-text p {
+  font-size: var(--text-xs);
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* Nav */
+.main-nav {
+  display: flex;
+  gap: var(--space-xs);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.main-nav a {
+  color: rgba(255,255,255,0.9);
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.main-nav a:hover,
+.main-nav a:focus-visible {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  text-decoration: none;
+}
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+/* ===== Hero ===== */
+.hero {
+  background: linear-gradient(165deg, var(--color-signal) 0%, var(--color-signal-dark) 100%);
+  color: #fff;
+  padding: var(--space-3xl) 0 var(--space-2xl);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -30%; right: -10%;
+  width: 60%; height: 160%;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+.hero h2 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+  letter-spacing: 0.01em;
+}
+.hero p {
+  font-size: var(--text-lg);
+  opacity: 0.9;
+  max-width: 540px;
+  margin: 0 0 var(--space-xl);
+}
+
+/* Quick actions */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-md);
+  max-width: 680px;
+}
+.quick-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg) var(--space-md);
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: var(--radius-lg);
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.2s, transform 0.15s;
+}
+.quick-action:hover {
+  background: rgba(255,255,255,0.22);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+.quick-action svg {
+  width: 28px; height: 28px;
+  opacity: 0.95;
+}
+.quick-action span {
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+/* ===== Notice Bar ===== */
+.notice-bar {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-rule-light);
+  padding: var(--space-md) 0;
+}
+.notice-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+.notice-tag {
+  background: var(--color-signal);
+  color: #fff;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+.notice-list {
+  display: flex;
+  gap: var(--space-xl);
+  overflow-x: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: var(--text-sm);
+  scrollbar-width: none;
+}
+.notice-list::-webkit-scrollbar { display: none; }
+.notice-list a {
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+.notice-list a:hover { color: var(--color-signal); }
+
+/* ===== Section Base ===== */
+.section {
+  padding: var(--space-3xl) 0;
+}
+.section-alt {
+  background: var(--color-surface);
+}
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-xl);
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+.section-title {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-ink);
+  position: relative;
+  padding-left: var(--space-md);
+}
+.section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  bottom: 0.15em;
+  width: 3px;
+  background: var(--color-signal);
+  border-radius: 2px;
+}
+.section-more {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+.section-more:hover { color: var(--color-signal); }
+
+/* ===== Services Grid ===== */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-lg);
+}
+.service-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-rule-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.service-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-surface-deep);
+}
+.service-card-icon {
+  width: 44px; height: 44px;
+  background: var(--color-signal-tint);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-md);
+  color: var(--color-signal);
+}
+.service-card h3 {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-sm);
+}
+.service-card p {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  margin: 0 0 var(--space-md);
+}
+.service-card-link {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-signal);
+}
+.service-card-link:hover { text-decoration: underline; }
+
+/* ===== Two-Column: Personal + Enterprise ===== */
+.dual-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+}
+.dual-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-rule-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.dual-panel-header {
+  padding: var(--space-lg) var(--space-xl);
+  border-bottom: 1px solid var(--color-rule-light);
+}
+.dual-panel--personal .dual-panel-header {
+  background: linear-gradient(135deg, var(--color-signal-tint) 0%, #fff 100%);
+}
+.dual-panel--enterprise .dual-panel-header {
+  background: linear-gradient(135deg, #EBF5E8 0%, #fff 100%);
+}
+.dual-panel-header h3 {
+  font-size: var(--text-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.dual-panel-header h3 svg {
+  width: 22px; height: 22px;
+}
+.dual-panel--personal h3 { color: var(--color-signal); }
+.dual-panel--enterprise h3 { color: var(--color-accent-green); }
+.dual-panel-body {
+  padding: var(--space-lg) var(--space-xl);
+}
+.dual-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.dual-list li {
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--color-rule-light);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+.dual-list li:last-child { border-bottom: none; }
+.dual-list li::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--color-signal);
+  border-radius: 50%;
+  margin-top: 0.55em;
+  flex-shrink: 0;
+}
+.dual-panel--enterprise .dual-list li::before {
+  background: var(--color-accent-green);
+}
+.dual-list a {
+  color: var(--color-ink);
+  font-size: var(--text-base);
+}
+.dual-list a:hover { color: var(--color-signal); }
+.dual-list-desc {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  margin-top: 0.15rem;
+}
+
+/* ===== Policy Cards ===== */
+.policy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-lg);
+}
+.policy-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-rule-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+}
+.policy-tag {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-sm);
+  width: fit-content;
+}
+.policy-tag--new {
+  background: #FFF0E6;
+  color: var(--color-accent-warm);
+}
+.policy-tag--hot {
+  background: #FDE8E8;
+  color: #C0392B;
+}
+.policy-tag--guide {
+  background: var(--color-signal-tint);
+  color: var(--color-signal);
+}
+.policy-card h3 {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+  line-height: var(--leading-normal);
+}
+.policy-card p {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+  flex: 1;
+}
+.policy-card-footer {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-rule-light);
+  font-size: var(--text-xs);
+  color: var(--color-muted-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===== Guide Steps ===== */
+.guide-section {
+  background: var(--color-signal-tint);
+}
+.guide-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-lg);
+  counter-reset: step;
+}
+.guide-step {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  position: relative;
+  border: 1px solid var(--color-rule-light);
+}
+.guide-step::before {
+  counter-increment: step;
+  content: counter(step);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; height: 32px;
+  background: var(--color-signal);
+  color: #fff;
+  border-radius: 50%;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  margin-bottom: var(--space-md);
+}
+.guide-step h3 {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+}
+.guide-step p {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+/* ===== Contact & Info ===== */
+.contact-section {
+  background: var(--color-surface);
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+}
+.contact-block h3 {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--color-signal);
+  display: inline-block;
+}
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+.info-table th,
+.info-table td {
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  border-bottom: 1px solid var(--color-rule-light);
+}
+.info-table th {
+  font-weight: 500;
+  color: var(--color-muted);
+  width: 100px;
+  white-space: nowrap;
+}
+.info-table td {
+  color: var(--color-ink);
+}
+
+/* Street offices */
+.street-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-sm);
+  max-height: 320px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-rule) transparent;
+}
+.street-item {
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-rule-light);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--color-canvas);
+}
+.street-item-name {
+  font-weight: 500;
+  color: var(--color-ink);
+}
+.street-item-tel {
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+}
+
+/* ===== Footer ===== */
+.site-footer {
+  background: var(--color-signal-darker);
+  color: rgba(255,255,255,0.7);
+  padding: var(--space-2xl) 0 var(--space-xl);
+  font-size: var(--text-sm);
+}
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-xl);
+  flex-wrap: wrap;
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.footer-links {
+  display: flex;
+  gap: var(--space-xl);
+  flex-wrap: wrap;
+}
+.footer-links a {
+  color: rgba(255,255,255,0.8);
+}
+.footer-links a:hover { color: #fff; }
+.footer-bottom {
+  padding-top: var(--space-lg);
+  text-align: center;
+  opacity: 0.6;
+  font-size: var(--text-xs);
+}
+
+/* ===== Mobile Responsive ===== */
+@media (max-width: 860px) {
+  .dual-section {
+    grid-template-columns: 1fr;
+  }
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-bar { display: none; }
+  .mobile-toggle { display: block; }
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: var(--color-signal-dark);
+    flex-direction: column;
+    padding: var(--space-md);
+    gap: 0;
+    box-shadow: var(--shadow-lg);
+  }
+  .main-nav.is-open { display: flex; }
+  .main-nav a {
+    padding: var(--space-md);
+    border-radius: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .site-header .container {
+    position: relative;
+  }
+  .brand-text h1 { font-size: var(--text-base); }
+  .brand-text p { display: none; }
+  .hero { padding: var(--space-2xl) 0 var(--space-xl); }
+  .hero h2 { font-size: 1.4rem; }
+  .quick-actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .section { padding: var(--space-2xl) 0; }
+  .section-title { font-size: var(--text-xl); }
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  .policy-grid {
+    grid-template-columns: 1fr;
+  }
+  .guide-steps {
+    grid-template-columns: 1fr;
+  }
+  .street-grid {
+    grid-template-columns: 1fr;
+  }
+  .notice-inner { flex-direction: column; align-items: flex-start; gap: var(--space-sm); }
+}
+
+@media (max-width: 480px) {
+  .quick-actions {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+  }
+  .quick-action {
+    padding: var(--space-md) var(--space-sm);
+  }
+}
+
+/* ===== Print ===== */
+@media print {
+  .top-bar, .site-header, .mobile-toggle, .notice-bar { display: none; }
+  .hero { background: none; color: var(--color-ink); padding: var(--space-xl) 0; }
+  .hero::before { display: none; }
+  .quick-action, .service-card, .dual-panel, .policy-card, .guide-step {
+    break-inside: avoid;
+    border: 1px solid #ccc;
+  }
+  body { background: #fff; color: #000; }
+  .site-footer { background: none; color: #666; border-top: 1px solid #ccc; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Top utility bar -->
+<div class="top-bar" role="navigation" aria-label="快捷链接">
+  <div class="container">
+    <span>松江区人力资源和社会保障局</span>
+    <ul class="top-bar-links">
+      <li><a href="https://rsj.sh.gov.cn" target="_blank" rel="noopener noreferrer">上海市人社局</a></li>
+      <li><a href="https://zwdt.sh.gov.cn" target="_blank" rel="noopener noreferrer">一网通办</a></li>
+      <li><a href="https://www.songjiang.gov.cn" target="_blank" rel="noopener noreferrer">松江区政府</a></li>
+      <li>咨询热线：12333</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Sticky header -->
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="#services" class="site-brand" aria-label="松江区就业服务中心首页">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="24" height="24">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>松江区就业服务中心</h1>
+          <p>公共就业 · 一站式服务</p>
+        </div>
+      </a>
+      <button class="mobile-toggle" aria-label="展开导航菜单" aria-expanded="false" onclick="toggleNav()">☰</button>
+      <nav>
+        <ul class="main-nav" id="mainNav">
+          <li><a href="#services">就业服务</a></li>
+          <li><a href="#categories">服务分类</a></li>
+          <li><a href="#policy">政策资讯</a></li>
+          <li><a href="#guide">办事指引</a></li>
+          <li><a href="#contact">联系我们</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- Hero section -->
+<section class="hero">
+  <div class="container hero-content">
+    <h2>就业服务，就在身边</h2>
+    <p>松江区就业促进中心为求职者和企业提供职业介绍、职业指导、技能培训、创业扶持等全方位公共就业服务。</p>
+    <div class="quick-actions">
+      <a href="#services" class="quick-action">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <span>找工作</span>
+      </a>
+      <a href="#guide" class="quick-action">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <span>办事指引</span>
+      </a>
+      <a href="#policy" class="quick-action">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>政策补贴</span>
+      </a>
+      <a href="#contact" class="quick-action">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>咨询投诉</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Notice bar -->
+<div class="notice-bar">
+  <div class="container">
+    <div class="notice-inner">
+      <span class="notice-tag">公告</span>
+      <ul class="notice-list">
+        <li><a href="https://www.songjiang.gov.cn/xwzx/001001/20260515/0f8b7f9a-c577-4c57-8ca6-61134287202e.html" target="_blank" rel="noopener noreferrer">"职引未来"经开区·岳阳街道联合招聘会（5月15日）</a></li>
+        <li><a href="https://www.songjiang.gov.cn/xwzx/001001/20260513/c6a0164f-03da-49e4-b4b4-e52cf5d3a2f9.html" target="_blank" rel="noopener noreferrer">2026年应届毕业生落户政策申报开启</a></li>
+        <li><a href="https://www.songjiang.gov.cn/shsj_main/e3bc1f92-7116-40fd-b6ae-6f520afa7c02/" target="_blank" rel="noopener noreferrer">《松江区关于惠企稳就业的若干措施》发布</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Core Services -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">核心就业服务</h2>
+      <a href="https://zwdt.sh.gov.cn/govPortals/region/SH00SJ" target="_blank" rel="noopener noreferrer" class="section-more">前往一网通办 →</a>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <h3>职业介绍</h3>
+        <p>提供岗位信息匹配、求职登记、招聘登记等服务，定期举办各类专场招聘会，搭建供需对接平台。</p>
+        <a href="https://zwdt.sh.gov.cn/govPortals/region/SH00SJ" target="_blank" rel="noopener noreferrer" class="service-card-link">在线办理 →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>职业指导</h3>
+        <p>专业就业服务专家提供一对一职业规划、简历优化、面试辅导等服务，助力求职者精准就业。</p>
+        <a href="#contact" class="service-card-link">致电预约 →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h3>职业技能培训</h3>
+        <p>开展多领域职业技能培训项目，提升劳动者就业竞争力，符合条件可享培训费用补贴。</p>
+        <a href="#guide" class="service-card-link">查看培训项目 →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>就业见习</h3>
+        <p>面向16-35岁未就业青年和毕业学年学生，提供3-12个月就业见习岗位，积累工作经验。</p>
+        <a href="https://zwdt.sh.gov.cn/govPortals/region/SH00SJ" target="_blank" rel="noopener noreferrer" class="service-card-link">在线申请 →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3>创业扶持</h3>
+        <p>为创业者提供开业指导、创业培训、场地支持及创业担保贷款等一站式创业服务。</p>
+        <a href="https://zwdt.sh.gov.cn/govPortals/region/SH00SJ" target="_blank" rel="noopener noreferrer" class="service-card-link">了解扶持政策 →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <h3>失业保险服务</h3>
+        <p>办理失业登记、失业保险金申领，提供再就业帮扶和相关社会保障咨询服务。</p>
+        <a href="https://zwdt.sh.gov.cn/govPortals/region/SH00SJ" target="_blank" rel="noopener noreferrer" class="service-card-link">了解申领条件 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Dual panel: Personal + Enterprise -->
+<section class="section section-alt" id="categories">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">服务分类</h2>
+    </div>
+    <div class="dual-section">
+      <!-- Personal -->
+      <div class="dual-panel dual-panel--personal">
+        <div class="dual-panel-header">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            个人求职服务
+          </h3>
+        </div>
+        <div class="dual-panel-body">
+          <ul class="dual-list">
+            <li>
+              <a href="https://zwdt.sh.gov.cn" target="_blank" rel="noopener noreferrer">
+                求职登记与岗位匹配
+                <span class="dual-list-desc">在线登记求职意向，智能匹配区内企业岗位</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://zwdt.sh.gov.cn" target="_blank" rel="noopener noreferrer">
+                职业指导与规划咨询
+                <span class="dual-list-desc">专家一对一职业规划、简历诊断、面试辅导</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://zwdt.sh.gov.cn" target="_blank" rel="noopener noreferrer">
+                职业技能提升培训
+                <span class="dual-list-desc">多领域技能培训，符合条件可申请培训补贴</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://zwdt.sh.gov.cn/govPortals/region/SH00SJ" target="_blank" rel="noopener noreferrer">
+                就业见习申请
+                <span class="dual-list-desc">16-35岁未就业青年可申请3-12个月见习岗位</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://zwdt.sh.gov.cn/govPortals/bsfw/item/74f962aa-c4ab-4596-b903-6b0f3ce64b55" target="_blank" rel="noopener noreferrer">
+                《就业创业证》申领
+                <span class="dual-list-desc">当场办结，可通过各街镇社区事务受理中心办理</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.songjiang.gov.cn/shsj_main/e3bc1f92-7116-40fd-b6ae-6f520afa7c02/" target="_blank" rel="noopener noreferrer">
+                就业困难人员帮扶
+                <span class="dual-list-desc">大龄劳动力、长期失业人员等享专项就业援助</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Enterprise -->
+      <div class="dual-panel dual-panel--enterprise">
+        <div class="dual-panel-header">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            企业用工服务
+          </h3>
+        </div>
+        <div class="dual-panel-body">
+          <ul class="dual-list">
+            <li>
+              <a href="https://zwdt.sh.gov.cn" target="_blank" rel="noopener noreferrer">
+                招聘发布与用工对接
+                <span class="dual-list-desc">免费发布招聘信息，参加各类专场招聘会</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.songjiang.gov.cn/shsj_main/e3bc1f92-7116-40fd-b6ae-6f520afa7c02/" target="_blank" rel="noopener noreferrer">
+                惠企稳就业政策补贴
+                <span class="dual-list-desc">录用就业困难人员可享600元/月/人社保补贴</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://zwdt.sh.gov.cn/govPortals/bsfw/item/dd30a3c9-10fe-4fb7-91e1-bbae5a0cd363" target="_blank" rel="noopener noreferrer">
+                高校毕业生社保补贴
+                <span class="dual-list-desc">小微企业招用高校毕业生可享单位缴费部分50%补贴</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://zwdt.sh.gov.cn/govPortals/region/SH00SJ" target="_blank" rel="noopener noreferrer">
+                就业见习基地申报
+                <span class="dual-list-desc">符合条件的企业可申报成为区级就业见习基地</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.songjiang.gov.cn/xwzx/001001/20260513/c6a0164f-03da-49e4-b4b4-e52cf5d3a2f9.html" target="_blank" rel="noopener noreferrer">
+                应届毕业生落户资质
+                <span class="dual-list-desc">用人单位引进非沪籍应届毕业生落户资质申报</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://zwdt.sh.gov.cn/govPortals/region/SH00SJ" target="_blank" rel="noopener noreferrer">
+                劳动关系与用工指导
+                <span class="dual-list-desc">劳动合同、工资集体协商等用工合规指导</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Policy section -->
+<section class="section" id="policy">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">政策与资讯</h2>
+      <a href="https://www.songjiang.gov.cn" target="_blank" rel="noopener noreferrer" class="section-more">更多政策 →</a>
+    </div>
+    <div class="policy-grid">
+      <div class="policy-card">
+        <span class="policy-tag policy-tag--new">最新政策</span>
+        <h3>松江区关于惠企稳就业的若干措施</h3>
+        <p>围绕企业用工保障、技能提升、人才集聚等方面推出务实举措，鼓励企业录用就业困难群体，提供社保补贴、稳岗补贴等支持。自2026年1月1日起施行，有效期至2027年12月31日。</p>
+        <div class="policy-card-footer">
+          <span>松江区人社局</span>
+          <a href="https://www.songjiang.gov.cn/shsj_main/e3bc1f92-7116-40fd-b6ae-6f520afa7c02/" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+        </div>
+      </div>
+      <div class="policy-card">
+        <span class="policy-tag policy-tag--hot">热门</span>
+        <h3>2026年应届毕业生落户政策申报</h3>
+        <p>用人单位可申报破格引进资质或重点扶持单位资质。工商注册、税收户管均在松江区范围内的用人单位，可按规定流程提交申报材料。</p>
+        <div class="policy-card-footer">
+          <span>松江区政府</span>
+          <a href="https://www.songjiang.gov.cn/xwzx/001001/20260513/c6a0164f-03da-49e4-b4b4-e52cf5d3a2f9.html" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+        </div>
+      </div>
+      <div class="policy-card">
+        <span class="policy-tag policy-tag--guide">办事指南</span>
+        <h3>小微企业招用高校毕业生社保补贴</h3>
+        <p>本市小微企业和社会组织新招用毕业年度或离校2年内未就业高校毕业生，签订1年以上劳动合同并缴纳社保，可享受单位承担部分50%的社保补贴。</p>
+        <div class="policy-card-footer">
+          <span>一网通办</span>
+          <a href="https://zwdt.sh.gov.cn/govPortals/bsfw/item/dd30a3c9-10fe-4fb7-91e1-bbae5a0cd363" target="_blank" rel="noopener noreferrer">在线申请 →</a>
+        </div>
+      </div>
+      <div class="policy-card">
+        <span class="policy-tag policy-tag--new">活动</span>
+        <h3>2026年春季促进就业专项行动</h3>
+        <p>松江区持续开展春季促进就业专项行动，在各街镇举办系列专场招聘会，覆盖先进制造、现代服务等多个领域，同步提供职业指导和政策咨询服务。</p>
+        <div class="policy-card-footer">
+          <span>松江区就业促进中心</span>
+          <a href="https://www.songjiang.gov.cn/xwzx/001001/20260515/0f8b7f9a-c577-4c57-8ca6-61134287202e.html" target="_blank" rel="noopener noreferrer">查看详情 →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Guide section -->
+<section class="section guide-section" id="guide">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">办事指引</h2>
+    </div>
+    <div class="guide-steps">
+      <div class="guide-step">
+        <h3>确认事项</h3>
+        <p>根据需求确定要办理的就业服务事项，如求职登记、失业登记、补贴申请等，了解所需材料清单。</p>
+      </div>
+      <div class="guide-step">
+        <h3>准备材料</h3>
+        <p>携带本人身份证、户口簿（或居住证）、学历证书等基本材料，部分事项需补充相关证明。</p>
+      </div>
+      <div class="guide-step">
+        <h3>前往办理</h3>
+        <p>前往区就业促进中心（荣乐东路2378号）或就近街镇社区事务受理服务中心窗口办理。</p>
+      </div>
+      <div class="guide-step">
+        <h3>在线办理</h3>
+        <p>部分事项支持通过"一网通办"或"随申办"APP在线提交申请，实现"零跑腿"。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact section -->
+<section class="section contact-section" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">联系我们</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-block">
+        <h3>区就业促进中心</h3>
+        <table class="info-table">
+          <caption class="sr-only">松江区就业促进中心联系方式</caption>
+          <tbody>
+            <tr><th>地址</th><td>上海市松江区荣乐东路2378号</td></tr>
+            <tr><th>电话</th><td>021-67848665（总机）</td></tr>
+            <tr><th>工作时间</th><td>周一至周五 8:45-11:00，13:00-16:30</td></tr>
+            <tr><th>咨询热线</th><td>12333（人力资源和社会保障服务热线）</td></tr>
+            <tr><th>投诉电话</th><td>12345（市民服务热线）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="contact-block">
+        <h3>"15分钟就业服务圈"站点</h3>
+        <p style="font-size:var(--text-sm);color:var(--color-muted);margin-bottom:var(--space-md);">松江区已建成31个社区就业服务站点，可就近咨询办理。以下为各街镇受理中心电话：</p>
+        <div class="street-grid">
+          <div class="street-item"><span class="street-item-name">中山街道</span><span class="street-item-tel">57786257</span></div>
+          <div class="street-item"><span class="street-item-name">方松街道</span><span class="street-item-tel">37021526</span></div>
+          <div class="street-item"><span class="street-item-name">岳阳街道</span><span class="street-item-tel">57716655</span></div>
+          <div class="street-item"><span class="street-item-name">永丰街道</span><span class="street-item-tel">67816119</span></div>
+          <div class="street-item"><span class="street-item-name">广富林街道</span><span class="street-item-tel">37655605</span></div>
+          <div class="street-item"><span class="street-item-name">九里亭街道</span><span class="street-item-tel">67890296</span></div>
+          <div class="street-item"><span class="street-item-name">车墩镇</span><span class="street-item-tel">57604759</span></div>
+          <div class="street-item"><span class="street-item-name">洞泾镇</span><span class="street-item-tel">57672532</span></div>
+          <div class="street-item"><span class="street-item-name">新桥镇</span><span class="street-item-tel">57642626</span></div>
+          <div class="street-item"><span class="street-item-name">九亭镇</span><span class="street-item-tel">57633103</span></div>
+          <div class="street-item"><span class="street-item-name">泗泾镇</span><span class="street-item-tel">57611712</span></div>
+          <div class="street-item"><span class="street-item-name">佘山镇</span><span class="street-item-tel">57652626</span></div>
+          <div class="street-item"><span class="street-item-name">小昆山镇</span><span class="street-item-tel">57761030</span></div>
+          <div class="street-item"><span class="street-item-name">石湖荡镇</span><span class="street-item-tel">57759035</span></div>
+          <div class="street-item"><span class="street-item-name">新浜镇</span><span class="street-item-tel">57892224</span></div>
+          <div class="street-item"><span class="street-item-name">泖港镇</span><span class="street-item-tel">57860567</span></div>
+          <div class="street-item"><span class="street-item-name">叶榭镇</span><span class="street-item-tel">67800093</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <strong style="color:rgba(255,255,255,0.9);">松江区就业促进中心</strong><br>
+        地址：上海市松江区荣乐东路2378号<br>
+        电话：021-67848665 &nbsp;|&nbsp; 热线：12333
+      </div>
+      <div class="footer-links">
+        <a href="https://rsj.sh.gov.cn" target="_blank" rel="noopener noreferrer">上海市人社局</a>
+        <a href="https://zwdt.sh.gov.cn" target="_blank" rel="noopener noreferrer">一网通办</a>
+        <a href="https://www.songjiang.gov.cn" target="_blank" rel="noopener noreferrer">松江区政府网</a>
+        <a href="https://rsj.sh.gov.cn/tjgqd_17756/" target="_blank" rel="noopener noreferrer">公共就业服务机构</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      上海市松江区人力资源和社会保障局 &nbsp;版权所有
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleNav() {
+  const nav = document.getElementById('mainNav');
+  const btn = document.querySelector('.mobile-toggle');
+  const isOpen = nav.classList.toggle('is-open');
+  btn.setAttribute('aria-expanded', isOpen);
+}
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Close mobile nav
+      document.getElementById('mainNav').classList.remove('is-open');
+      document.querySelector('.mobile-toggle').setAttribute('aria-expanded', 'false');
+    }
+  });
+});
+</script>
+
+</body>
+</html>

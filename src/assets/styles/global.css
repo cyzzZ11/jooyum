@@ -1,0 +1,19 @@
+/* 全局基础样式：具体页面样式由各视图的 scoped CSS 负责 */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+.page {
+  min-height: 100vh;
+  width: 100%;
+}

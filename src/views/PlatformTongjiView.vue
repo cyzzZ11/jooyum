@@ -1,0 +1,136 @@
+<template>
+  <div class="page page--platform">
+<!-- ===== DETAIL HERO ===== -->
+<section class="detail-hero">
+  <div class="detail-hero-content">
+    <a href="/" class="back-link">← 返回总览</a>
+    <div class="detail-hero-grid">
+      <div class="platform-visual color-tongji">
+          <div class="platform-visual-bg">TONGJI</div>
+          <div class="platform-visual-overlay"></div>
+          <div class="platform-num">01</div>
+          <div class="platform-visual-content">
+            <div class="platform-badge">🏛️ 区校共建新型研发机构</div>
+            <h3 style="color:#fff; font-size:1.4rem; font-weight:700;">同济大学长三角G60<br>科创走廊研究院</h3>
+          </div>
+        </div>
+      <div class="platform-info">
+        <div style="display:inline-block;background:rgba(255,255,255,0.6);backdrop-filter:blur(8px);border:1px solid rgba(74,144,184,0.2);padding:4px 14px;border-radius:50px;font-size:0.75rem;font-weight:700;color:var(--primary);letter-spacing:2px;margin-bottom:1rem;">平台 01/10</div>
+        <h1>同济大学长三角G60科创走廊研究院</h1>
+        <div class="subtitle">区校共建 · 打造全球影响力的高端智库与成果转化基地</div>
+        <p>2024年5月揭牌成立，由松江区人民政府与同济大学共建。依托同济大学在人工智能、智能汽车等领域的国家级实验室资源，采用新型研发机构运行模式，构建"一体两翼"功能格局——计量测试中心专注研发与中试，科创之眼地块聚力科学研究与产业孵化。同济大学校长郑庆华院士亲任战略引领者，确立"企业出题、高校答题"的科研模式。</p>
+        <div class="platform-tags" style="margin-top:1.5rem;">
+          <span class="tag">集成电路</span>
+            <span class="tag">仪器仪表</span>
+            <span class="tag">先进材料</span>
+            <span class="tag">卫星互联网</span>
+            <span class="tag">人工智能</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KEY METRICS ===== -->
+<section class="detail-body">
+  <div class="section-label">核心数据</div>
+  <h2>关键指标一览</h2>
+  <div class="metrics-row">
+        <div class="metric-card">
+          <div class="metric-icon">🏆</div>
+          <div class="metric-value">国家一等奖</div>
+          <div class="metric-label">2025年度国家科技进步奖</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">📐</div>
+          <div class="metric-value">5项</div>
+          <div class="metric-label">国家一级标准物质</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">🔬</div>
+          <div class="metric-value">皮米级</div>
+          <div class="metric-label">纳米计量精度（1pm=10⁻¹²m）</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">🏗️</div>
+          <div class="metric-value">一体两翼</div>
+          <div class="metric-label">空间功能格局</div>
+        </div>
+      </div>
+
+  <!-- ===== DETAIL CARDS ===== -->
+  <h3>核心功能与特色</h3>
+  <div class="detail-grid">
+        <div class="detail-card">
+          <div class="detail-card-icon icon-tongji">🎯</div>
+          <h4>高端智库</h4>
+          <p>聚焦G60科创走廊城市群发展、科技产业融合、产城融合等重大课题，开展前瞻性研究，为走廊建设提供战略咨询和智力支持。</p>
+        </div>
+        <div class="detail-card">
+          <div class="detail-card-icon icon-tongji">🤖</div>
+          <h4>人工智能与产学研</h4>
+          <p>共建国际领先的AI与机器人科研阵地，推动超构材料验证中心、新型光学载荷等储备项目落地，支撑先进材料和卫星互联网产业。</p>
+        </div>
+        <div class="detail-card">
+          <div class="detail-card-icon icon-tongji">🎓</div>
+          <h4>卓越人才培养</h4>
+          <p>将同济大学国家卓越工程师G60基地落户松江，以大师领衔、企业联盟支撑、实训中心筑底，培养高端工程人才。</p>
+        </div>
+        <div class="detail-card">
+          <div class="detail-card-icon icon-tongji">⚡</div>
+          <h4>国家计量测试中心</h4>
+          <p>首发项目——国家集成电路微纳检测设备产业计量测试中心落地松江，提供"三全一前"纳米计量服务，提升芯片产业链自主可控水平。</p>
+        </div>
+      </div>
+
+  <!-- ===== PREV / NEXT ===== -->
+  <div class="next-prev-nav">
+    <a href="/platforms/liug">← 6G信通智谷</a>
+    <a href="/platforms/qingrui">清锐光链加速器 →</a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <h3>高能级科创平台</h3>
+      <p>长三角G60科创走廊策源地（松江）十大高能级科创平台</p>
+    </div>
+    <div>
+      <h3>快速导航</h3>
+      <ul class="footer-links">
+        <li><a href="/">← 返回总览</a></li>
+        <li><a href="/#synergy">协同格局</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>平台列表</h3>
+      <ul class="footer-links">
+        <li><a href="/platforms/tongji">同济G60研究院</a></li>
+        <li><a href="/platforms/qingrui">清锐光链加速器</a></li>
+        <li><a href="/platforms/donghua">东华全重室基地</a></li>
+        <li><a href="/platforms/jiaoda">交大技转中心</a></li>
+        <li><a href="/platforms/weina">微纳计量中心</a></li>
+        <li><a href="/platforms/donghua-gn">东华概念验证</a></li>
+        <li><a href="/platforms/shisu">上外语科基地</a></li>
+        <li><a href="/platforms/guanggu">光谷科创源</a></li>
+        <li><a href="/platforms/yiqi">科学仪器创新港</a></li>
+        <li><a href="/platforms/liug">6G信通智谷</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 长三角G60科创走廊 · 高能级科创平台介绍 · 上海松江</p>
+  </div>
+</footer>
+  </div>
+</template>
+
+<script setup>
+import { useScrollReveal } from '@/composables/useScrollReveal'
+
+useScrollReveal('.fade-in', { className: 'visible' })
+</script>
+
+<style scoped src="../assets/styles/platform-shared.css"></style>

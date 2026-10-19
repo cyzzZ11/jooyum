@@ -1,0 +1,27 @@
+{
+  "name": "projects",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "node server.js",
+    "pack": "node build/pack.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "松江大学城科创源 - 科技服务平台官网（Vue 3 + Vite）",
+  "dependencies": {
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "archiver": "^7.0.1",
+    "vite": "^6.0.7"
+  }
+}

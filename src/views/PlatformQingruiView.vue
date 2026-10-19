@@ -1,0 +1,135 @@
+<template>
+  <div class="page page--platform">
+<!-- ===== DETAIL HERO ===== -->
+<section class="detail-hero">
+  <div class="detail-hero-content">
+    <a href="/" class="back-link">← 返回总览</a>
+    <div class="detail-hero-grid">
+      <div class="platform-visual color-qingrui">
+          <div class="platform-visual-bg">QINGRUI</div>
+          <div class="platform-visual-overlay"></div>
+          <div class="platform-num">02</div>
+          <div class="platform-visual-content">
+            <div class="platform-badge">🚀 清华系市场化加速器</div>
+            <h3 style="color:#fff; font-size:1.4rem; font-weight:700;">清锐光链加速器<br>清仪锐创智能科技</h3>
+          </div>
+        </div>
+      <div class="platform-info">
+        <div style="display:inline-block;background:rgba(255,255,255,0.6);backdrop-filter:blur(8px);border:1px solid rgba(74,144,184,0.2);padding:4px 14px;border-radius:50px;font-size:0.75rem;font-weight:700;color:var(--primary);letter-spacing:2px;margin-bottom:1rem;">平台 02/10</div>
+        <h1>清锐光链加速器</h1>
+        <div class="subtitle">清仪锐创智能科技（上海）有限公司 · "投招孵服"一体化</div>
+        <p>2025年5月成立，由清华大学精密仪器系校友团队、产业资本与地方政府共同孵化。拥有1700平方米运营空间，设有展示厅、概念验证中心分中心和加速器。作为松江区智能光电装备产业集聚区的生态运营公司，正筹建约3亿元专项创投基金，以"科技+产业+资本"三位一体模式，打造从核心技术突破到规模化商业应用的全链条闭环。</p>
+        <div class="platform-tags" style="margin-top:1.5rem;">
+          <span class="tag">半导体量检测装备</span>
+            <span class="tag">高速激光加工</span>
+            <span class="tag">光学精密部件</span>
+            <span class="tag">智能光电</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KEY METRICS ===== -->
+<section class="detail-body">
+  <div class="section-label">核心数据</div>
+  <h2>关键指标一览</h2>
+  <div class="metrics-row">
+        <div class="metric-card">
+          <div class="metric-icon">💰</div>
+          <div class="metric-value">~3亿元</div>
+          <div class="metric-label">专项创投基金规模</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">📐</div>
+          <div class="metric-value">1700㎡</div>
+          <div class="metric-label">多功能运营空间</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">🏆</div>
+          <div class="metric-value">3大</div>
+          <div class="metric-label">核心技术亮相工博会</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">🔗</div>
+          <div class="metric-value">清华精仪系</div>
+          <div class="metric-label">核心技术源头</div>
+        </div>
+      </div>
+
+  <!-- ===== DETAIL CARDS ===== -->
+  <h3>核心功能与特色</h3>
+  <div class="detail-grid">
+        <div class="detail-card">
+          <div class="detail-card-icon icon-qingrui">💡</div>
+          <h4>超快激光精密制造</h4>
+          <p>应用于量子芯片、光芯片制备及仿生减阻结构加工，代表清华大学光电工程研究所前沿技术产业化方向。</p>
+        </div>
+        <div class="detail-card">
+          <div class="detail-card-icon icon-qingrui">📏</div>
+          <h4>飞秒光频梳测距系统</h4>
+          <p>解决大量程、高精度、高测速和绝对测距难以兼顾的难题，在机床校准、长度计量等领域拥有约50亿元市场规模。</p>
+        </div>
+        <div class="detail-card">
+          <div class="detail-card-icon icon-qingrui">📡</div>
+          <h4>线阵列扫描激光雷达</h4>
+          <p>凭借ALS技术平台与多传感器融合能力，为AGV、无人机、具身智能等场景提供强大感知支持。</p>
+        </div>
+        <div class="detail-card">
+          <div class="detail-card-icon icon-qingrui">🌱</div>
+          <h4>产业生态愿景</h4>
+          <p>三步走战略：短期打造"光电梦创园"种子基地，中期建设"光电智慧谷"，长远助推形成百亿级"光电未来城"。</p>
+        </div>
+      </div>
+
+  <!-- ===== PREV / NEXT ===== -->
+  <div class="next-prev-nav">
+    <a href="/platforms/tongji">← 同济G60研究院</a>
+    <a href="/platforms/donghua">东华全重室基地 →</a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <h3>高能级科创平台</h3>
+      <p>长三角G60科创走廊策源地（松江）十大高能级科创平台</p>
+    </div>
+    <div>
+      <h3>快速导航</h3>
+      <ul class="footer-links">
+        <li><a href="/">← 返回总览</a></li>
+        <li><a href="/#synergy">协同格局</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>平台列表</h3>
+      <ul class="footer-links">
+        <li><a href="/platforms/tongji">同济G60研究院</a></li>
+        <li><a href="/platforms/qingrui">清锐光链加速器</a></li>
+        <li><a href="/platforms/donghua">东华全重室基地</a></li>
+        <li><a href="/platforms/jiaoda">交大技转中心</a></li>
+        <li><a href="/platforms/weina">微纳计量中心</a></li>
+        <li><a href="/platforms/donghua-gn">东华概念验证</a></li>
+        <li><a href="/platforms/shisu">上外语科基地</a></li>
+        <li><a href="/platforms/guanggu">光谷科创源</a></li>
+        <li><a href="/platforms/yiqi">科学仪器创新港</a></li>
+        <li><a href="/platforms/liug">6G信通智谷</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 长三角G60科创走廊 · 高能级科创平台介绍 · 上海松江</p>
+  </div>
+</footer>
+  </div>
+</template>
+
+<script setup>
+import { useScrollReveal } from '@/composables/useScrollReveal'
+
+useScrollReveal('.fade-in', { className: 'visible' })
+</script>
+
+<style scoped src="../assets/styles/platform-shared.css"></style>

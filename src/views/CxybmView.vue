@@ -1,0 +1,1370 @@
+<template>
+  <div class="page page--cxybm">
+<!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="#schools" class="site-logo" aria-label="产学研合作计划首页">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <rect width="28" height="28" rx="6" fill="#1472B4"/>
+          <path d="M7 14h14M14 7v14M9 9l10 10M19 9L9 19" stroke="#fff" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+          <circle cx="14" cy="14" r="4" stroke="#fff" stroke-width="1.5"/>
+        </svg>
+        <span class="site-logo-text">产学研合作计划</span>
+      </a>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="#schools">合作院校</a>
+        <a href="#directions">合作方向</a>
+        <button type="button" class="nav-cta" id="navRegisterBtn">立即报名</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 首屏 Hero -->
+  <main>
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span class="hero-badge-dot" aria-hidden="true"></span>
+        2026 年度报名通道已开启
+      </div>
+      <h1>产学研深度合作<br>共建技术创新生态</h1>
+      <p class="hero-subtitle">
+        联合上海农校与科创新技术学院，打通产业需求与教育资源，为企业与院校搭建精准对接平台，推动技术成果转化与人才培养。
+      </p>
+      <button type="button" class="hero-cta-btn" id="openModalBtn">立即报名</button>
+    </div>
+  </section>
+
+  <!-- 合作院校 -->
+  <section id="schools" class="section schools-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">合作院校</div>
+        <h2 class="section-title">两所特色院校，多元学科覆盖</h2>
+        <p class="section-desc">依托两所院校的优势学科与科研力量，覆盖现代农业、信息技术、智能制造等多个前沿领域，为产学研合作提供坚实的人才与技术支撑。</p>
+      </div>
+      <div class="schools-grid">
+        <!-- 上海农校 -->
+        <article class="school-card">
+          <div class="school-card-header">
+            <div class="school-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="school-name">上海农校</h3>
+              <span class="school-type">农业技术特色</span>
+            </div>
+          </div>
+          <p class="school-desc">
+            上海市重点农业职业院校，深耕现代农业技术教育多年，在都市农业、智慧农业、农产品加工与食品安全领域具备丰富的教学科研经验和产业合作基础。
+          </p>
+          <div class="school-tags">
+            <span class="school-tag">都市现代农业</span>
+            <span class="school-tag">智慧农业技术</span>
+            <span class="school-tag">食品加工与安全</span>
+            <span class="school-tag">生态农业</span>
+          </div>
+        </article>
+
+        <!-- 科创新技术学院 -->
+        <article class="school-card">
+          <div class="school-card-header">
+            <div class="school-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <path d="M8 21h8"/>
+                <path d="M12 17v4"/>
+                <path d="M7 8h2m2 0h2m2 0h2"/>
+                <path d="M7 12h10"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="school-name">科创新技术学院</h3>
+              <span class="school-type">信息技术特色</span>
+            </div>
+          </div>
+          <p class="school-desc">
+            聚焦信息技术与工程应用的新锐院校，在人工智能、物联网、智能制造、新能源等领域拥有先进的实验平台和产学研合作机制，致力于培养高素质技术技能型人才。
+          </p>
+          <div class="school-tags">
+            <span class="school-tag">人工智能</span>
+            <span class="school-tag">物联网技术</span>
+            <span class="school-tag">智能制造</span>
+            <span class="school-tag">新能源技术</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 合作方向 -->
+  <section id="directions" class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">合作方向</div>
+        <h2 class="section-title">聚焦产业需求，精准对接资源</h2>
+        <p class="section-desc">围绕行业关键技术与应用场景，设立以下产学研合作方向，欢迎企业和科研机构选择匹配领域提出合作需求。</p>
+      </div>
+      <div class="directions-grid">
+        <div class="direction-card">
+          <div class="direction-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 22c4-4 8-7.5 8-12a8 8 0 10-16 0c0 4.5 4 8 8 12z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <h3 class="direction-title">智慧农业与精准种植</h3>
+          <p class="direction-desc">基于物联网、传感器和数据分析技术，实现农业生产过程的智能监测与精准管理。</p>
+        </div>
+
+        <div class="direction-card">
+          <div class="direction-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 2a4 4 0 014 4c0 2-2 3-2 5h-4c0-2-2-3-2-5a4 4 0 014-4z"/>
+              <path d="M10 17h4"/>
+              <path d="M10 21h4"/>
+              <path d="M10 11h4"/>
+            </svg>
+          </div>
+          <h3 class="direction-title">人工智能与数据应用</h3>
+          <p class="direction-desc">面向行业场景的 AI 模型开发、数据处理与智能化解决方案，推动技术落地与产业赋能。</p>
+        </div>
+
+        <div class="direction-card">
+          <div class="direction-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+            </svg>
+          </div>
+          <h3 class="direction-title">智能制造与装备升级</h3>
+          <p class="direction-desc">围绕自动化产线、工业机器人和数字化车间，开展技术攻关与设备升级改造合作。</p>
+        </div>
+
+        <div class="direction-card">
+          <div class="direction-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+              <line x1="4" y1="22" x2="4" y2="15"/>
+            </svg>
+          </div>
+          <h3 class="direction-title">食品安全与质量控制</h3>
+          <p class="direction-desc">从原料检测到成品追溯，构建全链路食品安全体系，保障农产品与食品的质量安全。</p>
+        </div>
+
+        <div class="direction-card">
+          <div class="direction-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"/>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+          </div>
+          <h3 class="direction-title">新能源与绿色发展</h3>
+          <p class="direction-desc">探索光伏发电、储能系统和清洁能源技术在农业与工业场景中的应用与推广。</p>
+        </div>
+
+        <div class="direction-card">
+          <div class="direction-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+              <path d="M16 3.13a4 4 0 010 7.75"/>
+            </svg>
+          </div>
+          <h3 class="direction-title">人才联合培养</h3>
+          <p class="direction-desc">通过实习实训、订单班、企业导师等方式，为企业定向培养符合岗位需求的技术人才。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 报名弹窗 -->
+  <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+    <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button type="button" class="modal-close" id="modalCloseBtn" aria-label="关闭">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M5 5l10 10M15 5L5 15"/>
+        </svg>
+      </button>
+
+      <!-- 报名流程 -->
+      <div class="modal-section">
+        <h2 class="modal-title" id="modalTitle">报名流程</h2>
+        <p class="modal-desc">提交信息后，我们将在 3 个工作日内与您取得联系。</p>
+        <div class="process-steps modal-steps">
+          <div class="process-step">
+            <h3 class="process-step-title">填写报名表</h3>
+            <p class="process-step-desc">如实填写个人或企业信息、合作意向。</p>
+          </div>
+          <div class="process-step">
+            <h3 class="process-step-title">初步审核</h3>
+            <p class="process-step-desc">项目组审核信息，确认合作可行性。</p>
+          </div>
+          <div class="process-step">
+            <h3 class="process-step-title">对接沟通</h3>
+            <p class="process-step-desc">院校负责人与您详细沟通需求。</p>
+          </div>
+          <div class="process-step">
+            <h3 class="process-step-title">签署协议</h3>
+            <p class="process-step-desc">达成意向后签署协议，启动项目。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 报名表单 -->
+      <div class="modal-section">
+        <h2 class="modal-title">在线报名</h2>
+        <p class="modal-desc">标注 <span style="color: #D64545;">*</span> 的为必填项。</p>
+        <form id="registerForm" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="name">姓名 <span class="required">*</span></label>
+              <input type="text" id="name" name="name" class="form-input" placeholder="请输入您的姓名" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="phone">联系电话 <span class="required">*</span></label>
+              <input type="tel" id="phone" name="phone" class="form-input" placeholder="请输入手机号码" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">电子邮箱</label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="选填">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="org">所在单位 <span class="required">*</span></label>
+              <input type="text" id="org" name="org" class="form-input" placeholder="请输入企业或机构名称" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="position">职务 / 角色</label>
+              <input type="text" id="position" name="position" class="form-input" placeholder="如：技术总监">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="school">意向合作院校 <span class="required">*</span></label>
+              <div class="form-select-wrapper">
+                <select id="school" name="school" class="form-select" required>
+                  <option value="">请选择意向院校</option>
+                  <option value="上海农校">上海农校</option>
+                  <option value="科创新技术学院">科创新技术学院</option>
+                  <option value="两所均可">两所均可</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label">感兴趣的合作方向 <span class="required">*</span></label>
+              <div class="form-checkbox-group">
+                <label class="form-checkbox-item">
+                  <input type="checkbox" name="directions" value="智慧农业与精准种植">
+                  <span>智慧农业与精准种植</span>
+                </label>
+                <label class="form-checkbox-item">
+                  <input type="checkbox" name="directions" value="人工智能与数据应用">
+                  <span>人工智能与数据应用</span>
+                </label>
+                <label class="form-checkbox-item">
+                  <input type="checkbox" name="directions" value="智能制造与装备升级">
+                  <span>智能制造与装备升级</span>
+                </label>
+                <label class="form-checkbox-item">
+                  <input type="checkbox" name="directions" value="食品安全与质量控制">
+                  <span>食品安全与质量控制</span>
+                </label>
+                <label class="form-checkbox-item">
+                  <input type="checkbox" name="directions" value="新能源与绿色发展">
+                  <span>新能源与绿色发展</span>
+                </label>
+                <label class="form-checkbox-item">
+                  <input type="checkbox" name="directions" value="人才联合培养">
+                  <span>人才联合培养</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label" for="message">合作需求描述</label>
+              <textarea id="message" name="message" class="form-textarea" placeholder="请简要描述您的合作需求（选填）"></textarea>
+            </div>
+          </div>
+          <div class="form-submit-area">
+            <button type="submit" class="form-submit-btn">提交报名</button>
+            <span class="form-submit-hint">提交后 3 个工作日内将有专人与您联系</span>
+          </div>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <div class="form-success-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <h3>报名成功！</h3>
+          <p>感谢您的关注，我们将尽快与您联系。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div class="footer-info">
+        <div class="footer-title">产学研合作计划</div>
+        <p class="footer-text">上海农校 · 科创新技术学院<br>搭建产业与教育的桥梁，推动技术成果转化</p>
+      </div>
+      <div class="footer-contact">
+        <span>咨询热线：021-XXXX-XXXX</span>
+        <span>邮箱：industry-edu@example.com</span>
+        <span>地址：上海市</span>
+      </div>
+    </div>
+  </footer>
+  </div>
+</template>
+
+<script setup>
+import { onBeforeUnmount, onMounted } from 'vue'
+import { useSmoothScroll } from '@/composables/useSmoothScroll'
+
+useSmoothScroll({ excludeSelector: '.nav-cta' })
+
+onMounted(() => {
+  const modalOverlay = document.getElementById('modalOverlay')
+  const openModalBtn = document.getElementById('openModalBtn')
+  const closeModalBtn = document.getElementById('modalCloseBtn')
+  const navRegisterBtn = document.getElementById('navRegisterBtn')
+  const registerForm = document.getElementById('registerForm')
+  if (!modalOverlay) return
+
+  const openModal = () => {
+    modalOverlay.classList.add('open')
+    modalOverlay.setAttribute('aria-hidden', 'false')
+    document.body.style.overflow = 'hidden'
+    closeModalBtn.focus()
+  }
+
+  const closeModal = () => {
+    modalOverlay.classList.remove('open')
+    modalOverlay.setAttribute('aria-hidden', 'true')
+    document.body.style.overflow = ''
+  }
+
+  const onOverlayClick = (e) => {
+    if (e.target === modalOverlay) closeModal()
+  }
+
+  const onKeydown = (e) => {
+    if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModal()
+  }
+
+  const onNavRegister = (e) => {
+    e.preventDefault()
+    openModal()
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    const value = (id) => (document.getElementById(id)?.value || '').trim()
+    const name = value('name')
+    const phone = value('phone')
+    const org = value('org')
+    const school = document.getElementById('school')?.value
+    const directionChecked = document.querySelectorAll('input[name="directions"]:checked').length > 0
+
+    if (!name || !phone || !org || !school || !directionChecked) {
+      alert('请填写所有必填项并选择至少一个合作方向。')
+      return
+    }
+    if (!/^1[3-9]\d{9}$/.test(phone)) {
+      alert('请输入有效的手机号码。')
+      return
+    }
+    e.target.style.display = 'none'
+    document.getElementById('formSuccess')?.classList.add('show')
+  }
+
+  openModalBtn?.addEventListener('click', openModal)
+  closeModalBtn?.addEventListener('click', closeModal)
+  navRegisterBtn?.addEventListener('click', onNavRegister)
+  modalOverlay.addEventListener('click', onOverlayClick)
+  document.addEventListener('keydown', onKeydown)
+  registerForm?.addEventListener('submit', onSubmit)
+
+  onBeforeUnmount(() => {
+    openModalBtn?.removeEventListener('click', openModal)
+    closeModalBtn?.removeEventListener('click', closeModal)
+    navRegisterBtn?.removeEventListener('click', onNavRegister)
+    modalOverlay.removeEventListener('click', onOverlayClick)
+    document.removeEventListener('keydown', onKeydown)
+    registerForm?.removeEventListener('submit', onSubmit)
+    document.body.style.overflow = ''
+  })
+})
+</script>
+
+<style scoped>
+
+    .page--cxybm {
+      /* 色彩系统 - 浅冰蓝 #1472B4 信号蓝 */
+      --color-signal: #1472B4;
+      --color-signal-dark: #0D5A8F;
+      --color-signal-darker: #0A4570;
+      --color-signal-light: #3A8FCC;
+      --color-signal-pale: #E8F2FA;
+      --color-signal-ghost: #F3F8FC;
+      --color-canvas: #F7FAFD;
+      --color-surface: #FFFFFF;
+      --color-surface-alt: #EEF4F9;
+      --color-ink: #1A2A3A;
+      --color-ink-secondary: #3D5066;
+      --color-muted: #6B8299;
+      --color-rule: #D4E2EE;
+      --color-rule-light: #E8F0F6;
+      --color-success: #2D8B57;
+      --color-warning: #C67A1A;
+
+      /* 排版 */
+      --font-display: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --font-body: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+      /* 间距 */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+
+      /* 几何 */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+
+      /* 宽度 */
+      --content-max: 1120px;
+      --content-reading: 680px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    .page--cxybm {
+      scroll-behavior: smooth;
+    }
+
+    .page--cxybm {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--color-ink);
+      background-color: var(--color-canvas);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ====== 页面头部 ====== */
+    .site-header {
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-rule);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .site-header-inner {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+
+    .site-logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      text-decoration: none;
+      color: var(--color-ink);
+    }
+
+    .site-logo svg {
+      flex-shrink: 0;
+    }
+
+    .site-logo-text {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--color-ink-secondary);
+    }
+
+    .site-nav {
+      display: flex;
+      gap: var(--space-lg);
+      align-items: center;
+    }
+
+    .site-nav a {
+      font-size: 0.875rem;
+      color: var(--color-ink-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .site-nav a:hover,
+    .site-nav a:focus {
+      color: var(--color-signal);
+    }
+
+    .site-nav a:focus-visible {
+      outline: 2px solid var(--color-signal);
+      outline-offset: 2px;
+      border-radius: var(--radius-sm);
+    }
+
+    .nav-cta {
+      background: var(--color-signal);
+      color: #fff;
+      padding: 0.4em 1em;
+      border-radius: var(--radius-sm);
+      font-weight: 500;
+      font-size: 0.875rem;
+      font-family: var(--font-body);
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--color-signal-dark);
+    }
+
+    .nav-cta:focus-visible {
+      outline: 2px solid var(--color-signal);
+      outline-offset: 2px;
+    }
+
+    /* ====== 首屏 Hero ====== */
+    .hero {
+      background: linear-gradient(135deg, var(--color-signal) 0%, var(--color-signal-dark) 60%, var(--color-signal-darker) 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 60%;
+      height: 200%;
+      background: radial-gradient(ellipse, rgba(255,255,255,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    }
+
+    .hero-inner {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      padding: clamp(2rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 100px;
+      padding: 0.3em 1em;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: var(--space-lg);
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      background: #5CE0A0;
+      border-radius: 50%;
+      animation: page--cxybm-pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes page--cxybm-pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.25;
+      margin: 0 0 var(--space-md);
+      letter-spacing: -0.01em;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      line-height: 1.7;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 0 var(--space-xl);
+    }
+
+    /* ====== 通用章节 ====== */
+    .section {
+      padding: clamp(3rem, 6vw, 5rem) clamp(1rem, 4vw, 2rem);
+    }
+
+    .section-inner {
+      max-width: var(--content-max);
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: var(--space-xl);
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-signal);
+      margin-bottom: var(--space-sm);
+    }
+
+    .section-label::before {
+      content: '';
+      width: 16px;
+      height: 2px;
+      background: var(--color-signal);
+      border-radius: 1px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--color-ink);
+      margin: 0 0 var(--space-sm);
+    }
+
+    .section-desc {
+      font-size: 1rem;
+      color: var(--color-muted);
+      max-width: var(--content-reading);
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    /* ====== 学校卡片 ====== */
+    .schools-section {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-rule-light);
+      border-bottom: 1px solid var(--color-rule-light);
+    }
+
+    .schools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+      gap: var(--space-lg);
+    }
+
+    .school-card {
+      background: var(--color-signal-ghost);
+      border: 1px solid var(--color-rule);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 3vw, 2rem);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .school-card:hover {
+      border-color: var(--color-signal-light);
+      box-shadow: 0 4px 20px rgba(20, 114, 180, 0.08);
+    }
+
+    .school-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+
+    .school-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--color-signal);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .school-icon svg {
+      width: 24px;
+      height: 24px;
+      color: #fff;
+    }
+
+    .school-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--color-ink);
+      margin: 0 0 0.2em;
+    }
+
+    .school-type {
+      font-size: 0.8rem;
+      color: var(--color-signal);
+      font-weight: 500;
+      background: var(--color-signal-pale);
+      padding: 0.15em 0.6em;
+      border-radius: var(--radius-sm);
+      display: inline-block;
+    }
+
+    .school-desc {
+      font-size: 0.95rem;
+      color: var(--color-ink-secondary);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .school-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: auto;
+    }
+
+    .school-tag {
+      font-size: 0.78rem;
+      color: var(--color-muted);
+      background: var(--color-surface);
+      border: 1px solid var(--color-rule);
+      padding: 0.25em 0.7em;
+      border-radius: 100px;
+    }
+
+    /* ====== 合作方向 ====== */
+    .directions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+      gap: var(--space-md);
+    }
+
+    .direction-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-rule-light);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .direction-card:hover {
+      border-color: var(--color-signal);
+      transform: translateY(-2px);
+    }
+
+    .direction-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--color-signal-pale);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-md);
+    }
+
+    .direction-icon svg {
+      width: 18px;
+      height: 18px;
+      color: var(--color-signal);
+    }
+
+    .direction-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-ink);
+      margin: 0 0 0.4em;
+    }
+
+    .direction-desc {
+      font-size: 0.875rem;
+      color: var(--color-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ====== 流程说明 ====== */
+    .process-section {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-rule-light);
+      border-bottom: 1px solid var(--color-rule-light);
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+      gap: var(--space-lg);
+      counter-reset: step;
+    }
+
+    .process-step {
+      position: relative;
+      padding-top: var(--space-lg);
+    }
+
+    .process-step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 28px;
+      height: 28px;
+      background: var(--color-signal);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .process-step-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-ink);
+      margin: 0 0 0.3em;
+    }
+
+    .process-step-desc {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ====== 报名表单 ====== */
+    .form-section {
+      background: linear-gradient(180deg, var(--color-canvas) 0%, var(--color-signal-ghost) 100%);
+    }
+
+    .form-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .form-container {
+      background: var(--color-surface);
+      border: 1px solid var(--color-rule);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      box-shadow: 0 4px 24px rgba(20, 114, 180, 0.06);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+      gap: var(--space-md);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-ink-secondary);
+      display: flex;
+      align-items: center;
+      gap: 0.3em;
+    }
+
+    .form-label .required {
+      color: #D64545;
+      font-size: 0.9em;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 0.65em 0.9em;
+      font-size: 0.95rem;
+      font-family: var(--font-body);
+      color: var(--color-ink);
+      background: var(--color-surface);
+      border: 1px solid var(--color-rule);
+      border-radius: var(--radius-sm);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--color-signal);
+      box-shadow: 0 0 0 3px rgba(20, 114, 180, 0.1);
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: var(--color-muted);
+      opacity: 0.7;
+    }
+
+    .form-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .form-select-wrapper {
+      position: relative;
+    }
+
+    .form-select-wrapper::after {
+      content: '';
+      position: absolute;
+      right: 1em;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid var(--color-muted);
+      pointer-events: none;
+    }
+
+    .form-select {
+      cursor: pointer;
+      appearance: none;
+      padding-right: 2.5em;
+    }
+
+    .form-hint {
+      font-size: 0.78rem;
+      color: var(--color-muted);
+      margin-top: 0.15em;
+    }
+
+    .form-checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .form-checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      cursor: pointer;
+    }
+
+    .form-checkbox-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--color-signal);
+      cursor: pointer;
+    }
+
+    .form-checkbox-item span {
+      font-size: 0.9rem;
+      color: var(--color-ink-secondary);
+    }
+
+    .form-submit-area {
+      margin-top: var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .form-submit-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      background: var(--color-signal);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: var(--font-body);
+      padding: 0.75em 2.5em;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+      min-width: 200px;
+    }
+
+    .form-submit-btn:hover {
+      background: var(--color-signal-dark);
+    }
+
+    .form-submit-btn:active {
+      transform: scale(0.98);
+    }
+
+    .form-submit-btn:focus-visible {
+      outline: 2px solid var(--color-signal);
+      outline-offset: 2px;
+    }
+
+    .form-submit-hint {
+      font-size: 0.8rem;
+      color: var(--color-muted);
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: var(--space-xl);
+    }
+
+    .form-success.show {
+      display: block;
+    }
+
+    .form-success-icon {
+      width: 56px;
+      height: 56px;
+      background: #E8F8EF;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-md);
+    }
+
+    .form-success-icon svg {
+      width: 28px;
+      height: 28px;
+      color: var(--color-success);
+    }
+
+    .form-success h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--color-ink);
+      margin: 0 0 var(--space-sm);
+    }
+
+    .form-success p {
+      color: var(--color-muted);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* ====== 页脚 ====== */
+    .site-footer {
+      background: var(--color-ink);
+      color: rgba(255,255,255,0.7);
+      padding: clamp(2rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem);
+    }
+
+    .site-footer-inner {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-lg);
+    }
+
+    .footer-info {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .footer-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .footer-text {
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .footer-contact {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      font-size: 0.85rem;
+    }
+
+    .footer-contact a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-contact a:hover {
+      color: #fff;
+    }
+
+    /* ====== Hero CTA 按钮 ====== */
+    .hero-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      color: var(--color-signal);
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: var(--font-body);
+      padding: 0.7em 2em;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    .hero-cta-btn:hover {
+      background: #f0f7fc;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+    }
+
+    .hero-cta-btn:active {
+      transform: scale(0.98);
+    }
+
+    .hero-cta-btn:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+
+    /* ====== 报名弹窗 ====== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(10, 30, 50, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: flex-start;
+      padding: clamp(1rem, 4vw, 2rem);
+      overflow-y: auto;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-container {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 720px;
+      margin: auto 0;
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      animation: page--cxybm-modal-enter 0.25s ease-out;
+    }
+
+    @keyframes page--cxybm-modal-enter {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 36px;
+      height: 36px;
+      background: var(--color-surface-alt);
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--color-muted);
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .modal-close:hover {
+      background: var(--color-signal-pale);
+      color: var(--color-signal);
+    }
+
+    .modal-close:focus-visible {
+      outline: 2px solid var(--color-signal);
+      outline-offset: 2px;
+    }
+
+    .modal-section {
+      margin-bottom: var(--space-xl);
+    }
+
+    .modal-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .modal-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--color-ink);
+      margin: 0 0 var(--space-xs);
+    }
+
+    .modal-desc {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+      margin: 0 0 var(--space-lg);
+    }
+
+    .modal-steps {
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: var(--space-md);
+    }
+
+    /* ====== 响应式 ====== */
+    @media (max-width: 768px) {
+      .site-nav {
+        gap: var(--space-md);
+      }
+
+      .site-nav a:not(.nav-cta) {
+        display: none;
+      }
+
+      .schools-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .directions-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full-width {
+        grid-column: auto;
+      }
+
+      .site-footer-inner {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+
+      .hero-subtitle {
+        font-size: 0.95rem;
+      }
+
+      .section-title {
+        font-size: 1.3rem;
+      }
+    }
+
+    /* ====== 打印样式 ====== */
+    @media print {
+      .site-header,
+      .site-footer,
+      .form-submit-area,
+      .nav-cta {
+        display: none;
+      }
+
+      .hero {
+        background: var(--color-signal) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .school-card,
+      .direction-card,
+      .form-container {
+        break-inside: avoid;
+        box-shadow: none;
+      }
+
+      .section {
+        padding: 1.5rem 0;
+      }
+
+      .page--cxybm {
+        font-size: 12pt;
+        color: #000;
+      }
+    }
+
+    /* ====== 减少动效偏好 ====== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .page--cxybm {
+        scroll-behavior: auto;
+      }
+    }
+  
+</style>

@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>松江区科技创新政策</title>
+<style>
+:root {
+  --color-canvas: #EFF7FC;
+  --color-surface: #E0EFF8;
+  --color-surface-alt: #D4E8F4;
+  --color-panel: #FFFFFF;
+  --color-ink: #0F2B3D;
+  --color-muted: #4A6A7F;
+  --color-faint: #7A98AB;
+  --color-rule: #C2DAE8;
+  --color-signal: #1472B4;
+  --color-signal-dark: #0E5A8F;
+  --color-signal-light: #3A8FCC;
+  --color-signal-bg: #E8F2FA;
+  --color-accent-warm: #D4880F;
+  --color-accent-green: #1A8A5C;
+  --font-display: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1.25rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4.5rem;
+  --max-reading: 48rem;
+  --max-wide: 72rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: var(--color-signal); text-decoration: none; transition: color 0.15s; }
+a:hover { color: var(--color-signal-dark); text-decoration: underline; }
+a:focus-visible { outline: 2px solid var(--color-signal); outline-offset: 2px; border-radius: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  a { transition: none; }
+}
+
+/* ===== Page Container ===== */
+.page { max-width: var(--max-wide); margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2.5rem); }
+
+/* ===== Top Bar ===== */
+.top-bar {
+  background: var(--color-signal);
+  color: #fff;
+  padding: 0.6rem 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+.top-bar .page { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+.top-bar span { opacity: 0.85; }
+.top-bar-nav { display: flex; gap: 1rem; }
+.top-bar-nav a { color: rgba(255,255,255,0.9); font-size: 0.8rem; }
+.top-bar-nav a:hover { color: #fff; }
+
+/* ===== Part Divider ===== */
+.part-divider {
+  background: var(--color-signal);
+  color: #fff;
+  padding: var(--space-xl) 0 var(--space-2xl);
+  position: relative;
+  overflow: hidden;
+}
+.part-divider::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 38px,
+    rgba(255,255,255,0.04) 38px,
+    rgba(255,255,255,0.04) 39px
+  ),
+  repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 38px,
+    rgba(255,255,255,0.04) 38px,
+    rgba(255,255,255,0.04) 39px
+  );
+}
+.part-divider .page { position: relative; z-index: 1; }
+.part-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  opacity: 0.7;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.part-title {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+.part-subtitle {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  opacity: 0.8;
+  margin-top: 0.5rem;
+  max-width: var(--max-reading);
+  line-height: 1.7;
+}
+
+/* ===== Hero ===== */
+.hero {
+  padding: var(--space-2xl) 0 var(--space-xl);
+  border-bottom: 3px solid var(--color-signal);
+}
+.hero-inner { display: grid; grid-template-columns: 1fr; gap: var(--space-lg); }
+.hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--color-signal-bg);
+  color: var(--color-signal);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.3rem 0.8rem;
+  border-radius: 2px;
+  border-left: 3px solid var(--color-signal);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-md);
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--color-ink);
+  letter-spacing: -0.01em;
+}
+.hero h1 span { color: var(--color-signal); }
+.hero-subtitle {
+  font-size: clamp(0.8rem, 1.6vw, 0.95rem);
+  color: var(--color-muted);
+  line-height: 1.7;
+  text-align: justify;
+  margin-top: var(--space-md);
+}
+
+/* Stats Row */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px;
+  background: var(--color-rule);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-top: var(--space-lg);
+}
+.stat-cell {
+  background: var(--color-panel);
+  padding: var(--space-md) var(--space-sm);
+  text-align: center;
+}
+.stat-value {
+  font-family: var(--font-mono);
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-weight: 700;
+  color: var(--color-signal);
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  margin-top: 0.25rem;
+}
+
+/* ===== Section System ===== */
+.section { padding: var(--space-xl) 0; }
+.section + .section { border-top: 1px solid var(--color-rule); }
+
+.section-header {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.3rem;
+  margin-bottom: var(--space-lg);
+}
+.section-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-signal);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+.section-title {
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
+  font-weight: 700;
+  color: var(--color-ink);
+  line-height: 1.3;
+}
+
+/* ===== Policy Framework ===== */
+.policy-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+.policy-card {
+  background: var(--color-panel);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  position: relative;
+  overflow: hidden;
+}
+.policy-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--color-signal);
+  border-radius: 2px 0 0 2px;
+}
+.policy-card-num {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-faint);
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.04em;
+}
+.policy-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin-bottom: 0.5rem;
+  line-height: 1.35;
+}
+.policy-card p {
+  font-size: 0.88rem;
+  color: var(--color-muted);
+  line-height: 1.65;
+}
+
+/* ===== University Town Core Section ===== */
+.utown-section {
+  background: linear-gradient(180deg, var(--color-signal-bg) 0%, var(--color-canvas) 100%);
+  border: 2px solid var(--color-signal);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  margin: var(--space-lg) 0;
+  position: relative;
+}
+.utown-badge {
+  position: absolute;
+  top: -0.75rem;
+  left: var(--space-lg);
+  background: var(--color-signal);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.8rem;
+  border-radius: 2px;
+  letter-spacing: 0.06em;
+}
+.utown-title {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-weight: 800;
+  color: var(--color-ink);
+  margin-bottom: var(--space-sm);
+  line-height: 1.3;
+}
+.utown-desc {
+  font-size: 0.92rem;
+  color: var(--color-muted);
+  line-height: 1.75;
+  margin-bottom: var(--space-lg);
+  max-width: var(--max-reading);
+}
+
+.utown-features {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+.utown-feature {
+  background: var(--color-panel);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  border: 1px solid var(--color-rule);
+}
+.utown-feature-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--color-signal-bg);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-sm);
+}
+.utown-feature-icon svg { width: 1.25rem; height: 1.25rem; stroke: var(--color-signal); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.utown-feature h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin-bottom: 0.4rem;
+}
+.utown-feature p {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+/* Timeline */
+.utown-timeline {
+  margin-top: var(--space-lg);
+  position: relative;
+  padding-left: 1.5rem;
+}
+.utown-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0.35rem;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  width: 2px;
+  background: var(--color-rule);
+}
+.timeline-item {
+  position: relative;
+  padding-bottom: var(--space-md);
+}
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -1.15rem;
+  top: 0.35rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-signal);
+  border: 2px solid var(--color-panel);
+  box-shadow: 0 0 0 2px var(--color-signal);
+}
+.timeline-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-signal);
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+.timeline-text {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+/* ===== Industry Table ===== */
+.industry-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-md);
+}
+table.industry-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  min-width: 520px;
+}
+table.industry-table th {
+  background: var(--color-signal);
+  color: #fff;
+  font-weight: 600;
+  text-align: left;
+  padding: 0.7rem 0.8rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+table.industry-table td {
+  padding: 0.65rem 0.8rem;
+  border-bottom: 1px solid var(--color-rule);
+  color: var(--color-ink);
+  vertical-align: top;
+}
+table.industry-table tr:nth-child(even) td { background: var(--color-signal-bg); }
+table.industry-table tr:last-child td { border-bottom: none; }
+td.amount {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--color-signal);
+  white-space: nowrap;
+}
+
+/* ===== Ecosystem Section ===== */
+.eco-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+.eco-card {
+  background: var(--color-panel);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  border: 1px solid var(--color-rule);
+  display: flex;
+  gap: var(--space-sm);
+  align-items: flex-start;
+}
+.eco-icon {
+  flex-shrink: 0;
+  width: 2.2rem;
+  height: 2.2rem;
+  background: var(--color-signal-bg);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.eco-icon svg { width: 1.1rem; height: 1.1rem; stroke: var(--color-signal); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.eco-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--color-ink); margin-bottom: 0.3rem; }
+.eco-card p { font-size: 0.85rem; color: var(--color-muted); line-height: 1.6; }
+
+/* Data Highlights */
+.data-highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+.data-card {
+  background: var(--color-panel);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  border-left: 3px solid var(--color-signal);
+}
+.data-card .data-num {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-signal);
+  line-height: 1.2;
+}
+.data-card .data-unit {
+  font-size: 0.78rem;
+  color: var(--color-faint);
+  margin-left: 0.15rem;
+}
+.data-card .data-desc {
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  margin-top: 0.25rem;
+  line-height: 1.5;
+}
+
+/* ===== Callout ===== */
+.callout {
+  background: var(--color-signal-bg);
+  border: 1px solid var(--color-rule);
+  border-left: 4px solid var(--color-signal);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  margin: var(--space-lg) 0;
+}
+.callout-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-signal);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.3rem;
+}
+.callout p {
+  font-size: 0.9rem;
+  color: var(--color-ink);
+  line-height: 1.7;
+}
+
+/* ===== Utown Policy Cards (Part 2 specific) ===== */
+.utown-policy-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+.utown-policy-card {
+  background: var(--color-panel);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-md) var(--space-md) calc(var(--space-md) + 4px);
+  position: relative;
+  overflow: hidden;
+}
+.utown-policy-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--color-accent-green);
+  border-radius: 2px 0 0 2px;
+}
+.utown-policy-card h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin-bottom: 0.5rem;
+  line-height: 1.35;
+}
+.utown-policy-card p {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  line-height: 1.65;
+}
+.utown-policy-card .policy-tag {
+  display: inline-block;
+  background: var(--color-signal-bg);
+  color: var(--color-signal);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  margin-bottom: 0.5rem;
+}
+
+/* ===== Sources ===== */
+.sources { padding: var(--space-xl) 0 var(--space-2xl); }
+.sources-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.sources-list li {
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  line-height: 1.6;
+  padding-left: 1rem;
+  position: relative;
+}
+.sources-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-rule);
+}
+.sources-list li a { color: var(--color-signal); }
+
+/* ===== Footer ===== */
+.site-footer {
+  background: var(--color-ink);
+  color: rgba(255,255,255,0.6);
+  padding: var(--space-lg) 0;
+  font-size: 0.78rem;
+  text-align: center;
+  line-height: 1.6;
+}
+.site-footer strong { color: rgba(255,255,255,0.85); }
+
+/* ===== Responsive ===== */
+@media (min-width: 640px) {
+  .policy-grid { grid-template-columns: repeat(2, 1fr); }
+  .utown-features { grid-template-columns: repeat(2, 1fr); }
+  .utown-policy-grid { grid-template-columns: repeat(2, 1fr); }
+  .eco-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .policy-grid { grid-template-columns: repeat(2, 1fr); }
+  .utown-features { grid-template-columns: repeat(3, 1fr); }
+  .utown-policy-grid { grid-template-columns: repeat(3, 1fr); }
+  .eco-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1100px) {
+  .policy-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 639px) {
+  .utown-section { padding: var(--space-md); }
+  .top-bar-nav { display: none; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ===== Print ===== */
+@media print {
+  .top-bar, .site-footer { display: none; }
+  .part-divider { background: #1a5a8a; color: #fff; }
+  .utown-section { border: 1px solid #999; background: #fff; }
+  .policy-card, .eco-card, .data-card, .utown-feature, .utown-policy-card { break-inside: avoid; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .hero { border-bottom-color: #000; }
+  a { color: #000; text-decoration: underline; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #666; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar" role="banner">
+  <div class="page">
+    <span>上海市松江区 · 科技创新政策专题</span>
+    <nav class="top-bar-nav" aria-label="页面导航">
+      <a href="#part1">科创政策</a>
+      <a href="#part2">大学城科创源</a>
+    </nav>
+  </div>
+</div>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="page">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          长三角G60科创走廊策源地
+        </div>
+        <h1>松江区<span>科技创新</span>政策</h1>
+        <p class="hero-subtitle">
+          2025年12月，上海市出台《关于支持长三角G60科创走廊策源地建设的若干措施》，围绕四大领域推出23条举措，市、区两级财政持续五年共投入25亿元专项资金。其中，"打造松江大学城科创源"作为核心板块之一，依托8所高校、12万名师生的科教人才优势，正加速推动科技成果从实验室走向生产线。
+        </p>
+      </div>
+    </div>
+
+
+  </div>
+</header>
+
+<main>
+
+<!-- Section 1-1: 政策框架 -->
+<section class="section" id="part1">
+  <div class="page">
+    <div class="section-header">
+      <h2 class="section-title">《若干措施》四大核心板块</h2>
+    </div>
+
+    <div class="policy-grid">
+      <article class="policy-card">
+        <div class="policy-card-num">板块一</div>
+        <h3>共筑科技创新策源地</h3>
+        <p>完善应用性基础研究多元投入机制；发布策源地攻关项目需求榜单，支持全球机构"揭榜挂帅"；创建全国重点实验室等国家级科创平台；组建创新联合体，支持企业协同各类产学研力量实施重点产品技术攻关。</p>
+      </article>
+
+      <article class="policy-card">
+        <div class="policy-card-num">板块二</div>
+        <h3>共建世界级产业集群</h3>
+        <p>加速新一代电子信息（智能终端）、航空航天（卫星互联网）产业发展；培育科学仪器产业和6G未来产业；梯度培育科技领军企业，推动"小升规、规转强、强转股、股上市"。</p>
+      </article>
+
+      <article class="policy-card">
+        <div class="policy-card-num">板块三</div>
+        <h3>共育国际一流创新生态</h3>
+        <p>健全孵化转化体系，创建高质量孵化载体；加强科技金融支撑，推动科技成果转化基金与市未来产业基金联动；加强人才支撑保障和知识产权保护；推动高水平交流合作。</p>
+      </article>
+
+      <article class="policy-card">
+        <div class="policy-card-num">板块四</div>
+        <h3>共享科技创新资源</h3>
+        <p>优化科创空间布局，探索产业用地融合管理政策（M0）；加强区域算力统筹供给；促进科技资源开放共享，深化科技创新券跨区域互认互通；设立策源地专项资金。</p>
+      </article>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">专项资金规模</div>
+      <p>市、区两级财政持续五年共投入<strong>25亿元</strong>，其中市级财政10亿元、区级财政15亿元，设立长三角G60科创走廊策源地专项资金，重点支持关键技术攻关、重大平台建设和创新生态培育。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Section 1-2: 产业布局 -->
+<section class="section">
+  <div class="page">
+    <div class="section-header">
+      <h2 class="section-title">重点领域经费支持一览</h2>
+    </div>
+
+    <div class="industry-table-wrap">
+      <table class="industry-table">
+        <caption style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">重点领域经费支持一览</caption>
+        <thead>
+          <tr>
+            <th scope="col">重点领域</th>
+            <th scope="col">支持方向</th>
+            <th scope="col">最高支持</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>新一代电子信息（智能终端）</td>
+            <td>创新平台建设、技术研发布局、智能终端产品及关键零部件制造项目</td>
+            <td class="amount">5000万元</td>
+          </tr>
+          <tr>
+            <td>航空航天（卫星互联网）</td>
+            <td>引育产业链上下游重点项目，推动空天信息规模化应用</td>
+            <td class="amount">5000万元</td>
+          </tr>
+          <tr>
+            <td>科学仪器产业</td>
+            <td>质谱、色谱等核心领域国产化替代，科学仪器创新港建设</td>
+            <td class="amount">2000万元</td>
+          </tr>
+          <tr>
+            <td>6G未来产业</td>
+            <td>6G技术研发、标准研制、中试熟化、场景应用与国际合作</td>
+            <td class="amount">3000万元</td>
+          </tr>
+          <tr>
+            <td>创新联合体</td>
+            <td>企业联合高校、科研院所、产业链企业组建创新联合体</td>
+            <td class="amount">3000万元</td>
+          </tr>
+          <tr>
+            <td>应用性基础研究</td>
+            <td>企业牵头开展应用性基础研究</td>
+            <td class="amount">3000万元</td>
+          </tr>
+          <tr>
+            <td>"揭榜挂帅"</td>
+            <td>全球机构参与关键技术攻关</td>
+            <td class="amount">2000万元</td>
+          </tr>
+          <tr>
+            <td>高新技术企业</td>
+            <td>认定后一次性奖励</td>
+            <td class="amount">10万元</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout" style="margin-top: var(--space-lg);">
+      <div class="callout-label">6G产业目标</div>
+      <p>以"5G-A规模化应用、6G创新策源产业培育"双轮驱动，聚焦"6G+卫星+AI"构建创新生态。力争到<strong>2027年</strong>突破一批颠覆性技术、培育20家左右生态主导型企业；到<strong>2030年</strong>集聚5-8家领军和龙头企业、引育产业链企业300家以上，集聚区产业规模突破<strong>1000亿元</strong>。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Section 1-3: 创新生态 -->
+<section class="section">
+  <div class="page">
+    <div class="section-header">
+      <h2 class="section-title">全链条科创服务体系</h2>
+    </div>
+
+    <div class="eco-grid">
+      <article class="eco-card">
+        <div class="eco-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div>
+          <h3>科技金融支撑</h3>
+          <p>"七位一体"科技金融服务体系，涵盖专项金融政策、科创板对接、转化基金运营、金融服务联盟、产融示范园区、常态化对接活动和综合服务平台。G60科技成果转化基金已完成49家企业投资决策，直接投资16.27亿元，撬动社会资本超80亿元。</p>
+        </div>
+      </article>
+
+      <article class="eco-card">
+        <div class="eco-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div>
+          <h3>人才支撑保障</h3>
+          <p>加快海外高层次人才引进和紧缺急需产业人才培育，探索赋予重点用人单位人才计划自主推荐权。保障落户安居额度，推动人才随项目、产业、平台跨区域自由流动。</p>
+        </div>
+      </article>
+
+      <article class="eco-card">
+        <div class="eco-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <h3>知识产权保护</h3>
+          <p>建设上海市知识产权保护中心松江分中心，加快形成快速协同保护机制。设立国家海外知识产权纠纷应对指导中心上海分中心松江基地，推动G60知识产权行政保护共治。</p>
+        </div>
+      </article>
+
+      <article class="eco-card">
+        <div class="eco-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div>
+          <h3>孵化转化体系</h3>
+          <p>创建高质量孵化载体，加快培育硬科技企业。已建成3家国家级孵化器、18家市级孵化器、9家市级众创空间。支持共建概念验证、中试熟化、检验检测等技术平台。</p>
+        </div>
+      </article>
+
+      <article class="eco-card">
+        <div class="eco-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div>
+          <h3>跨区域协同</h3>
+          <p>建立跨区域产业合作利益共享机制，出台《松江区支持G60跨区域产业协同创新的若干举措（试行）》。已建成G60松江·中安科创园、金华（上海）科创中心等多个协同平台。</p>
+        </div>
+      </article>
+
+      <article class="eco-card">
+        <div class="eco-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div>
+          <h3>算力基础设施</h3>
+          <p>腾讯长三角人工智能先进计算中心、仪电智能算力平台等7个大数据中心项目落户松江，构建辐射长三角的智能算力服务枢纽与产业高地。</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Section 2-1: 总体概况 -->
+<section class="section" id="part2">
+  <div class="page">
+    <div class="section-header">
+      <h2 class="section-title">大学城科创源：从实验室到生产线</h2>
+    </div>
+
+    <div class="utown-section">
+      <div class="utown-badge">核心板块</div>
+      <h3 class="utown-title">打造松江大学城科创源</h3>
+      <p class="utown-desc">
+        《若干措施》明确提出"打造松江大学城科创源"，分为<strong>创新策源核心区</strong>和<strong>产业转化承载区</strong>两大区域，具备创新研发、技术转化、产业孵化和生产制造等功能。依托松江大学城8所高校、12万名师生的科教人才资源密集优势，推动高校科研布局与松江区重点产业深度适配，加速科技成果从实验室走向生产线。大学城科创源综合赋能中心已投入使用，正在推动高校科技成果转化，引进培育科技服务机构和技术经理人。
+      </p>
+
+      <div class="callout" style="margin-top: 0;">
+        <div class="callout-label">政策原文定位</div>
+        <p>《关于支持长三角G60科创走廊策源地建设的若干措施》第11条明确提出："<strong>打造松江大学城科创源</strong>。优化大学城科创源工作机制，制定大学城科创源支持政策，设立大学城科创源专项投资，推动高校科技成果转化，引进培育科技服务机构和技术经理人。"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 2-2: 六大功能模块 -->
+<section class="section">
+  <div class="page">
+    <div class="section-header">
+      <h2 class="section-title">六大核心功能模块</h2>
+    </div>
+
+    <div class="utown-features">
+      <div class="utown-feature">
+        <div class="utown-feature-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>强化顶层设计</h3>
+        <p>优化大学城工作机制，制定政策并设立专项投资，建立大学城科创运营平台，推进成果转化、校企合作与创新创业。</p>
+      </div>
+
+      <div class="utown-feature">
+        <div class="utown-feature-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3>健全转化机制</h3>
+        <p>推动高校深化职务科技成果赋权改革，全面推进技术经理人队伍职业化进程，探索"选育管用"全链条机制。</p>
+      </div>
+
+      <div class="utown-feature">
+        <div class="utown-feature-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>校企地合作</h3>
+        <p>建立校企"双向发榜"对接机制，强化关键共性技术协同攻关，支持高校加强基础学科建设与前沿学科布局。</p>
+      </div>
+
+      <div class="utown-feature">
+        <div class="utown-feature-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>资源开放共享</h3>
+        <p>鼓励高校为科技型企业开展研发、中试等服务，推动科研基础设施等科创资源开放共享，打造概念验证中心和中试平台基地。</p>
+      </div>
+
+      <div class="utown-feature">
+        <div class="utown-feature-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <h3>G60大学科技园矩阵</h3>
+        <p>联动浙江大学、合肥工业大学、苏州大学等国家大学科技园共建G60大学科技园矩阵，打造长三角科技成果转化高地。</p>
+      </div>
+
+      <div class="utown-feature">
+        <div class="utown-feature-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <h3>知识产权赋能</h3>
+        <p>国家知识产权运营（上海）国际服务平台松江大学城科创源赋能中心成立，提供专利运营、高价值专利培育等全链条服务。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 2-3: 具体政策措施 -->
+<section class="section">
+  <div class="page">
+    <div class="section-header">
+      <h2 class="section-title">大学城科创源专项支持政策</h2>
+    </div>
+
+    <div class="utown-policy-grid">
+      <article class="utown-policy-card">
+        <span class="policy-tag">体制机制</span>
+        <h3>优化大学城科创源工作机制</h3>
+        <p>建立区级统筹协调机制，联合市教委、市科委等部门形成合力，制定大学城科创源建设总体方案，明确各高校职责分工与协同推进路径。</p>
+      </article>
+
+      <article class="utown-policy-card">
+        <span class="policy-tag">资金支持</span>
+        <h3>设立大学城科创源专项投资</h3>
+        <p>在25亿策源地专项资金中设立大学城科创源专项，重点支持科技成果转化项目落地、技术经理人培育、科创服务平台建设及校企合作攻关。</p>
+      </article>
+
+      <article class="utown-policy-card">
+        <span class="policy-tag">成果转化</span>
+        <h3>推动高校科技成果转化</h3>
+        <p>深化职务科技成果赋权改革试点，探索"先使用后付费""先投后股"等模式，降低转化门槛。建设概念验证中心和中试熟化基地，打通从论文到产品的"最后一公里"。</p>
+      </article>
+
+      <article class="utown-policy-card">
+        <span class="policy-tag">人才引育</span>
+        <h3>引进培育科技服务机构和技术经理人</h3>
+        <p>引进国内外知名技术转移机构入驻，推进技术经理人职业化进程，探索"选育管用"全链条培养机制，打通科技成果与市场需求的桥梁。</p>
+      </article>
+
+      <article class="utown-policy-card">
+        <span class="policy-tag">平台载体</span>
+        <h3>建设综合赋能中心</h3>
+        <p>大学城科创源综合赋能中心已投入使用，集成成果展示、项目对接、创业辅导、投融资服务等功能，为高校师生和科技企业提供一站式服务。</p>
+      </article>
+
+      <article class="utown-policy-card">
+        <span class="policy-tag">协同创新</span>
+        <h3>校企"双向发榜"对接机制</h3>
+        <p>企业提出技术需求"张榜"、高校团队"揭榜"攻关；同时高校发布可转化成果、企业对接承接。双向发榜促进产学研精准匹配，强化关键共性技术协同攻关。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="page">
+    <strong>上海市松江区科技创新政策专题</strong><br>
+    信息来源：上海市人民政府、松江区人民政府官方网站 &nbsp;|&nbsp; 页面更新时间：2026年8月
+  </div>
+</footer>
+
+<script>
+// 页内平滑滚动
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+  anchor.addEventListener('click', function(e) {
+    var target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>

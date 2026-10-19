@@ -1,0 +1,1385 @@
+<template>
+  <div class="page page--platform-index">
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="hero-grid"></div>
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-content">
+    <div class="hero-badge">长三角G60科创走廊 · 策源地松江</div>
+    <h1>高能级科创平台<br><span>协同创新矩阵</span></h1>
+    <p class="hero-sub">
+      多所顶尖高校 · 十大创新引擎<br>
+      从基础研究到产业孵化，构建完整创新链条<br>
+      共同支撑长三角G60科创走廊向世界级科创走廊迈进
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">10</div>
+        <div class="hero-stat-label">高能级平台</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">多所高校</div>
+        <div class="hero-stat-label">顶尖高校依托</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">10+</div>
+        <div class="hero-stat-label">核心产业方向</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">1200亿+</div>
+        <div class="hero-stat-label">关联估值规模</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>向下探索</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ===== NAV ===== -->
+<nav class="nav-bar" id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="nav-logo-icon">G60</div>
+      高能级科创平台
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="菜单">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#platforms">十大平台</a></li>
+      <li><a href="#synergy">协同格局</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== PLATFORM OVERVIEW ===== -->
+<section class="section" id="platforms">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-tag">十大平台</div>
+      <h2 class="section-title">高能级科创平台全景</h2>
+      <p class="section-desc">点击任一平台卡片，查看详细介绍与核心数据</p>
+    </div>
+    <div class="overview-grid fade-in">
+      <a href="/platforms/tongji" class="overview-card">
+        <div class="overview-card-visual color-tongji"></div>
+        <div class="overview-card-body">
+          <h3>同济大学长三角G60科创走廊研究院</h3>
+          <p class="overview-card-sub">区校共建新型研发机构 · 高端智库与成果转化基地</p>
+          <div class="overview-card-tags"><span class="tag">集成电路</span><span class="tag">仪器仪表</span><span class="tag">先进材料</span></div>
+          <div class="overview-card-metrics"><span>🏆 国家科技进步一等奖</span><span>📐 皮米级计量精度</span></div>
+        </div>
+        <div class="overview-card-arrow">查看详情 →</div>
+      </a>
+      <a href="/platforms/qingrui" class="overview-card">
+        <div class="overview-card-visual color-qingrui"></div>
+        <div class="overview-card-body">
+          <h3>清锐光链加速器</h3>
+          <p class="overview-card-sub">清华系市场化加速器 · "投招孵服"一体化</p>
+          <div class="overview-card-tags"><span class="tag">半导体量检测</span><span class="tag">高速激光加工</span><span class="tag">光学精密部件</span></div>
+          <div class="overview-card-metrics"><span>💰 ~3亿元创投基金</span><span>📐 1700㎡运营空间</span></div>
+        </div>
+        <div class="overview-card-arrow">查看详情 →</div>
+      </a>
+      <a href="/platforms/donghua" class="overview-card">
+        <div class="overview-card-visual color-donghua"></div>
+        <div class="overview-card-body">
+          <h3>东华大学先进纤维材料全国重点实验室松江科创基地</h3>
+          <p class="overview-card-sub">我国纤维材料领域第一个国家重点实验室 · 源头创新策源地</p>
+          <div class="overview-card-tags"><span class="tag">高性能纤维</span><span class="tag">复合材料</span><span class="tag">智能纤维</span></div>
+          <div class="overview-card-metrics"><span>🧪 47项在研项目</span><span>🌙 月壤纤维国际首创</span></div>
+        </div>
+        <div class="overview-card-arrow">查看详情 →</div>
+      </a>
+      <a href="/platforms/jiaoda" class="overview-card">
+        <div class="overview-card-visual color-jiaoda"></div>
+        <div class="overview-card-body">
+          <h3>上海交通大学国家技术转移（松江）中心</h3>
+          <p class="overview-card-sub">首创"双赋权"模式 · 科技成果全链条转化服务</p>
+          <div class="overview-card-tags"><span class="tag">人工智能</span><span class="tag">集成电路</span><span class="tag">生物医药</span></div>
+          <div class="overview-card-metrics"><span>💰 企业估值1200亿+</span><span>🏢 202家持股企业</span></div>
+        </div>
+        <div class="overview-card-arrow">查看详情 →</div>
+      </a>
+      <a href="/platforms/weina" class="overview-card">
+        <div class="overview-card-visual color-weina"></div>
+        <div class="overview-card-body">
+          <h3>国家集成电路微纳检测设备产业计量测试中心</h3>
+          <p class="overview-card-sub">中国尺量中国芯 · 皮米级纳米计量</p>
+          <div class="overview-card-tags"><span class="tag">集成电路计量</span><span class="tag">量子化光晶格</span><span class="tag">皮米精度</span></div>
+          <div class="overview-card-metrics"><span>🏆 国家科技进步一等奖</span><span>📐 5项国家一级标准物质</span></div>
+        </div>
+        <div class="overview-card-arrow">查看详情 →</div>
+      </a>
+      <a href="/platforms/donghua-gn" class="overview-card">
+        <div class="overview-card-visual color-donghua-gn"></div>
+        <div class="overview-card-body">
+          <h3>东华大学国家大学科技园概念验证成果转化中心</h3>
+          <p class="overview-card-sub">跨越"死亡之谷" · 概念验证+中试熟化+转化孵化</p>
+          <div class="overview-card-tags"><span class="tag">概念验证</span><span class="tag">中试熟化</span><span class="tag">先进材料</span></div>
+          <div class="overview-card-metrics"><span>📐 3189㎡空间</span><span>🧪 10+入驻项目</span></div>
+        </div>
+        <div class="overview-card-arrow">查看详情 →</div>
+      </a>
+      <a href="/platforms/shisu" class="overview-card">
+        <div class="overview-card-visual color-shisu"></div>
+        <div class="overview-card-body">
+          <h3>上海外国语大学语言科学研究院科研转化基地</h3>
+          <p class="overview-card-sub">语言数据与人工智能 · 高质量语料库研发中心</p>
+          <div class="overview-card-tags"><span class="tag">多语种语料</span><span class="tag">AI+语言</span><span class="tag">大模型</span></div>
+          <div class="overview-card-metrics"><span>📚 ~200亿字词语料</span><span>🌍 50+语种覆盖</span></div>
+        </div>
+        <div class="overview-card-arrow">查看详情 →</div>
+      </a>
+      <a href="/platforms/guanggu" class="overview-card">
+        <div class="overview-card-visual color-guanggu"></div>
+        <div class="overview-card-body">
+          <h3>上海工程技术大学国家大学科技园光谷科创源</h3>
+          <p class="overview-card-sub">区校合作·央地协同·两岸融合 · 三区联动标杆</p>
+          <div class="overview-card-tags"><span class="tag">智能制造</span><span class="tag">电子信息</span><span class="tag">两岸科创</span></div>
+          <div class="overview-card-metrics"><span>🏢 1342家注册企业</span><span>🚀 50家高新企业</span></div>
+        </div>
+        <div class="overview-card-arrow">查看详情 →</div>
+      </a>
+      <a href="/platforms/yiqi" class="overview-card">
+        <div class="overview-card-visual color-yiqi"></div>
+        <div class="overview-card-body">
+          <h3>上海科学仪器创新港</h3>
+          <p class="overview-card-sub">科研的"眼睛" · 产业的"底座" · "六个一"生态体系</p>
+          <div class="overview-card-tags"><span class="tag">精密光学器件</span><span class="tag">精密数控</span><span class="tag">鸿蒙平台</span></div>
+          <div class="overview-card-metrics"><span>🏭 400家仪器仪表企业</span><span>📊 86亿产值</span></div>
+        </div>
+        <div class="overview-card-arrow">查看详情 →</div>
+      </a>
+      <a href="/platforms/liug" class="overview-card">
+        <div class="overview-card-visual color-6g"></div>
+        <div class="overview-card-body">
+          <h3>上海6G信通智谷未来产业园</h3>
+          <p class="overview-card-sub">6G+卫星+AI · 千亿级产业"核爆点"</p>
+          <div class="overview-card-tags"><span class="tag">6G通信</span><span class="tag">卫星互联网</span><span class="tag">AI融合</span></div>
+          <div class="overview-card-metrics"><span>📡 81家重点企业</span><span>💰 280亿→1000亿目标</span></div>
+        </div>
+        <div class="overview-card-arrow">查看详情 →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SYNERGY ===== -->
+<section class="section" id="synergy">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-tag">协同格局</div>
+      <h2 class="section-title">十大平台梯度互补 · 完整创新链条</h2>
+      <p class="section-desc">高能级平台分别处于科技创新链的不同环节，形成从基础研究到产业孵化的梯度互补格局</p>
+    </div>
+
+    <div class="synergy-grid fade-in">
+      <div class="synergy-card">
+        <div class="synergy-icon icon-donghua">🧬</div>
+        <h4>东华全重室 · 源头创新</h4>
+        <p>国家重点实验室，先进纤维材料前沿探索</p>
+      </div>
+      <div class="synergy-card">
+        <div class="synergy-icon icon-weina">📏</div>
+        <h4>微纳计量 · 标准底座</h4>
+        <p>国家级计量中心，皮米精度"中国尺量中国芯"</p>
+      </div>
+      <div class="synergy-card">
+        <div class="synergy-icon icon-tongji">🔬</div>
+        <h4>同济G60 · 中试转化</h4>
+        <p>新型研发机构，科研成果从实验室到生产线</p>
+      </div>
+      <div class="synergy-card">
+        <div class="synergy-icon icon-donghua-gn">🧪</div>
+        <h4>东华概念验证 · 跨越转化</h4>
+        <p>全流程概念验证，跨越成果转化"死亡之谷"</p>
+      </div>
+      <div class="synergy-card">
+        <div class="synergy-icon icon-qingrui">🚀</div>
+        <h4>清锐光链 · 产业催化</h4>
+        <p>"投招孵服"一体化，硬科技企业孵化加速</p>
+      </div>
+      <div class="synergy-card">
+        <div class="synergy-icon icon-jiaoda">🎯</div>
+        <h4>交大技转 · 综合转化</h4>
+        <p>"双赋权"模式，跨学科成果全链条转化</p>
+      </div>
+      <div class="synergy-card">
+        <div class="synergy-icon icon-shisu">🗣️</div>
+        <h4>上外语科 · 语言智能</h4>
+        <p>200亿字词语料矩阵，"语言+AI"人才蓄水池</p>
+      </div>
+      <div class="synergy-card">
+        <div class="synergy-icon icon-guanggu">🔧</div>
+        <h4>光谷科创源 · 产教融合</h4>
+        <p>区校合作+央地协同+两岸融合，三区联动</p>
+      </div>
+      <div class="synergy-card">
+        <div class="synergy-icon icon-yiqi">🔬</div>
+        <h4>科学仪器港 · 底座技术</h4>
+        <p>"六个一"体系，突破高端仪器进口依赖</p>
+      </div>
+      <div class="synergy-card">
+        <div class="synergy-icon icon-6g">📡</div>
+        <h4>6G信通智谷 · 未来产业</h4>
+        <p>6G+卫星+AI，千亿级产业"核爆点"</p>
+      </div>
+    </div>
+
+    <div class="flow-chain fade-in">
+      <div class="flow-step">
+        <div class="flow-step-icon">🔬</div>
+        <div class="flow-step-label">基础研究</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-step-icon">⚡</div>
+        <div class="flow-step-label">技术攻关</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-step-icon">🧪</div>
+        <div class="flow-step-label">概念验证</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-step-icon">🏭</div>
+        <div class="flow-step-label">中试熟化</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-step-icon">🚀</div>
+        <div class="flow-step-label">产业孵化</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-step-icon">🌐</div>
+        <div class="flow-step-label">集群发展</div>
+      </div>
+    </div>
+
+    <!-- Comparison Table -->
+    <h3 style="text-align:center; font-size:1.5rem; font-weight:900; color:var(--primary); margin:3rem 0 1.5rem;">平台横向对比</h3>
+    <div class="comparison-table-wrap fade-in">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>对比维度</th>
+            <th>🔵 同济G60研究院</th>
+            <th>🟣 清锐光链加速器</th>
+            <th>🟢 东华全重室基地</th>
+            <th>🔴 交大技转中心</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>依托主体</td>
+            <td>同济大学</td>
+            <td>清华精仪系校友团队+产业资本</td>
+            <td>东华大学</td>
+            <td>上海交通大学</td>
+          </tr>
+          <tr>
+            <td>机构性质</td>
+            <td>区校共建新型研发机构</td>
+            <td>市场化运营公司</td>
+            <td>国家重点实验室分支</td>
+            <td>高校技术转移机构</td>
+          </tr>
+          <tr>
+            <td>成立时间</td>
+            <td>2024年5月</td>
+            <td>2025年5月</td>
+            <td>2026年5月</td>
+            <td>规划推进中</td>
+          </tr>
+          <tr>
+            <td>产业方向</td>
+            <td>集成电路、仪器仪表、先进材料</td>
+            <td>半导体装备、激光装备、光学部件</td>
+            <td>高性能纤维、功能纤维、智能纤维</td>
+            <td>AI、集成电路、生物医药等8大领域</td>
+          </tr>
+          <tr>
+            <td>运营模式</td>
+            <td>揭榜挂帅+新型创新联合体</td>
+            <td>投招孵服一体化</td>
+            <td>揭榜挂帅+链主科创联盟</td>
+            <td>双赋权模式+概念验证</td>
+          </tr>
+          <tr>
+            <td>资本赋能</td>
+            <td>多元化成果转化平台公司</td>
+            <td>约3亿元专项创投基金</td>
+            <td>近3000万产业创新资金</td>
+            <td>多渠道资本对接</td>
+          </tr>
+          <tr>
+            <td>标志性成果</td>
+            <td>国家科技进步一等奖</td>
+            <td>三大核心技术亮相工博会</td>
+            <td>月壤纤维突破·47项在研</td>
+            <td>202家企业·估值超1200亿</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <h3>高能级科创平台</h3>
+      <p>
+        长三角G60科创走廊策源地（松江）十大高能级科创平台，覆盖集成电路、智能光电、先进纤维材料、多学科综合转化等赛道，形成基础研究到产业孵化的梯度互补格局。
+      </p>
+    </div>
+    <div>
+      <h3>平台导航</h3>
+      <ul class="footer-links">
+        <li><a href="/platforms/tongji">同济G60研究院</a></li>
+        <li><a href="/platforms/qingrui">清锐光链加速器</a></li>
+        <li><a href="/platforms/donghua">东华全重室基地</a></li>
+        <li><a href="/platforms/jiaoda">交大技转中心</a></li>
+        <li><a href="/platforms/weina">微纳计量中心</a></li>
+        <li><a href="/platforms/donghua-gn">东华概念验证中心</a></li>
+        <li><a href="/platforms/shisu">上外语科基地</a></li>
+        <li><a href="/platforms/guanggu">光谷科创源</a></li>
+        <li><a href="/platforms/yiqi">科学仪器创新港</a></li>
+        <li><a href="/platforms/liug">6G信通智谷</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>相关链接</h3>
+      <ul class="footer-links">
+        <li><a href="https://www.tongji.edu.cn" target="_blank">同济大学</a></li>
+        <li><a href="https://www.dhu.edu.cn" target="_blank">东华大学</a></li>
+        <li><a href="https://www.sjtu.edu.cn" target="_blank">上海交通大学</a></li>
+        <li><a href="https://www.songjiang.gov.cn" target="_blank">松江区人民政府</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 长三角G60科创走廊 · 高能级科创平台介绍 · 上海松江</p>
+  </div>
+</footer>
+  </div>
+</template>
+
+<script setup>
+import { useScrollReveal } from '@/composables/useScrollReveal'
+import { useTiltCards } from '@/composables/useTiltCards'
+
+useTiltCards('.overview-card')
+useScrollReveal('.fade-in', { className: 'visible' })
+</script>
+
+<style scoped>
+
+.page--platform-index {
+  --primary: #4a90b8;
+  --primary-light: #6baed6;
+  --accent: #7ec8e3;
+  --accent-glow: #a8dce8;
+  --gold: #5ba4cf;
+  --gold-light: #7ec8e3;
+  --surface: #ffffff;
+  --surface-dim: #f0f8ff;
+  --surface-dark: #2c5f7c;
+  --text: #2c3e50;
+  --text-light: #6b8a9e;
+  --text-on-dark: #e0f0fa;
+  --border: #d4eaf5;
+  --radius: 16px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 24px rgba(74, 144, 184, 0.08);
+  --shadow-lg: 0 12px 48px rgba(74, 144, 184, 0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+.page--platform-index {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+.page--platform-index {
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text);
+  background: var(--surface);
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #e8f4f8 0%, #d1ecf5 30%, #b8e0ef 60%, #a0d4e8 100%);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(126, 200, 227, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(91, 164, 207, 0.25) 0%, transparent 40%),
+    radial-gradient(circle at 60% 80%, rgba(168, 220, 232, 0.35) 0%, transparent 40%);
+  animation: page--platform-index-heroGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes page--platform-index-heroGlow {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(74, 144, 184, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74, 144, 184, 0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(74, 144, 184, 0.25);
+  border-radius: 50%;
+  animation: page--platform-index-float linear infinite;
+}
+
+@keyframes page--platform-index-float {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 900px;
+  padding: 2rem;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(74, 144, 184, 0.2);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  color: var(--primary);
+  margin-bottom: 2rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: page--platform-index-pulse 2s infinite;
+}
+
+@keyframes page--platform-index-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.5); }
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  color: var(--primary);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.hero h1 span {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text-light);
+  max-width: 680px;
+  margin: 0 auto 2.5rem;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+}
+
+.hero-stat {
+  text-align: center;
+}
+
+.hero-stat-num {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.hero-stat-label {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: var(--text-light);
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: page--platform-index-bounce 2s infinite;
+}
+
+@keyframes page--platform-index-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+.hero-scroll svg { width: 20px; height: 20px; }
+
+/* ===== NAV ===== */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  transition: box-shadow 0.3s;
+}
+
+.nav-bar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.nav-logo {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-logo-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-light);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--primary);
+  background: rgba(126, 200, 227, 0.15);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  margin: 5px 0;
+  transition: 0.3s;
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  padding: 6rem 2rem;
+}
+
+.section-alt { background: var(--surface-dim); }
+
+.container {
+  max-width: 80vw;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 16px;
+  border-radius: 50px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+  color: var(--primary);
+  line-height: 1.3;
+  margin-bottom: 1rem;
+}
+
+.section-desc {
+  font-size: 1.05rem;
+  color: var(--text-light);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ===== PLATFORM CARDS ===== */
+.platform {
+  margin-bottom: 6rem;
+}
+
+.platform:last-child { margin-bottom: 0; }
+
+.platform-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.platform-hero.reverse { direction: rtl; }
+.platform-hero.reverse > * { direction: ltr; }
+
+.platform-visual {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.platform-visual-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(255,255,255,0.08);
+  letter-spacing: 4px;
+}
+
+.platform-visual-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.1), transparent);
+}
+
+.platform-visual-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.platform-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 50px;
+  letter-spacing: 1px;
+  width: fit-content;
+  margin-bottom: 0.75rem;
+}
+
+.platform-num {
+  font-size: 6rem;
+  font-weight: 900;
+  color: rgba(255,255,255,0.15);
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  line-height: 1;
+}
+
+.platform-info h2 {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--primary);
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+.platform-info .subtitle {
+  font-size: 0.95rem;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.platform-info p {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  line-height: 1.9;
+  margin-bottom: 1.5rem;
+}
+
+.platform-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  background: rgba(126, 200, 227, 0.12);
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 50px;
+  border: 1px solid rgba(126, 200, 227, 0.25);
+}
+
+/* ===== KEY METRICS ===== */
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.metric-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: var(--accent);
+}
+
+.metric-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.metric-value {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--primary);
+  line-height: 1.2;
+}
+
+.metric-label {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+/* ===== DETAIL GRID ===== */
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.detail-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  transition: all 0.3s;
+}
+
+.detail-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.detail-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.detail-card h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.detail-card p {
+  font-size: 0.88rem;
+  color: var(--text-light);
+  line-height: 1.8;
+}
+
+/* ===== PLATFORM COLORS ===== */
+.color-tongji {
+  background: linear-gradient(135deg, #5b9bd5, #7ec8e3);
+}
+.color-qingrui {
+  background: linear-gradient(135deg, #6baed6, #a0d4e8);
+}
+.color-donghua {
+  background: linear-gradient(135deg, #4a90b8, #7ec8e3);
+}
+.color-jiaoda {
+  background: linear-gradient(135deg, #3a7ca5, #6baed6);
+}
+
+.bg-tongji { color: #5b9bd5; }
+.bg-qingrui { color: #6baed6; }
+.bg-donghua { color: #4a90b8; }
+.bg-jiaoda { color: #3a7ca5; }
+
+.color-weina {
+  background: linear-gradient(135deg, #3170a7, #5b9bd5);
+}
+.color-donghua-gn {
+  background: linear-gradient(135deg, #2e8b8b, #5bb8b8);
+}
+.color-shisu {
+  background: linear-gradient(135deg, #5b6ea8, #8599cc);
+}
+.color-guanggu {
+  background: linear-gradient(135deg, #3a8a8a, #6bc4c4);
+}
+.color-yiqi {
+  background: linear-gradient(135deg, #4a6f8a, #7aadcc);
+}
+.color-6g {
+  background: linear-gradient(135deg, #2878a8, #52b0e0);
+}
+
+.icon-weina { background: rgba(49, 112, 167, 0.12); color: #3170a7; }
+.icon-donghua-gn { background: rgba(46, 139, 139, 0.12); color: #2e8b8b; }
+.icon-shisu { background: rgba(91, 110, 168, 0.12); color: #5b6ea8; }
+.icon-guanggu { background: rgba(58, 138, 138, 0.12); color: #3a8a8a; }
+.icon-yiqi { background: rgba(74, 111, 138, 0.12); color: #4a6f8a; }
+.icon-6g { background: rgba(40, 120, 168, 0.12); color: #2878a8; }
+
+/* ===== COMPARISON ===== */
+.comparison-table-wrap {
+  overflow-x: auto;
+  margin: 2rem 0;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.comparison-table th {
+  background: var(--primary);
+  color: rgba(255,255,255,0.95);
+  padding: 1rem 1.2rem;
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.comparison-table td {
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.comparison-table tr:nth-child(even) td { background: var(--surface-dim); }
+.comparison-table tr:hover td { background: rgba(126, 200, 227, 0.06); }
+
+.comparison-table td:first-child {
+  font-weight: 600;
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+/* ===== TIMELINE ===== */
+.timeline {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), var(--primary));
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.timeline-item:nth-child(odd) { flex-direction: row-reverse; }
+
+.timeline-content {
+  width: 45%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1.5rem;
+  transition: all 0.3s;
+}
+
+.timeline-content:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  border-radius: 50%;
+  border: 3px solid var(--surface);
+  box-shadow: 0 0 0 3px var(--accent);
+  z-index: 2;
+}
+
+.timeline-date {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.3rem;
+}
+
+.timeline-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.3rem;
+}
+
+.timeline-desc {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: linear-gradient(135deg, #2c5f7c, #3a7ca5);
+  color: var(--text-on-dark);
+  padding: 4rem 2rem 2rem;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+}
+
+.footer h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.footer p {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.8;
+}
+
+.footer-links { list-style: none; }
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: #fff; }
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 3rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ===== ANIMATIONS ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .platform-hero {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .platform-hero.reverse { direction: ltr; }
+  
+  .hero-stats { gap: 1.5rem; }
+  
+  .timeline::before { left: 20px; }
+  .timeline-item,
+  .timeline-item:nth-child(odd) { flex-direction: column; padding-left: 50px; }
+  .timeline-content { width: 100%; }
+  .timeline-dot { left: 20px; }
+  
+  .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+  
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(20px);
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+  .nav-toggle { display: block; }
+}
+
+@media (max-width: 600px) {
+  .section { padding: 3rem 1rem; }
+  .hero h1 { font-size: 2rem; }
+  .metrics-row { grid-template-columns: 1fr 1fr; }
+  .detail-grid { grid-template-columns: 1fr; }
+}
+
+/* Color-specific card icons */
+.icon-tongji { background: rgba(91, 155, 213, 0.12); color: #5b9bd5; }
+.icon-qingrui { background: rgba(107, 174, 214, 0.12); color: #6baed6; }
+.icon-donghua { background: rgba(74, 144, 184, 0.12); color: #4a90b8; }
+.icon-jiaoda { background: rgba(58, 124, 165, 0.12); color: #3a7ca5; }
+
+/* Highlight box */
+.highlight-box {
+  background: linear-gradient(135deg, rgba(126, 200, 227, 0.08), rgba(168, 220, 232, 0.08));
+  border: 1px solid rgba(126, 200, 227, 0.2);
+  border-radius: var(--radius);
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.highlight-box h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.highlight-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.highlight-box li {
+  font-size: 0.9rem;
+  color: var(--text);
+  padding: 0.4rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  line-height: 1.7;
+}
+
+.highlight-box li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Synergy section */
+.synergy-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.2rem;
+  margin: 3rem 0;
+}
+
+.synergy-card {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all 0.3s;
+}
+
+.synergy-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.synergy-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin: 0 auto 1rem;
+}
+
+.synergy-card h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.synergy-card p {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+@media (max-width: 1100px) {
+  .synergy-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 700px) {
+  .synergy-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+  .synergy-grid { grid-template-columns: 1fr; }
+}
+
+/* Flow chain */
+.flow-chain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 3rem 0;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-radius: var(--radius);
+}
+
+.flow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  color: rgba(255,255,255,0.95);
+}
+
+.flow-step-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.flow-step-label {
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.flow-arrow {
+  color: rgba(255,255,255,0.7);
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0 0.3rem;
+}
+
+@media (max-width: 600px) {
+  .flow-step { padding: 0.5rem 0.8rem; }
+  .flow-step-icon { width: 36px; height: 36px; font-size: 1rem; }
+  .flow-step-label { font-size: 0.7rem; }
+}
+
+/* ===== OVERVIEW CARDS (Main page grid) ===== */
+.overview-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+.overview-card { display: flex; flex-direction: column; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.overview-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--accent); }
+.overview-card-visual { position: relative; height: 30px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.overview-card-num { position: absolute; top: 8px; right: 14px; font-size: 3rem; font-weight: 900; color: rgba(255,255,255,0.15); line-height: 1; }
+.overview-card-icon { font-size: 2.8rem; position: relative; z-index: 2; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15)); }
+.overview-card-body { padding: 1.5rem; flex: 1; }
+.overview-card-body h3 { font-size: 1.05rem; font-weight: 700; color: var(--primary); line-height: 1.4; margin-bottom: 0.4rem; }
+.overview-card-sub { font-size: 0.82rem; color: var(--text-light); margin-bottom: 0.8rem; line-height: 1.6; }
+.overview-card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 0.8rem; }
+.overview-card-tags .tag { font-size: 0.72rem; padding: 2px 10px; }
+
+.overview-card-metrics { display: flex; flex-wrap: wrap; gap: 0.8rem; font-size: 0.78rem; color: var(--text); font-weight: 500; }
+.overview-card-arrow { padding: 0.8rem 1.5rem; border-top: 1px solid var(--border); font-size: 0.82rem; font-weight: 600; color: var(--primary); text-align: right; transition: all 0.3s; }
+.overview-card:hover .overview-card-arrow { background: rgba(126, 200, 227, 0.08); padding-right: 2rem; }
+@media (max-width: 900px) { .overview-grid { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .overview-card-visual { height: 25px; } .overview-card-body { padding: 1rem; } .overview-card-body h3 { font-size: 0.95rem; } }
+
+/* === 卡片点击效果 === */
+.overview-card {
+  position: relative;
+  cursor: pointer;
+}
+.overview-card:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 12px rgba(74, 144, 184, 0.2);
+}
+.overview-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(126, 200, 227, 0.3) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  border-radius: var(--radius);
+}
+.overview-card:hover::after {
+  opacity: 1;
+}
+
+</style>
