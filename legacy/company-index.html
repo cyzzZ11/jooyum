@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +25,9 @@
       --radius: 0.5rem;
     }
 
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
     }
 
@@ -241,6 +244,7 @@
     }
 
     @media (max-width: 768px) {
+
       .services-grid,
       .values-grid {
         grid-template-columns: 1fr;
@@ -262,7 +266,8 @@
         padding: 0;
       }
 
-      header, section {
+      header,
+      section {
         page-break-inside: avoid;
       }
 
@@ -282,6 +287,7 @@
     }
   </style>
 </head>
+
 <body>
   <main>
     <header>
@@ -386,7 +392,7 @@
 
     <footer id="contact">
       <p>&copy; 2024 公司名称. 保留所有权利.</p>
-      <p>地址：[公司详细地址] | 电话：[联系电话] | 邮箱：contact@company.com</p>
+      <p>地址：[公司详细地址] | </p>
     </footer>
   </main>
 
@@ -395,7 +401,7 @@
       anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
         if (href === '#' || href.length <= 1) return;
-        
+
         const target = document.querySelector(href);
         if (target) {
           e.preventDefault();
@@ -405,4 +411,5 @@
     });
   </script>
 </body>
+
 </html>

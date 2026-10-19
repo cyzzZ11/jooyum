@@ -17,3 +17,37 @@ body {
   min-height: 100vh;
   width: 100%;
 }
+
+/* 全站统一箭头光标：正文区域不出现 I 形文本光标 */
+body,
+body :where(
+  p, span, div, li, ul, ol, dl, dd, dt, table, td, th, tr, thead, tbody,
+  h1, h2, h3, h4, h5, h6, small, strong, em, b, i, u, s, sub, sup,
+  blockquote, figure, figcaption, article, section, header, footer, main, nav,
+  aside, form, time, address, code, pre, mark, q, abbr, cite
+) {
+  cursor: default;
+}
+
+/* 可交互元素及其内部仍保持手型（同级特异性，靠后覆盖上面） */
+body a,
+body a *,
+body button,
+body button *,
+body [role='button'],
+body [role='button'] *,
+body summary,
+body summary *,
+body select,
+body select *,
+body label,
+body label * {
+  cursor: pointer;
+}
+
+/* 输入类元素保留文本光标 */
+body input,
+body textarea,
+body [contenteditable='true'] {
+  cursor: text;
+}

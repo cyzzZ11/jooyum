@@ -1751,15 +1751,32 @@ useTiltCards('.activity-card, .stat-card')
       .page--home.fp-on .activities-section .activity-grid-scroll {
         max-height: calc(var(--home-viewport-h, 100vh) - var(--home-nav-h, 64px) - 230px);
       }
+      /* 跑马灯两侧渐隐，避免卡片在容器边缘被硬切 */
+      .page--home .activity-grid-scroll {
+        -webkit-mask-image: linear-gradient(
+          90deg,
+          transparent 0,
+          #000 28px,
+          #000 calc(100% - 28px),
+          transparent 100%
+        );
+        mask-image: linear-gradient(
+          90deg,
+          transparent 0,
+          #000 28px,
+          #000 calc(100% - 28px),
+          transparent 100%
+        );
+      }
       @media (max-height: 800px) {
         .page--home.fp-on .activities-section .activity-grid { grid-template-rows: auto; }
       }
-      /* margin:auto 居中，内容超高时自动退化为顶部对齐，避免顶部被裁掉 */
+      /* margin:auto 双向居中；内容超高时自动退化为顶部对齐，避免顶部被裁掉 */
       .page--home.fp-on .activities-section > .container,
       .page--home.fp-on .about-section > .container,
       .page--home.fp-on .footer.fp-section > .container {
         width: 100%;
-        margin: auto 0;
+        margin: auto;
       }
       /* 整屏模式下每屏一进入就完整可见，避免滚动渐显动画在切屏时卡住 */
       .page--home.fp-on .fade-in-up {
