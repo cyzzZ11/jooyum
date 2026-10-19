@@ -1,6 +1,7 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 
-const SPLASH_AUTO_HIDE = 2500
+const SPLASH_AUTO_HIDE = 3000
+const SPLASH_COUNTDOWN_TICK = 50
 const CAROUSEL_DELAY = 5000
 
 /**
@@ -9,8 +10,10 @@ const CAROUSEL_DELAY = 5000
 export function useHomePage() {
   const splashVisible = ref(true)
   const appVisible = ref(false)
+  const splashSeconds = ref(Math.ceil(SPLASH_AUTO_HIDE / 1000))
+  const splashProgress = ref(0)
 
-  let splashTimer = null
+  let countdownTimer = null
   let revealTimer = null
   let hideDisplayTimer = null
   let carouselTimer = null
@@ -35,10 +38,11 @@ export function useHomePage() {
 
   function hideSplash() {
     if (!splashVisible.value) return
-    if (splashTimer) {
-      clearTimeout(splashTimer)
-      splashTimer = null
+    if (countdownTimer) {
+      clearInterval(countdownTimer)
+      countdownTimer = null
     }
+    splashProgress.value = 1
     splashVisible.value = false
 
     revealTimer = setTimeout(() => {
@@ -354,7 +358,13 @@ export function useHomePage() {
 
     const modal = document.getElementById('splashModal')
     if (modal) {
-      splashTimer = setTimeout(hideSplash, SPLASH_AUTO_HIDE)
+      const startedAt = Date.now()
+      countdownTimer = setInterval(() => {
+        const elapsed = Date.now() - startedAt
+        splashProgress.value = Math.min(elapsed / SPLASH_AUTO_HIDE, 1)
+        splashSeconds.value = Math.max(1, Math.ceil((SPLASH_AUTO_HIDE - elapsed) / 1000))
+        if (elapsed >= SPLASH_AUTO_HIDE) hideSplash()
+      }, SPLASH_COUNTDOWN_TICK)
     } else {
       appVisible.value = true
       initScrollAnim()
@@ -362,7 +372,7 @@ export function useHomePage() {
   })
 
   onBeforeUnmount(() => {
-    clearTimeout(splashTimer)
+    clearInterval(countdownTimer)
     clearTimeout(revealTimer)
     clearTimeout(hideDisplayTimer)
     clearTimeout(carouselAnimTimer)
@@ -376,5 +386,5 @@ export function useHomePage() {
     document.removeEventListener('keydown', onKeydown)
   })
 
-  return { splashVisible, appVisible, hideSplash }
+  return { splashVisible, appVisible, splashSeconds, splashProgress, hideSplash }
 }

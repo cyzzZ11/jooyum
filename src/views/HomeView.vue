@@ -13,6 +13,21 @@
         <div class="splash-modal__image-wrap">
           <div class="splash-modal__image"></div>
           <div class="splash-modal__gradient"></div>
+          <button
+            type="button"
+            class="splash-countdown"
+            :aria-label="splashSeconds + ' 秒后自动进入，点击立即进入'"
+            @click="hideSplash"
+          >
+            <span class="splash-countdown__ring">
+              <svg viewBox="0 0 44 44" aria-hidden="true">
+                <circle class="splash-countdown__track" cx="22" cy="22" r="18"></circle>
+                <circle class="splash-countdown__bar" cx="22" cy="22" r="18" :style="{ strokeDashoffset: 113.1 * splashProgress }"></circle>
+              </svg>
+              <span class="splash-countdown__num">{{ splashSeconds }}</span>
+            </span>
+            <span class="splash-countdown__text">秒后自动进入</span>
+          </button>
           <div class="splash-modal__text">
             <p class="splash-modal__sub">TECHNOLOGY INNOVATION PLATFORM</p>
             <h2 class="splash-modal__title">赋能创新 · 链接未来</h2>
@@ -886,7 +901,7 @@
 <script setup>
 import { useHomePage } from '@/composables/useHomePage'
 
-const { splashVisible, appVisible, hideSplash } = useHomePage()
+const { splashVisible, appVisible, splashSeconds, splashProgress, hideSplash } = useHomePage()
 </script>
 
 <style scoped src="../assets/styles/home.css"></style>
@@ -1181,6 +1196,81 @@ const { splashVisible, appVisible, hideSplash } = useHomePage()
         .nav__dropdown-item--has-sub.is-open > .arrow {
           transform: rotate(90deg);
         }
+      }
+
+      /* ===== 首屏倒计时 ===== */
+      .splash-countdown {
+        position: absolute;
+        top: var(--space-5);
+        left: var(--space-5);
+        z-index: 10;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 14px 6px 6px;
+        border-radius: 999px;
+        color: var(--text-white);
+        background: rgba(15, 23, 42, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition:
+          background var(--duration-fast) var(--ease-default),
+          transform var(--duration-fast) var(--ease-default);
+      }
+      .splash-countdown:hover {
+        background: rgba(15, 23, 42, 0.55);
+        transform: translateY(-1px);
+      }
+      .splash-countdown__ring {
+        position: relative;
+        width: 34px;
+        height: 34px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: none;
+      }
+      .splash-countdown__ring svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        transform: rotate(-90deg);
+      }
+      .splash-countdown__track,
+      .splash-countdown__bar {
+        fill: none;
+        stroke-width: 3;
+      }
+      .splash-countdown__track { stroke: rgba(255, 255, 255, 0.25); }
+      .splash-countdown__bar {
+        stroke: var(--accent-ice, #38bdf8);
+        stroke-linecap: round;
+        stroke-dasharray: 113.1;
+        transition: stroke-dashoffset 80ms linear;
+      }
+      .splash-countdown__num {
+        position: relative;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1;
+        color: #fff;
+        font-variant-numeric: tabular-nums;
+      }
+      .splash-countdown__text {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.85);
+        white-space: nowrap;
+      }
+
+      @media (max-width: 480px) {
+        .splash-countdown {
+          top: var(--space-3);
+          left: var(--space-3);
+          padding-right: 10px;
+        }
+        .splash-countdown__text { font-size: 11px; }
       }
     
 </style>
