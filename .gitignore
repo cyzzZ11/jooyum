@@ -1,0 +1,32 @@
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Vite / 构建缓存
+.vite/
+node_modules/.vite/
+
+# 地图源数据缓存（DataV 下载结果）
+.cache/
+
+# 截图 / 调试产物
+*.png
+!src/assets/**/*.png
+
+# 内网穿透工具（二进制，见 DEPLOY.md）
+tools/cpolar/
+tools/cloudflared/
+tools/*.zip
+tools/*-out.txt
+
+# 编辑器
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

@@ -1,0 +1,45 @@
+// ============================================================
+// 设计变量 —— 由 vite.config.ts 的 additionalData 全局注入
+// ============================================================
+
+// ---------- 画布基准（单屏 1920x1080） ----------
+$design-w: 1920px;
+$design-h: 1080px;
+
+// ---------- 主色 ----------
+$c-cyan: #2fd8ff;
+$c-blue: #3f8cff;
+$c-teal: #21e6c1;
+$c-gold: #ffc94d;
+$c-pink: #ff5f9e;
+$c-purple: #a97bff;
+$c-red: #ff6b6b;
+$c-green: #5ef2a0;
+$c-orange: #ff9f43;
+
+// ---------- 背景 / 面板 ----------
+$c-bg: #030a1a;
+$c-bg-deep: #02060f;
+$c-panel: rgba(10, 40, 82, 0.38);
+$c-panel-solid: #071c3a;
+$c-border: rgba(64, 178, 255, 0.26);
+$c-border-hi: rgba(94, 214, 255, 0.7);
+
+// ---------- 文本 ----------
+$c-text: #dcf0ff;
+$c-text-sub: #8fb6dd;
+$c-text-dim: #5d84ad;
+
+// ---------- 字体 ----------
+$font-num: 'Bahnschrift', 'DIN Alternate', 'Oswald', 'Arial Narrow', system-ui, sans-serif;
+$font-base: 'PingFang SC', 'Microsoft YaHei', 'HarmonyOS Sans SC', system-ui, sans-serif;
+
+// ---------- 布局 ----------
+$header-h: 76px;
+$page-pad: 14px;
+$gap: 14px;
+$r-panel: 4px;
+
+// ---------- 布局宽度（1920 基准） ----------
+$w-left: 462px;
+$w-right: 476px;

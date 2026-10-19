@@ -1,0 +1,47 @@
+@use './vars.scss' as *;
+
+// 弹性布局快捷方式
+@mixin flex($dir: row, $jc: flex-start, $ai: center) {
+    display: flex;
+    flex-direction: $dir;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+// 数字字体（等宽、带发光）
+@mixin num-font($size: 26px, $color: $c-cyan, $weight: 700) {
+    font-family: $font-num;
+    font-size: $size;
+    font-weight: $weight;
+    color: $color;
+    line-height: 1.1;
+    letter-spacing: 0.5px;
+    font-variant-numeric: tabular-nums;
+}
+
+@mixin glow-text($color: $c-cyan, $r: 12px) {
+    text-shadow: 0 0 ($r * 0.5) rgba($color, 0.85), 0 0 $r rgba($color, 0.4);
+}
+
+@mixin ellipsis($lines: 1) {
+    @if $lines ==1 {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    @else {
+        display: -webkit-box;
+        -webkit-line-clamp: $lines;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+
+// 渐变文本
+@mixin grad-text($from: $c-cyan, $to: #ffffff) {
+    background: linear-gradient(180deg, $to 10%, $from 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}

@@ -1,0 +1,244 @@
+/* 卡片通用布局（全局，非 scoped） */
+
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    gap: 8px;
+}
+
+/* 一行指标 */
+.stat-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    flex: none;
+
+    >* {
+        flex: 1 1 0;
+        min-width: 0;
+    }
+
+    &.is-4 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px 14px;
+    }
+}
+
+.stat-grid {
+    display: grid;
+    gap: 10px 12px;
+    flex: none;
+
+    &.cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    &.cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* 小节标题 */
+.chart-title {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: $c-text-sub;
+    padding-left: 9px;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3px;
+        height: 11px;
+        background: linear-gradient(180deg, $c-cyan, $c-blue);
+        box-shadow: 0 0 6px rgba(47, 216, 255, 0.8);
+    }
+
+    em {
+        font-style: normal;
+        font-size: 10px;
+        color: $c-text-dim;
+    }
+
+    b {
+        margin-left: auto;
+        font-weight: 400;
+        font-size: 10px;
+        color: $c-text-dim;
+    }
+}
+
+/* 撑满剩余高度的图表区 */
+.chart-fill {
+    flex: 1;
+    min-height: 0;
+    position: relative;
+}
+
+/* 环形图 + 图例 */
+.donut-row {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.donut-wrap {
+    position: relative;
+    flex: none;
+    width: 46%;
+    height: 100%;
+    min-height: 0;
+}
+
+.donut-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+
+    .dc-value {
+        font-family: $font-num;
+        font-size: 21px;
+        font-weight: 700;
+        color: #ffffff;
+        @include glow-text($c-cyan, 14px);
+
+        i {
+            font-style: normal;
+            font-size: 11px;
+            color: $c-text-sub;
+            margin-left: 2px;
+        }
+    }
+
+    .dc-label {
+        margin-top: 2px;
+        font-size: 10px;
+        color: $c-text-dim;
+    }
+}
+
+.pie-legend {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: $c-text-sub;
+        min-width: 0;
+    }
+
+    i {
+        flex: none;
+        width: 8px;
+        height: 8px;
+        border-radius: 2px;
+        box-shadow: 0 0 6px currentColor;
+    }
+
+    .pl-name {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: $c-text;
+    }
+
+    .pl-val {
+        font-family: $font-num;
+        font-size: 14px;
+        color: $c-gold;
+    }
+
+    .pl-unit {
+        font-style: normal;
+        font-size: 10px;
+        color: $c-text-dim;
+    }
+}
+
+/* 左侧强调竖线的小列表 */
+.mini-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: $c-text-sub;
+    }
+
+    .ml-val {
+        margin-left: auto;
+        font-family: $font-num;
+        font-size: 13px;
+        color: $c-cyan;
+    }
+}
+
+/* 内容超出时可纵向滚动（常配合 .chart-fill 使用）
+   内置主题化细滚动条 + 底部渐隐提示 */
+.scroll-area {
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-right: 8px;
+    overscroll-behavior: contain;
+
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(47, 216, 255, 0.6) rgba(64, 178, 255, 0.08);
+
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: rgba(64, 178, 255, 0.08);
+        border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 3px;
+        background: linear-gradient(180deg, #9ceaff, #2fd8ff);
+        box-shadow: 0 0 6px rgba(47, 216, 255, 0.8);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #c3f6ff;
+    }
+}
+
+/* 标题栏右侧的滚动提示 */
+.scroll-hint {
+    margin-left: auto;
+    font-size: 10px;
+    font-weight: 400;
+    color: $c-text-dim;
+    letter-spacing: 0.5px;
+}
