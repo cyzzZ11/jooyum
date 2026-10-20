@@ -12,6 +12,9 @@ node_modules/.vite/
 
 # 截图 / 调试产物
 *.png
+
+# 单文件预览版（构建产物，不提交）
+*-预览.html
 !src/assets/**/*.png
 
 # 内网穿透工具（二进制，见 DEPLOY.md）

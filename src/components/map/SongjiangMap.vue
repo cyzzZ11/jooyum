@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /**
  * 松江区街镇一张图
- * - 17 个街镇 choropleth（真实区界 + 街镇示意分区）
+ * - 17 个街镇 choropleth（真实区界 + 真实街镇行政边界，GCJ-02，无缝拼接）
  * - 重点景区点位 effectScatter
  * - 伪 3D 立体底座（多层错位渲染）
  */
@@ -12,7 +12,7 @@ import { type EChartsOption } from '@/utils/echarts'
 import { MAP_NAME, DISTRICT_MAP_NAME } from '@/utils/mapRegister'
 import { MAP_METRICS, TOWN_STATS, TOWN_SUMMARY } from '@/data/towns'
 import { SCENIC_SPOTS } from '@/data/map'
-import { mixColor } from '@/utils/color'
+import { rampColor, rankRatio } from '@/utils/color'
 
 const metric = ref(MAP_METRICS[0].key)
 const activeMetric = computed(
@@ -23,38 +23,33 @@ const activeMetric = computed(
 const CENTER_Y = 47.5
 const CENTER: [string, string] = ['50%', `${CENTER_Y}%`]
 const SIZE = '100%'
+/**
+ * 地图纵横比修正。
+ * ECharts 默认 0.75，松江区按默认渲染出来的宽高比是 0.97（偏瘦），左右各留一大块空白。
+ * 松江大致跨 lon 0.3471° / lat 0.2686°，在 31°N 处 1° 经度 ≈ 0.86 个纬度长度，
+ * 因此地理上正确的比例约 1.11，反推 aspectScale ≈ 0.86。
+ * 设置后地图变宽、左右留白收窄，也更接近真实形状。
+ */
+const ASPECT_SCALE = 0.86
 
 const values = computed(() => TOWN_STATS.map((t) => t[metric.value]))
 const minV = computed(() => Math.min(...values.value))
 const maxV = computed(() => Math.max(...values.value))
 
-/** 归一化（幂次 >1 让中低值更暗，拉开与头部街镇的层次） */
-function ratio(v: number) {
-  const span = maxV.value - minV.value || 1
-  return Math.pow((v - minV.value) / span, 1.35)
-}
+/** 各街镇在色带上的位置：按名次铺开，避免离群值把其余街镇压成一团深色 */
+const rankT = computed(() => rankRatio(values.value))
 
 const mapData = computed(() =>
-  TOWN_STATS.map((t) => {
-    const v = t[metric.value]
-    return {
-      name: t.name,
-      value: v,
-      itemStyle: {
-        areaColor: mixColor(
-          activeMetric.value.ramp[0],
-          activeMetric.value.ramp[1],
-          ratio(v)
-        )
-      }
-    }
-  })
+  TOWN_STATS.map((t, i) => ({
+    name: t.name,
+    value: t[metric.value],
+    itemStyle: { areaColor: rampColor(activeMetric.value.ramp, rankT.value[i]) }
+  }))
 )
 
-/** 用于渐变图例的 CSS 色带 */
+/** 用于渐变图例的 CSS 色带（多段分级） */
 const rampCss = computed(
-  () =>
-    `linear-gradient(90deg, ${activeMetric.value.ramp[0]}, ${activeMetric.value.ramp[1]})`
+  () => `linear-gradient(90deg, ${activeMetric.value.ramp.join(', ')})`
 )
 
 /** 重点点位（带名称标签） */
@@ -82,6 +77,7 @@ function baseSeries() {
     map: MAP_NAME,
     layoutCenter: CENTER,
     layoutSize: SIZE,
+    aspectScale: ASPECT_SCALE,
     roam: false,
     silent: true,
     tooltip: { show: false },
@@ -108,7 +104,7 @@ const option = computed<EChartsOption>(
           if (!town) {
             const spot = SCENIC_SPOTS.find((s) => s.name === name)
             return spot
-              ? `<b>${spot.name}</b><br/>本月客流：${spot.visitors} 万人次`
+              ? `<b>${spot.name}</b><br/>假期客流：${spot.visitors} 万人次`
               : name
           }
           return [
@@ -126,6 +122,7 @@ const option = computed<EChartsOption>(
         map: MAP_NAME,
         layoutCenter: CENTER,
         layoutSize: SIZE,
+        aspectScale: ASPECT_SCALE,
         roam: false,
         silent: true,
         itemStyle: { areaColor: 'transparent', borderColor: 'transparent' },
@@ -139,13 +136,21 @@ const option = computed<EChartsOption>(
           name: 'towns',
           silent: false,
           data: mapData.value,
+          // 街镇名放在这里（不能另开一个同 map 名的 series：ECharts 对同一张 map 只认
+          // 第一个 series 的绘制上下文，第二个 series 的 label 会被置为 ignore 而全部消失）。
+          // 「街镇名优先于景区名」不靠 z 分层，而靠 ECharts LabelManager 的全局重叠裁决：
+          // hideOverlap 的优先级 = 宿主元素包围盒面积，街镇面远大于景区散点，
+          // 因此重叠时景区名会被隐藏、街镇名保留。
           label: {
             show: true,
-            color: '#cfeaff',
-            fontSize: 10,
+            color: '#eaf6ff',
+            fontSize: 11,
+            fontWeight: 'bold',
             fontFamily: 'PingFang SC, Microsoft YaHei',
-            textShadowColor: 'rgba(0,0,0,.9)',
-            textShadowBlur: 4
+            textShadowColor: 'rgba(0, 18, 36, 1)',
+            textShadowBlur: 6,
+            textBorderColor: 'rgba(2, 12, 26, 0.9)',
+            textBorderWidth: 2.5
           },
           labelLayout: { hideOverlap: true },
           itemStyle: {
@@ -424,21 +429,26 @@ function resetView() {
       @dblclick="resetView"
     >
       <div class="map-inner" :style="innerStyle">
-        <MapBackdrop class="map-backdrop" :center-y="CENTER_Y" :size="SIZE" />
+        <MapBackdrop
+          class="map-backdrop"
+          :center-y="CENTER_Y"
+          :size="SIZE"
+          :aspect-scale="ASPECT_SCALE"
+        />
         <VChart :option="option" class="map-chart" />
       </div>
 
       <!-- 左上：全区汇总 -->
       <div class="map-total">
         <div class="mt-row">
-          <span class="mt-label">全区接待游客</span>
+          <span class="mt-label">假期接待游客</span>
           <b class="mt-value">
-            {{ TOWN_SUMMARY.tourists.toFixed(1) }}
+            {{ TOWN_SUMMARY.tourists.toFixed(2) }}
             <i>万人次</i>
           </b>
         </div>
         <div class="mt-row">
-          <span class="mt-label">文旅综合营收</span>
+          <span class="mt-label">假期文旅营收</span>
           <b class="mt-value">
             {{ (TOWN_SUMMARY.revenue / 10000).toFixed(2) }}
             <i>亿元</i>
@@ -481,7 +491,7 @@ function resetView() {
 
       <!-- 右下：发展指数 -->
       <div class="map-index">
-        <span class="mi-label">旅游发展指数</span>
+        <span class="mi-label">假期文旅热度指数</span>
         <b class="mi-value">{{ TOWN_SUMMARY.index }}</b>
       </div>
     </div>

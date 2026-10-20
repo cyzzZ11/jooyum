@@ -35,7 +35,7 @@ const option = computed(() =>
             464
             <i>家</i>
           </span>
-          <span class="dc-label">在营住宿设施</span>
+          <span class="dc-label">住宿设施存量</span>
         </div>
       </div>
       <ul class="pie-legend">

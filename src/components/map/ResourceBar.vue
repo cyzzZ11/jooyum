@@ -10,7 +10,7 @@ import { RESOURCE_LEGEND } from '@/data/map'
       <span class="rb-badge">数</span>
       <span class="rb-title">松江区文旅资源统计</span>
       <span class="rb-line" />
-      <span class="rb-sub">数据口径：区文旅局行业管理台账（模拟）</span>
+      <span class="rb-sub">数据口径：区文旅局行业管理台账（存量，截至 2026.09）</span>
     </header>
     <ul class="rb-grid">
       <li v-for="r in RESOURCE_LEGEND" :key="r.label">

@@ -10,7 +10,7 @@ const option = computed(() =>
     categories: YOU_BARS.map((b) => b.name),
     values: YOU_BARS.map((b) => b.value),
     colors: ['rgba(47,216,255,0.10)', '#2fd8ff'],
-    max: 7
+    max: 16
   })
 )
 </script>
@@ -21,7 +21,7 @@ const option = computed(() =>
       <StatBlock v-for="s in YOU_STATS" :key="s.label" v-bind="s" size="sm" />
     </div>
     <div class="chart-title">
-      开放式景区实时客流
+      重点景区假期客流
       <em>万人次</em>
     </div>
     <div class="chart-fill">

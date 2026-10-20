@@ -3,17 +3,13 @@ import { computed } from 'vue'
 import VChart from '@/components/common/VChart.vue'
 import RankBar from '@/components/common/RankBar.vue'
 import StatBlock from '@/components/common/StatBlock.vue'
-import { FU_PIE, FU_RANK, FU_STATS } from '@/data/panels'
+import { FU_EXTRA, FU_PIE, FU_RANK, FU_STATS } from '@/data/panels'
 import { donutOption } from '@/utils/chartTheme'
 
 const COLORS = ['#2fd8ff', '#ff9f43', '#a97bff', '#21e6c1', '#7fb3ff']
 
 /** 服务效能补充指标 */
-const EXTRA = [
-  { label: '投诉办结率', value: '98.6', unit: '%' },
-  { label: '平均响应时长', value: '2.4', unit: '小时' },
-  { label: '游客满意度', value: '4.8', unit: '分' }
-]
+const EXTRA = FU_EXTRA
 
 const option = computed(() =>
   donutOption({
@@ -49,10 +45,10 @@ const option = computed(() =>
         <VChart :option="option" />
         <div class="donut-center">
           <span class="dc-value">
-            43
+            {{ FU_STATS[0].value }}
             <i>件</i>
           </span>
-          <span class="dc-label">当月受理</span>
+          <span class="dc-label">假期受理</span>
         </div>
       </div>
       <ul class="pie-legend">

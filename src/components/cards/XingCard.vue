@@ -2,17 +2,11 @@
 import { computed } from 'vue'
 import VChart from '@/components/common/VChart.vue'
 import StatBlock from '@/components/common/StatBlock.vue'
-import { XING_BIG, XING_SMALL } from '@/data/panels'
+import { XING_BIG, XING_MODES, XING_SMALL } from '@/data/panels'
 import { barOption } from '@/utils/chartTheme'
 
-/** 各交通方式客流分担（万人次） */
-const MODES = [
-  { name: '公交车', value: 78.5, color: '#5ef2a0' },
-  { name: '轨交9号线', value: 42.6, color: '#2fd8ff' },
-  { name: '铁路', value: 8.4, color: '#3f8cff' },
-  { name: '长途客运', value: 3.2, color: '#a97bff' },
-  { name: '有轨电车', value: 1.6, color: '#ffc94d' }
-]
+/** 各交通方式假期客流分担（万人次） */
+const MODES = XING_MODES
 
 const option = computed(() =>
   barOption({
@@ -20,7 +14,7 @@ const option = computed(() =>
     values: MODES.map((m) => m.value),
     colors: ['rgba(63,140,255,0.10)', '#3f8cff'],
     unit: '万',
-    max: 90
+    max: 180
   })
 )
 </script>

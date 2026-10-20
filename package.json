@@ -8,6 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "build:single": "node scripts/build-single-html.mjs",
     "gen:geo": "node scripts/build-towns.mjs"
   },
   "dependencies": {

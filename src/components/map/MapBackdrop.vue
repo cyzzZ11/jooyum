@@ -15,8 +15,10 @@ const props = withDefaults(
     /** 主图中心 Y（%），需与 SongjiangMap 的 CENTER 一致 */
     centerY?: number
     size?: string
+    /** 纵横比修正，必须与 SongjiangMap 的 ASPECT_SCALE 一致，否则底座会错位 */
+    aspectScale?: number
   }>(),
-  { centerY: 47.5, size: '100%' }
+  { centerY: 47.5, size: '100%', aspectScale: 0.86 }
 )
 
 /** [相对主图的下偏移(%), 颜色] —— 越靠下越暗 */
@@ -33,6 +35,7 @@ const option = computed<EChartsOption>(() => ({
     map: MAP_NAME,
     layoutCenter: ['50%', `${props.centerY + offset}%`],
     layoutSize: props.size,
+    aspectScale: props.aspectScale,
     roam: false,
     silent: true,
     tooltip: { show: false },

@@ -51,7 +51,7 @@ const option = computed(() =>
         </li>
         <li class="pl-total">
           <span class="pl-name">合计</span>
-          <b class="pl-val">{{ TOTAL.toFixed(1) }}</b>
+          <b class="pl-val">{{ TOTAL.toFixed(2) }}</b>
           <em class="pl-unit">亿元</em>
         </li>
       </ul>

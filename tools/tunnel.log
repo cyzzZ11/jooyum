@@ -48,3 +48,9 @@
 2026-10-16T03:30:10Z INF Retrying connection in up to 4s connIndex=0 event=0 ip=198.41.200.73
 2026-10-16T03:30:11Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=0 event=0 ip=198.41.192.47
 2026-10-16T03:30:11Z INF Registered tunnel connection connIndex=0 connection=c8bada5f-c9e6-46c9-88e8-6718df4d5e5c event=0 ip=198.41.192.47 location=lax09 protocol=quic
+2026-10-16T06:52:03Z INF Initiating graceful shutdown due to signal terminated ...
+2026-10-16T06:52:03Z INF Retrying connection in up to 2s connIndex=0 event=0 ip=198.41.192.47
+2026-10-16T06:52:03Z ERR Connection terminated connIndex=0
+2026-10-16T06:52:03Z ERR no more connections active and exiting
+2026-10-16T06:52:03Z INF Tunnel server stopped
+2026-10-16T06:52:03Z INF Metrics server stopped

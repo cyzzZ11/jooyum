@@ -19,6 +19,10 @@ const screen = useScreenStore()
         </span>
         <span class="w-desc">多云 · 东南风 2 级</span>
       </div>
+      <div class="period" title="大屏所有指标均为该假期口径">
+        <span class="p-txt">2026 国庆假期</span>
+        <span class="p-date">10.01–10.07</span>
+      </div>
     </div>
 
     <div class="hd-center">
@@ -88,12 +92,16 @@ const screen = useScreenStore()
   display: flex;
   align-items: center;
   gap: 16px;
-  width: 460px;
+  width: 500px;
 }
 
 .clock {
   display: flex;
   flex-direction: column;
+  /* 固定宽度：秒数/日期变化时整块不变宽，右侧天气与周期角标才不会左右抖动。
+     等宽数字下 HH:MM:SS 实测恒定 104.4px，留 8px 余量取 112px */
+  flex: none;
+  width: 112px;
   line-height: 1.1;
 
   &-time {
@@ -103,18 +111,25 @@ const screen = useScreenStore()
     letter-spacing: 1.5px;
     color: #ffffff;
     @include glow-text($c-cyan, 12px);
+    /* 等宽数字：否则 1 比 8 窄，每秒跳字都会把后面的元素挤动 */
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+    white-space: nowrap;
   }
 
   &-date {
     font-size: 11px;
     color: $c-text-sub;
     letter-spacing: 0.5px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
   }
 }
 
 .weather {
   display: flex;
   align-items: center;
+  flex: none;
   gap: 6px;
   padding-left: 14px;
   border-left: 1px solid rgba(94, 214, 255, 0.22);
@@ -138,6 +153,37 @@ const screen = useScreenStore()
   .w-desc {
     font-size: 11px;
     color: $c-text-dim;
+  }
+}
+
+/* ---------- 数据周期角标 ---------- */
+.period {
+  display: flex;
+  align-items: center;
+  flex: none;
+  gap: 6px;
+  height: 26px;
+  padding: 0 10px;
+  border: 1px solid rgba(47, 216, 255, 0.45);
+  border-radius: 4px;
+  background: linear-gradient(
+    180deg,
+    rgba(47, 216, 255, 0.16),
+    rgba(9, 36, 72, 0.3)
+  );
+  white-space: nowrap;
+
+  .p-txt {
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffd166;
+  }
+
+  .p-date {
+    font-family: $font-num;
+    font-size: 11px;
+    color: $c-cyan;
+    letter-spacing: 0.5px;
   }
 }
 
@@ -199,7 +245,7 @@ const screen = useScreenStore()
 
 /* ---------- 右：控制 / 用户 ---------- */
 .hd-right {
-  width: 460px;
+  width: 500px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
