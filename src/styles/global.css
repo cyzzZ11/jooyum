@@ -1,0 +1,160 @@
+/* ==========================================================================
+   全局样式：深色大屏基调，色值取自参考站（全国文旅态势感知与智能决策平台）
+   ========================================================================== */
+
+:root {
+  --sj-bg: #030b16;
+  --sj-panel: rgba(3, 28, 52, 0.75);
+  --sj-panel-solid: #041c30;
+  --sj-border: rgba(8, 138, 251, 0.45);
+  --sj-border-soft: rgba(8, 138, 251, 0.25);
+  --sj-primary: #088afb;
+  --sj-primary-light: #7ad4ff;
+  --sj-text: #ffffff;
+  --sj-text-sub: rgba(180, 220, 255, 0.78);
+  --sj-text-weak: rgba(255, 255, 255, 0.6);
+  --sj-gold: #ffd200;
+  --sj-gold-dark: #d8b048;
+  --sj-gold-light: #f6d76a;
+  --sj-up: #ff5b5b;
+  --sj-down: #2fd27a;
+  --sj-header-h: 93px;
+  --sj-content-h: 1010px;
+  --sj-sider-w: 210px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--sj-bg);
+}
+
+/* #app 由 src/utils/screen.js 固定为 1920×1080 并整体缩放 */
+#app {
+  width: 1920px;
+  height: 1080px;
+  transform-origin: left top;
+  background-color: transparent;
+  color: var(--sj-text);
+  font-family: 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', Arial, sans-serif;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(8, 138, 251, 0.45);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---------- 通用面板 ---------- */
+.sj-panel {
+  position: relative;
+  background: linear-gradient(180deg, rgba(6, 40, 70, 0.92), rgba(3, 18, 33, 0.92));
+  border: 1px solid var(--sj-border-soft);
+  border-radius: 4px;
+}
+
+.sj-panel__corner::before,
+.sj-panel__corner::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--sj-primary);
+  border-style: solid;
+}
+.sj-panel__corner::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+.sj-panel__corner::after {
+  right: -1px;
+  bottom: -1px;
+  border-width: 0 2px 2px 0;
+}
+
+/* ---------- Element Plus 深色微调 ---------- */
+.el-select__wrapper,
+.el-input__wrapper {
+  background-color: rgba(3, 28, 52, 0.75) !important;
+  box-shadow: 0 0 0 1px var(--sj-border-soft) inset !important;
+}
+
+.el-select__wrapper.is-focused,
+.el-input__wrapper.is-focus {
+  box-shadow: 0 0 0 1px var(--sj-primary) inset !important;
+}
+
+.el-select__placeholder,
+.el-input__inner {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.custom-select-popper.el-popper.is-light,
+.el-picker-panel {
+  background: #06263f !important;
+  border: 1px solid var(--sj-border) !important;
+}
+
+.custom-select-popper .el-select-dropdown__item {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+.custom-select-popper .el-select-dropdown__item.is-selected,
+.custom-select-popper .el-select-dropdown__item.is-hovering {
+  color: var(--sj-gold) !important;
+  background: rgba(8, 138, 251, 0.18) !important;
+}
+
+/* 数字使用等宽显示，避免跳动 */
+.sj-num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+/* ---------- 页面通用容器 ---------- */
+.sj-page {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.sj-page__scroll {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.sj-loading-mask {
+  background-color: rgba(3, 20, 35, 0.4) !important;
+}
