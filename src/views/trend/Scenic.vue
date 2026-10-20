@@ -68,7 +68,7 @@ import {
   HOLIDAY_TOTALS,
   buildHolidaySeries
 } from '@/mock/holiday2026'
-import { SH_DWELL, SJ_SPENDING_POWER, TRAVEL_APP } from '@/mock/realdata'
+import { TRAVEL_APP } from '@/mock/realdata'
 import { percent } from '@/utils/format'
 
 /**
@@ -93,7 +93,7 @@ const travelTabs = [
 
 const travelOption = (active) => {
   let list = HOLIDAY_SCENIC.preference
-  if (active === 'dwell') list = SH_DWELL.list
+  if (active === 'dwell') list = HOLIDAY_SCENIC.dwell
   if (active === 'app') list = TRAVEL_APP
   return {
     tooltip: { trigger: 'item', valueFormatter: (v) => v + '%' },
@@ -128,14 +128,14 @@ const profileColumns = computed(() => [
 
 const profileRows = computed(() => {
   if (profileActive.value === 'power') {
-    return SJ_SPENDING_POWER.list.map((p) => ({ name: p.name, pct: `${p.pct}%` }))
+    return HOLIDAY_SCENIC.consume.map((p) => ({ name: p.name, pct: `${p.pct}%` }))
   }
   return HOLIDAY_SCENIC.age.map((a) => ({ name: a.name, pct: `${a.pct}%` }))
 })
 
 const profileBars = computed(() => {
   if (profileActive.value === 'power') {
-    return SJ_SPENDING_POWER.list.slice(0, 6).map((p) => ({ name: p.name, pct: Number(p.pct) }))
+    return HOLIDAY_SCENIC.consume.map((p) => ({ name: p.name, pct: Number(p.pct) }))
   }
   if (profileActive.value === 'origin') {
     return HOLIDAY_SCENIC.origin.slice(0, 6).map((o) => ({ name: o.name, pct: Number(o.pct) }))
@@ -223,10 +223,10 @@ const originColumns = [
 ]
 const originRows = computed(() => HOLIDAY_SCENIC.origin.map((o) => ({ name: o.name, pct: `${o.pct}%` })))
 
-/** 表头补充说明：外省规模 = 假期景区客流 × 外省占比（参考图 41.93%） */
+/** 表头补充说明：外地规模 = 假期景区客流 × 外地占比（平台实测 32.04%） */
 const originCaption = computed(() => {
   const outside = HOLIDAY_TOTALS.scenic.value * HOLIDAY_SCENIC.outProvinceRatio
-  return `外省规模：${(outside / 1e4).toFixed(2)} 万人次　占比：${(HOLIDAY_SCENIC.outProvinceRatio * 100).toFixed(2)}%`
+  return `外地规模：${(outside / 1e4).toFixed(2)} 万人次　占比：${(HOLIDAY_SCENIC.outProvinceRatio * 100).toFixed(2)}%`
 })
 </script>
 

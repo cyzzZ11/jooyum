@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 界面文案与结构定义（松江区口径）。
  * 参考站同位置定义见 chunk-1b0fcab6：statisticsList / dateTypeList / rankTypeList / listTabList。
  */
@@ -58,7 +58,7 @@ export const hotTableConfig = [
 export const breakTableConfig = []
 
 export const trendChartConfig = [
-  { key: 'trendFeeData', loadingKey: 'fee', name: '松江区旅游消费', unit: '万元', color: '#ffd200' },
+  { key: 'trendFeeData', loadingKey: 'fee', name: '松江区旅游消费', unit: '亿元', color: '#ffd200' },
   { key: 'trendCityData', loadingKey: 'city', name: '松江区国内旅游', unit: '万人次', color: '#088afb' },
   { key: 'trendEntryData', loadingKey: 'entry', name: '松江区入境旅游', unit: '万人次', color: '#7ad4ff' },
   { key: 'trendScenicData', loadingKey: 'scenic', name: '松江区景区游客', unit: '万人次', color: '#2fd27a' },

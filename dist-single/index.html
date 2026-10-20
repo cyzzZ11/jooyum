@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="./img/logo3.cb611b5e.png" />
+    <title>松江区文旅态势感知与智能决策平台</title>
+    <!-- 运行时配置：后端地址与开关，部署时可直接改此文件，无需重新打包 -->
+    <script src="./config/appContext.js"></script>
+    <script type="module" crossorigin src="./assets/index-BXdQb9Zh.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/style-CQkW-nsA.css">
+  </head>
+  <body>
+    <noscript>本平台需要启用 JavaScript 才能正常访问。</noscript>
+    <div id="app"></div>
+    <!-- 直接双击 dist/index.html 时浏览器会拦截 ES Module，这里给出明确提示；
+         单文件版（内置全部资源）可正常挂载，不会触发该提示 -->
+    <script>
+      if (location.protocol === 'file:') {
+        setTimeout(function () {
+          var box = document.getElementById('app')
+          if (box && box.children.length) return
+          box.innerHTML =
+            '<div style="height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;background:#041426;color:#e6f2ff;font-family:system-ui,sans-serif;text-align:center;padding:24px">' +
+            '<h2 style="margin:0;font-size:22px">请通过「启动演示.cmd」打开演示</h2>' +
+            '<p style="margin:0;opacity:.8;line-height:1.8">浏览器出于安全限制，禁止直接双击多文件版的 html 运行本平台。<br>双击项目根目录下的「启动演示.cmd」，或打开单文件版「松江区文旅态势感知平台.html」。</p>' +
+            '</div>'
+        }, 1500)
+      }
+    </script>
+  </body>
+</html>

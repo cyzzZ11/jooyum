@@ -1,9 +1,10 @@
 <template>
-  <div class="area-select">
+  <div class="area-select" :class="{ 'is-locked': disabled }">
     <div class="area-select__trigger" @click="toggle">
       <el-icon class="area-select__icon"><Location /></el-icon>
       <span class="area-select__text">{{ displayText }}</span>
-      <el-icon class="area-select__arrow" :class="{ 'is-open': visible }"><ArrowDown /></el-icon>
+      <el-icon v-if="disabled" class="area-select__lock"><Lock /></el-icon>
+      <el-icon v-else class="area-select__arrow" :class="{ 'is-open': visible }"><ArrowDown /></el-icon>
     </div>
 
     <transition name="el-zoom-in-top">
@@ -59,7 +60,9 @@ import { computed, onMounted, onUnmounted, ref } from 'vue'
 const props = defineProps({
   modelValue: { type: Object, default: null },
   /** 可选层级：national / province / city / district / town */
-  areaRange: { type: String, default: 'all' }
+  areaRange: { type: String, default: 'all' },
+  /** 锁定后仅展示当前区域，无法打开选择面板 */
+  disabled: { type: Boolean, default: false }
 })
 const emit = defineEmits(['update:modelValue', 'changeArea'])
 
@@ -130,6 +133,7 @@ const confirm = () => {
 }
 
 const toggle = () => {
+  if (props.disabled) return
   visible.value = !visible.value
 }
 
@@ -190,6 +194,16 @@ defineExpose({ reset })
 
 .area-select__arrow.is-open {
   transform: rotate(180deg);
+}
+
+/* 锁定态：仅展示，不响应点击 */
+.area-select.is-locked .area-select__trigger {
+  cursor: default;
+}
+
+.area-select__lock {
+  font-size: 12px;
+  color: rgba(200, 226, 255, 0.6);
 }
 
 .area-select__panel {

@@ -1,0 +1,93 @@
+{
+ "query": {
+  "name": "sj_daily_dated",
+  "desc": "松江区·假日日度接待序列（带真实日期 20261001…）",
+  "dataId": "qgjjshfzldjsc_ykdb_csdb_receive_tourists",
+  "filter": {
+   "year": 2026,
+   "holiday_name": "国庆节",
+   "fnid": "310117",
+   "type": 0,
+   "time_start": 20261001,
+   "time_end": 20261007
+  },
+  "app": {
+   "appCode": "jjrykdsjjcpt",
+   "way": "POST /smart-decision/api/v2/nocache/data/json",
+   "innerRequest": "/api/v4/attr/query/list?dataId=qgjjshfzldjsc_ykdb_csdb_receive_tourists&filter=%7B%22year%22%3A2026%2C%22holiday_name%22%3A%22%E5%9B%BD%E5%BA%86%E8%8A%82%22%2C%22fnid%22%3A%22310117%22%2C%22type%22%3A0%2C%22time_start%22%3A20261001%2C%22time_end%22%3A20261007%7D"
+  },
+  "fetchedAt": "2026-10-20T07:46:17.574Z",
+  "rows": 7,
+  "error": null,
+  "file": "api/sj_daily_dated.json"
+ },
+ "response": {
+  "code": "1",
+  "msg": "SUCCESS",
+  "data": [
+   {
+    "scenic_code": 310117,
+    "scenic_name": "松江区",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "1",
+    "all_value": 257537,
+    "all_night": 142594
+   },
+   {
+    "scenic_code": 310117,
+    "scenic_name": "松江区",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "2",
+    "all_value": 259297,
+    "all_night": 143083
+   },
+   {
+    "scenic_code": 310117,
+    "scenic_name": "松江区",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "3",
+    "all_value": 215805,
+    "all_night": 117779
+   },
+   {
+    "scenic_code": 310117,
+    "scenic_name": "松江区",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "4",
+    "all_value": 215555,
+    "all_night": 123254
+   },
+   {
+    "scenic_code": 310117,
+    "scenic_name": "松江区",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "5",
+    "all_value": 249398,
+    "all_night": 135111
+   },
+   {
+    "scenic_code": 310117,
+    "scenic_name": "松江区",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "6",
+    "all_value": 253836,
+    "all_night": 137463
+   },
+   {
+    "scenic_code": 310117,
+    "scenic_name": "松江区",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "7",
+    "all_value": 249972,
+    "all_night": 131360
+   }
+  ]
+ }
+}

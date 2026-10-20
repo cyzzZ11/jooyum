@@ -5,7 +5,7 @@
       <IndexCard
         :title="totalTitle"
         :value="totalValue"
-        unit="万元"
+        unit="亿元"
         :tb="totalTb"
       />
 
@@ -22,7 +22,7 @@
             </div>
             <div class="entry-data">
               <div class="scale-wrapper sj-num">
-                {{ wan(t.amt) }}<span class="unit-wrapper">万元</span>
+                {{ wan(t.amt) }}<span class="unit-wrapper">亿元</span>
               </div>
               <div class="entry-bottom">
                 <span class="entry-name">{{ t.name }}</span>
@@ -120,7 +120,7 @@ import { percent } from '@/utils/format'
 const breakdown = HOLIDAY_FEE
 
 const totalTitle = computed(() => '旅游消费总金额(累计)')
-const totalValue = computed(() => (breakdown['总'].amt / 1e4).toFixed(2))
+const totalValue = computed(() => (breakdown['总'].amt / 1e8).toFixed(2))
 const totalTb = computed(() => breakdown['总'].tb)
 
 const feeTypes = computed(() =>
@@ -141,12 +141,12 @@ const iconOf = (keyStr) =>
     entertainment: 'MagicStick'
   })[keyStr] || 'DataLine'
 
-const wan = (v) => (Number(v) / 1e4).toFixed(2)
+const wan = (v) => (Number(v) / 1e8).toFixed(2)
 
 /* ---------- 消费结构雷达 ---------- */
 const radarOption = computed(() => {
   const items = feeTypes.value
-  const data = items.map((t) => Number((t.amt / 1e4).toFixed(2)))
+  const data = items.map((t) => Number((t.amt / 1e8).toFixed(2)))
   const sum = data.reduce((a, b) => a + b, 0) || 1
   const max = Math.max(...data, 1)
   return {
@@ -243,7 +243,7 @@ const trendOption = computed(() => {
     yAxis: [
       {
         type: 'value',
-        name: '万元',
+        name: '亿元',
         nameTextStyle: { color: 'rgba(180,220,255,.8)', fontSize: 12 },
         axisLine: { show: false },
         axisTick: { show: false },
@@ -303,7 +303,7 @@ const rankColumns = [
 /**
  * 热门排行 = **松江区 17 个街镇** 2026 年国庆节假期消费排行。
  * 口径说明：平台区域维度只到区县，街镇无独立监测值，
- * 故按街镇文旅消费体量对假期区级消费总额（13.69 万元）做分布测算，
+ * 故按街镇文旅消费体量对假期区级消费总额（13.69 亿元）做分布测算，
  * 合计与区级值严格一致（src/mock/holiday2026.js）。
  */
 const hotRank = computed(() => HOLIDAY_RANK_FEE.map((d) => ({ ...d })))
@@ -312,7 +312,7 @@ const rankType = ref('吃')
 
 /**
  * 分类消费排行：该分类在**松江区的假期总额** × 各街镇消费占比。
- * 假期分项取自 data-picture 参考图（如餐饮 3.91 万元），街镇按消费体量占比分配。
+ * 假期分项取自 data-picture 参考图（如餐饮 3.91 亿元），街镇按消费体量占比分配。
  */
 const typeRank = computed(() => {
   const key = rankType.value

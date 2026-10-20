@@ -27,7 +27,7 @@
               class="center-top-compare-data-wrapper sj-num"
               :class="tbNum >= 0 ? 'is-up' : 'is-down'"
             >
-              {{ percent(Math.abs(tbNum)) }}%
+              {{ percent(tbNum) }}%
             </div>
             <div class="center-top-compare-icon-wrapper">
               <i class="compare-arrow" :class="tbNum >= 0 ? 'is-up' : 'is-down'"></i>

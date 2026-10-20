@@ -17,9 +17,9 @@
         </div>
       </div>
 
-      <div class="top-params-wrapper">
+      <div class="top-params-wrapper" :class="{ 'is-locked': filterLocked }">
         <div class="param-wrapper param-wrapper--area">
-          <AreaSelect v-model="currentArea" @changeArea="changeArea" />
+          <AreaSelect v-model="currentArea" :disabled="filterLocked" @changeArea="changeArea" />
         </div>
         <div class="param-wrapper">
           <el-select
@@ -27,6 +27,7 @@
             popper-class="custom-select-popper"
             placeholder="请选择"
             filterable
+            :disabled="filterLocked"
             :popper-append-to-body="true"
             @change="changeDateType"
           >
@@ -41,6 +42,7 @@
             format="YYYY"
             value-format="YYYY"
             :clearable="false"
+            :disabled="filterLocked"
             :append-to-body="false"
             style="width: 100%"
             @change="loadAll"
@@ -51,6 +53,7 @@
             :options="holidayData"
             :props="{ expandTrigger: 'hover' }"
             :show-all-levels="false"
+            :disabled="filterLocked"
             :append-to-body="false"
             style="width: 100%"
             @change="loadAll"
@@ -61,6 +64,7 @@
             type="date"
             format="YYYY-MM-DD"
             :clearable="false"
+            :disabled="filterLocked"
             :append-to-body="false"
             style="width: 100%"
             @change="loadAll"
@@ -171,6 +175,7 @@ import {
 import { fetchBreakRank, fetchHotRank, fetchStatistics } from '@/api/trend'
 import { fetchHolidays } from '@/api/trend'
 import { percent } from '@/utils/format'
+import { isFilterLocked } from '@/utils/lock'
 
 /** 指标卡图标（用 Element Plus 图标替代参考站的 PNG，避免外部图片依赖） */
 const iconOf = (key) =>
@@ -184,6 +189,8 @@ const iconOf = (key) =>
 const rankType = ref('hot')
 // 演示口径：默认落在 2026 年国庆节假期（10 月 1 日 - 10 月 7 日）
 const dateType = ref('holiday')
+/** 区域 + 时间是否锁定（演示时固定口径，避免误操作） */
+const filterLocked = isFilterLocked()
 // 默认落在最近一个有完整年度数据的年份（松江区统计公报最新为 2025 年）
 const latestCompleteYear = new Date().getMonth() >= 3 ? new Date().getFullYear() - 1 : new Date().getFullYear() - 2
 const currentYear = ref(String(latestCompleteYear))

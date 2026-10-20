@@ -14,7 +14,8 @@
  *                   合计数与平台实测的区级总量一致（可校验）。
  */
 import { towns, scenicSpots } from './songjiang'
-import { PLATFORM_TOTALS, SCENIC_METRICS } from './realdata'
+import { PLATFORM_TOTALS } from './realdata'
+import { SJ } from './holiday2026'
 
 /** 街镇权重：依据 A 级景区数量、床位/餐饮网点体量、区位（合计 = 1） */
 const W = {
@@ -108,13 +109,11 @@ export const SPECIAL_NIGHT = {
  *
  * 与排行榜同源（同一套区级真实总量 + 街镇权重），保证地图配色与榜单一致。
  *
- * ⚠️ 四张榜的**覆盖范围不同**，着色时必须各自处理，否则会出现「无值街镇透明」：
+ * ⚠️ 四张榜的**覆盖范围不同**，着色时必须各自处理：
  *   - 消费 / 国内游客 / 入境游客：3 张榜均为 17 个街镇（权重派生），天然全覆盖
- *   - 景区榜：只列 **9 个实测景区**，仅覆盖 **5 个街镇**
- *     → 若直接用它着色，其余 **12 个街镇会渲染为透明**（曾出现此问题）
- *     → 故景区改按 **全部景区点位（77 个，覆盖 14 个街镇）按 A 级加权** 聚合，
- *       剩余 3 个无景区街镇（九里亭街道 / 新桥镇 / 洞泾镇）取极小值，
- *       保证 17 个街镇全部有色、地图不出现空洞。
+ *   - 景区：直接用**平台实测的 9 家重点景区接待量**按所属街镇聚合，
+ *     只覆盖有景区的街镇（佘山镇 / 广富林街道 / 车墩镇 / 中山街道 / 岳阳街道），
+ *     其余街镇不给数值，由地图渲染为「无景区点位」灰色（不用哨兵值 1）
  */
 const derive = (key) => {
   const feeMap = Object.fromEntries(RANK_FEE_CITY.map((d) => [d.region_name, d.all_value]))
@@ -127,45 +126,28 @@ const derive = (key) => {
   return scenicChoropleth()
 }
 
-/** A 级权重：4A 权重高于 3A，非 A 级更低（用于把「景区数量」折算成「接待体量」） */
-const SCENIC_LEVEL_WEIGHT = { '4A': 1, '3A': 0.42, '2A': 0.18, '—': 0.3 }
+/** 景区名归一：去掉「上海」前缀后与本地名录对齐（如「辰山植物园」↔「上海辰山植物园」） */
+const normSpotName = (n) => String(n).replace(/^上海/, '').trim()
 
-/** 全部景区点位（含 A 级与非 A 级），覆盖 14 个街镇 */
-const SCENIC_SPOTS = scenicSpots
-
-/** 17 个街镇名单（以消费榜为准，它是权重派生的完整集合） */
-const SCENIC_ALL_TOWNS = RANK_FEE_CITY.map((d) => d.region_name)
+/** 景区 → 所属街镇（来自 songjiang.js 的 scenicSpots 名录） */
+const TOWN_OF_SPOT = new Map(scenicSpots.map((s) => [normSpotName(s.name), s.town]))
 void towns
 
 /**
- * 景区街镇聚合。
+ * 景区街镇聚合（**平台实测口径**）。
  *
- * 思路：**用区级真实总量做归一化锚点**，而不是用各镇自己的实测值反推单位量
- * （先前那种做法会因锚点不一致而放大误差，曾算出佘山镇 1918 万 ≈ 全区的 1.3 倍）。
- *
- * 依据：
- *   - 统计公报：松江区 **16 家 A 级景区** 共接待 **1496.77 万人次**
- *   - `scenicSpots` 里 A 级点位恰好 **16 个**（4A×10 + 3A×6），口径吻合
- *   - 因此：43.8 万 人次 / 单位权重 = 14967700 ÷ 12 个 A 级景区的权重和
- *   - 非 A 级景区（城市公园、文博场馆等）给较低权重
- *
- * 17 个街镇全部有值；确无景区点位的街镇取极小值（地图上呈最浅色，不出现空洞）。
+ * 平台对松江区监测 9 家重点景区（2026 国庆合计 43.37 万人次），
+ * 这里按景区所属街镇直接求和，因此：
+ *   · 街镇数值 = 该街镇重点景区接待量之和，与地图「街镇景区热度」语义完全一致；
+ *   · 合计 = 区级重点景区总量，可直接校验；
+ *   · 无景区点位的街镇不写入数值，渲染为「无景区点位」灰色。
  */
 function scenicChoropleth() {
-  const A_SPOTS = SCENIC_SPOTS.filter((s) => s.aLevel)
-  const wSumAll = A_SPOTS.reduce((a, s) => a + (SCENIC_LEVEL_WEIGHT[s.level] || 0.3), 0)
-  // 每单位权重的接待量（人次）
-  const unit = wSumAll > 0 ? SCENIC_METRICS.bulletinTotal / wSumAll : 0
-
   const out = {}
-  SCENIC_ALL_TOWNS.forEach((town) => {
-    const spots = SCENIC_SPOTS.filter((s) => s.town === town)
-    if (!spots.length) {
-      out[town] = 1
-      return
-    }
-    const w = spots.reduce((a, s) => a + (SCENIC_LEVEL_WEIGHT[s.level] || 0.3), 0)
-    out[town] = Math.max(1, Math.round(w * unit))
+  SJ.scenic.list.forEach((s) => {
+    const town = TOWN_OF_SPOT.get(normSpotName(s.name))
+    if (!town) return
+    out[town] = (out[town] || 0) + s.visitors
   })
   return out
 }

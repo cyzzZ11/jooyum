@@ -1,0 +1,60 @@
+{
+ "query": {
+  "name": "sh_profile",
+  "desc": "上海市·游客画像（性别/年龄/消费能力/本地外地）",
+  "dataId": "qgjjshfzldjsc_ykdb_csdb_tourist",
+  "filter": {
+   "year": 2026,
+   "holiday_name": "国庆节",
+   "fnid": "310000",
+   "type": 0,
+   "time_start": 20261001,
+   "time_end": 20261007
+  },
+  "app": {
+   "appCode": "jjrykdsjjcpt",
+   "way": "POST /smart-decision/api/v2/nocache/data/json",
+   "innerRequest": "/api/v4/attr/query/list?dataId=qgjjshfzldjsc_ykdb_csdb_tourist&filter=%7B%22year%22%3A2026%2C%22holiday_name%22%3A%22%E5%9B%BD%E5%BA%86%E8%8A%82%22%2C%22fnid%22%3A%22310000%22%2C%22type%22%3A0%2C%22time_start%22%3A20261001%2C%22time_end%22%3A20261007%7D"
+  },
+  "fetchedAt": "2026-10-20T07:46:18.490Z",
+  "rows": 1,
+  "error": null,
+  "file": "api/sh_profile.json"
+ },
+ "response": {
+  "code": "1",
+  "msg": "SUCCESS",
+  "data": [
+   {
+    "region_procode": "100000",
+    "region_proname": "全国",
+    "region_code": 310000,
+    "region_name": "上海市",
+    "all_value": 22214934,
+    "male_value_ratio": 0.5286,
+    "female_value_ratio": 0.4714,
+    "age_16_24_ratio": 0.0991,
+    "age_25_34_ratio": 0.2899,
+    "age_35_44_ratio": 0.2787,
+    "age_45_54_ratio": 0.1849,
+    "age_above_55_ratio": 0.1473,
+    "s1_ratio": 0.0395,
+    "s2_ratio": 0.2191,
+    "s3_ratio": 0.2127,
+    "s4_ratio": 0.016,
+    "s5_ratio": 0.0015,
+    "bd_value_ratio": 0.5011,
+    "wd_value_ratio": 0.4989,
+    "cx_qt_ratio": 0.8978,
+    "cx_fj_ratio": 0.0253,
+    "cx_gt_ratio": 0.0769,
+    "residency1_ratio": 0.4013,
+    "residency2_ratio": 0.1065,
+    "residency3_ratio": 0.0475,
+    "residency4_ratio": 0.0256,
+    "residency_5up_ratio": 0.0284,
+    "tb_ratio_all_value": 0.1861
+   }
+  ]
+ }
+}

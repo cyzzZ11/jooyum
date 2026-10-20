@@ -1,0 +1,33 @@
+{
+ "query": {
+  "name": "sj_map",
+  "desc": "松江区·地图打点数据",
+  "dataId": "jjrykdsjjcpt_csyk_ykgm_map",
+  "filter": {
+   "year": "2026",
+   "holiday_name": "国庆节",
+   "code": 310117
+  },
+  "app": {
+   "appCode": "jjrykdsjjcpt",
+   "way": "POST /smart-decision/api/v2/nocache/data/json",
+   "innerRequest": "/api/v4/attr/query/list?dataId=jjrykdsjjcpt_csyk_ykgm_map&filter=%7B%22year%22%3A%222026%22%2C%22holiday_name%22%3A%22%E5%9B%BD%E5%BA%86%E8%8A%82%22%2C%22code%22%3A310117%7D"
+  },
+  "fetchedAt": "2026-10-20T07:46:18.121Z",
+  "rows": 1,
+  "error": null,
+  "file": "api/sj_map.json"
+ },
+ "response": {
+  "code": "1",
+  "msg": "SUCCESS",
+  "data": [
+   {
+    "region_code": 310117,
+    "region_name": "松江区",
+    "all_value": 1701400,
+    "all_night": 930644
+   }
+  ]
+ }
+}

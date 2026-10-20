@@ -14,6 +14,7 @@
           value-format="YYYY-MM-DD"
           size="small"
           :clearable="false"
+          :disabled="filterLocked"
           @change="emitChange"
         />
       </div>
@@ -25,7 +26,7 @@
         v-for="d in dimensions"
         :key="d.value"
         class="dimension-item"
-        :class="{ 'is-active': dimension === d.value }"
+        :class="{ 'is-active': dimension === d.value, 'is-locked': filterLocked }"
         @click="changeDimension(d.value)"
       >
         {{ d.name }}
@@ -52,6 +53,7 @@
 
 <script setup>
 import { reactive, ref, watch } from 'vue'
+import { isFilterLocked } from '@/utils/lock'
 
 /**
  * 页面控制栏：1:1 对齐参考站各子页面顶部的 .picker-control + 时间维度 + 监测维度。
@@ -85,6 +87,8 @@ const props = defineProps({
 const emit = defineEmits(['change'])
 
 const dimension = ref(props.defaultDimension)
+/** 区域 + 时间锁定（演示口径） */
+const filterLocked = isFilterLocked()
 const selections = reactive({})
 props.groups.forEach((g) => {
   selections[g.key] = g.options && g.options.length ? g.options[0].value : ''
@@ -100,6 +104,7 @@ const emitChange = () => {
 }
 
 const changeDimension = (v) => {
+  if (filterLocked) return
   dimension.value = v
   emitChange()
 }
@@ -194,6 +199,15 @@ watch(() => props.groups, (gs) => {
 
 .dimension-item:hover {
   color: #fede48;
+}
+
+/* 锁定态：仅展示，不响应点击 */
+.dimension-item.is-locked {
+  cursor: default;
+}
+
+.dimension-item.is-locked:not(.is-active):hover {
+  color: #fff;
 }
 
 .dimension-item.is-active {

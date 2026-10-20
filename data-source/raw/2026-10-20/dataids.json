@@ -1,0 +1,218 @@
+[
+ {
+  "dataId": "jjrykdsjjcpt_csyk_ykgm_grand_total",
+  "filter": "{\"year\":\"2026\",\"holiday_name\":\"国庆节\",\"fnid\":\"310100\",\"sort\":\"all_value\",\"sequence\":\"desc\",\"lv\":2,\"scenic_code\":0,\"limitnum\":10}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_jqyk_ykgm_grand_total_gather_v3",
+  "filter": "{\"year\":\"2026\",\"holiday_name\":\"国庆节\",\"fnid\":\"310100\",\"sort\":\"all_value\",\"sequence\":\"desc\",\"lv\":2,\"scenic_code\":0,\"limitnum\":10}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_csyk_ykgm_regional_reception_city",
+  "filter": "{\"year\":\"2026\",\"holiday_name\":\"国庆节\",\"fnid\":\"310100\",\"sort\":\"all_value\",\"sequence\":\"desc\",\"lv\":2,\"scenic_code\":0,\"limitnum\":10}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_sqyk_ykgm_grand_total_gather_v3",
+  "filter": "{\"year\":\"2026\",\"holiday_name\":\"国庆节\",\"fnid\":\"310100\",\"sort\":\"all_value\",\"sequence\":\"desc\",\"lv\":2,\"scenic_code\":0,\"limitnum\":10}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_csyk_ykgm_regional_reception_city_night",
+  "filter": "{\"year\":\"2026\",\"holiday_name\":\"国庆节\",\"fnid\":\"310100\",\"sort\":\"all_value\",\"sequence\":\"desc\",\"lv\":2,\"scenic_code\":0,\"limitnum\":10}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_jqyk_ykgm_regional_reception_gather_v3",
+  "filter": "{\"year\":\"2026\",\"holiday_name\":\"国庆节\",\"fnid\":\"310100\",\"sort\":\"all_value\",\"sequence\":\"desc\",\"lv\":2,\"scenic_code\":0,\"limitnum\":10}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_sqyk_ykgm_regional_reception_gather_v3",
+  "filter": "{\"year\":\"2026\",\"holiday_name\":\"国庆节\",\"fnid\":\"310100\",\"sort\":\"all_value\",\"sequence\":\"desc\",\"lv\":2,\"scenic_code\":0,\"limitnum\":10}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_csyk_ykgm_map",
+  "filter": "{\"year\":\"2026\",\"holiday_name\":\"国庆节\",\"code\":310100}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_csyk_ykgm_receive_tourists",
+  "filter": "{\"year\":\"2026\",\"holiday_name\":\"国庆节\",\"fnid\":\"310100\",\"sort\":\"all_value\",\"sequence\":\"desc\",\"type\":0}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_csyk_ykgm_regional_reception",
+  "filter": "{\"year\":\"2026\",\"holiday_name\":\"国庆节\",\"fnid\":\"310100\",\"sort\":\"all_value\",\"sequence\":\"desc\",\"type\":0}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_csyk_ykgm_tourist_comparison",
+  "filter": "{\"year\":\"2026\",\"holiday_name\":\"国庆节\",\"fnid\":\"310100\",\"sort\":\"all_value\",\"sequence\":\"desc\",\"type\":0}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_map_boundary",
+  "filter": "{\"code\":310100}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_jqyk_ykgm_receive_tourists_gather_v3",
+  "filter": "{\"year\":\"2026\",\"holiday_name\":\"国庆节\",\"fnid\":\"310100\",\"lv\":2,\"region_code\":0,\"scenic_code\":0,\"sort\":\"all_value\",\"sequence\":\"desc\",\"limitnum\":1000}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_jqyk_ykgm_tourist_comparison_gather_v3",
+  "filter": "{\"year\":\"2026\",\"holiday_name\":\"国庆节\",\"fnid\":\"310100\",\"lv\":2,\"region_code\":0,\"scenic_code\":0,\"sort\":\"all_value\",\"sequence\":\"desc\",\"limitnum\":1000}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_jqyk_ykgm_map_gather_v3",
+  "filter": "{\"year\":\"2026\",\"holiday_name\":\"国庆节\",\"fnid\":310100,\"lv\":2,\"scenic_code\":0,\"sort\":all_value,\"sequence\":\"desc\",\"limitnum\":10}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_sqyk_ykgm_tourist_comparison_gather_v3",
+  "filter": "{\"year\":\"2026\",\"holiday_name\":\"国庆节\",\"fnid\":\"310100\",\"lv\":2,\"region_code\":0,\"scenic_code\":0,\"sort\":\"all_value\",\"sequence\":\"desc\",\"limitnum\":3000}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_sqyk_ykgm_receive_tourists_gather_v3",
+  "filter": "{\"year\":\"2026\",\"holiday_name\":\"国庆节\",\"fnid\":\"310100\",\"lv\":2,\"region_code\":0,\"scenic_code\":0,\"sort\":\"all_value\",\"sequence\":\"desc\",\"limitnum\":3000}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_sqyk_ykgm_map_gather_v3",
+  "filter": "{\"year\":\"2026\",\"holiday_name\":\"国庆节\",\"fnid\":310100,\"lv\":2,\"scenic_code\":0,\"sort\":all_value,\"sequence\":\"desc\",\"limitnum\":10}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_jqyk_scenic_spots",
+  "filter": "{ fnid: 310000, lv: 1}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_sqyk_scenic_spots",
+  "filter": "{ fnid: 310000, lv: 1}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "qgjjshfzldjsc_ykdb_jqdb_receive_tourists",
+  "filter": "{\"year\":2026,\"holiday_name\":\"国庆节\",\"scenic_code\":\"3100003101001,31000031010010,31000031010011,31000031010012,31000031010013\",\"type\":0,\"time_start\":20261001,\"time_end\":20261007}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "qgjjshfzldjsc_ykdb_jqdb_tourist",
+  "filter": "{\"year\":2026,\"holiday_name\":\"国庆节\",\"scenic_code\":\"3100003101001,31000031010010,31000031010011,31000031010012,31000031010013\",\"type\":0,\"time_start\":20261001,\"time_end\":20261007}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "qgjjshfzldjsc_ykdb_csdb_receive_tourists",
+  "filter": "{\"year\":2026,\"holiday_name\":\"国庆节\",\"fnid\":\"310000\",\"type\":0,\"time_start\":20261001,\"time_end\":20261007}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "qgjjshfzldjsc_ykdb_csdb_tourist",
+  "filter": "{\"year\":2026,\"holiday_name\":\"国庆节\",\"fnid\":\"310000\",\"type\":0,\"time_start\":20261001,\"time_end\":20261007}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "qgjjshfzldjsc_ykdb_sqdb_receive_tourists",
+  "filter": "{\"year\":2026,\"holiday_name\":\"国庆节\",\"scenic_code\":\"310000_2,310000_C_228,310000_C_302,310000_C_6,310000_C_9\",\"type\":0,\"time_start\":20261001,\"time_end\":20261007}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "qgjjshfzldjsc_ykdb_sqdb_tourist",
+  "filter": "{\"year\":2026,\"holiday_name\":\"国庆节\",\"scenic_code\":\"310000_2,310000_C_228,310000_C_302,310000_C_6,310000_C_9\",\"type\":0,\"time_start\":20261001,\"time_end\":20261007}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ },
+ {
+  "dataId": "jjrykdsjjcpt_report",
+  "filter": "{year: \"2026\",holiday: \"国庆节\",fnid: \"310000\",name: \"\",page_num: 1,page_size: 10,sort: desc}",
+  "adcode": "110000",
+  "level": "province",
+  "time": "2024",
+  "regionGroup": "general"
+ }
+]

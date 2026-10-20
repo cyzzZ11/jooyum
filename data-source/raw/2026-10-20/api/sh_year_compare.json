@@ -1,0 +1,48 @@
+{
+ "query": {
+  "name": "sh_year_compare",
+  "desc": "上海市·2025 与 2026 国庆假期接待量对比",
+  "dataId": "jjrykdsjjcpt_csyk_ykgm_tourist_comparison",
+  "filter": {
+   "year": "2026",
+   "holiday_name": "国庆节",
+   "fnid": "310100",
+   "sort": "all_value",
+   "sequence": "desc",
+   "scenic_code": 0,
+   "limitnum": 1000,
+   "type": 0
+  },
+  "app": {
+   "appCode": "jjrykdsjjcpt",
+   "way": "POST /smart-decision/api/v2/nocache/data/json",
+   "innerRequest": "/api/v4/attr/query/list?dataId=jjrykdsjjcpt_csyk_ykgm_tourist_comparison&filter=%7B%22year%22%3A%222026%22%2C%22holiday_name%22%3A%22%E5%9B%BD%E5%BA%86%E8%8A%82%22%2C%22fnid%22%3A%22310100%22%2C%22sort%22%3A%22all_value%22%2C%22sequence%22%3A%22desc%22%2C%22scenic_code%22%3A0%2C%22limitnum%22%3A1000%2C%22type%22%3A0%7D"
+  },
+  "fetchedAt": "2026-10-20T07:46:18.371Z",
+  "rows": 2,
+  "error": null,
+  "file": "api/sh_year_compare.json"
+ },
+ "response": {
+  "code": "1",
+  "msg": "SUCCESS",
+  "data": [
+   {
+    "year": "2025",
+    "type": "国庆节",
+    "all_value_avg": 2675687.7143,
+    "all_value_sum": 18729814,
+    "all_night_avg": 1533140,
+    "all_night_sum": 10731980
+   },
+   {
+    "year": "2026",
+    "type": "国庆节",
+    "all_value_avg": 3173562,
+    "all_value_sum": 22214934,
+    "all_night_avg": 1721287.4286,
+    "all_night_sum": 12049012
+   }
+  ]
+ }
+}

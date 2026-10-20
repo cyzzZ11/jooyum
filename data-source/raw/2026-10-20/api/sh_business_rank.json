@@ -1,0 +1,83 @@
+{
+ "query": {
+  "name": "sh_business_rank",
+  "desc": "上海市·商圈接待排行",
+  "dataId": "jjrykdsjjcpt_sqyk_ykgm_regional_reception_gather_v3",
+  "filter": {
+   "year": "2026",
+   "holiday_name": "国庆节",
+   "fnid": "310100",
+   "sort": "all_value",
+   "sequence": "desc",
+   "scenic_code": 0,
+   "limitnum": 1000,
+   "lv": 2,
+   "region_code": 0
+  },
+  "app": {
+   "appCode": "jjrykdsjjcpt",
+   "way": "POST /smart-decision/api/v2/nocache/data/json",
+   "innerRequest": "/api/v4/attr/query/list?dataId=jjrykdsjjcpt_sqyk_ykgm_regional_reception_gather_v3&filter=%7B%22year%22%3A%222026%22%2C%22holiday_name%22%3A%22%E5%9B%BD%E5%BA%86%E8%8A%82%22%2C%22fnid%22%3A%22310100%22%2C%22sort%22%3A%22all_value%22%2C%22sequence%22%3A%22desc%22%2C%22scenic_code%22%3A0%2C%22limitnum%22%3A1000%2C%22lv%22%3A2%2C%22region_code%22%3A0%7D"
+  },
+  "fetchedAt": "2026-10-20T07:46:18.837Z",
+  "rows": 5,
+  "error": null,
+  "file": "api/sh_business_rank.json"
+ },
+ "response": {
+  "code": "1",
+  "msg": "SUCCESS",
+  "data": [
+   {
+    "region_name": "上海市",
+    "scenic_name": "陆家嘴核心区",
+    "all_value": 1928758,
+    "all_value_avg": 275536.86,
+    "zb_ratio_all_value": 0.2776,
+    "avg_zb_ratio_all_value": 0.2776,
+    "tb_ratio_all_value": -0.0668,
+    "avg_tb_ratio_all_value": -0.0668
+   },
+   {
+    "region_name": "上海市",
+    "scenic_name": "徐家汇",
+    "all_value": 1922263,
+    "all_value_avg": 274609,
+    "zb_ratio_all_value": 0.2766,
+    "avg_zb_ratio_all_value": 0.2766,
+    "tb_ratio_all_value": 0.092,
+    "avg_tb_ratio_all_value": 0.092
+   },
+   {
+    "region_name": "上海市",
+    "scenic_name": "南京路步行街",
+    "all_value": 1497795,
+    "all_value_avg": 213970.71,
+    "zb_ratio_all_value": 0.2155,
+    "avg_zb_ratio_all_value": 0.2155,
+    "tb_ratio_all_value": -0.0814,
+    "avg_tb_ratio_all_value": -0.0814
+   },
+   {
+    "region_name": "上海市",
+    "scenic_name": "大豫园板块",
+    "all_value": 1402676,
+    "all_value_avg": 200382.29,
+    "zb_ratio_all_value": 0.2019,
+    "avg_zb_ratio_all_value": 0.2019,
+    "tb_ratio_all_value": -0.3298,
+    "avg_tb_ratio_all_value": -0.3298
+   },
+   {
+    "region_name": "上海市",
+    "scenic_name": "上海大华虎城商圈",
+    "all_value": 197593,
+    "all_value_avg": 28227.57,
+    "zb_ratio_all_value": 0.0284,
+    "avg_zb_ratio_all_value": 0.0284,
+    "tb_ratio_all_value": -0.0688,
+    "avg_tb_ratio_all_value": -0.0688
+   }
+  ]
+ }
+}

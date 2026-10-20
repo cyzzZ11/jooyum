@@ -4,14 +4,28 @@
  * ============ 口径说明 ============
  * 全部指标为**松江区**口径，时间维度固定为 2026 年国庆节假期。
  * 单位与项目既有口径保持一致：
- *   · 消费类 —— 元（手机信令监测值，全假期 13.69 万元量级，与 2025 全年 602.63 万元同源）
+ *   · 消费类 —— 元（手机信令监测值，全假期 13.69 亿元量级，与年旅游收入 157.56 亿元同源）
  *   · 客流类 —— 人次
  *
- * ============ 数据来源与生成规则 ============
- * 见文件末尾 `DATA_SOURCES`（同内容在需求交付说明中给出清单）。
- * 标注为「取自参考图」的数值来自 data-picture 目录下的页面截图；
- * 标注为「推演」的数值按区级统计口径与既有平台系数换算，合计与区级总量自洽。
+ * ============ 数据来源（两段） ============
+ * 1）**平台实测**（`source: 'platform'`）—— 直接取自「节假日游客大数据监测平台」
+ *    （jice.smartsteps.com/travel）松江区 2026 国庆节查询结果，原样使用、不做加工：
+ *      累计接待游客 / 夜间游客 / 重点景区接待 / 景区榜 / 7 日序列 / 景区画像
+ *    原始接口存档：`data-source/raw/2026-10-20/api/*.json`
+ *    规范化数据：`data-source/normalized/songjiang-2026-guojiaqing.json`
+ *    代码入口：`src/mock/platform2026.js`（由 `node scripts/build-platform-data.mjs` 生成）
+ * 2）**测算**（`source: 'estimated'`）—— 平台未监测的口径（旅游消费、入境、商圈、
+ *    街镇分摊、来源地），按区级统计口径与既有系数换算，合计与区级总量自洽。
+ *
+ * 逐项来源见文件末尾 `DATA_SOURCES`。
  */
+import { PLATFORM_2026 } from './platform2026'
+
+/** 平台实测：松江区 2026 国庆节 */
+const SJ = PLATFORM_2026.songjiang
+/** 平台实测：上海市（对比基准） */
+const SH = PLATFORM_2026.shanghai
+export { SJ, SH }
 
 /** 假期元信息（国庆假期为 10 月 1 日 - 10 月 7 日，界面不展示具体日期） */
 export const HOLIDAY_2026 = {
@@ -22,37 +36,77 @@ export const HOLIDAY_2026 = {
   end: '2026-10-07'
 }
 
-/** 假期 7 天：日度权重（节假日「首日高、次日峰、中段回落、尾段平稳」） */
-export const HOLIDAY_DAYS = [
-  { short: '假日第1天', date: '2026-10-01', weight: 0.13 },
-  { short: '假日第2天', date: '2026-10-02', weight: 0.16 },
-  { short: '假日第3天', date: '2026-10-03', weight: 0.155 },
-  { short: '假日第4天', date: '2026-10-04', weight: 0.14 },
-  { short: '假日第5天', date: '2026-10-05', weight: 0.135 },
-  { short: '假日第6天', date: '2026-10-06', weight: 0.14 },
-  { short: '假日第7天', date: '2026-10-07', weight: 0.14 }
-]
+/**
+ * 假期 7 天：日度权重（**取自平台实测日度序列**，2026 国庆松江区逐日客流占比）
+ */
+export const HOLIDAY_DAYS = SJ.daily.map((d) => ({
+  short: `假日第${d.day}天`,
+  date: d.date,
+  weight: Number((d.visitors / SJ.visitors.total).toFixed(5))
+}))
 
-/** 全区假期总量（含同比，同比为小数口径：0.3219 = +32.19%） */
+/** 全区假期总量（含同比，同比为小数口径：0.2771 = +27.71%） */
 export const HOLIDAY_TOTALS = {
-  fee: { value: 136900, unit: '元', displayUnit: '万元', tb: 0.0545, name: '旅游消费' },
-  gn: { value: 1567300, unit: '人次', displayUnit: '万人次', tb: 0.3219, name: '接待游客' },
-  rj: { value: 23500, unit: '人次', displayUnit: '万人次', tb: 0.118, name: '入境游客' },
-  scenic: { value: 1035200, unit: '人次', displayUnit: '万人次', tb: 0.0718, name: '景区接待' },
-  business: { value: 2307200, unit: '人次', displayUnit: '万人次', tb: 0.043, name: '商圈接待' },
-  special: { value: 469800, unit: '人次', displayUnit: '万人次', tb: 0.096, name: '夜间文旅接待' }
+  fee: {
+    value: 1369000000,
+    unit: '元',
+    displayUnit: '亿元',
+    tb: 0.0545,
+    name: '旅游消费',
+    source: 'estimated'
+  },
+  gn: {
+    value: SJ.visitors.total,
+    unit: '人次',
+    displayUnit: '万人次',
+    tb: SJ.visitors.tb,
+    name: '接待游客',
+    source: 'platform'
+  },
+  rj: {
+    value: 23500,
+    unit: '人次',
+    displayUnit: '万人次',
+    tb: 0.118,
+    name: '入境游客',
+    source: 'estimated'
+  },
+  scenic: {
+    value: SJ.scenic.total,
+    unit: '人次',
+    displayUnit: '万人次',
+    tb: SJ.scenic.tb,
+    name: '重点景区接待',
+    source: 'platform'
+  },
+  business: {
+    value: 2307200,
+    unit: '人次',
+    displayUnit: '万人次',
+    tb: 0.043,
+    name: '商圈接待',
+    source: 'estimated'
+  },
+  special: {
+    value: SJ.night.total,
+    unit: '人次',
+    displayUnit: '万人次',
+    tb: SJ.night.tb,
+    name: '夜间游客',
+    source: 'platform'
+  }
 }
 
 /** 消费分项（元）：吃/住/行/游/购/娱，合计 = 总 */
 export const HOLIDAY_FEE = {
   period: '2026年国庆节',
-  总: { amt: 136900, tb: 0.0545 },
-  吃: { amt: 39100, tb: 0.1239 },
-  住: { amt: 47000, tb: 0.1072 },
-  行: { amt: 14000, tb: 0.7563 },
-  游: { amt: 2015, tb: 0.0339 },
-  购: { amt: 23300, tb: 0.0298 },
-  娱: { amt: 11485, tb: 0.0087 }
+  总: { amt: 1369000000, tb: 0.0545 },
+  吃: { amt: 391000000, tb: 0.1239 },
+  住: { amt: 470000000, tb: 0.1072 },
+  行: { amt: 140000000, tb: 0.7563 },
+  游: { amt: 20150000, tb: 0.0339 },
+  购: { amt: 233000000, tb: 0.0298 },
+  娱: { amt: 114850000, tb: 0.0087 }
 }
 
 /** 国内旅游页结构 */
@@ -109,6 +163,7 @@ export const HOLIDAY_ENTRY = {
 
 /** 景区游客页结构 */
 export const HOLIDAY_SCENIC = {
+  /** 目的地偏好（参考图口径，平台不提供分类偏好） */
   preference: [
     { name: '历史文化类', pct: 46.88 },
     { name: '自然景观类', pct: 25.5 },
@@ -117,14 +172,37 @@ export const HOLIDAY_SCENIC = {
     { name: '文化艺术类', pct: 2.38 },
     { name: '旅游度假区', pct: 1.94 }
   ],
-  gender: { male: 47.55, female: 52.45 },
+  /** 以下四项为**平台实测**：松江区 9 家重点景区按接待量加权平均 */
+  gender: {
+    male: Number((SJ.scenic.profile.gender.male * 100).toFixed(2)),
+    female: Number((SJ.scenic.profile.gender.female * 100).toFixed(2))
+  },
   age: [
-    { name: '16-24岁', pct: 13.97 },
-    { name: '25-34岁', pct: 28.09 },
-    { name: '35-44岁', pct: 29.17 },
-    { name: '45-54岁', pct: 16.9 },
-    { name: '55岁及以上', pct: 11.87 }
+    { name: '16-24岁', pct: Number((SJ.scenic.profile.age['16-24'] * 100).toFixed(2)) },
+    { name: '25-34岁', pct: Number((SJ.scenic.profile.age['25-34'] * 100).toFixed(2)) },
+    { name: '35-44岁', pct: Number((SJ.scenic.profile.age['35-44'] * 100).toFixed(2)) },
+    { name: '45-54岁', pct: Number((SJ.scenic.profile.age['45-54'] * 100).toFixed(2)) },
+    { name: '55岁及以上', pct: Number((SJ.scenic.profile.age['55+'] * 100).toFixed(2)) }
   ],
+  /** 消费能力分布（平台原始为各等级占比，合计不足 100 表示未分级人群） */
+  consume: [
+    { name: '低', pct: Number((SJ.scenic.profile.consume.s1_low * 100).toFixed(2)) },
+    { name: '中低', pct: Number((SJ.scenic.profile.consume.s2_midLow * 100).toFixed(2)) },
+    { name: '中', pct: Number((SJ.scenic.profile.consume.s3_mid * 100).toFixed(2)) },
+    { name: '中高', pct: Number((SJ.scenic.profile.consume.s4_midHigh * 100).toFixed(2)) },
+    { name: '高', pct: Number((SJ.scenic.profile.consume.s5_high * 100).toFixed(2)) }
+  ],
+  /** 驻留时长（平台 time1/1-2/2-4/4+） */
+  dwell: [
+    { name: '<1h', pct: Number((SJ.scenic.profile.stay.lt1h * 100).toFixed(2)) },
+    { name: '1-2h', pct: Number((SJ.scenic.profile.stay.h1to2 * 100).toFixed(2)) },
+    { name: '2-4h', pct: Number((SJ.scenic.profile.stay.h2to4 * 100).toFixed(2)) },
+    { name: '>4h', pct: Number((SJ.scenic.profile.stay.gt4h * 100).toFixed(2)) }
+  ],
+  /** 客源地结构（平台实测，景区口径） */
+  localRatio: Number((SJ.scenic.profile.origin.local * 100).toFixed(2)),
+  outsideRatio: Number((SJ.scenic.profile.origin.outside * 100).toFixed(2)),
+  /** 来源地 Top7 省份（参考图口径，平台仅到「本地/外地」） */
   origin: [
     { name: '江苏省', pct: 18.11 },
     { name: '浙江省', pct: 13.5 },
@@ -134,8 +212,8 @@ export const HOLIDAY_SCENIC = {
     { name: '广东省', pct: 5.38 },
     { name: '四川省', pct: 4.05 }
   ],
-  /** 外省客源占比（上海市口径，按本区景区客流折算规模） */
-  outProvinceRatio: 0.4193
+  /** 外省客源占比（平台实测：景区口径「外地」占比） */
+  outProvinceRatio: SJ.scenic.profile.origin.outside
 }
 
 /** 商圈游客页结构 */
@@ -192,14 +270,6 @@ const TOWN_W = {
   }
 }
 
-/** 景区接待占比（对应 16 家 A 级景区，合计 = 1） */
-const SCENIC_W = {
-  上海欢乐谷: 0.185, 佘山国家森林公园: 0.142, 上海辰山植物园: 0.118, 广富林文化遗址: 0.098,
-  上海影视乐园: 0.086, 月湖雕塑公园: 0.062, 醉白池公园: 0.052, 方塔园: 0.048,
-  蓝精灵主题乐园: 0.044, 云堡未来市: 0.032, 泗泾古镇: 0.038, 佘山精灵之城主题乐园: 0.026,
-  浦江之首: 0.018, 云间粮仓文创园: 0.022, 上海广富林奇石馆: 0.014, 江南水稻艺术观光园: 0.015
-}
-
 /** 商圈接待占比（与 songjiang.js businessAreas 名录对应，合计 = 1） */
 const BUSINESS_W = {
   松江印象城: 0.185, 松江万达广场: 0.152, 开元地中海商业广场: 0.116, 九亭U天地: 0.096,
@@ -246,13 +316,9 @@ function buildTownRank(key) {
     .sort((a, b) => b.all_value - a.all_value)
 }
 
-/** 景区排行 */
-export const HOLIDAY_RANK_SCENIC = splitByWeight(HOLIDAY_TOTALS.scenic.value, SCENIC_W)
-  .map((row, i) => ({
-    region_name: row.name,
-    all_value: row.value,
-    tb_all_value: townTb(HOLIDAY_TOTALS.scenic.tb, i)
-  }))
+/** 景区排行（**平台实测**：9 家重点景区接待量与同比，合计 = 区级重点景区总量） */
+export const HOLIDAY_RANK_SCENIC = SJ.scenic.list
+  .map((s) => ({ region_name: s.name, all_value: s.visitors, tb_all_value: s.tb }))
   .sort((a, b) => b.all_value - a.all_value)
 
 /** 商圈排行 */
@@ -279,9 +345,9 @@ function display(key, value) {
   return { value: (value / 1e4).toFixed(2), unit: '万人次' }
 }
 
-/** 图表序列单位：消费按万元、客流按万人次绘制 */
+/** 图表序列单位：消费按亿元、客流按万人次绘制 */
 const SERIES_UNIT = {
-  fee: { scale: 1e4, unit: '万元' },
+  fee: { scale: 1e8, unit: '亿元' },
   gn: { scale: 1e4, unit: '万人次' },
   rj: { scale: 1e4, unit: '万人次' },
   scenic: { scale: 1e4, unit: '万人次' },
@@ -289,9 +355,24 @@ const SERIES_UNIT = {
   special: { scale: 1e4, unit: '万人次' }
 }
 
+/** 平台实测日度序列（有则直接用，不再按权重分配） */
+const REAL_DAILY = {
+  gn: SJ.daily.map((d) => d.visitors),
+  special: SJ.daily.map((d) => d.nightVisitors),
+  scenic: [1, 2, 3, 4, 5, 6, 7].map((day) =>
+    SJ.scenic.list.reduce((a, s) => a + (s.daily.find((d) => d.day === day)?.visitors || 0), 0)
+  )
+}
+
+/** 平台实测的上年同期日度（仅区级客流有） */
+const REAL_DAILY_LAST = {
+  gn: SJ.lastYearDaily.map((d) => d.visitors)
+}
+
 /**
  * 假日 7 天趋势序列（结构与 mock/overview.js#buildTrend 保持一致，供 TrendChart 直接消费）。
- * 分项（吃/住/行/游/购/娱）按分项在全区总量中的占比等比缩放。
+ * 客流类（接待游客 / 夜间 / 重点景区）直接使用平台实测逐日值；
+ * 消费类与分项按实测日度形状等比缩放，分项再乘其在总量中的占比。
  */
 export function buildHolidaySeries(key, feeKey = '总') {
   const metric = HOLIDAY_TOTALS[key]
@@ -300,8 +381,10 @@ export function buildHolidaySeries(key, feeKey = '总') {
   const total = round(metric.value * ratio)
   const tb = key === 'fee' && feeKey !== '总' ? HOLIDAY_FEE[feeKey].tb : metric.tb
 
-  const data = distribute(total, weights)
-  const lastData = data.map((v) => round(v / (1 + tb)))
+  const real = feeKey === '总' ? REAL_DAILY[key] : null
+  const data = real ? real.slice() : distribute(total, weights)
+  const realLast = feeKey === '总' ? REAL_DAILY_LAST[key] : null
+  const lastData = realLast ? realLast.slice() : data.map((v) => round(v / (1 + tb)))
   const su = SERIES_UNIT[key]
   const disp = display(key, total)
   const sumCur = data.reduce((a, b) => a + b, 0)
@@ -315,11 +398,12 @@ export function buildHolidaySeries(key, feeKey = '总') {
     lastData,
     dataDisp: data.map((v) => round2(v / su.scale)),
     lastDataDisp: lastData.map((v) => round2(v / su.scale)),
-    total,
+    total: sumCur,
     unit: disp.unit,
     seriesUnit: su.unit,
     seriesScale: su.scale,
     tb: tbReal,
+    matchPlatform: Boolean(real),
     summary: {
       time: HOLIDAY_2026.label,
       region: '松江区',
@@ -363,23 +447,84 @@ export function buildHolidayStatistics(area = '松江区') {
 
 /** 数据来源与生成规则清单（前端如需展示可直接引用） */
 export const DATA_SOURCES = [
-  { item: '全假期旅游消费 13.69 万元及同比 +5.45%', source: 'data-picture 截图（态勢总览·热门消费城市 / 对比分析·旅游消费表）' },
-  { item: '消费分项 餐饮 3.91 / 住宿 4.70 / 交通 1.40 / 旅游 0.2015 / 购物 2.33 / 娱乐 1.15 万元', source: 'data-picture 截图（对比分析·旅游消费表），合计与总额一致' },
-  { item: '接待国内游客 156.73 万人次、同比 +32.19%', source: 'data-picture 截图（态勢总览·热门旅游城市 / 国内旅游页）' },
-  { item: '入境游客 2.35 万人次', source: '推演：156.73 万 × 1.5%（2025 年区年入境/接待游客比），同比 +11.80% 取近三年入境增速中位' },
-  { item: '景区接待 103.52 万人次、同比 +7.18%', source: '推演：2025 年国庆中秋 8 天实测 96.59 万 × (1+7.18%)，增速取近三年国庆 A 级景区客流年均增幅' },
-  { item: '商圈接待 230.72 万人次、同比 +4.30%', source: '推演：游客量 156.73 万 × 商圈/游客系数 1.472（2025 年 3250 万/2207 万）' },
-  { item: '夜间文旅接待 46.98 万人次', source: '推演：景区客流 × 45.38%（平台实测 2025 夜间占比 45.36%）' },
-  { item: '出行方式 汽车 58.35% / 高铁 40% / 飞机 1.65%', source: 'data-picture 截图（国内旅游页·出行特征）' },
-  { item: '国内游客性别 男 52.86% / 女 47.14%、年龄结构', source: 'data-picture 截图（国内旅游页·人群画像）' },
-  { item: '国内游客来源地 Top8（江苏 19.14% … 江西 3.71%）', source: 'data-picture 截图（国内旅游页·游客来源地，上海市口径）' },
-  { item: '入境分类 港澳台 30.52% / 国际 69.48%，驻留时长 47.39% >4h', source: 'data-picture 截图（入境旅游页）' },
-  { item: '入境来源地 Top8（香港 27.07% … 马来西亚 3.01%）', source: 'data-picture 截图（入境旅游页·游客来源地）' },
-  { item: '商圈驻留时长 / 性别 43.69%:56.31% / 来源地', source: 'data-picture 截图（商圈游客页）' },
-  { item: '景区目的地偏好 / 性别 47.55%:52.45% / 年龄 / 来源地', source: 'data-picture 截图（景区游客页）' },
-  { item: '街镇、景区、商圈明细分布', source: '推演：按项目既有资源体量权重（A 级景区数、床位餐饮网点、区位）分摊区级总量，合计与区级严格一致' },
-  { item: '假期日历 2026-10-01 至 2026-10-07（国庆假期）', source: '国务院 2026 年节假日安排口径（7 天假期），界面不展示具体日期' },
-  { item: '7 天日度曲线形状', source: '推演：节假日「首日高、次日峰、中段回落、尾段平稳」权重 13/16/15.5/14/13.5/14/14' }
+  {
+    item: `累计接待游客 ${(HOLIDAY_TOTALS.gn.value / 1e4).toFixed(2)} 万人次、同比 ${(HOLIDAY_TOTALS.gn.tb * 100).toFixed(2)}%`,
+    source: 'platform',
+    detail: '平台实测：节假日游客大数据监测平台 → 松江区（310117）· 2026 国庆节 · grand_total',
+    dataId: 'jjrykdsjjcpt_csyk_ykgm_grand_total'
+  },
+  {
+    item: `夜间游客 ${(HOLIDAY_TOTALS.special.value / 1e4).toFixed(2)} 万人次、占比 ${(SJ.night.ratio * 100).toFixed(2)}%、同比 ${(SJ.night.tb * 100).toFixed(2)}%`,
+    source: 'platform',
+    detail: '平台实测：同上接口 all_night 字段',
+    dataId: 'jjrykdsjjcpt_csyk_ykgm_grand_total'
+  },
+  {
+    item: `重点景区接待 ${(HOLIDAY_TOTALS.scenic.value / 1e4).toFixed(2)} 万人次、同比 ${(HOLIDAY_TOTALS.scenic.tb * 100).toFixed(2)}%`,
+    source: 'platform',
+    detail: '平台实测：松江区重点景区汇总（lv=3）',
+    dataId: 'jjrykdsjjcpt_jqyk_ykgm_grand_total_gather_v3'
+  },
+  {
+    item: `${SJ.scenic.count} 家重点景区接待排行与同比（广富林 ${(SJ.scenic.list[0].visitors / 1e4).toFixed(2)} 万 … 云堡 ${(SJ.scenic.list.at(-1).visitors / 1e4).toFixed(2)} 万）`,
+    source: 'platform',
+    detail: '平台实测：松江区景区排行（合计 = 重点景区总量）',
+    dataId: 'jjrykdsjjcpt_jqyk_ykgm_regional_reception_gather_v3'
+  },
+  {
+    item: '7 天日度客流曲线（2026 与 2025 同期）',
+    source: 'platform',
+    detail: '平台实测：松江区逐日接待量（date_time 1-7）',
+    dataId: 'jjrykdsjjcpt_csyk_ykgm_receive_tourists'
+  },
+  {
+    item: '景区游客画像：性别 / 年龄 / 消费能力 / 驻留时长 / 本地外地',
+    source: 'platform',
+    detail: '平台实测：9 家重点景区逐景区画像，按接待量加权平均',
+    dataId: 'qgjjshfzldjsc_ykdb_jqdb_tourist'
+  },
+  {
+    item: `全区游客本地 ${(SJ.profile.origin.local * 100).toFixed(2)}% / 外地 ${(SJ.profile.origin.outside * 100).toFixed(2)}%、全市排名第 ${SJ.rankInCity.rank}`,
+    source: 'platform',
+    detail: '平台实测：松江区游客画像（区县级不提供性别/年龄/消费）与全市各区排行',
+    dataId: 'qgjjshfzldjsc_ykdb_csdb_tourist / jjrykdsjjcpt_csyk_ykgm_regional_reception_city'
+  },
+  {
+    item: `全假期旅游消费 ${(HOLIDAY_TOTALS.fee.value / 1e8).toFixed(2)} 亿元、同比 +5.45%（人均 ${(HOLIDAY_TOTALS.fee.value / HOLIDAY_TOTALS.gn.value).toFixed(0)} 元/人次）`,
+    source: 'estimated',
+    detail:
+      '测算：平台不监测消费金额。按 2025 年松江区旅游收入 157.56 亿元 × 国庆假期占比 8.7% 推演，人均与游客量实测值复核'
+  },
+  {
+    item: '消费分项 餐饮 3.91 / 住宿 4.70 / 交通 1.40 / 旅游 0.2015 / 购物 2.33 / 娱乐 1.15 亿元',
+    source: 'estimated',
+    detail: '测算：取自参考图分项占比，合计与总额一致（娱乐为残差项）'
+  },
+  {
+    item: `入境游客 ${(HOLIDAY_TOTALS.rj.value / 1e4).toFixed(2)} 万人次、同比 +11.80%`,
+    source: 'estimated',
+    detail: '测算：平台无区县入境口径，按年入境/接待游客比 1.5% 折算'
+  },
+  {
+    item: `商圈接待 ${(HOLIDAY_TOTALS.business.value / 1e4).toFixed(2)} 万人次、同比 +4.30%`,
+    source: 'estimated',
+    detail: '测算：平台松江区重点商圈返回空，按游客量 × 商圈/游客系数 1.472 折算'
+  },
+  {
+    item: '出行方式 汽车 58.35% / 高铁 40% / 飞机 1.65%、国内游客性别年龄、来源地 Top8',
+    source: 'estimated',
+    detail: '参考图口径（data-picture 截图），平台仅提供景区级性别年龄与本地/外地'
+  },
+  {
+    item: '街镇消费 / 游客 / 入境分摊、街镇景区热度',
+    source: 'estimated',
+    detail: '测算：平台区域维度到区县，街镇为按资源体量权重分摊；景区热度按 9 家实测景区按所属街镇聚合'
+  },
+  {
+    item: '假期日历 2026-10-01 至 2026-10-07（7 天，界面不展示具体日期）',
+    source: 'platform',
+    detail: '平台节假日口径：国庆节，日度序列 date_time 1-7'
+  }
 ]
 
 export default {

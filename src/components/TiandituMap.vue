@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="tdt-map">
     <div v-if="!hasKey" class="tdt-map__placeholder">
       <el-icon class="tdt-map__icon"><MapLocation /></el-icon>
@@ -30,6 +30,9 @@
         <span>{{ legendMin }}</span>
         <span>{{ legendMax }}</span>
       </div>
+      <div v-if="missingCount" class="tdt-map__legend-note">
+        灰色：{{ emptyText }}（{{ missingCount }} 个街镇）
+      </div>
     </div>
 
     <!-- 悬浮提示 -->
@@ -41,6 +44,9 @@
       <b>{{ hover.name }}</b>
       <span v-if="hover.text">{{ hover.text }}</span>
     </div>
+
+    <!-- 底图/着色层加载失败提示（避免出现只有图例、地图空白的观感） -->
+    <div v-if="mapError" class="tdt-map__error">{{ mapError }}</div>
   </div>
 </template>
 
@@ -52,8 +58,13 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 // v6 的 worker 是独立入口，需显式交给 Vite 打包成 worker 资源，
 // 否则在构建/开发环境下会报 “Worker failed to load”
 import MapWorker from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
+import townsGeoRaw from '@/assets/songjiang-towns.geojson?raw'
 
 maplibregl.setWorkerUrl(MapWorker)
+
+/** 街道边界数据随包内置（避免 file:// 下 fetch 本地文件被拦截） */
+const TOWNS_GEOJSON = JSON.parse(townsGeoRaw)
+TOWNS_GEOJSON.features = (TOWNS_GEOJSON.features || []).map((f, i) => ({ ...f, id: i }))
 
 /**
  * 天地图底图组件（标准 XYZ 瓦片，EPSG:3857，可直接被 MapLibre 作为 raster 源使用）。
@@ -77,8 +88,13 @@ const props = defineProps({
   values: { type: Object, default: null },
   /** 图例标题与数值单位 */
   legendTitle: { type: String, default: '' },
-  valueUnit: { type: String, default: '' }
+  valueUnit: { type: String, default: '' },
+  /** 街镇无数据时的悬浮文案 */
+  emptyText: { type: String, default: '暂无数据' }
 })
+
+/** ready：底图与着色层就绪；fail：Worker/瓦片被拦截，交由父组件降级 */
+const emit = defineEmits(['ready', 'fail'])
 
 const ctx = window.appContext || {}
 const el = ref(null)
@@ -93,17 +109,18 @@ const layers = [
 ]
 const activeLayer = ref('vec')
 
-const GEO_URL = '/geo/songjiang-towns.geojson'
 const SRC_ID = 'towns'
 const FILL_ID = 'towns-fill'
 const LINE_ID = 'towns-line'
-/** 街镇边界 GeoJSON 缓存（面层与名称标注共用，只 fetch 一次） */
+/** 街镇边界 GeoJSON 缓存（面层与名称标注共用） */
 let townsGeoJSON = null
 /** 街镇名称的 HTML Marker（symbol 层需 glyphs 字体服务，故不用） */
 let townMarkers = []
 
 const choroplethEnabled = computed(() => Boolean(props.values && Object.keys(props.values).length))
 const hover = ref(null)
+/** 底图 10 秒内未就绪时给出提示（file:// 下 worker/瓦片被拦截时不会只剩空白） */
+const mapError = ref('')
 
 /** 数值 → 颜色：低值深蓝 → 高值金色（与平台配色一致） */
 const RAMP = [
@@ -143,6 +160,13 @@ const fmtNum = (n) => {
 }
 const legendMin = computed(() => (choroplethEnabled.value ? fmtNum(valueRange.value.min) + props.valueUnit : ''))
 const legendMax = computed(() => (choroplethEnabled.value ? fmtNum(valueRange.value.max) + props.valueUnit : ''))
+/** 无数据街镇数量：填充灰色并给出说明，避免透明空洞 */
+const missingCount = computed(() => {
+  if (!choroplethEnabled.value) return 0
+  return (TOWNS_GEOJSON.features || []).filter(
+    (f) => !Number.isFinite(Number(props.values[f.properties.name]))
+  ).length
+})
 
 /**
  * 组装天地图瓦片地址模板。
@@ -176,12 +200,9 @@ const styleOf = (type) => ({
 async function addTownsLayer() {
   if (!map || !choroplethEnabled.value) return
   try {
-    // 边界数据只需取一次，缓存在模块作用域，供面层与标注共用
+    // 边界数据随包内置（模块作用域缓存），面层与标注共用
     if (!townsGeoJSON) {
-      const res = await fetch(GEO_URL)
-      townsGeoJSON = await res.json()
-      // feature-state 需要 feature.id，这里用要素序号补齐
-      townsGeoJSON.features = (townsGeoJSON.features || []).map((f, i) => ({ ...f, id: i }))
+      townsGeoJSON = TOWNS_GEOJSON
     }
     if (!map.getSource(SRC_ID)) {
       map.addSource(SRC_ID, { type: 'geojson', data: townsGeoJSON })
@@ -192,13 +213,13 @@ async function addTownsLayer() {
     // 因此**不需要**任何兜底图层或补丁图层，只有一层，不会出现叠层痕迹与条纹。
     const { min, max } = valueRange.value
     const span = max - min || 1
-    /** 生成「按名称取色」的 match 表达式；未命中为透明 */
+    /** 生成「按名称取色」的 match 表达式；未命中（无数据街镇）为灰色 */
     const buildMatch = (getter) => {
       const expr = ['match', getter]
       Object.entries(props.values).forEach(([name, val]) => {
         expr.push(name, colorAt((Number(val) - min) / span))
       })
-      expr.push('rgba(0,0,0,0)')
+      expr.push('rgba(150,170,190,0.42)')
       return expr
     }
 
@@ -273,7 +294,7 @@ function bindTownsEvents() {
       x: e.point.x + 12,
       y: e.point.y + 12,
       name,
-      text: v === undefined ? '暂无数据' : fmtNum(v) + props.valueUnit
+      text: v === undefined ? props.emptyText : fmtNum(v) + props.valueUnit
     }
   })
   map.on('mouseleave', FILL_ID, () => {
@@ -300,8 +321,17 @@ function createMap() {
   // 调试钩子：把实例挂到 window，便于在控制台/CDP 里检查图层与几何（对功能无影响）
   if (typeof window !== 'undefined') window.__tdtMap = map
   map.on('load', () => {
+    mapError.value = ''
+    emit('ready')
     addTownsLayer().then(bindTownsEvents)
   })
+  // 兜底提示：8 秒内样式仍未就绪，说明 Worker/瓦片被环境拦截 → 通知父组件降级为离线矢量图
+  setTimeout(() => {
+    if (map && !map.isStyleLoaded()) {
+      mapError.value = '底图加载失败：请检查网络，或使用离线矢量地图'
+      emit('fail')
+    }
+  }, 8000)
   new ResizeObserver(() => map && map.resize()).observe(el.value)
 }
 
@@ -478,6 +508,12 @@ defineExpose({ getMap: () => map })
   color: rgba(180, 220, 255, 0.85);
 }
 
+.tdt-map__legend-note {
+  margin-top: 5px;
+  font-size: 11px;
+  color: rgba(190, 205, 220, 0.7);
+}
+
 /* 悬浮提示 */
 .tdt-map__tip {
   position: absolute;
@@ -501,6 +537,22 @@ defineExpose({ getMap: () => map })
 
 .tdt-map__tip span {
   color: #ffd200;
+}
+
+/* 底图加载失败提示 */
+.tdt-map__error {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 8;
+  padding: 6px 14px;
+  border-radius: 4px;
+  background: rgba(120, 30, 30, 0.85);
+  border: 1px solid rgba(255, 120, 120, 0.5);
+  color: #ffe9e9;
+  font-size: 12px;
+  white-space: nowrap;
 }
 
 /* 街镇名称标注（HTML Marker）：深色描边保证在电子地图与影像图上都能读清 */

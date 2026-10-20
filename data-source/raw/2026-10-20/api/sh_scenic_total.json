@@ -1,0 +1,41 @@
+{
+ "query": {
+  "name": "sh_scenic_total",
+  "desc": "上海市·重点景区累计接待 / 夜间 / 同比",
+  "dataId": "jjrykdsjjcpt_jqyk_ykgm_grand_total_gather_v3",
+  "filter": {
+   "year": "2026",
+   "holiday_name": "国庆节",
+   "fnid": "310100",
+   "sort": "all_value",
+   "sequence": "desc",
+   "scenic_code": 0,
+   "limitnum": 1000,
+   "lv": 2
+  },
+  "app": {
+   "appCode": "jjrykdsjjcpt",
+   "way": "POST /smart-decision/api/v2/nocache/data/json",
+   "innerRequest": "/api/v4/attr/query/list?dataId=jjrykdsjjcpt_jqyk_ykgm_grand_total_gather_v3&filter=%7B%22year%22%3A%222026%22%2C%22holiday_name%22%3A%22%E5%9B%BD%E5%BA%86%E8%8A%82%22%2C%22fnid%22%3A%22310100%22%2C%22sort%22%3A%22all_value%22%2C%22sequence%22%3A%22desc%22%2C%22scenic_code%22%3A0%2C%22limitnum%22%3A1000%2C%22lv%22%3A2%7D"
+  },
+  "fetchedAt": "2026-10-20T07:46:18.668Z",
+  "rows": 1,
+  "error": null,
+  "file": "api/sh_scenic_total.json"
+ },
+ "response": {
+  "code": "1",
+  "msg": "SUCCESS",
+  "data": [
+   {
+    "all_value": 5799466,
+    "all_value_avg": 828495,
+    "all_night": 2339735,
+    "tb_ratio_all_value": -0.0782,
+    "avg_tb_ratio_all_value": -0.0782,
+    "zb_ratio_all_night": 0.4034,
+    "tb_ratio_all_night": -0.1098
+   }
+  ]
+ }
+}

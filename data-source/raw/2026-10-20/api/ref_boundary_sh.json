@@ -1,0 +1,29 @@
+{
+ "query": {
+  "name": "ref_boundary_sh",
+  "desc": "上海市边界 GeoJSON",
+  "dataId": "jjrykdsjjcpt_map_boundary",
+  "filter": {
+   "code": 310000
+  },
+  "app": {
+   "appCode": "jjrykdsjjcpt",
+   "way": "POST /smart-decision/api/v2/nocache/data/json",
+   "innerRequest": "/api/v4/attr/query/list?dataId=jjrykdsjjcpt_map_boundary&filter=%7B%22code%22%3A310000%7D"
+  },
+  "fetchedAt": "2026-10-20T07:46:19.182Z",
+  "rows": 1,
+  "error": null,
+  "file": "api/ref_boundary_sh.json"
+ },
+ "response": {
+  "code": "1",
+  "msg": "SUCCESS",
+  "data": [
+   {
+    "region_code": 310000,
+    "region_name": "上海市"
+   }
+  ]
+ }
+}

@@ -13,8 +13,8 @@
           v-for="t in dateTypes"
           :key="t.value"
           class="param-btn"
-          :class="{ 'parsm-btn-select': dateType === t.value }"
-          @click="dateType = t.value"
+          :class="{ 'parsm-btn-select': dateType === t.value, 'is-locked': filterLocked }"
+          @click="changeDateType(t.value)"
         >
           {{ t.name }}
         </div>
@@ -31,6 +31,7 @@
           format="YYYY-MM"
           value-format="YYYY-MM"
           size="small"
+          :disabled="filterLocked"
         />
         <span v-else class="holiday-period-text">{{ HOLIDAY_2026.periodText }}</span>
       </div>
@@ -98,6 +99,7 @@
 import { computed, reactive, ref } from 'vue'
 import { HOLIDAY_2026, HOLIDAY_CITY, HOLIDAY_FEE, HOLIDAY_RANK_CITY, HOLIDAY_RANK_FEE, HOLIDAY_TOTALS } from '@/mock/holiday2026'
 import { towns } from '@/mock/songjiang'
+import { isFilterLocked } from '@/utils/lock'
 
 /**
  * 对比分析页 —— 版式 1:1 对齐参考站 `/main/trend/compare`（CDP 实测）：
@@ -120,6 +122,12 @@ const dateTypes = [
 ]
 const dateType = ref('holiday')
 const dateRange = ref(['2026-01', '2026-09'])
+/** 区域 + 时间锁定（演示口径固定为 2026 年国庆节 / 松江区） */
+const filterLocked = isFilterLocked()
+const changeDateType = (v) => {
+  if (filterLocked) return
+  dateType.value = v
+}
 
 const tabs = [
   { key: 'fee', name: '旅游消费' },
@@ -131,33 +139,31 @@ const tabs = [
 const activeTab = ref('fee')
 
 /**
- * 对比区域：**松江区下属 17 个街镇**（数据一律采用松江区口径）。
+ * 对比区域：**松江区 + 17 个街镇**（数据一律采用松江区口径）。
  * 平台区域维度只到区县，街镇值按各街镇文旅体量对区级假期总量做分布测算。
+ * 用平铺列表（而非「松江区 → 街镇」两级），这样「松江区」可以和各街镇同时被选中。
  */
 const SJ_TOWNS = towns.map((t) => t.name)
 const areaOptions = [
-  {
-    value: '松江区',
-    label: '松江区',
-    children: SJ_TOWNS.map((d) => ({ value: d, label: d }))
-  }
+  { value: '松江区', label: '松江区' },
+  ...SJ_TOWNS.map((d) => ({ value: d, label: d }))
 ]
 const compareAreas = ref(['松江区', '佘山镇', '方松街道', '岳阳街道', '中山街道', '广富林街道'])
 
 /* ---------- 表格列定义：按 TAB 切换（与参考站一致的列） ---------- */
 const FEE_KEYS = [
-  { key: '吃', prop: 'food', label: '餐饮(元)' },
-  { key: '住', prop: 'live', label: '住宿(元)' },
-  { key: '行', prop: 'traffic', label: '交通(元)' },
-  { key: '游', prop: 'travel', label: '旅游(元)' },
-  { key: '购', prop: 'shopping', label: '购物(元)' },
-  { key: '娱', prop: 'entertainment', label: '娱乐(元)' }
+  { key: '吃', prop: 'food', label: '餐饮(亿元)' },
+  { key: '住', prop: 'live', label: '住宿(亿元)' },
+  { key: '行', prop: 'traffic', label: '交通(亿元)' },
+  { key: '游', prop: 'travel', label: '旅游(亿元)' },
+  { key: '购', prop: 'shopping', label: '购物(亿元)' },
+  { key: '娱', prop: 'entertainment', label: '娱乐(亿元)' }
 ]
 
 const columns = computed(() => {
   switch (activeTab.value) {
     case 'fee':
-      return [{ prop: 'total', label: '消费总额(元)' }, ...FEE_KEYS.map((k) => ({ prop: k.prop, label: k.label }))]
+      return [{ prop: 'total', label: '消费总额(亿元)' }, ...FEE_KEYS.map((k) => ({ prop: k.prop, label: k.label }))]
     case 'tourist':
       return [
         { prop: 'total', label: '累计客流(人次)' },
@@ -198,7 +204,8 @@ const firstColumnLabel = computed(() =>
 )
 
 /* ---------- 数据 ---------- */
-const fmtWan = (v) => (v >= 1e4 ? `${(v / 1e4).toFixed(2)}万` : String(Math.round(v)))
+/** 消费金额统一按亿元展示（与指标卡口径一致） */
+const fmtYi = (v) => (Number(v) / 1e8).toFixed(2)
 const fmtNum = (v) => (v >= 1e8 ? `${(v / 1e8).toFixed(2)}亿` : v >= 1e4 ? `${(v / 1e4).toFixed(2)}万` : String(Math.round(v)))
 
 /** 松江区假期消费分项（2026 年国庆节） */
@@ -221,6 +228,10 @@ AREA_TRIPS['松江区'] = HOLIDAY_TOTALS.gn.value
 const AREA_TB = Object.fromEntries(HOLIDAY_RANK_FEE.map((d) => [d.region_name, d.tb_all_value]))
 AREA_TB['松江区'] = HOLIDAY_TOTALS.fee.tb
 
+/** 各街镇客流同比（与消费同比分开取，避免口径串用） */
+const AREA_TRIPS_TB = Object.fromEntries(HOLIDAY_RANK_CITY.map((d) => [d.region_name, d.tb_all_value]))
+AREA_TRIPS_TB['松江区'] = HOLIDAY_TOTALS.gn.tb
+
 /** 分项占比（用松江区假期分项占比，作为各街镇结构的近似） */
 const FEE_RATIO = Object.fromEntries(
   FEE_KEYS.map((k) => [k.key, SJ_FEE[k.key].amt / SJ_FEE_TOTAL])
@@ -236,10 +247,10 @@ const tableRows = computed(() => {
     const row = { region: name }
     switch (activeTab.value) {
       case 'fee': {
-        row.total = fmtWan(total)
+        row.total = fmtYi(total)
         // 分项 = 该街镇总额 × 该分类结构占比（结构取松江区假期分项占比）
         FEE_KEYS.forEach((k) => {
-          row[k.prop] = fmtWan(total * FEE_RATIO[k.key])
+          row[k.prop] = fmtYi(total * FEE_RATIO[k.key])
         })
         break
       }
@@ -248,7 +259,7 @@ const tableRows = computed(() => {
         row.total = fmtNum(trips)
         row.avg = fmtNum(Math.round(trips / HOLIDAY_DAYS))
         row.night = fmtNum(Math.round(trips * 0.4536))
-        row.tb = AREA_TB[name] !== undefined ? Number((AREA_TB[name] * 100).toFixed(2)) : 5.45
+        row.tb = AREA_TRIPS_TB[name] !== undefined ? Number((AREA_TRIPS_TB[name] * 100).toFixed(2)) : 32.19
         row.nightRatio = 45.36
         break
       }
@@ -398,6 +409,15 @@ void towns
 
 .param-btn:last-child {
   border-radius: 0 3px 3px 0;
+}
+
+/* 锁定态：保留选中样式，但不响应点击 */
+.param-btn.is-locked {
+  cursor: default;
+}
+
+.param-btn.is-locked:not(.parsm-btn-select):hover {
+  color: #cfe6ff;
 }
 
 .param-btn.parsm-btn-select {

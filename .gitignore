@@ -1,4 +1,4 @@
-node_modules
+﻿node_modules
 dist
 .npm-cache
 .chrome-profile
@@ -8,3 +8,4 @@ _shots
 _ref
 .DS_Store
 *.log
+dist-single

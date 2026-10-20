@@ -1,0 +1,29 @@
+{
+ "query": {
+  "name": "ref_boundary_sj",
+  "desc": "松江区边界 GeoJSON",
+  "dataId": "jjrykdsjjcpt_map_boundary",
+  "filter": {
+   "code": 310117
+  },
+  "app": {
+   "appCode": "jjrykdsjjcpt",
+   "way": "POST /smart-decision/api/v2/nocache/data/json",
+   "innerRequest": "/api/v4/attr/query/list?dataId=jjrykdsjjcpt_map_boundary&filter=%7B%22code%22%3A310117%7D"
+  },
+  "fetchedAt": "2026-10-20T07:46:19.263Z",
+  "rows": 1,
+  "error": null,
+  "file": "api/ref_boundary_sj.json"
+ },
+ "response": {
+  "code": "1",
+  "msg": "SUCCESS",
+  "data": [
+   {
+    "region_code": 310117,
+    "region_name": "松江区"
+   }
+  ]
+ }
+}

@@ -233,8 +233,8 @@ export const holidayStatistics = [
   { holiday: '端午', year: 2025, visitors: 22.81, monitored: 20, revenue: null, source: '上海市政府官网 2025-06-05' },
   { holiday: '国庆', year: 2024, visitors: 59.39, monitored: 18, revenue: 2394, source: '松江区政府官网 2024-10-09' },
   { holiday: '国庆中秋', year: 2025, visitors: 96.59, monitored: 20, revenue: null, source: '松江区政府官网 2025-10-10' },
-  // 2026 年国庆节为演示口径（见 src/mock/holiday2026.js），接待量为 A 级景区与主要点位测算值
-  { holiday: '国庆', year: 2026, visitors: 103.52, monitored: 20, revenue: 1369, source: '演示口径 · data-picture 参考图 + 推演' }
+  // 2026 年国庆节为演示口径（见 src/mock/holiday2026.js），接待量为 A 级景区与主要点位测算值，营收 13.69 亿元（=136900 万元）
+  { holiday: '国庆', year: 2026, visitors: 103.52, monitored: 20, revenue: 136900, source: '演示口径 · data-picture 参考图 + 推演' }
 ]
 
 export default {

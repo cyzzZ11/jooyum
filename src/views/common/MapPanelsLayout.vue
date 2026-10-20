@@ -13,9 +13,22 @@
     -->
     <div class="map-layer">
       <div class="map-wrapper">
-        <TiandituMap
+        <!--
+          地图：在线版（http/https）用天地图 maplibre（支持缩放/拖拽/底图切换）；
+          单文件版（file:// 打开）用静态拼接图，避免浏览器拦截 Worker 导致无区域色块。
+        -->
+        <TownChoropleth
+          v-if="useStaticMap"
           :values="choropleth"
           :legend-title="choroplethTitle"
+          :empty-text="choroplethEmptyText"
+          value-unit=""
+        />
+        <TiandituMap
+          v-else
+          :values="choropleth"
+          :legend-title="choroplethTitle"
+          :empty-text="choroplethEmptyText"
           value-unit=""
         />
       </div>
@@ -41,6 +54,7 @@
 <script setup>
 import { computed } from 'vue'
 import TiandituMap from '@/components/TiandituMap.vue'
+import TownChoropleth from '@/components/TownChoropleth.vue'
 import { SJ_TOWN_CHOROPLETH } from '@/mock/rankData'
 
 /**
@@ -61,6 +75,14 @@ const props = defineProps({
   metric: { type: String, default: 'city' }
 })
 
+/**
+ * 单文件版（file:// 直开）使用静态拼接地图：
+ * 浏览器会拦截 maplibre 的 Worker，导致「有底图无区域色块」。
+ * 在线版（http/https）保持原有天地图交互地图，不做改动。
+ */
+const useStaticMap =
+  typeof window !== 'undefined' && (location.protocol === 'file:' || window.__STATIC_MAP__ === true)
+
 const choropleth = computed(() => SJ_TOWN_CHOROPLETH[props.metric] || SJ_TOWN_CHOROPLETH.city)
 const choroplethTitle = computed(
   () =>
@@ -71,6 +93,8 @@ const choroplethTitle = computed(
       scenic: '街镇景区热度'
     })[props.metric] || '街镇热度'
 )
+/** 无数据街镇的口径说明：景区指标下即「无景区点位」 */
+const choroplethEmptyText = computed(() => (props.metric === 'scenic' ? '无景区点位' : '暂无数据'))
 </script>
 
 <style scoped>

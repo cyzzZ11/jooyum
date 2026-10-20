@@ -1,0 +1,597 @@
+{
+ "query": {
+  "name": "sj_scenic_daily_dated",
+  "desc": "松江区·9 家重点景区日度接待序列（带真实日期）",
+  "dataId": "qgjjshfzldjsc_ykdb_jqdb_receive_tourists",
+  "filter": {
+   "year": 2026,
+   "holiday_name": "国庆节",
+   "scenic_code": "31000031010040,31000031010014,31000031010012,31010021,31000031010035,31010017,3101006,31000031010044,31000031010034",
+   "type": 0,
+   "time_start": 20261001,
+   "time_end": 20261007
+  },
+  "app": {
+   "appCode": "qgjjshfzldjsc",
+   "way": "POST /smart-decision/api/v2/nocache/data/json",
+   "innerRequest": "/api/v4/attr/query/list?dataId=qgjjshfzldjsc_ykdb_jqdb_receive_tourists&filter=%7B%22year%22%3A2026%2C%22holiday_name%22%3A%22%E5%9B%BD%E5%BA%86%E8%8A%82%22%2C%22scenic_code%22%3A%2231000031010040%2C31000031010014%2C31000031010012%2C31010021%2C31000031010035%2C31010017%2C3101006%2C31000031010044%2C31000031010034%22%2C%22type%22%3A0%2C%22time_start%22%3A20261001%2C%22time_end%22%3A20261007%7D"
+  },
+  "fetchedAt": "2026-10-20T07:40:55.437Z",
+  "rows": 63,
+  "error": null,
+  "file": "api/sj_scenic_daily_dated.json"
+ },
+ "response": {
+  "code": "1",
+  "msg": "SUCCESS",
+  "data": [
+   {
+    "scenic_code": 31000031010040,
+    "scenic_name": "广富林文化遗址",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "1",
+    "all_value": 21740,
+    "all_night": 10320
+   },
+   {
+    "scenic_code": 31000031010014,
+    "scenic_name": "上海欢乐谷",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "1",
+    "all_value": 11009,
+    "all_night": 6611
+   },
+   {
+    "scenic_code": 31000031010012,
+    "scenic_name": "上海影视乐园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "1",
+    "all_value": 10633,
+    "all_night": 5894
+   },
+   {
+    "scenic_code": 31010021,
+    "scenic_name": "辰山植物园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "1",
+    "all_value": 5599,
+    "all_night": 1199
+   },
+   {
+    "scenic_code": 31000031010035,
+    "scenic_name": "佘山国家森林公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "1",
+    "all_value": 6044,
+    "all_night": 763
+   },
+   {
+    "scenic_code": 31010017,
+    "scenic_name": "方塔园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "1",
+    "all_value": 4078,
+    "all_night": 1830
+   },
+   {
+    "scenic_code": 3101006,
+    "scenic_name": "上海月湖雕塑公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "1",
+    "all_value": 2794,
+    "all_night": 547
+   },
+   {
+    "scenic_code": 31000031010044,
+    "scenic_name": "醉白池公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "1",
+    "all_value": 3011,
+    "all_night": 852
+   },
+   {
+    "scenic_code": 31000031010034,
+    "scenic_name": "云堡未来市",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "1",
+    "all_value": 500,
+    "all_night": 340
+   },
+   {
+    "scenic_code": 31000031010040,
+    "scenic_name": "广富林文化遗址",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "2",
+    "all_value": 28135,
+    "all_night": 12728
+   },
+   {
+    "scenic_code": 31000031010014,
+    "scenic_name": "上海欢乐谷",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "2",
+    "all_value": 17994,
+    "all_night": 11613
+   },
+   {
+    "scenic_code": 31000031010012,
+    "scenic_name": "上海影视乐园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "2",
+    "all_value": 12073,
+    "all_night": 6595
+   },
+   {
+    "scenic_code": 31010021,
+    "scenic_name": "辰山植物园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "2",
+    "all_value": 8645,
+    "all_night": 1512
+   },
+   {
+    "scenic_code": 31000031010035,
+    "scenic_name": "佘山国家森林公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "2",
+    "all_value": 10442,
+    "all_night": 825
+   },
+   {
+    "scenic_code": 31010017,
+    "scenic_name": "方塔园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "2",
+    "all_value": 4153,
+    "all_night": 1717
+   },
+   {
+    "scenic_code": 3101006,
+    "scenic_name": "上海月湖雕塑公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "2",
+    "all_value": 4662,
+    "all_night": 785
+   },
+   {
+    "scenic_code": 31000031010044,
+    "scenic_name": "醉白池公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "2",
+    "all_value": 2928,
+    "all_night": 817
+   },
+   {
+    "scenic_code": 31000031010034,
+    "scenic_name": "云堡未来市",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "2",
+    "all_value": 540,
+    "all_night": 275
+   },
+   {
+    "scenic_code": 31000031010040,
+    "scenic_name": "广富林文化遗址",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "3",
+    "all_value": 10429,
+    "all_night": 3286
+   },
+   {
+    "scenic_code": 31000031010014,
+    "scenic_name": "上海欢乐谷",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "3",
+    "all_value": 5478,
+    "all_night": 3055
+   },
+   {
+    "scenic_code": 31000031010012,
+    "scenic_name": "上海影视乐园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "3",
+    "all_value": 7748,
+    "all_night": 4042
+   },
+   {
+    "scenic_code": 31010021,
+    "scenic_name": "辰山植物园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "3",
+    "all_value": 3391,
+    "all_night": 689
+   },
+   {
+    "scenic_code": 31000031010035,
+    "scenic_name": "佘山国家森林公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "3",
+    "all_value": 2291,
+    "all_night": 613
+   },
+   {
+    "scenic_code": 31010017,
+    "scenic_name": "方塔园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "3",
+    "all_value": 3531,
+    "all_night": 1423
+   },
+   {
+    "scenic_code": 3101006,
+    "scenic_name": "上海月湖雕塑公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "3",
+    "all_value": 972,
+    "all_night": 437
+   },
+   {
+    "scenic_code": 31000031010044,
+    "scenic_name": "醉白池公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "3",
+    "all_value": 2321,
+    "all_night": 840
+   },
+   {
+    "scenic_code": 31000031010034,
+    "scenic_name": "云堡未来市",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "3",
+    "all_value": 363,
+    "all_night": 231
+   },
+   {
+    "scenic_code": 31000031010040,
+    "scenic_name": "广富林文化遗址",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "4",
+    "all_value": 13358,
+    "all_night": 6766
+   },
+   {
+    "scenic_code": 31000031010014,
+    "scenic_name": "上海欢乐谷",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "4",
+    "all_value": 5870,
+    "all_night": 4005
+   },
+   {
+    "scenic_code": 31000031010012,
+    "scenic_name": "上海影视乐园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "4",
+    "all_value": 7724,
+    "all_night": 4590
+   },
+   {
+    "scenic_code": 31010021,
+    "scenic_name": "辰山植物园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "4",
+    "all_value": 3348,
+    "all_night": 929
+   },
+   {
+    "scenic_code": 31000031010035,
+    "scenic_name": "佘山国家森林公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "4",
+    "all_value": 2272,
+    "all_night": 674
+   },
+   {
+    "scenic_code": 31010017,
+    "scenic_name": "方塔园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "4",
+    "all_value": 3235,
+    "all_night": 1487
+   },
+   {
+    "scenic_code": 3101006,
+    "scenic_name": "上海月湖雕塑公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "4",
+    "all_value": 857,
+    "all_night": 373
+   },
+   {
+    "scenic_code": 31000031010044,
+    "scenic_name": "醉白池公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "4",
+    "all_value": 2288,
+    "all_night": 795
+   },
+   {
+    "scenic_code": 31000031010034,
+    "scenic_name": "云堡未来市",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "4",
+    "all_value": 358,
+    "all_night": 220
+   },
+   {
+    "scenic_code": 31000031010040,
+    "scenic_name": "广富林文化遗址",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "5",
+    "all_value": 25008,
+    "all_night": 11368
+   },
+   {
+    "scenic_code": 31000031010014,
+    "scenic_name": "上海欢乐谷",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "5",
+    "all_value": 17452,
+    "all_night": 11940
+   },
+   {
+    "scenic_code": 31000031010012,
+    "scenic_name": "上海影视乐园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "5",
+    "all_value": 9644,
+    "all_night": 5090
+   },
+   {
+    "scenic_code": 31010021,
+    "scenic_name": "辰山植物园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "5",
+    "all_value": 9680,
+    "all_night": 1499
+   },
+   {
+    "scenic_code": 31000031010035,
+    "scenic_name": "佘山国家森林公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "5",
+    "all_value": 9521,
+    "all_night": 1003
+   },
+   {
+    "scenic_code": 31010017,
+    "scenic_name": "方塔园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "5",
+    "all_value": 3901,
+    "all_night": 1626
+   },
+   {
+    "scenic_code": 3101006,
+    "scenic_name": "上海月湖雕塑公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "5",
+    "all_value": 4489,
+    "all_night": 955
+   },
+   {
+    "scenic_code": 31000031010044,
+    "scenic_name": "醉白池公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "5",
+    "all_value": 2692,
+    "all_night": 787
+   },
+   {
+    "scenic_code": 31000031010034,
+    "scenic_name": "云堡未来市",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "5",
+    "all_value": 531,
+    "all_night": 231
+   },
+   {
+    "scenic_code": 31000031010040,
+    "scenic_name": "广富林文化遗址",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "6",
+    "all_value": 23045,
+    "all_night": 12914
+   },
+   {
+    "scenic_code": 31000031010014,
+    "scenic_name": "上海欢乐谷",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "6",
+    "all_value": 13431,
+    "all_night": 9018
+   },
+   {
+    "scenic_code": 31000031010012,
+    "scenic_name": "上海影视乐园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "6",
+    "all_value": 8786,
+    "all_night": 5043
+   },
+   {
+    "scenic_code": 31010021,
+    "scenic_name": "辰山植物园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "6",
+    "all_value": 8314,
+    "all_night": 1577
+   },
+   {
+    "scenic_code": 31000031010035,
+    "scenic_name": "佘山国家森林公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "6",
+    "all_value": 7373,
+    "all_night": 837
+   },
+   {
+    "scenic_code": 31010017,
+    "scenic_name": "方塔园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "6",
+    "all_value": 3785,
+    "all_night": 1886
+   },
+   {
+    "scenic_code": 3101006,
+    "scenic_name": "上海月湖雕塑公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "6",
+    "all_value": 3950,
+    "all_night": 825
+   },
+   {
+    "scenic_code": 31000031010044,
+    "scenic_name": "醉白池公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "6",
+    "all_value": 3024,
+    "all_night": 844
+   },
+   {
+    "scenic_code": 31000031010034,
+    "scenic_name": "云堡未来市",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "6",
+    "all_value": 609,
+    "all_night": 348
+   },
+   {
+    "scenic_code": 31000031010040,
+    "scenic_name": "广富林文化遗址",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "7",
+    "all_value": 11063,
+    "all_night": 3768
+   },
+   {
+    "scenic_code": 31000031010014,
+    "scenic_name": "上海欢乐谷",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "7",
+    "all_value": 8377,
+    "all_night": 4609
+   },
+   {
+    "scenic_code": 31000031010012,
+    "scenic_name": "上海影视乐园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "7",
+    "all_value": 7561,
+    "all_night": 4279
+   },
+   {
+    "scenic_code": 31010021,
+    "scenic_name": "辰山植物园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "7",
+    "all_value": 6100,
+    "all_night": 1293
+   },
+   {
+    "scenic_code": 31000031010035,
+    "scenic_name": "佘山国家森林公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "7",
+    "all_value": 4799,
+    "all_night": 836
+   },
+   {
+    "scenic_code": 31010017,
+    "scenic_name": "方塔园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "7",
+    "all_value": 3413,
+    "all_night": 1478
+   },
+   {
+    "scenic_code": 3101006,
+    "scenic_name": "上海月湖雕塑公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "7",
+    "all_value": 2846,
+    "all_night": 707
+   },
+   {
+    "scenic_code": 31000031010044,
+    "scenic_name": "醉白池公园",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "7",
+    "all_value": 2948,
+    "all_night": 849
+   },
+   {
+    "scenic_code": 31000031010034,
+    "scenic_name": "云堡未来市",
+    "year": 2026,
+    "type": "国庆节",
+    "date_time": "7",
+    "all_value": 552,
+    "all_night": 283
+   }
+  ]
+ }
+}
