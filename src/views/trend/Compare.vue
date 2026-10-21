@@ -97,7 +97,15 @@
 
 <script setup>
 import { computed, reactive, ref } from 'vue'
-import { HOLIDAY_2026, HOLIDAY_CITY, HOLIDAY_FEE, HOLIDAY_RANK_CITY, HOLIDAY_RANK_FEE, HOLIDAY_TOTALS } from '@/mock/holiday2026'
+import {
+  HOLIDAY_2026,
+  HOLIDAY_CITY,
+  HOLIDAY_FEE,
+  HOLIDAY_RANK_CITY,
+  HOLIDAY_RANK_FEE,
+  HOLIDAY_TOTALS,
+  SJ
+} from '@/mock/holiday2026'
 import { towns } from '@/mock/songjiang'
 import { isFilterLocked } from '@/utils/lock'
 
@@ -213,7 +221,7 @@ const SJ_FEE = HOLIDAY_FEE
 const SJ_FEE_TOTAL = SJ_FEE['总'].amt
 
 /**
- * 各街镇消费总额：按街镇消费体量对**松江区假期消费总额（13.69 万元）**分布测算
+ * 各街镇消费总额：按街镇消费体量对**松江区假期消费总额（13.69 亿元）**分布测算
  * （数据源 `holiday2026.js`）。
  */
 const AREA_FEE = Object.fromEntries(HOLIDAY_RANK_FEE.map((d) => [d.region_name, d.all_value]))
@@ -240,6 +248,12 @@ const FEE_RATIO = Object.fromEntries(
 /** 假期天数（日均客流 = 累计 / 7） */
 const HOLIDAY_DAYS = 7
 
+/** 夜间客流占比：取平台实测松江区夜间占比（街镇按同一比例分摊） */
+const NIGHT_RATIO = SJ.night.ratio
+
+/** 区级夜间客流直接取平台实测值，避免「累计 × 占比」的二次舍入误差 */
+const AREA_NIGHT = { 松江区: SJ.night.total }
+
 const tableRows = computed(() => {
   const names = compareAreas.value.length ? compareAreas.value : SJ_TOWNS
   return names.map((name) => {
@@ -258,9 +272,9 @@ const tableRows = computed(() => {
         const trips = AREA_TRIPS[name] || 0
         row.total = fmtNum(trips)
         row.avg = fmtNum(Math.round(trips / HOLIDAY_DAYS))
-        row.night = fmtNum(Math.round(trips * 0.4536))
-        row.tb = AREA_TRIPS_TB[name] !== undefined ? Number((AREA_TRIPS_TB[name] * 100).toFixed(2)) : 32.19
-        row.nightRatio = 45.36
+        row.night = fmtNum(AREA_NIGHT[name] !== undefined ? AREA_NIGHT[name] : Math.round(trips * NIGHT_RATIO))
+        row.tb = AREA_TRIPS_TB[name] !== undefined ? Number((AREA_TRIPS_TB[name] * 100).toFixed(2)) : Number((HOLIDAY_TOTALS.gn.tb * 100).toFixed(2))
+        row.nightRatio = Number((NIGHT_RATIO * 100).toFixed(2))
         break
       }
       case 'profile': {

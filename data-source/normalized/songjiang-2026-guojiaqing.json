@@ -4,7 +4,7 @@
   "host": "https://jice.smartsteps.com/travel/",
   "api": "POST /smart-decision/api/v2/nocache/data/json → /api/v4/attr/query/list?dataId=…",
   "appCode": "jjrykdsjjcpt / qgjjshfzldjsc",
-  "capturedAt": "2026-10-20T07:40:07.132Z",
+  "capturedAt": "2026-10-20T07:46:19.182Z",
   "year": 2026,
   "holiday": "国庆节",
   "period": {

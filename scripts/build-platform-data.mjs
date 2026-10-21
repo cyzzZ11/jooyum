@@ -254,6 +254,157 @@ mkdirSync(NORM_DIR, { recursive: true })
 writeFileSync(NORM, JSON.stringify(normalized, null, 1), 'utf8')
 console.log('已生成规范化数据：' + NORM)
 
+/* ---------- 附：CSV 导出（方便 Excel / 其他项目直接用） ---------- */
+const CSV_DIR = join(NORM_DIR, 'csv')
+mkdirSync(CSV_DIR, { recursive: true })
+const csvCell = (v) => {
+  const s = v === null || v === undefined ? '' : String(v)
+  return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s
+}
+const toCsv = (rows, headers) =>
+  [headers.join(','), ...rows.map((r) => headers.map((h) => csvCell(r[h])).join(','))].join('\n') + '\n'
+
+const s0 = normalized.songjiang
+writeFileSync(
+  join(CSV_DIR, 'sj-daily-7days.csv'),
+  toCsv(
+    s0.daily.map((d, i) => ({
+      day: d.day,
+      date: d.date,
+      visitors: d.visitors,
+      night_visitors: d.nightVisitors,
+      last_year_visitors: s0.lastYearDaily[i]?.visitors ?? ''
+    })),
+    ['day', 'date', 'visitors', 'night_visitors', 'last_year_visitors']
+  ),
+  'utf8'
+)
+writeFileSync(
+  join(CSV_DIR, 'sj-scenic-rank.csv'),
+  toCsv(
+    s0.scenic.list.map((x, i) => ({
+      rank: i + 1,
+      scenic_name: x.name,
+      scenic_code: x.code,
+      visitors: x.visitors,
+      share: x.share,
+      tb: x.tb
+    })),
+    ['rank', 'scenic_name', 'scenic_code', 'visitors', 'share', 'tb']
+  ),
+  'utf8'
+)
+writeFileSync(
+  join(CSV_DIR, 'sj-scenic-daily.csv'),
+  toCsv(
+    s0.scenic.list.flatMap((x) =>
+      x.daily.map((d) => ({ scenic_name: x.name, day: d.day, visitors: d.visitors, night_visitors: d.nightVisitors }))
+    ),
+    ['scenic_name', 'day', 'visitors', 'night_visitors']
+  ),
+  'utf8'
+)
+writeFileSync(
+  join(CSV_DIR, 'sj-scenic-profile.csv'),
+  toCsv(
+    s0.scenic.list.map((x) => ({
+      scenic_name: x.name,
+      visitors: x.visitors,
+      male_ratio: x.profile.gender.male,
+      female_ratio: x.profile.gender.female,
+      age_16_24: x.profile.age['16-24'],
+      age_25_34: x.profile.age['25-34'],
+      age_35_44: x.profile.age['35-44'],
+      age_45_54: x.profile.age['45-54'],
+      age_55up: x.profile.age['55+'],
+      local_ratio: x.profile.origin.local,
+      outside_ratio: x.profile.origin.outside,
+      stay_lt1h: x.profile.stay.lt1h,
+      stay_1to2h: x.profile.stay.h1to2,
+      stay_2to4h: x.profile.stay.h2to4,
+      stay_gt4h: x.profile.stay.gt4h
+    })),
+    [
+      'scenic_name',
+      'visitors',
+      'male_ratio',
+      'female_ratio',
+      'age_16_24',
+      'age_25_34',
+      'age_35_44',
+      'age_45_54',
+      'age_55up',
+      'local_ratio',
+      'outside_ratio',
+      'stay_lt1h',
+      'stay_1to2h',
+      'stay_2to4h',
+      'stay_gt4h'
+    ]
+  ),
+  'utf8'
+)
+writeFileSync(
+  join(CSV_DIR, 'sh-districts.csv'),
+  toCsv(
+    normalized.shanghai.districts.map((d) => ({
+      rank: d.rank,
+      district: d.name,
+      visitors: d.visitors,
+      tb: d.tb,
+      night_rank: normalized.shanghai.districtsNight.find((n) => n.name === d.name)?.rank ?? '',
+      night_visitors: normalized.shanghai.districtsNight.find((n) => n.name === d.name)?.nightVisitors ?? '',
+      night_ratio: normalized.shanghai.districtsNight.find((n) => n.name === d.name)?.nightRatio ?? ''
+    })),
+    ['rank', 'district', 'visitors', 'tb', 'night_rank', 'night_visitors', 'night_ratio']
+  ),
+  'utf8'
+)
+console.log('已导出 CSV：' + CSV_DIR)
+
+/* ---------- 附：数据集目录（给其他项目的机读入口） ---------- */
+const catalog = {
+  dataset: 'songjiang-2026-guojiaqing',
+  title: '松江区 · 2026 年国庆节（10.01-10.07）文旅运行数据',
+  version: '1.0.0',
+  capturedAt: fetchedAt,
+  source: {
+    platform: '节假日游客大数据监测平台',
+    host: 'https://jice.smartsteps.com/travel/',
+    api: 'POST /smart-decision/api/v2/nocache/data/json',
+    note: '平台接口可能变化或要求重新登录；本存档为一次性快照，可离线使用'
+  },
+  entryPoints: {
+    normalized: 'data-source/normalized/songjiang-2026-guojiaqing.json',
+    csvDir: 'data-source/normalized/csv/',
+    rawDir: `data-source/raw/${day}/api/`,
+    manifest: `data-source/raw/${day}/manifest.json`,
+    fields: 'data-source/README.md#字段字典',
+    verify: 'node scripts/verify-data-archive.mjs'
+  },
+  units: {
+    visitors: '人次',
+    ratios: '小数（0.2771 = +27.71%）',
+    money: '本数据集不含消费金额（平台不监测）'
+  },
+  topLevelKeys: ['meta', 'songjiang', 'shanghai'],
+  counts: {
+    apiFiles: manifest.length,
+    scenics: s0.scenic.count,
+    days: s0.daily.length,
+    districts: normalized.shanghai.districts.length
+  },
+  caveats: [
+    '区县级不提供性别 / 年龄 / 消费能力画像，只有「本地/外地」与「居住时长」；景区级才提供完整画像',
+    '松江区重点商圈平台未监测（接口返回空），商圈数据不在本数据集内',
+    '本次仅 2026 年国庆节；其他假期需按 data-source/README.md 重新抓取',
+    '比例字段为小数；客流字段为整数人次'
+  ],
+  apiFiles: manifest.map((m) => ({ name: m.name, desc: m.desc, dataId: m.dataId, rows: m.rows, file: m.file }))
+}
+writeFileSync(join('data-source', 'index.json'), JSON.stringify(catalog, null, 1), 'utf8')
+console.log('已生成数据集目录：data-source/index.json')
+
 const js = `/**
  * 自动生成，请勿手工编辑。
  *

@@ -1,0 +1,254 @@
+{
+ "dataset": "songjiang-2026-guojiaqing",
+ "title": "松江区 · 2026 年国庆节（10.01-10.07）文旅运行数据",
+ "version": "1.0.0",
+ "capturedAt": "2026-10-20T07:46:19.182Z",
+ "source": {
+  "platform": "节假日游客大数据监测平台",
+  "host": "https://jice.smartsteps.com/travel/",
+  "api": "POST /smart-decision/api/v2/nocache/data/json",
+  "note": "平台接口可能变化或要求重新登录；本存档为一次性快照，可离线使用"
+ },
+ "entryPoints": {
+  "normalized": "data-source/normalized/songjiang-2026-guojiaqing.json",
+  "csvDir": "data-source/normalized/csv/",
+  "rawDir": "data-source/raw/2026-10-20/api/",
+  "manifest": "data-source/raw/2026-10-20/manifest.json",
+  "fields": "data-source/README.md#字段字典",
+  "verify": "node scripts/verify-data-archive.mjs"
+ },
+ "units": {
+  "visitors": "人次",
+  "ratios": "小数（0.2771 = +27.71%）",
+  "money": "本数据集不含消费金额（平台不监测）"
+ },
+ "topLevelKeys": [
+  "meta",
+  "songjiang",
+  "shanghai"
+ ],
+ "counts": {
+  "apiFiles": 30,
+  "scenics": 9,
+  "days": 7,
+  "districts": 16
+ },
+ "caveats": [
+  "区县级不提供性别 / 年龄 / 消费能力画像，只有「本地/外地」与「居住时长」；景区级才提供完整画像",
+  "松江区重点商圈平台未监测（接口返回空），商圈数据不在本数据集内",
+  "本次仅 2026 年国庆节；其他假期需按 data-source/README.md 重新抓取",
+  "比例字段为小数；客流字段为整数人次"
+ ],
+ "apiFiles": [
+  {
+   "name": "ref_boundary_sh",
+   "desc": "上海市边界 GeoJSON",
+   "dataId": "jjrykdsjjcpt_map_boundary",
+   "rows": 1,
+   "file": "api/ref_boundary_sh.json"
+  },
+  {
+   "name": "ref_boundary_sj",
+   "desc": "松江区边界 GeoJSON",
+   "dataId": "jjrykdsjjcpt_map_boundary",
+   "rows": 1,
+   "file": "api/ref_boundary_sj.json"
+  },
+  {
+   "name": "ref_business_spots",
+   "desc": "商圈点位名录",
+   "dataId": "jjrykdsjjcpt_sqyk_scenic_spots",
+   "rows": 5,
+   "file": "api/ref_business_spots.json"
+  },
+  {
+   "name": "ref_region_dict",
+   "desc": "行政区划字典（id/name/pid/lv/经纬度）",
+   "dataId": "jjrykdsjjcpt_region",
+   "rows": 3249,
+   "file": "api/ref_region_dict.json"
+  },
+  {
+   "name": "ref_scenic_spots",
+   "desc": "景区点位名录（含所属区县、经纬度）",
+   "dataId": "jjrykdsjjcpt_jqyk_scenic_spots",
+   "rows": 73,
+   "file": "api/ref_scenic_spots.json"
+  },
+  {
+   "name": "ref_years",
+   "desc": "平台可选年份",
+   "dataId": "jjrykdsjjcpt_csyk_ykgm_year",
+   "rows": 4,
+   "file": "api/ref_years.json"
+  },
+  {
+   "name": "sh_business_rank",
+   "desc": "上海市·商圈接待排行",
+   "dataId": "jjrykdsjjcpt_sqyk_ykgm_regional_reception_gather_v3",
+   "rows": 5,
+   "file": "api/sh_business_rank.json"
+  },
+  {
+   "name": "sh_business_total",
+   "desc": "上海市·重点商圈累计接待",
+   "dataId": "jjrykdsjjcpt_sqyk_ykgm_grand_total_gather_v3",
+   "rows": 1,
+   "file": "api/sh_business_total.json"
+  },
+  {
+   "name": "sh_daily",
+   "desc": "上海市·假日日度接待序列",
+   "dataId": "jjrykdsjjcpt_csyk_ykgm_receive_tourists",
+   "rows": 14,
+   "file": "api/sh_daily.json"
+  },
+  {
+   "name": "sh_districts",
+   "desc": "上海市·各区县接待排行（含松江区行）",
+   "dataId": "jjrykdsjjcpt_csyk_ykgm_regional_reception_city",
+   "rows": 16,
+   "file": "api/sh_districts.json"
+  },
+  {
+   "name": "sh_districts_night",
+   "desc": "上海市·各区县夜间游客排行（含松江区行）",
+   "dataId": "jjrykdsjjcpt_csyk_ykgm_regional_reception_city_night",
+   "rows": 10,
+   "file": "api/sh_districts_night.json"
+  },
+  {
+   "name": "sh_grand_total",
+   "desc": "上海市·累计接待游客量 / 夜间游客量 / 同比",
+   "dataId": "jjrykdsjjcpt_csyk_ykgm_grand_total",
+   "rows": 1,
+   "file": "api/sh_grand_total.json"
+  },
+  {
+   "name": "sh_profile",
+   "desc": "上海市·游客画像（性别/年龄/消费能力/本地外地）",
+   "dataId": "qgjjshfzldjsc_ykdb_csdb_tourist",
+   "rows": 1,
+   "file": "api/sh_profile.json"
+  },
+  {
+   "name": "sh_scenic_rank",
+   "desc": "上海市·景区接待排行（含松江各景区行）",
+   "dataId": "jjrykdsjjcpt_jqyk_ykgm_regional_reception_gather_v3",
+   "rows": 72,
+   "file": "api/sh_scenic_rank.json"
+  },
+  {
+   "name": "sh_scenic_total",
+   "desc": "上海市·重点景区累计接待 / 夜间 / 同比",
+   "dataId": "jjrykdsjjcpt_jqyk_ykgm_grand_total_gather_v3",
+   "rows": 1,
+   "file": "api/sh_scenic_total.json"
+  },
+  {
+   "name": "sh_year_compare",
+   "desc": "上海市·2025 与 2026 国庆假期接待量对比",
+   "dataId": "jjrykdsjjcpt_csyk_ykgm_tourist_comparison",
+   "rows": 2,
+   "file": "api/sh_year_compare.json"
+  },
+  {
+   "name": "sj_business_rank",
+   "desc": "松江区·商圈接待排行",
+   "dataId": "jjrykdsjjcpt_sqyk_ykgm_regional_reception_gather_v3",
+   "rows": 0,
+   "file": "api/sj_business_rank.json"
+  },
+  {
+   "name": "sj_business_total",
+   "desc": "松江区·重点商圈累计接待（平台无松江重点商圈时为空）",
+   "dataId": "jjrykdsjjcpt_sqyk_ykgm_grand_total_gather_v3",
+   "rows": 1,
+   "file": "api/sj_business_total.json"
+  },
+  {
+   "name": "sj_daily",
+   "desc": "松江区·假日日度接待序列（平台口径）",
+   "dataId": "jjrykdsjjcpt_csyk_ykgm_receive_tourists",
+   "rows": 14,
+   "file": "api/sj_daily.json"
+  },
+  {
+   "name": "sj_daily_dated",
+   "desc": "松江区·假日日度接待序列（带真实日期 20261001…）",
+   "dataId": "qgjjshfzldjsc_ykdb_csdb_receive_tourists",
+   "rows": 7,
+   "file": "api/sj_daily_dated.json"
+  },
+  {
+   "name": "sj_grand_total",
+   "desc": "松江区·累计接待游客量 / 夜间游客量 / 同比",
+   "dataId": "jjrykdsjjcpt_csyk_ykgm_grand_total",
+   "rows": 1,
+   "file": "api/sj_grand_total.json"
+  },
+  {
+   "name": "sj_map",
+   "desc": "松江区·地图打点数据",
+   "dataId": "jjrykdsjjcpt_csyk_ykgm_map",
+   "rows": 1,
+   "file": "api/sj_map.json"
+  },
+  {
+   "name": "sj_profile",
+   "desc": "松江区·游客画像（本地/外地、居住时长、同比；性别年龄消费为区县级不提供）",
+   "dataId": "qgjjshfzldjsc_ykdb_csdb_tourist",
+   "rows": 1,
+   "file": "api/sj_profile.json"
+  },
+  {
+   "name": "sj_scenic_daily",
+   "desc": "松江区·景区维度日度接待序列",
+   "dataId": "jjrykdsjjcpt_jqyk_ykgm_receive_tourists_gather_v3",
+   "rows": 14,
+   "file": "api/sj_scenic_daily.json"
+  },
+  {
+   "name": "sj_scenic_daily_dated",
+   "desc": "松江区·9 家重点景区日度接待序列（带真实日期）",
+   "dataId": "qgjjshfzldjsc_ykdb_jqdb_receive_tourists",
+   "rows": 63,
+   "file": "api/sj_scenic_daily_dated.json"
+  },
+  {
+   "name": "sj_scenic_profile",
+   "desc": "松江区·9 家重点景区游客画像（性别/年龄/消费等级/本地外地/停留时长）",
+   "dataId": "qgjjshfzldjsc_ykdb_jqdb_tourist",
+   "rows": 9,
+   "file": "api/sj_scenic_profile.json"
+  },
+  {
+   "name": "sj_scenic_rank",
+   "desc": "松江区·景区接待排行（含占比、同比）",
+   "dataId": "jjrykdsjjcpt_jqyk_ykgm_regional_reception_gather_v3",
+   "rows": 9,
+   "file": "api/sj_scenic_rank.json"
+  },
+  {
+   "name": "sj_scenic_total",
+   "desc": "松江区·重点景区累计接待 / 夜间 / 同比",
+   "dataId": "jjrykdsjjcpt_jqyk_ykgm_grand_total_gather_v3",
+   "rows": 1,
+   "file": "api/sj_scenic_total.json"
+  },
+  {
+   "name": "sj_scenic_year",
+   "desc": "松江区·景区维度 2025/2026 假期汇总",
+   "dataId": "jjrykdsjjcpt_jqyk_ykgm_tourist_comparison_gather_v3",
+   "rows": 2,
+   "file": "api/sj_scenic_year.json"
+  },
+  {
+   "name": "sj_year_compare",
+   "desc": "松江区·2025 与 2026 国庆假期接待量对比（含日均）",
+   "dataId": "jjrykdsjjcpt_csyk_ykgm_tourist_comparison",
+   "rows": 2,
+   "file": "api/sj_year_compare.json"
+  }
+ ]
+}

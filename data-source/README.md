@@ -26,6 +26,35 @@ data-source/
 
 ---
 
+## 一·补、字段字典（`normalized/*.json`）
+
+所有比例字段为**小数**（`0.2771` = +27.71%），所有客流字段为**整数人次**。
+
+| 路径 | 含义 |
+| --- | --- |
+| `meta` | 平台、接口、抓取时间、年/假期、区域（310117 松江区 / 310100 上海市）、假期起止 |
+| `songjiang.visitors.total` | 累计接待游客（乘降去重口径） |
+| `songjiang.visitors.dailyAvg` | 日均接待 |
+| `songjiang.visitors.tb` | 同比（小数） |
+| `songjiang.visitors.lastYearTotal` | 2025 同期累计接待 |
+| `songjiang.night.total` / `.ratio` / `.tb` | 夜间游客量 / 夜间占比 / 夜间同比 |
+| `songjiang.daily[]` | `{ day, date, visitors, nightVisitors }`，7 条，合计 = `visitors.total` |
+| `songjiang.lastYearDaily[]` | 同上结构，2025 同期 |
+| `songjiang.profile.origin` | `{ local, outside }` 本地 / 外地占比（区县级仅此两项） |
+| `songjiang.profile.residency` | 居住时长分布 `d1/d2/d3/d4/d5up`（平台本期返回 0） |
+| `songjiang.scenic.total` | 重点景区累计接待（9 家合计） |
+| `songjiang.scenic.tb` / `.nightTotal` / `.nightRatio` / `.nightTb` | 景区同比 / 景区夜间量 / 占比 / 同比 |
+| `songjiang.scenic.list[]` | 9 家景区：`code`（景区编码）、`name`、`visitors`、`share`（占重点景区比）、`tb`（同比）、`daily[]`（7 天）、`profile`（画像） |
+| `songjiang.scenic.profile` | 9 家按接待量加权的整体画像：`gender` / `age` / `consume` / `origin` / `stay` |
+| `songjiang.rankInCity` | `{ rank, districts, nightRank }` 在上海市各区中的排名 / 区县数 / 夜间排名 |
+| `shanghai.*` | 上海市同口径数据集（对比基准）：`visitors` / `night` / `scenic` / `business` / `districts[]` / `districtsNight[]` / `profile` |
+| `shanghai.business.total` | 上海市重点商圈接待（松江区该项平台未监测） |
+
+CSV 等价文件在 `normalized/csv/`：`sj-daily-7days.csv`、`sj-scenic-rank.csv`、`sj-scenic-daily.csv`、`sj-scenic-profile.csv`、`sh-districts.csv`。
+机读目录（接口清单 + 注意事项）在 `data-source/index.json`。
+
+---
+
 ## 二、接口协议（复用要点）
 
 平台所有数据都走同一个网关接口，靠 `dataId` + `filter` 区分指标：

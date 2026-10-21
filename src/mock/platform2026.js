@@ -3,7 +3,7 @@
  *
  * 来源：节假日游客大数据监测平台（https://jice.smartsteps.com/travel/）
  *       松江区 · 2026 年国庆节（10.01-10.07）
- * 抓取：2026-10-20T07:40:07.132Z
+ * 抓取：2026-10-20T07:46:19.182Z
  * 原始接口存档：data-source/raw/2026-10-20/api/*.json
  * 规范化数据：data-source/normalized/songjiang-2026-guojiaqing.json
  *
@@ -15,7 +15,7 @@ export const PLATFORM_2026 = {
   "host": "https://jice.smartsteps.com/travel/",
   "api": "POST /smart-decision/api/v2/nocache/data/json → /api/v4/attr/query/list?dataId=…",
   "appCode": "jjrykdsjjcpt / qgjjshfzldjsc",
-  "capturedAt": "2026-10-20T07:40:07.132Z",
+  "capturedAt": "2026-10-20T07:46:19.182Z",
   "year": 2026,
   "holiday": "国庆节",
   "period": {

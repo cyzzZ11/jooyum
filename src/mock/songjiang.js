@@ -19,6 +19,7 @@
  * 街镇级客流/消费为按全区总量、结合各街镇文旅资源体量测算的分布数据（区级合计与公报一致），
  * 明细口径需以松江区文旅局实际统计为准，接口就绪后在 api 层替换。
  */
+import { PLATFORM_2026 } from './platform2026'
 
 /** 行政区划与口径常量 */
 export const REGION = {
@@ -233,8 +234,16 @@ export const holidayStatistics = [
   { holiday: '端午', year: 2025, visitors: 22.81, monitored: 20, revenue: null, source: '上海市政府官网 2025-06-05' },
   { holiday: '国庆', year: 2024, visitors: 59.39, monitored: 18, revenue: 2394, source: '松江区政府官网 2024-10-09' },
   { holiday: '国庆中秋', year: 2025, visitors: 96.59, monitored: 20, revenue: null, source: '松江区政府官网 2025-10-10' },
-  // 2026 年国庆节为演示口径（见 src/mock/holiday2026.js），接待量为 A 级景区与主要点位测算值，营收 13.69 亿元（=136900 万元）
-  { holiday: '国庆', year: 2026, visitors: 103.52, monitored: 20, revenue: 136900, source: '演示口径 · data-picture 参考图 + 推演' }
+  // 2026 年国庆节：接待量取平台实测（节假日游客大数据监测平台，见 src/mock/platform2026.js），
+  // monitored = 平台监测的松江区重点景区数；revenue 13.69 亿元为测算值（平台不监测消费金额）
+  {
+    holiday: '国庆',
+    year: 2026,
+    visitors: Number((PLATFORM_2026.songjiang.visitors.total / 1e4).toFixed(2)),
+    monitored: PLATFORM_2026.songjiang.scenic.count,
+    revenue: 136900,
+    source: '平台实测（节假日游客大数据监测平台，2026-10-20 抓取）'
+  }
 ]
 
 export default {
