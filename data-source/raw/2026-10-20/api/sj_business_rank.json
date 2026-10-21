@@ -1,0 +1,32 @@
+{
+ "query": {
+  "name": "sj_business_rank",
+  "desc": "松江区·商圈接待排行",
+  "dataId": "jjrykdsjjcpt_sqyk_ykgm_regional_reception_gather_v3",
+  "filter": {
+   "year": "2026",
+   "holiday_name": "国庆节",
+   "fnid": "310117",
+   "sort": "all_value",
+   "sequence": "desc",
+   "scenic_code": 0,
+   "limitnum": 1000,
+   "lv": 3,
+   "region_code": 0
+  },
+  "app": {
+   "appCode": "jjrykdsjjcpt",
+   "way": "POST /smart-decision/api/v2/nocache/data/json",
+   "innerRequest": "/api/v4/attr/query/list?dataId=jjrykdsjjcpt_sqyk_ykgm_regional_reception_gather_v3&filter=%7B%22year%22%3A%222026%22%2C%22holiday_name%22%3A%22%E5%9B%BD%E5%BA%86%E8%8A%82%22%2C%22fnid%22%3A%22310117%22%2C%22sort%22%3A%22all_value%22%2C%22sequence%22%3A%22desc%22%2C%22scenic_code%22%3A0%2C%22limitnum%22%3A1000%2C%22lv%22%3A3%2C%22region_code%22%3A0%7D"
+  },
+  "fetchedAt": "2026-10-20T07:46:18.062Z",
+  "rows": 0,
+  "error": null,
+  "file": "api/sj_business_rank.json"
+ },
+ "response": {
+  "code": "1",
+  "msg": "SUCCESS",
+  "data": []
+ }
+}

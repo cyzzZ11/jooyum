@@ -56,7 +56,7 @@ const rows = computed(() =>
     gap: 6px;
 
     .rb-name {
-      font-size: 11px;
+      font-size: calc(11px * var(--fs, 1));
     }
   }
 }
@@ -77,7 +77,7 @@ const rows = computed(() =>
   height: 15px;
   line-height: 15px;
   text-align: center;
-  font-size: 10px;
+  font-size: calc(10px * var(--fs, 1));
   font-family: $font-num;
   color: $c-text-sub;
   border: 1px solid rgba(94, 214, 255, 0.3);
@@ -94,7 +94,7 @@ const rows = computed(() =>
 .rb-name {
   flex: 1;
   min-width: 0;
-  font-size: 12px;
+  font-size: calc(12px * var(--fs, 1));
   color: $c-text;
   @include ellipsis(1);
 }
@@ -107,7 +107,7 @@ const rows = computed(() =>
 
   i {
     font-style: normal;
-    font-size: 10px;
+    font-size: calc(10px * var(--fs, 1));
     color: $c-text-sub;
     margin-left: 1px;
   }

@@ -219,7 +219,7 @@ defineExpose({ go, activeKey })
   height: 22px;
   line-height: 22px;
   text-align: center;
-  font-size: 13px;
+  font-size: calc(13px * var(--fs, 1));
   font-weight: 700;
   color: #04182f;
   background: linear-gradient(160deg, #a6f2ff, #2fd8ff 70%);
@@ -229,7 +229,7 @@ defineExpose({ go, activeKey })
 
 .pb-title {
   flex: none;
-  font-size: 14px;
+  font-size: calc(14px * var(--fs, 1));
   font-weight: 600;
   letter-spacing: 1px;
   @include grad-text($c-cyan, #ffffff);
@@ -253,7 +253,7 @@ defineExpose({ go, activeKey })
 
 .pb-tab {
   padding: 2px 10px;
-  font-size: 12px;
+  font-size: calc(12px * var(--fs, 1));
   font-family: inherit;
   color: $c-text-dim;
   background: rgba(64, 178, 255, 0.06);

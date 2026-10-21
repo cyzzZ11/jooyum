@@ -33,6 +33,25 @@ const screen = useScreenStore()
     </div>
 
     <div class="hd-right">
+      <div class="fs-ctrl" title="全局字号：内容区文字与图表数字同步缩放（上限 130%，避免撑破版式）">
+        <button
+          type="button"
+          class="fs-btn"
+          :disabled="!screen.fontCanDec"
+          title="缩小字号"
+          @click="screen.stepFont(-1)"
+        >A-</button>
+        <span class="fs-val" :class="{ big: screen.fontStep > 0 }">
+          {{ Math.round(screen.fontScale * 100) }}%
+        </span>
+        <button
+          type="button"
+          class="fs-btn"
+          :disabled="!screen.fontCanInc"
+          title="放大字号"
+          @click="screen.stepFont(1)"
+        >A+</button>
+      </div>
       <button
         type="button"
         class="hd-btn"
@@ -292,6 +311,58 @@ const screen = useScreenStore()
   }
   50% {
     opacity: 0.35;
+  }
+}
+
+/* ---------- 全局字号调节 ---------- */
+.fs-ctrl {
+  display: flex;
+  align-items: center;
+  flex: none;
+  gap: 2px;
+  height: 28px;
+  padding: 0 4px;
+  background: rgba(64, 178, 255, 0.1);
+  border: 1px solid rgba(64, 178, 255, 0.35);
+  border-radius: 14px;
+}
+
+.fs-btn {
+  width: 26px;
+  height: 22px;
+  padding: 0;
+  font-family: $font-num;
+  font-size: 11px;
+  font-weight: 700;
+  color: $c-text;
+  background: transparent;
+  border: 0;
+  border-radius: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover:not(:disabled) {
+    color: $c-cyan;
+    background: rgba(47, 216, 255, 0.18);
+  }
+
+  &:disabled {
+    color: rgba(143, 182, 221, 0.3);
+    cursor: not-allowed;
+  }
+}
+
+.fs-val {
+  min-width: 38px;
+  text-align: center;
+  font-family: $font-num;
+  font-size: 12px;
+  font-weight: 700;
+  color: $c-text-sub;
+  font-variant-numeric: tabular-nums;
+
+  &.big {
+    color: $c-gold;
   }
 }
 

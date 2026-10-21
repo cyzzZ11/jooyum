@@ -1,0 +1,1082 @@
+{
+ "meta": {
+  "platform": "节假日游客大数据监测平台",
+  "host": "https://jice.smartsteps.com/travel/",
+  "api": "POST /smart-decision/api/v2/nocache/data/json → /api/v4/attr/query/list?dataId=…",
+  "appCode": "jjrykdsjjcpt / qgjjshfzldjsc",
+  "capturedAt": "2026-10-20T07:46:19.182Z",
+  "year": 2026,
+  "holiday": "国庆节",
+  "period": {
+   "start": "2026-10-01",
+   "end": "2026-10-07",
+   "days": 7
+  },
+  "region": {
+   "code": 310117,
+   "name": "松江区",
+   "parent": {
+    "code": 310100,
+    "name": "上海市"
+   }
+  },
+  "note": "数值为平台原样返回（人次），未做任何加工；区县级不提供性别/年龄/消费画像，景区级提供。"
+ },
+ "songjiang": {
+  "visitors": {
+   "total": 1701400,
+   "dailyAvg": 243057.14,
+   "tb": 0.2771,
+   "lastYearTotal": 1332236
+  },
+  "night": {
+   "total": 930644,
+   "ratio": 0.547,
+   "tb": 0.1775,
+   "lastYearTotal": 790381
+  },
+  "daily": [
+   {
+    "day": 1,
+    "date": "2026-10-01",
+    "visitors": 257537,
+    "nightVisitors": 142594
+   },
+   {
+    "day": 2,
+    "date": "2026-10-02",
+    "visitors": 259297,
+    "nightVisitors": 143083
+   },
+   {
+    "day": 3,
+    "date": "2026-10-03",
+    "visitors": 215805,
+    "nightVisitors": 117779
+   },
+   {
+    "day": 4,
+    "date": "2026-10-04",
+    "visitors": 215555,
+    "nightVisitors": 123254
+   },
+   {
+    "day": 5,
+    "date": "2026-10-05",
+    "visitors": 249398,
+    "nightVisitors": 135111
+   },
+   {
+    "day": 6,
+    "date": "2026-10-06",
+    "visitors": 253836,
+    "nightVisitors": 137463
+   },
+   {
+    "day": 7,
+    "date": "2026-10-07",
+    "visitors": 249972,
+    "nightVisitors": 131360
+   }
+  ],
+  "lastYearDaily": [
+   {
+    "day": 1,
+    "date": "2025-10-01",
+    "visitors": 213664,
+    "nightVisitors": 126823
+   },
+   {
+    "day": 2,
+    "date": "2025-10-02",
+    "visitors": 202275,
+    "nightVisitors": 117981
+   },
+   {
+    "day": 3,
+    "date": "2025-10-03",
+    "visitors": 190930,
+    "nightVisitors": 112293
+   },
+   {
+    "day": 4,
+    "date": "2025-10-04",
+    "visitors": 182240,
+    "nightVisitors": 107140
+   },
+   {
+    "day": 5,
+    "date": "2025-10-05",
+    "visitors": 178499,
+    "nightVisitors": 107199
+   },
+   {
+    "day": 6,
+    "date": "2025-10-06",
+    "visitors": 187781,
+    "nightVisitors": 117396
+   },
+   {
+    "day": 7,
+    "date": "2025-10-07",
+    "visitors": 176847,
+    "nightVisitors": 101549
+   }
+  ],
+  "profile": {
+   "origin": {
+    "local": 0.5212,
+    "outside": 0.4788
+   },
+   "residency": {
+    "d1": 0,
+    "d2": 0,
+    "d3": 0,
+    "d4": 0,
+    "d5up": 0
+   },
+   "note": "区县级仅提供本地/外地与居住时长；性别、年龄、消费能力为 0（平台不提供），见 scenicProfile"
+  },
+  "scenic": {
+   "total": 433708,
+   "dailyAvg": 61958,
+   "tb": -0.1389,
+   "nightTotal": 185571,
+   "nightRatio": 0.4279,
+   "nightTb": -0.2033,
+   "count": 9,
+   "list": [
+    {
+     "code": "31000031010040",
+     "name": "广富林文化遗址",
+     "visitors": 132778,
+     "visitorsAvg": 18968.29,
+     "share": 0.3061,
+     "tb": -0.0097,
+     "daily": [
+      {
+       "day": 1,
+       "visitors": 21740,
+       "nightVisitors": 10320
+      },
+      {
+       "day": 2,
+       "visitors": 28135,
+       "nightVisitors": 12728
+      },
+      {
+       "day": 3,
+       "visitors": 10429,
+       "nightVisitors": 3286
+      },
+      {
+       "day": 4,
+       "visitors": 13358,
+       "nightVisitors": 6766
+      },
+      {
+       "day": 5,
+       "visitors": 25008,
+       "nightVisitors": 11368
+      },
+      {
+       "day": 6,
+       "visitors": 23045,
+       "nightVisitors": 12914
+      },
+      {
+       "day": 7,
+       "visitors": 11063,
+       "nightVisitors": 3768
+      }
+     ],
+     "profile": {
+      "gender": {
+       "male": 0.4769,
+       "female": 0.5231
+      },
+      "age": {
+       "16-24": 0.0937,
+       "25-34": 0.2592,
+       "35-44": 0.3413,
+       "45-54": 0.1653,
+       "55+": 0.1406
+      },
+      "consume": {
+       "s1_low": 0.0197,
+       "s2_midLow": 0.1294,
+       "s3_mid": 0.154,
+       "s4_midHigh": 0.0126,
+       "s5_high": 0.0009
+      },
+      "origin": {
+       "local": 0.696,
+       "outside": 0.304
+      },
+      "stay": {
+       "lt1h": 0.1472,
+       "h1to2": 0.2848,
+       "h2to4": 0.3701,
+       "gt4h": 0.1979
+      }
+     }
+    },
+    {
+     "code": "31000031010014",
+     "name": "上海欢乐谷",
+     "visitors": 79611,
+     "visitorsAvg": 11373,
+     "share": 0.1836,
+     "tb": -0.2391,
+     "daily": [
+      {
+       "day": 1,
+       "visitors": 11009,
+       "nightVisitors": 6611
+      },
+      {
+       "day": 2,
+       "visitors": 17994,
+       "nightVisitors": 11613
+      },
+      {
+       "day": 3,
+       "visitors": 5478,
+       "nightVisitors": 3055
+      },
+      {
+       "day": 4,
+       "visitors": 5870,
+       "nightVisitors": 4005
+      },
+      {
+       "day": 5,
+       "visitors": 17452,
+       "nightVisitors": 11940
+      },
+      {
+       "day": 6,
+       "visitors": 13431,
+       "nightVisitors": 9018
+      },
+      {
+       "day": 7,
+       "visitors": 8377,
+       "nightVisitors": 4609
+      }
+     ],
+     "profile": {
+      "gender": {
+       "male": 0.4592,
+       "female": 0.5408
+      },
+      "age": {
+       "16-24": 0.1907,
+       "25-34": 0.2631,
+       "35-44": 0.3531,
+       "45-54": 0.116,
+       "55+": 0.0771
+      },
+      "consume": {
+       "s1_low": 0.0185,
+       "s2_midLow": 0.1115,
+       "s3_mid": 0.1206,
+       "s4_midHigh": 0.0073,
+       "s5_high": 0.0009
+      },
+      "origin": {
+       "local": 0.6296,
+       "outside": 0.3704
+      },
+      "stay": {
+       "lt1h": 0.1247,
+       "h1to2": 0.1027,
+       "h2to4": 0.1916,
+       "gt4h": 0.581
+      }
+     }
+    },
+    {
+     "code": "31000031010012",
+     "name": "上海影视乐园",
+     "visitors": 64169,
+     "visitorsAvg": 9167,
+     "share": 0.148,
+     "tb": -0.4116,
+     "daily": [
+      {
+       "day": 1,
+       "visitors": 10633,
+       "nightVisitors": 5894
+      },
+      {
+       "day": 2,
+       "visitors": 12073,
+       "nightVisitors": 6595
+      },
+      {
+       "day": 3,
+       "visitors": 7748,
+       "nightVisitors": 4042
+      },
+      {
+       "day": 4,
+       "visitors": 7724,
+       "nightVisitors": 4590
+      },
+      {
+       "day": 5,
+       "visitors": 9644,
+       "nightVisitors": 5090
+      },
+      {
+       "day": 6,
+       "visitors": 8786,
+       "nightVisitors": 5043
+      },
+      {
+       "day": 7,
+       "visitors": 7561,
+       "nightVisitors": 4279
+      }
+     ],
+     "profile": {
+      "gender": {
+       "male": 0.5452,
+       "female": 0.4548
+      },
+      "age": {
+       "16-24": 0.1078,
+       "25-34": 0.3032,
+       "35-44": 0.3318,
+       "45-54": 0.1514,
+       "55+": 0.1057
+      },
+      "consume": {
+       "s1_low": 0.0273,
+       "s2_midLow": 0.1365,
+       "s3_mid": 0.1083,
+       "s4_midHigh": 0.0032,
+       "s5_high": 0.0004
+      },
+      "origin": {
+       "local": 0.6393,
+       "outside": 0.3607
+      },
+      "stay": {
+       "lt1h": 0.1463,
+       "h1to2": 0.1592,
+       "h2to4": 0.2398,
+       "gt4h": 0.4547
+      }
+     }
+    },
+    {
+     "code": "31010021",
+     "name": "辰山植物园",
+     "visitors": 45077,
+     "visitorsAvg": 6439.57,
+     "share": 0.1039,
+     "tb": 0.0857,
+     "daily": [
+      {
+       "day": 1,
+       "visitors": 5599,
+       "nightVisitors": 1199
+      },
+      {
+       "day": 2,
+       "visitors": 8645,
+       "nightVisitors": 1512
+      },
+      {
+       "day": 3,
+       "visitors": 3391,
+       "nightVisitors": 689
+      },
+      {
+       "day": 4,
+       "visitors": 3348,
+       "nightVisitors": 929
+      },
+      {
+       "day": 5,
+       "visitors": 9680,
+       "nightVisitors": 1499
+      },
+      {
+       "day": 6,
+       "visitors": 8314,
+       "nightVisitors": 1577
+      },
+      {
+       "day": 7,
+       "visitors": 6100,
+       "nightVisitors": 1293
+      }
+     ],
+     "profile": {
+      "gender": {
+       "male": 0.4922,
+       "female": 0.5078
+      },
+      "age": {
+       "16-24": 0.0894,
+       "25-34": 0.2925,
+       "35-44": 0.321,
+       "45-54": 0.1496,
+       "55+": 0.1473
+      },
+      "consume": {
+       "s1_low": 0.0203,
+       "s2_midLow": 0.1491,
+       "s3_mid": 0.1591,
+       "s4_midHigh": 0.0118,
+       "s5_high": 0.0009
+      },
+      "origin": {
+       "local": 0.6628,
+       "outside": 0.3372
+      },
+      "stay": {
+       "lt1h": 0.2296,
+       "h1to2": 0.1755,
+       "h2to4": 0.2909,
+       "gt4h": 0.304
+      }
+     }
+    },
+    {
+     "code": "31000031010035",
+     "name": "佘山国家森林公园",
+     "visitors": 42742,
+     "visitorsAvg": 6106,
+     "share": 0.0986,
+     "tb": -0.0109,
+     "daily": [
+      {
+       "day": 1,
+       "visitors": 6044,
+       "nightVisitors": 763
+      },
+      {
+       "day": 2,
+       "visitors": 10442,
+       "nightVisitors": 825
+      },
+      {
+       "day": 3,
+       "visitors": 2291,
+       "nightVisitors": 613
+      },
+      {
+       "day": 4,
+       "visitors": 2272,
+       "nightVisitors": 674
+      },
+      {
+       "day": 5,
+       "visitors": 9521,
+       "nightVisitors": 1003
+      },
+      {
+       "day": 6,
+       "visitors": 7373,
+       "nightVisitors": 837
+      },
+      {
+       "day": 7,
+       "visitors": 4799,
+       "nightVisitors": 836
+      }
+     ],
+     "profile": {
+      "gender": {
+       "male": 0.5075,
+       "female": 0.4925
+      },
+      "age": {
+       "16-24": 0.0872,
+       "25-34": 0.2736,
+       "35-44": 0.3661,
+       "45-54": 0.1546,
+       "55+": 0.1186
+      },
+      "consume": {
+       "s1_low": 0.0229,
+       "s2_midLow": 0.1299,
+       "s3_mid": 0.1422,
+       "s4_midHigh": 0.0113,
+       "s5_high": 0.0007
+      },
+      "origin": {
+       "local": 0.7214,
+       "outside": 0.2786
+      },
+      "stay": {
+       "lt1h": 0.4427,
+       "h1to2": 0.3304,
+       "h2to4": 0.1255,
+       "gt4h": 0.1015
+      }
+     }
+    },
+    {
+     "code": "31010017",
+     "name": "方塔园",
+     "visitors": 26096,
+     "visitorsAvg": 3728,
+     "share": 0.0602,
+     "tb": -0.0427,
+     "daily": [
+      {
+       "day": 1,
+       "visitors": 4078,
+       "nightVisitors": 1830
+      },
+      {
+       "day": 2,
+       "visitors": 4153,
+       "nightVisitors": 1717
+      },
+      {
+       "day": 3,
+       "visitors": 3531,
+       "nightVisitors": 1423
+      },
+      {
+       "day": 4,
+       "visitors": 3235,
+       "nightVisitors": 1487
+      },
+      {
+       "day": 5,
+       "visitors": 3901,
+       "nightVisitors": 1626
+      },
+      {
+       "day": 6,
+       "visitors": 3785,
+       "nightVisitors": 1886
+      },
+      {
+       "day": 7,
+       "visitors": 3413,
+       "nightVisitors": 1478
+      }
+     ],
+     "profile": {
+      "gender": {
+       "male": 0.554,
+       "female": 0.446
+      },
+      "age": {
+       "16-24": 0.1042,
+       "25-34": 0.2801,
+       "35-44": 0.2867,
+       "45-54": 0.171,
+       "55+": 0.158
+      },
+      "consume": {
+       "s1_low": 0.019,
+       "s2_midLow": 0.1223,
+       "s3_mid": 0.1255,
+       "s4_midHigh": 0.0025,
+       "s5_high": 0.0004
+      },
+      "origin": {
+       "local": 0.7447,
+       "outside": 0.2553
+      },
+      "stay": {
+       "lt1h": 0.341,
+       "h1to2": 0.1967,
+       "h2to4": 0.1693,
+       "gt4h": 0.2929
+      }
+     }
+    },
+    {
+     "code": "3101006",
+     "name": "上海月湖雕塑公园",
+     "visitors": 20570,
+     "visitorsAvg": 2938.57,
+     "share": 0.0474,
+     "tb": 0.2203,
+     "daily": [
+      {
+       "day": 1,
+       "visitors": 2794,
+       "nightVisitors": 547
+      },
+      {
+       "day": 2,
+       "visitors": 4662,
+       "nightVisitors": 785
+      },
+      {
+       "day": 3,
+       "visitors": 972,
+       "nightVisitors": 437
+      },
+      {
+       "day": 4,
+       "visitors": 857,
+       "nightVisitors": 373
+      },
+      {
+       "day": 5,
+       "visitors": 4489,
+       "nightVisitors": 955
+      },
+      {
+       "day": 6,
+       "visitors": 3950,
+       "nightVisitors": 825
+      },
+      {
+       "day": 7,
+       "visitors": 2846,
+       "nightVisitors": 707
+      }
+     ],
+     "profile": {
+      "gender": {
+       "male": 0.4587,
+       "female": 0.5413
+      },
+      "age": {
+       "16-24": 0.0554,
+       "25-34": 0.275,
+       "35-44": 0.4018,
+       "45-54": 0.1248,
+       "55+": 0.143
+      },
+      "consume": {
+       "s1_low": 0.0242,
+       "s2_midLow": 0.1302,
+       "s3_mid": 0.1685,
+       "s4_midHigh": 0.0168,
+       "s5_high": 0.0008
+      },
+      "origin": {
+       "local": 0.7595,
+       "outside": 0.2405
+      },
+      "stay": {
+       "lt1h": 0.1415,
+       "h1to2": 0.1552,
+       "h2to4": 0.3374,
+       "gt4h": 0.3659
+      }
+     }
+    },
+    {
+     "code": "31000031010044",
+     "name": "醉白池公园",
+     "visitors": 19212,
+     "visitorsAvg": 2744.57,
+     "share": 0.0443,
+     "tb": -0.1725,
+     "daily": [
+      {
+       "day": 1,
+       "visitors": 3011,
+       "nightVisitors": 852
+      },
+      {
+       "day": 2,
+       "visitors": 2928,
+       "nightVisitors": 817
+      },
+      {
+       "day": 3,
+       "visitors": 2321,
+       "nightVisitors": 840
+      },
+      {
+       "day": 4,
+       "visitors": 2288,
+       "nightVisitors": 795
+      },
+      {
+       "day": 5,
+       "visitors": 2692,
+       "nightVisitors": 787
+      },
+      {
+       "day": 6,
+       "visitors": 3024,
+       "nightVisitors": 844
+      },
+      {
+       "day": 7,
+       "visitors": 2948,
+       "nightVisitors": 849
+      }
+     ],
+     "profile": {
+      "gender": {
+       "male": 0.5131,
+       "female": 0.4869
+      },
+      "age": {
+       "16-24": 0.1553,
+       "25-34": 0.2478,
+       "35-44": 0.3024,
+       "45-54": 0.1708,
+       "55+": 0.1237
+      },
+      "consume": {
+       "s1_low": 0.018,
+       "s2_midLow": 0.1274,
+       "s3_mid": 0.1078,
+       "s4_midHigh": 0.0019,
+       "s5_high": 0.0004
+      },
+      "origin": {
+       "local": 0.6576,
+       "outside": 0.3424
+      },
+      "stay": {
+       "lt1h": 0.5621,
+       "h1to2": 0.1512,
+       "h2to4": 0.1199,
+       "gt4h": 0.1668
+      }
+     }
+    },
+    {
+     "code": "31000031010034",
+     "name": "云堡未来市",
+     "visitors": 3453,
+     "visitorsAvg": 493.29,
+     "share": 0.008,
+     "tb": -0.1036,
+     "daily": [
+      {
+       "day": 1,
+       "visitors": 500,
+       "nightVisitors": 340
+      },
+      {
+       "day": 2,
+       "visitors": 540,
+       "nightVisitors": 275
+      },
+      {
+       "day": 3,
+       "visitors": 363,
+       "nightVisitors": 231
+      },
+      {
+       "day": 4,
+       "visitors": 358,
+       "nightVisitors": 220
+      },
+      {
+       "day": 5,
+       "visitors": 531,
+       "nightVisitors": 231
+      },
+      {
+       "day": 6,
+       "visitors": 609,
+       "nightVisitors": 348
+      },
+      {
+       "day": 7,
+       "visitors": 552,
+       "nightVisitors": 283
+      }
+     ],
+     "profile": {
+      "gender": {
+       "male": 0.5375,
+       "female": 0.4625
+      },
+      "age": {
+       "16-24": 0.1431,
+       "25-34": 0.3,
+       "35-44": 0.3194,
+       "45-54": 0.1326,
+       "55+": 0.1048
+      },
+      "consume": {
+       "s1_low": 0.0194,
+       "s2_midLow": 0.1538,
+       "s3_mid": 0.1784,
+       "s4_midHigh": 0.0061,
+       "s5_high": 0
+      },
+      "origin": {
+       "local": 0.806,
+       "outside": 0.194
+      },
+      "stay": {
+       "lt1h": 0.1717,
+       "h1to2": 0.1399,
+       "h2to4": 0.1836,
+       "gt4h": 0.5048
+      }
+     }
+    }
+   ],
+   "profile": {
+    "gender": {
+     "male": 0.4942,
+     "female": 0.5058
+    },
+    "age": {
+     "16-24": 0.1144,
+     "25-34": 0.2731,
+     "35-44": 0.3401,
+     "45-54": 0.1499,
+     "55+": 0.1224
+    },
+    "consume": {
+     "s1_low": 0.0211,
+     "s2_midLow": 0.129,
+     "s3_mid": 0.1376,
+     "s4_midHigh": 0.0091,
+     "s5_high": 0.0007
+    },
+    "origin": {
+     "local": 0.6796,
+     "outside": 0.3204
+    },
+    "stay": {
+     "lt1h": 0.2106,
+     "h1to2": 0.2074,
+     "h2to4": 0.2595,
+     "gt4h": 0.3225
+    },
+    "method": "9 家重点景区按接待量加权平均"
+   }
+  },
+  "business": {
+   "total": null,
+   "note": "平台未监测松江区重点商圈（接口返回空），商圈数据仍为测算值"
+  },
+  "rankInCity": {
+   "rank": 3,
+   "districts": 16,
+   "nightRank": 3
+  }
+ },
+ "shanghai": {
+  "visitors": {
+   "total": 22214934,
+   "dailyAvg": 3173562,
+   "tb": 0.1861,
+   "lastYearTotal": 18729814
+  },
+  "night": {
+   "total": 12049012,
+   "ratio": 0.5424,
+   "tb": 0.1227
+  },
+  "scenic": {
+   "total": 5799466,
+   "tb": -0.0782,
+   "nightTotal": 2339735,
+   "nightRatio": 0.4034
+  },
+  "business": {
+   "total": 6949085,
+   "tb": -0.1048,
+   "nightTotal": 1643086,
+   "nightRatio": 0.2364
+  },
+  "districts": [
+   {
+    "rank": 1,
+    "name": "浦东新区",
+    "visitors": 6080530,
+    "tb": 0.3084
+   },
+   {
+    "rank": 2,
+    "name": "闵行区",
+    "visitors": 2699582,
+    "tb": 0.2926
+   },
+   {
+    "rank": 3,
+    "name": "松江区",
+    "visitors": 1701400,
+    "tb": 0.2771
+   },
+   {
+    "rank": 4,
+    "name": "嘉定区",
+    "visitors": 1316630,
+    "tb": 0.0085
+   },
+   {
+    "rank": 5,
+    "name": "青浦区",
+    "visitors": 1257145,
+    "tb": 0.0282
+   },
+   {
+    "rank": 6,
+    "name": "黄浦区",
+    "visitors": 1167647,
+    "tb": 0.0528
+   },
+   {
+    "rank": 7,
+    "name": "宝山区",
+    "visitors": 1119262,
+    "tb": 0.0315
+   },
+   {
+    "rank": 8,
+    "name": "徐汇区",
+    "visitors": 1106289,
+    "tb": 0.1817
+   },
+   {
+    "rank": 9,
+    "name": "静安区",
+    "visitors": 1054640,
+    "tb": 0.0591
+   },
+   {
+    "rank": 10,
+    "name": "奉贤区",
+    "visitors": 1013389,
+    "tb": 0.2553
+   },
+   {
+    "rank": 11,
+    "name": "普陀区",
+    "visitors": 741359,
+    "tb": 0.1339
+   },
+   {
+    "rank": 12,
+    "name": "杨浦区",
+    "visitors": 702584,
+    "tb": 0.1854
+   },
+   {
+    "rank": 13,
+    "name": "长宁区",
+    "visitors": 696563,
+    "tb": 0.1214
+   },
+   {
+    "rank": 14,
+    "name": "金山区",
+    "visitors": 681328,
+    "tb": 0.4956
+   },
+   {
+    "rank": 15,
+    "name": "崇明区",
+    "visitors": 475752,
+    "tb": -0.0033
+   },
+   {
+    "rank": 16,
+    "name": "虹口区",
+    "visitors": 400834,
+    "tb": 0.0036
+   }
+  ],
+  "districtsNight": [
+   {
+    "rank": 1,
+    "name": "浦东新区",
+    "nightVisitors": 3335947,
+    "nightRatio": 0.5486
+   },
+   {
+    "rank": 2,
+    "name": "闵行区",
+    "nightVisitors": 1431925,
+    "nightRatio": 0.5304
+   },
+   {
+    "rank": 3,
+    "name": "松江区",
+    "nightVisitors": 930644,
+    "nightRatio": 0.547
+   },
+   {
+    "rank": 4,
+    "name": "嘉定区",
+    "nightVisitors": 745850,
+    "nightRatio": 0.5665
+   },
+   {
+    "rank": 5,
+    "name": "青浦区",
+    "nightVisitors": 660575,
+    "nightRatio": 0.5255
+   },
+   {
+    "rank": 6,
+    "name": "黄浦区",
+    "nightVisitors": 615321,
+    "nightRatio": 0.527
+   },
+   {
+    "rank": 7,
+    "name": "宝山区",
+    "nightVisitors": 662209,
+    "nightRatio": 0.5916
+   },
+   {
+    "rank": 8,
+    "name": "徐汇区",
+    "nightVisitors": 560856,
+    "nightRatio": 0.507
+   },
+   {
+    "rank": 9,
+    "name": "静安区",
+    "nightVisitors": 571389,
+    "nightRatio": 0.5418
+   },
+   {
+    "rank": 10,
+    "name": "奉贤区",
+    "nightVisitors": 526796,
+    "nightRatio": 0.5198
+   }
+  ],
+  "profile": {
+   "gender": {
+    "male": 0.5286,
+    "female": 0.4714
+   },
+   "age": {
+    "16-24": 0.0991,
+    "25-34": 0.2899,
+    "35-44": 0.2787,
+    "45-54": 0.1849,
+    "55+": 0.1473
+   },
+   "consume": {
+    "s1_low": 0.0395,
+    "s2_midLow": 0.2191,
+    "s3_mid": 0.2127,
+    "s4_midHigh": 0.016,
+    "s5_high": 0.0015
+   },
+   "origin": {
+    "local": 0.5011,
+    "outside": 0.4989
+   },
+   "stay": {
+    "lt1h": 0.4013,
+    "h1to2": 0.1065,
+    "h2to4": 0.0475,
+    "gt4h": 0.0256
+   }
+  }
+ }
+}

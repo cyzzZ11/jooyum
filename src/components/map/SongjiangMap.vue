@@ -591,7 +591,7 @@ function resetView() {
   height: 22px;
   line-height: 22px;
   text-align: center;
-  font-size: 13px;
+  font-size: calc(13px * var(--fs, 1));
   font-weight: 700;
   color: #04182f;
   background: linear-gradient(160deg, #a6f2ff, #2fd8ff 70%);
@@ -600,7 +600,7 @@ function resetView() {
 }
 
 .mh-title {
-  font-size: 17px;
+  font-size: calc(17px * var(--fs, 1));
   font-weight: 700;
   letter-spacing: 2px;
   @include grad-text($c-cyan, #ffffff);
@@ -619,7 +619,7 @@ function resetView() {
 
 .mh-metric {
   padding: 3px 11px;
-  font-size: 12px;
+  font-size: calc(12px * var(--fs, 1));
   font-family: inherit;
   color: $c-text-dim;
   background: rgba(64, 178, 255, 0.06);
@@ -701,20 +701,20 @@ function resetView() {
   }
 
   .mt-label {
-    font-size: 11px;
+    font-size: calc(11px * var(--fs, 1));
     color: $c-text-dim;
     width: 72px;
   }
 
   .mt-value {
     font-family: $font-num;
-    font-size: 17px;
+    font-size: calc(17px * var(--fs, 1));
     color: $c-cyan;
     @include glow-text($c-cyan, 10px);
 
     i {
       font-style: normal;
-      font-size: 10px;
+      font-size: calc(10px * var(--fs, 1));
       color: $c-text-sub;
       margin-left: 3px;
     }
@@ -727,7 +727,7 @@ function resetView() {
   width: 150px;
 
   .mr-title {
-    font-size: 11px;
+    font-size: calc(11px * var(--fs, 1));
     color: $c-text-dim;
     margin-bottom: 6px;
     padding-left: 8px;
@@ -751,7 +751,7 @@ function resetView() {
     align-items: center;
     gap: 6px;
     height: 20px;
-    font-size: 11px;
+    font-size: calc(11px * var(--fs, 1));
   }
 
   .mr-idx {
@@ -760,7 +760,7 @@ function resetView() {
     line-height: 14px;
     text-align: center;
     font-family: $font-num;
-    font-size: 10px;
+    font-size: calc(10px * var(--fs, 1));
     color: #04182f;
     background: linear-gradient(180deg, #9ceaff, #2fd8ff);
     border-radius: 2px;
@@ -774,7 +774,7 @@ function resetView() {
 
   .mr-val {
     font-family: $font-num;
-    font-size: 13px;
+    font-size: calc(13px * var(--fs, 1));
     color: $c-gold;
   }
 }
@@ -785,7 +785,7 @@ function resetView() {
   @include flex(row, flex-start, center);
   gap: 6px;
   font-family: $font-num;
-  font-size: 11px;
+  font-size: calc(11px * var(--fs, 1));
   color: $c-text-sub;
 
   i {
@@ -798,7 +798,7 @@ function resetView() {
 
   em {
     font-style: normal;
-    font-size: 10px;
+    font-size: calc(10px * var(--fs, 1));
     color: $c-text-dim;
     margin-left: 2px;
   }
@@ -811,13 +811,13 @@ function resetView() {
   gap: 8px;
 
   .mi-label {
-    font-size: 12px;
+    font-size: calc(12px * var(--fs, 1));
     color: $c-text-sub;
   }
 
   .mi-value {
     font-family: $font-num;
-    font-size: 34px;
+    font-size: calc(34px * var(--fs, 1));
     font-weight: 700;
     color: $c-cyan;
     @include glow-text($c-cyan, 18px);
@@ -837,7 +837,7 @@ function resetView() {
 }
 
 .mt-hint {
-  font-size: 10px;
+  font-size: calc(10px * var(--fs, 1));
   letter-spacing: 0.5px;
   color: $c-text-dim;
   opacity: 0.85;
@@ -846,7 +846,7 @@ function resetView() {
 .mt-reset {
   pointer-events: auto;
   padding: 2px 10px;
-  font-size: 11px;
+  font-size: calc(11px * var(--fs, 1));
   font-family: inherit;
   color: $c-cyan;
   background: rgba(47, 216, 255, 0.12);

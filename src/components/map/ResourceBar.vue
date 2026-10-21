@@ -69,7 +69,7 @@ import { RESOURCE_LEGEND } from '@/data/map'
   height: 20px;
   line-height: 20px;
   text-align: center;
-  font-size: 12px;
+  font-size: calc(12px * var(--fs, 1));
   font-weight: 700;
   color: #04182f;
   background: linear-gradient(160deg, #a6f2ff, #2fd8ff 70%);
@@ -77,7 +77,7 @@ import { RESOURCE_LEGEND } from '@/data/map'
 }
 
 .rb-title {
-  font-size: 14px;
+  font-size: calc(14px * var(--fs, 1));
   font-weight: 600;
   letter-spacing: 1px;
   @include grad-text($c-cyan, #ffffff);
@@ -90,7 +90,7 @@ import { RESOURCE_LEGEND } from '@/data/map'
 }
 
 .rb-sub {
-  font-size: 10px;
+  font-size: calc(10px * var(--fs, 1));
   color: $c-text-dim;
 }
 
@@ -127,13 +127,13 @@ import { RESOURCE_LEGEND } from '@/data/map'
 
   .rb-num {
     font-family: $font-num;
-    font-size: 17px;
+    font-size: calc(17px * var(--fs, 1));
     font-weight: 700;
     @include glow-text($c-cyan, 8px);
   }
 
   .rb-name {
-    font-size: 10px;
+    font-size: calc(10px * var(--fs, 1));
     color: $c-text-sub;
     @include ellipsis(1);
   }

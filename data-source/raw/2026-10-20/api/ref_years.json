@@ -1,0 +1,35 @@
+{
+ "query": {
+  "name": "ref_years",
+  "desc": "平台可选年份",
+  "dataId": "jjrykdsjjcpt_csyk_ykgm_year",
+  "filter": {},
+  "app": {
+   "appCode": "jjrykdsjjcpt",
+   "way": "POST /smart-decision/api/v2/nocache/data/json",
+   "innerRequest": "/api/v4/attr/query/list?dataId=jjrykdsjjcpt_csyk_ykgm_year&filter=%7B%7D"
+  },
+  "fetchedAt": "2026-10-20T07:46:19.120Z",
+  "rows": 4,
+  "error": null,
+  "file": "api/ref_years.json"
+ },
+ "response": {
+  "code": "1",
+  "msg": "SUCCESS",
+  "data": [
+   {
+    "year": 2023
+   },
+   {
+    "year": 2024
+   },
+   {
+    "year": 2025
+   },
+   {
+    "year": 2026
+   }
+  ]
+ }
+}

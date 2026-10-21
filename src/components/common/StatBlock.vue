@@ -70,18 +70,21 @@ withDefaults(
 
   .sb-text {
     @include flex(row, flex-start, baseline);
-    gap: 4px;
+    /* 字号放大后「数值 + 单位」可能放不下一行，允许单位换行兜底，
+       而不是横向溢出压到相邻指标上 */
+    flex-wrap: wrap;
+    gap: 3px;
     min-width: 0;
   }
 
   .sb-unit {
-    font-size: 11px;
+    font-size: calc(11px * var(--fs, 1));
     color: $c-text-sub;
     flex: none;
   }
 
   .sb-label {
-    font-size: 12px;
+    font-size: calc(12px * var(--fs, 1));
     color: $c-text-sub;
     @include ellipsis(1);
     max-width: 100%;
@@ -105,7 +108,7 @@ withDefaults(
     }
 
     .sb-label {
-      font-size: 11px;
+      font-size: calc(11px * var(--fs, 1));
     }
   }
 

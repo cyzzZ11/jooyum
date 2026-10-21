@@ -48,7 +48,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 12px;
+    font-size: calc(12px * var(--fs, 1));
     color: $c-text-sub;
     padding-left: 9px;
     position: relative;
@@ -67,14 +67,14 @@
 
     em {
         font-style: normal;
-        font-size: 10px;
+        font-size: calc(10px * var(--fs, 1));
         color: $c-text-dim;
     }
 
     b {
         margin-left: auto;
         font-weight: 400;
-        font-size: 10px;
+        font-size: calc(10px * var(--fs, 1));
         color: $c-text-dim;
     }
 }
@@ -114,14 +114,14 @@
 
     .dc-value {
         font-family: $font-num;
-        font-size: 21px;
+        font-size: calc(21px * var(--fs, 1));
         font-weight: 700;
         color: #ffffff;
         @include glow-text($c-cyan, 14px);
 
         i {
             font-style: normal;
-            font-size: 11px;
+            font-size: calc(11px * var(--fs, 1));
             color: $c-text-sub;
             margin-left: 2px;
         }
@@ -129,7 +129,7 @@
 
     .dc-label {
         margin-top: 2px;
-        font-size: 10px;
+        font-size: calc(10px * var(--fs, 1));
         color: $c-text-dim;
     }
 }
@@ -145,7 +145,7 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        font-size: 12px;
+        font-size: calc(12px * var(--fs, 1));
         color: $c-text-sub;
         min-width: 0;
     }
@@ -169,13 +169,13 @@
 
     .pl-val {
         font-family: $font-num;
-        font-size: 14px;
+        font-size: calc(14px * var(--fs, 1));
         color: $c-gold;
     }
 
     .pl-unit {
         font-style: normal;
-        font-size: 10px;
+        font-size: calc(10px * var(--fs, 1));
         color: $c-text-dim;
     }
 }
@@ -190,14 +190,14 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        font-size: 12px;
+        font-size: calc(12px * var(--fs, 1));
         color: $c-text-sub;
     }
 
     .ml-val {
         margin-left: auto;
         font-family: $font-num;
-        font-size: 13px;
+        font-size: calc(13px * var(--fs, 1));
         color: $c-cyan;
     }
 }
@@ -237,7 +237,7 @@
 /* 标题栏右侧的滚动提示 */
 .scroll-hint {
     margin-left: auto;
-    font-size: 10px;
+    font-size: calc(10px * var(--fs, 1));
     font-weight: 400;
     color: $c-text-dim;
     letter-spacing: 0.5px;

@@ -88,21 +88,21 @@ const option = computed(() =>
 
   .fe-val {
     font-family: $font-num;
-    font-size: 20px;
+    font-size: calc(20px * var(--fs, 1));
     font-weight: 700;
     color: $c-teal;
     @include glow-text($c-teal, 12px);
 
     i {
       font-style: normal;
-      font-size: 10px;
+      font-size: calc(10px * var(--fs, 1));
       color: $c-text-sub;
       margin-left: 2px;
     }
   }
 
   .fe-label {
-    font-size: 11px;
+    font-size: calc(11px * var(--fs, 1));
     color: $c-text-sub;
   }
 }

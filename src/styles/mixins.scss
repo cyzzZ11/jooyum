@@ -11,7 +11,8 @@
 // 数字字体（等宽、带发光）
 @mixin num-font($size: 26px, $color: $c-cyan, $weight: 700) {
     font-family: $font-num;
-    font-size: $size;
+    /* --fs 为全局字号系数（页头“字号”按钮控制），数字会随之缩放 */
+    font-size: calc(#{$size} * var(--fs, 1));
     font-weight: $weight;
     color: $color;
     line-height: 1.1;

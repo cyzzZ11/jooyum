@@ -1,0 +1,130 @@
+{
+ "query": {
+  "name": "sh_daily",
+  "desc": "上海市·假日日度接待序列",
+  "dataId": "jjrykdsjjcpt_csyk_ykgm_receive_tourists",
+  "filter": {
+   "year": "2026",
+   "holiday_name": "国庆节",
+   "fnid": "310100",
+   "sort": "all_value",
+   "sequence": "desc",
+   "scenic_code": 0,
+   "limitnum": 1000,
+   "type": 0
+  },
+  "app": {
+   "appCode": "jjrykdsjjcpt",
+   "way": "POST /smart-decision/api/v2/nocache/data/json",
+   "innerRequest": "/api/v4/attr/query/list?dataId=jjrykdsjjcpt_csyk_ykgm_receive_tourists&filter=%7B%22year%22%3A%222026%22%2C%22holiday_name%22%3A%22%E5%9B%BD%E5%BA%86%E8%8A%82%22%2C%22fnid%22%3A%22310100%22%2C%22sort%22%3A%22all_value%22%2C%22sequence%22%3A%22desc%22%2C%22scenic_code%22%3A0%2C%22limitnum%22%3A1000%2C%22type%22%3A0%7D"
+  },
+  "fetchedAt": "2026-10-20T07:46:18.432Z",
+  "rows": 14,
+  "error": null,
+  "file": "api/sh_daily.json"
+ },
+ "response": {
+  "code": "1",
+  "msg": "SUCCESS",
+  "data": [
+   {
+    "year": "2025",
+    "type": "国庆节",
+    "date_time": 1,
+    "all_value": 2891184,
+    "all_night": 1672051
+   },
+   {
+    "year": "2025",
+    "type": "国庆节",
+    "date_time": 2,
+    "all_value": 2827875,
+    "all_night": 1625036
+   },
+   {
+    "year": "2025",
+    "type": "国庆节",
+    "date_time": 3,
+    "all_value": 2746202,
+    "all_night": 1575380
+   },
+   {
+    "year": "2025",
+    "type": "国庆节",
+    "date_time": 4,
+    "all_value": 2644322,
+    "all_night": 1499092
+   },
+   {
+    "year": "2025",
+    "type": "国庆节",
+    "date_time": 5,
+    "all_value": 2537652,
+    "all_night": 1449395
+   },
+   {
+    "year": "2025",
+    "type": "国庆节",
+    "date_time": 6,
+    "all_value": 2544490,
+    "all_night": 1513412
+   },
+   {
+    "year": "2025",
+    "type": "国庆节",
+    "date_time": 7,
+    "all_value": 2538089,
+    "all_night": 1397614
+   },
+   {
+    "year": "2026",
+    "type": "国庆节",
+    "date_time": 1,
+    "all_value": 3300474,
+    "all_night": 1840127
+   },
+   {
+    "year": "2026",
+    "type": "国庆节",
+    "date_time": 2,
+    "all_value": 3392818,
+    "all_night": 1870791
+   },
+   {
+    "year": "2026",
+    "type": "国庆节",
+    "date_time": 3,
+    "all_value": 2974922,
+    "all_night": 1637256
+   },
+   {
+    "year": "2026",
+    "type": "国庆节",
+    "date_time": 4,
+    "all_value": 2956928,
+    "all_night": 1668648
+   },
+   {
+    "year": "2026",
+    "type": "国庆节",
+    "date_time": 5,
+    "all_value": 3271889,
+    "all_night": 1746865
+   },
+   {
+    "year": "2026",
+    "type": "国庆节",
+    "date_time": 6,
+    "all_value": 3261251,
+    "all_night": 1727669
+   },
+   {
+    "year": "2026",
+    "type": "国庆节",
+    "date_time": 7,
+    "all_value": 3056652,
+    "all_night": 1557656
+   }
+  ]
+ }
+}

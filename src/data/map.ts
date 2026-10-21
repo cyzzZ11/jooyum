@@ -1,4 +1,9 @@
-/** 松江区重点景区 / 文旅点位（坐标与 GeoJSON 同坐标系） */
+/**
+ * 松江区重点景区 / 文旅点位（坐标与 GeoJSON 同坐标系）
+ *
+ * visitors 取值优先级：数据源2 实测（9 家重点景区，见 docs/数据源清单.md）> 推算。
+ * 第 9 家「云堡未来市」平台无经纬度，暂不落位。
+ */
 export interface ScenicSpot {
     name: string
     coord: [number, number]
@@ -13,16 +18,16 @@ export interface ScenicSpot {
 }
 
 export const SCENIC_SPOTS: ScenicSpot[] = [
-    { name: '佘山国家森林公园', coord: [121.1934, 31.0934], level: 3, visitors: 8.6, showLabel: true, dir: 'left' },
-    { name: '上海欢乐谷', coord: [121.2075, 31.0862], level: 3, visitors: 9.8, showLabel: true, dir: 'right' },
-    { name: '辰山植物园', coord: [121.1876, 31.0772], level: 3, visitors: 5.4, showLabel: true, dir: 'left' },
+    { name: '佘山国家森林公园', coord: [121.1934, 31.0934], level: 3, visitors: 4.27, showLabel: true, dir: 'left' },
+    { name: '上海欢乐谷', coord: [121.2075, 31.0862], level: 3, visitors: 7.96, showLabel: true, dir: 'right' },
+    { name: '辰山植物园', coord: [121.1876, 31.0772], level: 3, visitors: 4.51, showLabel: true, dir: 'left' },
     // dir 用 top：bottom 会正好压在「广富林街道」的街镇名上（街镇名优先级更高）
-    { name: '广富林文化遗址', coord: [121.2087, 31.0652], level: 3, visitors: 14.4, showLabel: true, dir: 'top' },
-    { name: '上海影视乐园', coord: [121.3052, 30.9826], level: 2, visitors: 3.2, showLabel: true, dir: 'right' },
-    { name: '月湖雕塑公园', coord: [121.2012, 31.0966], level: 2, visitors: 1.9 },
+    { name: '广富林文化遗址', coord: [121.2087, 31.0652], level: 3, visitors: 13.28, showLabel: true, dir: 'top' },
+    { name: '上海影视乐园', coord: [121.3052, 30.9826], level: 2, visitors: 6.42, showLabel: true, dir: 'right' },
+    { name: '月湖雕塑公园', coord: [121.2012, 31.0966], level: 2, visitors: 2.06 },
     { name: '泰晤士小镇', coord: [121.2205, 31.0625], level: 2, visitors: 6.8, showLabel: true, dir: 'right' },
-    { name: '醉白池公园', coord: [121.2352, 31.0021], level: 2, visitors: 2.8, showLabel: true, dir: 'right' },
-    { name: '方塔园', coord: [121.2455, 31.0106], level: 2, visitors: 6.4 },
+    { name: '醉白池公园', coord: [121.2352, 31.0021], level: 2, visitors: 1.92, showLabel: true, dir: 'right' },
+    { name: '方塔园', coord: [121.2455, 31.0106], level: 2, visitors: 2.61 },
     { name: '天马山', coord: [121.1612, 31.0804], level: 1, visitors: 0.9 },
     { name: '松江区博物馆', coord: [121.2305, 31.0108], level: 1, visitors: 0.6 },
     { name: '云间粮仓', coord: [121.2413, 31.0215], level: 1, visitors: 1.4 },

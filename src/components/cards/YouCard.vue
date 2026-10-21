@@ -7,7 +7,7 @@ import { barOption } from '@/utils/chartTheme'
 
 const option = computed(() =>
   barOption({
-    categories: YOU_BARS.map((b) => b.name),
+    categories: YOU_BARS.map((b) => b.short ?? b.name),
     values: YOU_BARS.map((b) => b.value),
     colors: ['rgba(47,216,255,0.10)', '#2fd8ff'],
     max: 16
@@ -21,7 +21,7 @@ const option = computed(() =>
       <StatBlock v-for="s in YOU_STATS" :key="s.label" v-bind="s" size="sm" />
     </div>
     <div class="chart-title">
-      重点景区假期客流
+      重点景区假期客流 TOP6
       <em>万人次</em>
     </div>
     <div class="chart-fill">

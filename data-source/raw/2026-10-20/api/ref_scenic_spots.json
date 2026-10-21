@@ -1,0 +1,464 @@
+{
+ "query": {
+  "name": "ref_scenic_spots",
+  "desc": "景区点位名录（含所属区县、经纬度）",
+  "dataId": "jjrykdsjjcpt_jqyk_scenic_spots",
+  "filter": {
+   "fnid": "310000",
+   "lv": 1
+  },
+  "app": {
+   "appCode": "jjrykdsjjcpt",
+   "way": "POST /smart-decision/api/v2/nocache/data/json",
+   "innerRequest": "/api/v4/attr/query/list?dataId=jjrykdsjjcpt_jqyk_scenic_spots&filter=%7B%22fnid%22%3A%22310000%22%2C%22lv%22%3A1%7D"
+  },
+  "fetchedAt": "2026-10-20T07:46:18.187Z",
+  "rows": 73,
+  "error": null,
+  "file": "api/ref_scenic_spots.json"
+ },
+ "response": {
+  "code": "1",
+  "msg": "SUCCESS",
+  "data": [
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "3100003101001",
+    "scenic_name": "七宝古镇"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010010",
+    "scenic_name": "上海廊下郊野公园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010011",
+    "scenic_name": "上海张马景区"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010012",
+    "scenic_name": "上海影视乐园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010013",
+    "scenic_name": "上海朱家角古镇旅游区"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010014",
+    "scenic_name": "上海欢乐谷"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010015",
+    "scenic_name": "上海江南三民文化村景区"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010016",
+    "scenic_name": "上海浦江郊野公园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010017",
+    "scenic_name": "上海海昌海洋公园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010018",
+    "scenic_name": "上海海洋水族馆"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010019",
+    "scenic_name": "上海海湾国家森林公园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "3100003101002",
+    "scenic_name": "上海动物园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010020",
+    "scenic_name": "上海犹太难民纪念馆"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010021",
+    "scenic_name": "上海玻璃博物馆"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010022",
+    "scenic_name": "上海科技馆"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010023",
+    "scenic_name": "上海联怡枇杷乐园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010024",
+    "scenic_name": "上海薰衣草公园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010025",
+    "scenic_name": "上海野生动物园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010027",
+    "scenic_name": "上海青少年校外活动营地东方绿舟"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010028",
+    "scenic_name": "上海高家庄生态园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010029",
+    "scenic_name": "世纪公园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "3100003101003",
+    "scenic_name": "上海北外滩国客中心"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010030",
+    "scenic_name": "东平国家森林公园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010031",
+    "scenic_name": "东滩湿地公园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010032",
+    "scenic_name": "中共四大纪念馆"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010033",
+    "scenic_name": "中国航海博物馆"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010034",
+    "scenic_name": "云堡未来市"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010035",
+    "scenic_name": "佘山国家森林公园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010036",
+    "scenic_name": "共青国家森林公园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010037",
+    "scenic_name": "前卫村"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010038",
+    "scenic_name": "古猗园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010039",
+    "scenic_name": "召稼楼古镇"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "3100003101004",
+    "scenic_name": "上海南翔老街景区"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010040",
+    "scenic_name": "广富林文化遗址"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010041",
+    "scenic_name": "比斯特上海购物村精品奥特莱斯"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010042",
+    "scenic_name": "碧海金沙"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010043",
+    "scenic_name": "花开海上生态园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010044",
+    "scenic_name": "醉白池公园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010045",
+    "scenic_name": "金山嘴渔村景区"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010046",
+    "scenic_name": "长兴岛郊野公园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010047",
+    "scenic_name": "闵行文化公园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010048",
+    "scenic_name": "闻道园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31000031010049",
+    "scenic_name": "陈云故里·练塘古镇"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "3100003101005",
+    "scenic_name": "上海博物馆(人民广场馆)"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "3100003101006",
+    "scenic_name": "上海国际时尚中心"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "3100003101007",
+    "scenic_name": "上海国际赛车场"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "3100003101008",
+    "scenic_name": "上海宝山国际民间艺术博览馆"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "3100003101009",
+    "scenic_name": "上海市龙华烈士陵园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "3101001",
+    "scenic_name": "上海东林寺"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31010010",
+    "scenic_name": "东方明珠广播电视塔"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31010011",
+    "scenic_name": "中共二大会址纪念馆"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31010012",
+    "scenic_name": "中国共产党第一次全国代表大会会址纪念馆"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31010013",
+    "scenic_name": "嘉定州桥景区"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31010014",
+    "scenic_name": "安亭·上海汽车博览公园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31010015",
+    "scenic_name": "宋庆龄故居"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31010016",
+    "scenic_name": "徐家汇源"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31010017",
+    "scenic_name": "方塔园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31010018",
+    "scenic_name": "枫泾古镇"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31010019",
+    "scenic_name": "西沙明珠湖景区西沙湿地"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "3101002",
+    "scenic_name": "上海吴淞炮台湾湿地森林公园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31010020",
+    "scenic_name": "豫园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31010021",
+    "scenic_name": "辰山植物园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31010022",
+    "scenic_name": "金山城市沙滩"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31010023",
+    "scenic_name": "锦江乐园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31010024",
+    "scenic_name": "静安雕塑公园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "31010025",
+    "scenic_name": "顾村公园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "3101003",
+    "scenic_name": "上海城市规划展示馆"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "3101004",
+    "scenic_name": "上海城隍庙"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "3101005",
+    "scenic_name": "上海大观园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "3101006",
+    "scenic_name": "上海月湖雕塑公园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "3101007",
+    "scenic_name": "上海植物园"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "3101008",
+    "scenic_name": "上海长风海洋世界"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "3101009",
+    "scenic_name": "上海鲜花港"
+   }
+  ]
+ }
+}

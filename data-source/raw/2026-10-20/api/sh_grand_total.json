@@ -1,0 +1,40 @@
+{
+ "query": {
+  "name": "sh_grand_total",
+  "desc": "上海市·累计接待游客量 / 夜间游客量 / 同比",
+  "dataId": "jjrykdsjjcpt_csyk_ykgm_grand_total",
+  "filter": {
+   "year": "2026",
+   "holiday_name": "国庆节",
+   "fnid": "310100",
+   "sort": "all_value",
+   "sequence": "desc",
+   "scenic_code": 0,
+   "limitnum": 1000
+  },
+  "app": {
+   "appCode": "jjrykdsjjcpt",
+   "way": "POST /smart-decision/api/v2/nocache/data/json",
+   "innerRequest": "/api/v4/attr/query/list?dataId=jjrykdsjjcpt_csyk_ykgm_grand_total&filter=%7B%22year%22%3A%222026%22%2C%22holiday_name%22%3A%22%E5%9B%BD%E5%BA%86%E8%8A%82%22%2C%22fnid%22%3A%22310100%22%2C%22sort%22%3A%22all_value%22%2C%22sequence%22%3A%22desc%22%2C%22scenic_code%22%3A0%2C%22limitnum%22%3A1000%7D"
+  },
+  "fetchedAt": "2026-10-20T07:46:18.307Z",
+  "rows": 1,
+  "error": null,
+  "file": "api/sh_grand_total.json"
+ },
+ "response": {
+  "code": "1",
+  "msg": "SUCCESS",
+  "data": [
+   {
+    "all_value": 22214934,
+    "all_value_avg": 3173562,
+    "all_night": 12049012,
+    "tb_ratio_all_value": 0.1861,
+    "avg_tb_ratio_all_value": 0.1861,
+    "zb_ratio_all_night": 0.5424,
+    "tb_ratio_all_night": 0.1227
+   }
+  ]
+ }
+}

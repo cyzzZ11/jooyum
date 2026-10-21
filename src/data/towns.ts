@@ -1,9 +1,11 @@
 /**
  * 松江区 17 个街镇文旅指标 —— 统计周期：2026 年国庆假期（10.01 ~ 10.07，7 天）
  *
+ * 取数优先级见 docs/数据源清单.md：数据源2（平台存档）> data-picture 截图 > 官方公网 > 推算。
+ *
  * 闭合校验（改动数据后请保持成立）：
- *  - tourists   合计 146.40 万人次 = 全区假期接待游客（区文旅局通报）
- *  - revenue    合计 111000 万元  = 11.10 亿元（全区假期文旅综合营收）
+ *  - tourists   合计 170.14 万人次 = 全区假期接待游客（数据源2 实测：1,701,400 人次）
+ *  - revenue    合计 129000 万元  = 12.90 亿元（全区假期文旅综合营收，推算）
  *  - spots      合计 31 个        = 「文旅资源统计」旅游景区
  *  - hotels     合计 464 家       = 「文旅资源统计」宾馆酒店
  *  - restaurants 合计 9306 家     = 吃卡片餐馆数量
@@ -33,23 +35,23 @@ export interface TownStat {
 }
 
 export const TOWN_STATS: TownStat[] = [
-  { name: '佘山镇', type: '镇', tourists: 18.72, spots: 8, hotels: 42, restaurants: 386, revenue: 14626, cases: 22, index: 96.5 },
-  { name: '方松街道', type: '街道', tourists: 13.58, spots: 3, hotels: 68, restaurants: 1120, revenue: 11971, cases: 38, index: 94.2 },
-  { name: '广富林街道', type: '街道', tourists: 12.65, spots: 2, hotels: 36, restaurants: 720, revenue: 10102, cases: 28, index: 93.8 },
-  { name: '中山街道', type: '街道', tourists: 11.41, spots: 2, hotels: 54, restaurants: 980, revenue: 8837, cases: 34, index: 92.6 },
-  { name: '岳阳街道', type: '街道', tourists: 10.35, spots: 1, hotels: 46, restaurants: 1080, revenue: 7745, cases: 36, index: 91.4 },
-  { name: '九亭镇', type: '镇', tourists: 9.48, spots: 1, hotels: 28, restaurants: 760, revenue: 6614, cases: 22, index: 90.1 },
-  { name: '车墩镇', type: '镇', tourists: 9.19, spots: 3, hotels: 22, restaurants: 420, revenue: 7211, cases: 18, index: 89.7 },
-  { name: '泗泾镇', type: '镇', tourists: 8.72, spots: 2, hotels: 31, restaurants: 680, revenue: 6787, cases: 26, index: 89.3 },
-  { name: '新桥镇', type: '镇', tourists: 7.63, spots: 1, hotels: 24, restaurants: 540, revenue: 5640, cases: 13, index: 87.9 },
-  { name: '洞泾镇', type: '镇', tourists: 7.18, spots: 1, hotels: 19, restaurants: 460, revenue: 4902, cases: 11, index: 86.8 },
-  { name: '九里亭街道', type: '街道', tourists: 6.88, spots: 1, hotels: 17, restaurants: 420, revenue: 4697, cases: 6, index: 86.2 },
-  { name: '永丰街道', type: '街道', tourists: 6.63, spots: 1, hotels: 21, restaurants: 510, revenue: 5279, cases: 16, index: 86.9 },
-  { name: '小昆山镇', type: '镇', tourists: 5.72, spots: 1, hotels: 14, restaurants: 320, revenue: 4116, cases: 4, index: 84.6 },
-  { name: '石湖荡镇', type: '镇', tourists: 5.11, spots: 1, hotels: 11, restaurants: 260, revenue: 3283, cases: 3, index: 83.2 },
-  { name: '泖港镇', type: '镇', tourists: 4.87, spots: 1, hotels: 13, restaurants: 240, revenue: 3629, cases: 3, index: 83.7 },
-  { name: '叶榭镇', type: '镇', tourists: 4.57, spots: 1, hotels: 10, restaurants: 230, revenue: 3111, cases: 3, index: 82.5 },
-  { name: '新浜镇', type: '镇', tourists: 3.71, spots: 1, hotels: 8, restaurants: 180, revenue: 2450, cases: 3, index: 81.3 },
+  { name: '佘山镇', type: '镇', tourists: 21.76, spots: 8, hotels: 42, restaurants: 386, revenue: 16998, cases: 22, index: 96.5 },
+  { name: '方松街道', type: '街道', tourists: 15.78, spots: 3, hotels: 68, restaurants: 1120, revenue: 13912, cases: 38, index: 94.2 },
+  { name: '广富林街道', type: '街道', tourists: 14.70, spots: 2, hotels: 36, restaurants: 720, revenue: 11740, cases: 28, index: 93.8 },
+  { name: '中山街道', type: '街道', tourists: 13.26, spots: 2, hotels: 54, restaurants: 980, revenue: 10270, cases: 34, index: 92.6 },
+  { name: '岳阳街道', type: '街道', tourists: 12.03, spots: 1, hotels: 46, restaurants: 1080, revenue: 9001, cases: 36, index: 91.4 },
+  { name: '九亭镇', type: '镇', tourists: 11.02, spots: 1, hotels: 28, restaurants: 760, revenue: 7687, cases: 22, index: 90.1 },
+  { name: '车墩镇', type: '镇', tourists: 10.68, spots: 3, hotels: 22, restaurants: 420, revenue: 8380, cases: 18, index: 89.7 },
+  { name: '泗泾镇', type: '镇', tourists: 10.13, spots: 2, hotels: 31, restaurants: 680, revenue: 7888, cases: 26, index: 89.3 },
+  { name: '新桥镇', type: '镇', tourists: 8.87, spots: 1, hotels: 24, restaurants: 540, revenue: 6555, cases: 13, index: 87.9 },
+  { name: '洞泾镇', type: '镇', tourists: 8.34, spots: 1, hotels: 19, restaurants: 460, revenue: 5697, cases: 11, index: 86.8 },
+  { name: '九里亭街道', type: '街道', tourists: 8.00, spots: 1, hotels: 17, restaurants: 420, revenue: 5459, cases: 6, index: 86.2 },
+  { name: '永丰街道', type: '街道', tourists: 7.71, spots: 1, hotels: 21, restaurants: 510, revenue: 6135, cases: 16, index: 86.9 },
+  { name: '小昆山镇', type: '镇', tourists: 6.65, spots: 1, hotels: 14, restaurants: 320, revenue: 4783, cases: 4, index: 84.6 },
+  { name: '石湖荡镇', type: '镇', tourists: 5.94, spots: 1, hotels: 11, restaurants: 260, revenue: 3815, cases: 3, index: 83.2 },
+  { name: '泖港镇', type: '镇', tourists: 5.66, spots: 1, hotels: 13, restaurants: 240, revenue: 4217, cases: 3, index: 83.7 },
+  { name: '叶榭镇', type: '镇', tourists: 5.31, spots: 1, hotels: 10, restaurants: 230, revenue: 3615, cases: 3, index: 82.5 },
+  { name: '新浜镇', type: '镇', tourists: 4.30, spots: 1, hotels: 8, restaurants: 180, revenue: 2848, cases: 3, index: 81.3 },
 ]
 
 /** 地图可切换的指标维度 */

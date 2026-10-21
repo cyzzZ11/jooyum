@@ -1,0 +1,56 @@
+{
+ "query": {
+  "name": "ref_business_spots",
+  "desc": "商圈点位名录",
+  "dataId": "jjrykdsjjcpt_sqyk_scenic_spots",
+  "filter": {
+   "fnid": "310000",
+   "lv": 1
+  },
+  "app": {
+   "appCode": "jjrykdsjjcpt",
+   "way": "POST /smart-decision/api/v2/nocache/data/json",
+   "innerRequest": "/api/v4/attr/query/list?dataId=jjrykdsjjcpt_sqyk_scenic_spots&filter=%7B%22fnid%22%3A%22310000%22%2C%22lv%22%3A1%7D"
+  },
+  "fetchedAt": "2026-10-20T07:46:18.248Z",
+  "rows": 5,
+  "error": null,
+  "file": "api/ref_business_spots.json"
+ },
+ "response": {
+  "code": "1",
+  "msg": "SUCCESS",
+  "data": [
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "310000_2",
+    "scenic_name": "南京路步行街"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "310000_C_228",
+    "scenic_name": "徐家汇"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "310000_C_302",
+    "scenic_name": "陆家嘴核心区"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "310000_C_6",
+    "scenic_name": "大豫园板块"
+   },
+   {
+    "region_code": "310100",
+    "region_name": "上海市",
+    "scenic_code": "310000_C_9",
+    "scenic_name": "上海大华虎城商圈"
+   }
+  ]
+ }
+}
