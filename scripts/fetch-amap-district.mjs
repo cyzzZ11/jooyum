@@ -8,7 +8,8 @@
  *   2. 运行：
  *        AMAP_KEY=你的Key node scripts/fetch-amap-district.mjs
  *      （Windows PowerShell： $env:AMAP_KEY="你的Key"; node scripts/fetch-amap-district.mjs）
- *   3. 脚本会覆盖 src/assets/geo/songjiang-towns.json，重启 dev 即可生效
+ *   3. 脚本写入 songjiang-towns.geojson，再执行 npm run import:geo
+ *      生成 src/assets/geo/songjiang-towns.json 与区界轮廓，重启 dev 即可生效
  *
  * 说明：高德返回的是 GCJ-02 坐标系、polyline 字符串（"lon,lat;lon,lat;..." 以 "|" 分隔多段）。
  *      DataV 的区界同样是 GCJ-02，两者可以直接混用，无需纠偏。
@@ -19,7 +20,7 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..')
-const OUT_FILE = path.join(ROOT, 'src', 'assets', 'geo', 'songjiang-towns.json')
+const OUT_FILE = path.join(ROOT, 'songjiang-towns.geojson')
 
 const KEY = process.env.AMAP_KEY
 if (!KEY) {
@@ -77,3 +78,4 @@ for (const child of children) {
 fs.writeFileSync(OUT_FILE, JSON.stringify({ type: 'FeatureCollection', features }))
 console.log(`✓ 已写入 ${features.length} 个街镇真实边界 → ${path.relative(ROOT, OUT_FILE)}`)
 console.log(`  ${features.map((f) => f.properties.name).join('、')}`)
+console.log('→ 接着运行 npm run import:geo 生成地图资产（会同时重算区界）')
