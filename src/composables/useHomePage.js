@@ -7,7 +7,7 @@ const CAROUSEL_DELAY = 5000
 /**
  * 首页交互：首屏弹窗、轮播、下拉导航、移动端导航、平滑滚动、数字滚动与渐显动画。
  */
-export function useHomePage() {
+export function useHomePage () {
   const splashVisible = ref(true)
   const appVisible = ref(false)
   const splashSeconds = ref(Math.ceil(SPLASH_AUTO_HIDE / 1000))
@@ -38,7 +38,7 @@ export function useHomePage() {
     listeners.push([target, type, handler, options])
   }
 
-  function hideSplash() {
+  function hideSplash () {
     if (!splashVisible.value) return
     if (countdownTimer) {
       clearInterval(countdownTimer)
@@ -59,7 +59,7 @@ export function useHomePage() {
   }
 
   // ===== 轮播 =====
-  function goTo(index, direction = 'next') {
+  function goTo (index, direction = 'next') {
     if (isCarouselAnimating || index === carouselIndex) return
     isCarouselAnimating = true
 
@@ -98,7 +98,7 @@ export function useHomePage() {
     goTo((carouselIndex - 1 + carouselSlides.length) % carouselSlides.length, 'prev')
   }
 
-  function resetAutoPlay() {
+  function resetAutoPlay () {
     const activeDot = carouselDots[carouselIndex]
     if (!activeDot) return
     activeDot.classList.remove('carousel__dot--active')
@@ -106,7 +106,7 @@ export function useHomePage() {
     activeDot.classList.add('carousel__dot--active')
   }
 
-  function initCarousel() {
+  function initCarousel () {
     carousel = document.getElementById('carousel')
     if (!carousel) return
 
@@ -142,7 +142,7 @@ export function useHomePage() {
   }
 
   // ===== 滚动动画 =====
-  function initScrollAnim() {
+  function initScrollAnim () {
     const elements = Array.from(document.querySelectorAll(
       '.section-header, .activity-card, .activity-tabs, .footer__grid > *'
     ))
@@ -173,7 +173,7 @@ export function useHomePage() {
   }
 
   // ===== 数字滚动计数 =====
-  function initCountUp() {
+  function initCountUp () {
     const numbers = Array.from(document.querySelectorAll('.stat-number'))
     if (!numbers.length || typeof IntersectionObserver === 'undefined') return
 
@@ -208,7 +208,7 @@ export function useHomePage() {
   }
 
   // ===== 渐显动画 =====
-  function initScrollReveal() {
+  function initScrollReveal () {
     const elements = Array.from(document.querySelectorAll('.stat-card, .partner-logo'))
     if (!elements.length || !('IntersectionObserver' in window)) return
 
@@ -235,7 +235,7 @@ export function useHomePage() {
   }
 
   // ===== 移动端导航 =====
-  function initMobileNav() {
+  function initMobileNav () {
     const toggle = document.getElementById('navToggle')
     const menu = document.querySelector('.nav__menu')
     if (!toggle || !menu) return
@@ -256,7 +256,7 @@ export function useHomePage() {
   }
 
   // ===== 下拉菜单 =====
-  function initDropdowns() {
+  function initDropdowns () {
     const dropdowns = Array.from(document.querySelectorAll('.nav__item--dropdown'))
     if (!dropdowns.length) return
 
@@ -322,8 +322,54 @@ export function useHomePage() {
     }
   }
 
+  // ===== 鼠标视差 + 光斑跟随（仅首页首屏） =====
+  let mouseFrame = null
+  function initMouseParallax () {
+    // 尊重用户偏好：关闭动画时只写入 0，避免所有 transform
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const root = document.documentElement
+    root.style.setProperty('--mouse-x', '50%')
+    root.style.setProperty('--mouse-y', '50%')
+    root.style.setProperty('--mouse-rx', '0')
+    root.style.setProperty('--mouse-ry', '0')
+    root.style.setProperty('--mouse-active', prefersReduced ? '0' : '1')
+
+    if (prefersReduced) return
+
+    const targets = [document, window]
+    let pending = false
+    const onMove = (e) => {
+      if (pending) return
+      pending = true
+      mouseFrame = requestAnimationFrame(() => {
+        pending = false
+        const w = window.innerWidth || 1
+        const h = window.innerHeight || 1
+        const x = e.clientX / w // 0..1
+        const y = e.clientY / h
+        root.style.setProperty('--mouse-x', (x * 100).toFixed(2) + '%')
+        root.style.setProperty('--mouse-y', (y * 100).toFixed(2) + '%')
+        // 归一化到 -0.5 .. 0.5
+        root.style.setProperty('--mouse-rx', (x - 0.5).toFixed(3))
+        root.style.setProperty('--mouse-ry', (y - 0.5).toFixed(3))
+      })
+    }
+    const reset = () => {
+      if (pending) cancelAnimationFrame(mouseFrame)
+      root.style.setProperty('--mouse-rx', '0')
+      root.style.setProperty('--mouse-ry', '0')
+      root.style.setProperty('--mouse-active', '0')
+    }
+    const enter = () => root.style.setProperty('--mouse-active', '1')
+
+    on(document, 'mousemove', onMove, { passive: true })
+    on(document, 'mouseleave', reset)
+    on(document, 'mouseenter', enter)
+    on(window, 'blur', reset)
+  }
+
   // ===== 首屏高度：扣掉吸顶导航 =====
-  function initViewportFit() {
+  function initViewportFit () {
     const nav = document.querySelector('.nav')
     const sync = () => {
       const height = nav ? nav.offsetHeight : 64
@@ -335,7 +381,7 @@ export function useHomePage() {
   }
 
   // ===== 顶部滚动进度条 =====
-  function initScrollProgress() {
+  function initScrollProgress () {
     const update = () => {
       scrollFrame = null
       const max = document.documentElement.scrollHeight - window.innerHeight
@@ -350,7 +396,7 @@ export function useHomePage() {
   }
 
   // ===== 平滑滚动 =====
-  function initSmoothScroll() {
+  function initSmoothScroll () {
     on(document, 'click', (event) => {
       const anchor = event.target.closest('a[href^="#"]')
       if (!anchor || event.defaultPrevented) return
@@ -364,7 +410,8 @@ export function useHomePage() {
       }
       if (!target) return
       event.preventDefault()
-      window.scrollTo({ top: target.offsetTop - 64, behavior: 'smooth' })
+      const navHeight = document.querySelector('.nav')?.offsetHeight ?? 72
+      window.scrollTo({ top: target.offsetTop - navHeight, behavior: 'smooth' })
     })
   }
 
@@ -386,6 +433,7 @@ export function useHomePage() {
     initSmoothScroll()
     initCountUp()
     initScrollReveal()
+    initMouseParallax()
 
     const modal = document.getElementById('splashModal')
     if (modal) {
@@ -404,8 +452,14 @@ export function useHomePage() {
 
   onBeforeUnmount(() => {
     if (scrollFrame) cancelAnimationFrame(scrollFrame)
+    if (mouseFrame) cancelAnimationFrame(mouseFrame)
     document.documentElement.style.removeProperty('--home-nav-h')
     document.documentElement.style.removeProperty('--home-viewport-h')
+    document.documentElement.style.removeProperty('--mouse-x')
+    document.documentElement.style.removeProperty('--mouse-y')
+    document.documentElement.style.removeProperty('--mouse-rx')
+    document.documentElement.style.removeProperty('--mouse-ry')
+    document.documentElement.style.removeProperty('--mouse-active')
     clearInterval(countdownTimer)
     clearTimeout(revealTimer)
     clearTimeout(hideDisplayTimer)

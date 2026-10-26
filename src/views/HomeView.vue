@@ -60,9 +60,12 @@
         <div class="nav__inner">
           <div class="nav__brand">
             <div class="nav__logo">
-              <img :src="`${baseUrl}logo.png`" style="height: 100%; object-fit: contain;" />
+              <img
+                :src="`${baseUrl}logo.png`"
+                alt="松江大学城科创源"
+                style="height: 100%; object-fit: contain;"
+              />
             </div>
-            <span class="nav__name"></span>
           </div>
           <nav class="nav__menu">
             <div class="nav__item nav__item--dropdown" id="navFinance">
@@ -191,10 +194,22 @@
           <!-- 新闻轮播区 -->
           <section class="news-section fp-section" id="innovation">
             <div class="tech-backdrop" aria-hidden="true">
+              <span class="tech-backdrop__photo"></span>
               <span class="tech-backdrop__grid"></span>
               <span class="tech-backdrop__glow tech-backdrop__glow--1"></span>
               <span class="tech-backdrop__glow tech-backdrop__glow--2"></span>
+              <span class="tech-backdrop__beam tech-backdrop__beam--1"></span>
+              <span class="tech-backdrop__beam tech-backdrop__beam--2"></span>
+              <span class="tech-backdrop__particles"></span>
               <span class="tech-backdrop__scan"></span>
+              <!-- 鼠标柔光跟随（spotlight） -->
+              <span class="tech-backdrop__spotlight"></span>
+              <!-- 四周装饰浮动点（纯 CSS 呼吸动画，无 JS 依赖） -->
+              <span class="tech-backdrop__dot tech-backdrop__dot--1"></span>
+              <span class="tech-backdrop__dot tech-backdrop__dot--2"></span>
+              <span class="tech-backdrop__dot tech-backdrop__dot--3"></span>
+              <span class="tech-backdrop__ring tech-backdrop__ring--1"></span>
+              <span class="tech-backdrop__ring tech-backdrop__ring--2"></span>
             </div>
             <div class="container">
               <div class="news-wrap">
@@ -1817,14 +1832,59 @@ useTiltCards('.activity-card, .stat-card')
   overflow: hidden;
   pointer-events: none;
 }
+/* 鼠标跟随柔光（前景光斑，z-index 最高） */
+.tech-backdrop__spotlight {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(
+    circle 380px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(56, 189, 248, calc(0.16 * var(--mouse-active, 1))),
+    rgba(99, 102, 241, calc(0.08 * var(--mouse-active, 1))) 35%,
+    transparent 65%
+  );
+  opacity: calc(0.85 * var(--mouse-active, 1));
+  transition: opacity 320ms ease;
+  mix-blend-mode: screen;
+}
+/* 轻微视差：各层 transform 幅度不同，制造纵深 */
+/* photo 与 glow 层原有的 float/drift 动画已合并到各自的 keyframes 中 */
+.tech-backdrop__grid {
+  transform: translate3d(
+    calc(var(--mouse-rx, 0) * 10px),
+    calc(var(--mouse-ry, 0) * 10px),
+    0
+  );
+  transition: transform 220ms ease-out;
+  will-change: transform;
+}
+.tech-backdrop__particles {
+  transform: translate3d(
+    calc(var(--mouse-rx, 0) * 12px),
+    calc(var(--mouse-ry, 0) * 12px),
+    0
+  );
+  transition: transform 220ms ease-out;
+  will-change: transform;
+}
+.tech-backdrop__beam--1,
+.tech-backdrop__beam--2 {
+  transform-origin: center;
+  transition: transform 260ms ease-out, opacity 300ms ease;
+}
+.tech-backdrop__beam--1 {
+  transform: translate3d(calc(var(--mouse-rx, 0) * 8px), 0, 0) rotate(18deg);
+}
+.tech-backdrop__beam--2 {
+  transform: translate3d(calc(var(--mouse-rx, 0) * -8px), 0, 0) rotate(-18deg);
+}
 .tech-backdrop__grid {
   position: absolute;
   inset: -25% -12%;
   background-image: linear-gradient(
-      rgba(56, 189, 248, 0.09) 1px,
+      rgba(56, 189, 248, 0.12) 1px,
       transparent 1px
     ),
-    linear-gradient(90deg, rgba(56, 189, 248, 0.09) 1px, transparent 1px);
+    linear-gradient(90deg, rgba(56, 189, 248, 0.12) 1px, transparent 1px);
   background-size: 56px 56px;
   -webkit-mask-image: radial-gradient(
     ellipse 70% 60% at 50% 45%,
@@ -1870,7 +1930,7 @@ useTiltCards('.activity-card, .stat-card')
     rgba(99, 102, 241, 0.28),
     transparent 72%
   );
-  animation: techGlowFloat 22s ease-in-out infinite alternate-reverse;
+  animation: techGlowFloatRev 22s ease-in-out infinite alternate-reverse;
 }
 .tech-backdrop__scan {
   position: absolute;
@@ -1887,6 +1947,217 @@ useTiltCards('.activity-card, .stat-card')
   );
   animation: techScan 11s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
+/* 装饰浮动点：四角/边缘呼吸小圆点 */
+.tech-backdrop__dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(56, 189, 248, 0.9),
+    rgba(56, 189, 248, 0.3) 60%,
+    transparent 100%
+  );
+  filter: blur(0.5px);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.45);
+  animation: techDotPulse 5s ease-in-out infinite;
+}
+.tech-backdrop__dot--1 {
+  top: 18%;
+  left: 8%;
+  width: 10px;
+  height: 10px;
+  animation-delay: 0s;
+}
+.tech-backdrop__dot--2 {
+  bottom: 28%;
+  right: 12%;
+  width: 7px;
+  height: 7px;
+  animation-delay: -2.3s;
+}
+.tech-backdrop__dot--3 {
+  bottom: 14%;
+  left: 22%;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(
+    circle,
+    rgba(99, 102, 241, 0.9),
+    rgba(99, 102, 241, 0.25) 60%,
+    transparent 100%
+  );
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.4);
+  animation-delay: -3.7s;
+}
+/* 装饰细环：微呼吸描边圆环，不抢戏 */
+.tech-backdrop__ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.18) inset;
+  animation: techRingPulse 7s ease-in-out infinite;
+}
+.tech-backdrop__ring--1 {
+  top: 10%;
+  right: 22%;
+  width: 180px;
+  height: 180px;
+  animation-delay: -1.2s;
+}
+.tech-backdrop__ring--2 {
+  bottom: 8%;
+  left: 4%;
+  width: 120px;
+  height: 120px;
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 0 18px rgba(99, 102, 241, 0.15) inset;
+  animation-delay: -4.4s;
+}
+@keyframes techDotPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+@keyframes techRingPulse {
+  0%,
+  100% {
+    opacity: 0.28;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.06);
+  }
+}
+/* 科创园实景底图（淡化处理，铺满首屏空白区域） */
+.tech-backdrop__photo {
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/images/campus-bg.jpg');
+  background-size: cover;
+  background-position: center 58%;
+  opacity: 0.38;
+  filter: grayscale(0.15) saturate(0.9) contrast(0.95);
+  -webkit-mask-image: radial-gradient(
+    ellipse 96% 90% at 50% 52%,
+    #000 16%,
+    transparent 92%
+  );
+  mask-image: radial-gradient(
+    ellipse 96% 90% at 50% 52%,
+    #000 16%,
+    transparent 92%
+  );
+  animation: techPhotoDrift 46s ease-in-out infinite alternate;
+}
+/* 淡色蒙层，保证前景文字与轮播图对比度 */
+.tech-backdrop::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(248, 250, 252, 0.52) 0%,
+    rgba(248, 250, 252, 0.2) 38%,
+    rgba(248, 250, 252, 0.66) 100%
+  );
+  pointer-events: none;
+}
+/* 斜向科技光束 */
+.tech-backdrop__beam {
+  position: absolute;
+  top: -25%;
+  width: 2px;
+  height: 150%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(56, 189, 248, 0.5) 35%,
+    rgba(99, 102, 241, 0.18) 62%,
+    transparent 100%
+  );
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+  opacity: 0.65;
+  animation: techBeam 9s ease-in-out infinite alternate;
+}
+.tech-backdrop__beam--1 {
+  left: 22%;
+  transform: rotate(18deg);
+}
+.tech-backdrop__beam--2 {
+  left: 76%;
+  transform: rotate(-18deg);
+  animation-delay: -4s;
+}
+/* 细颗粒粒子层 */
+.tech-backdrop__particles {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+      circle,
+      rgba(14, 165, 233, 0.5) 0 1px,
+      transparent 1.6px
+    ),
+    radial-gradient(circle, rgba(99, 102, 241, 0.45) 0 1px, transparent 1.6px);
+  background-size: 180px 180px, 260px 260px;
+  background-position: 10px 20px, 100px 130px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 72% 68% at 50% 50%,
+    #000 26%,
+    transparent 86%
+  );
+  mask-image: radial-gradient(
+    ellipse 72% 68% at 50% 50%,
+    #000 26%,
+    transparent 86%
+  );
+  opacity: 0.6;
+  animation: techParticles 11s ease-in-out infinite alternate;
+}
+@keyframes techPhotoDrift {
+  from {
+    transform: translate3d(
+        calc(var(--mouse-rx, 0) * -6px),
+        calc(var(--mouse-ry, 0) * -6px),
+        0
+      )
+      scale(1.04);
+  }
+  to {
+    transform: translate3d(
+        calc(calc(var(--mouse-rx, 0) * -6px) - 1.5%),
+        calc(calc(var(--mouse-ry, 0) * -6px) - 1%),
+        0
+      )
+      scale(1.1);
+  }
+}
+@keyframes techBeam {
+  from {
+    opacity: 0.18;
+  }
+  to {
+    opacity: 0.62;
+  }
+}
+@keyframes techParticles {
+  from {
+    opacity: 0.22;
+    background-position: 10px 20px, 100px 130px;
+  }
+  to {
+    opacity: 0.55;
+    background-position: 26px 46px, 118px 156px;
+  }
+}
 @keyframes techGridDrift {
   to {
     background-position: 56px 56px, 56px 56px;
@@ -1894,10 +2165,38 @@ useTiltCards('.activity-card, .stat-card')
 }
 @keyframes techGlowFloat {
   from {
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translate3d(
+        calc(var(--mouse-rx, 0) * 14px),
+        calc(var(--mouse-ry, 0) * 14px),
+        0
+      )
+      scale(1);
   }
   to {
-    transform: translate3d(4%, 6%, 0) scale(1.12);
+    transform: translate3d(
+        calc(calc(var(--mouse-rx, 0) * 14px) + 4%),
+        calc(calc(var(--mouse-ry, 0) * 14px) + 6%),
+        0
+      )
+      scale(1.12);
+  }
+}
+@keyframes techGlowFloatRev {
+  from {
+    transform: translate3d(
+        calc(var(--mouse-rx, 0) * -16px),
+        calc(var(--mouse-ry, 0) * -16px),
+        0
+      )
+      scale(1);
+  }
+  to {
+    transform: translate3d(
+        calc(calc(var(--mouse-rx, 0) * -16px) - 4%),
+        calc(calc(var(--mouse-ry, 0) * -16px) - 6%),
+        0
+      )
+      scale(1.08);
   }
 }
 @keyframes techScan {
@@ -2370,12 +2669,30 @@ useTiltCards('.activity-card, .stat-card')
   }
   .tech-backdrop__grid,
   .tech-backdrop__glow,
+  .tech-backdrop__photo,
+  .tech-backdrop__beam,
+  .tech-backdrop__particles,
   .tech-backdrop__scan,
+  .tech-backdrop__dot,
+  .tech-backdrop__ring,
   .tech-ticker__track,
   .page--home .about-header::after,
   .page--home .section-header__eyebrow::before,
   .page--home .activities-section::after {
     animation: none;
+  }
+  .tech-backdrop__grid,
+  .tech-backdrop__glow--1,
+  .tech-backdrop__glow--2,
+  .tech-backdrop__photo,
+  .tech-backdrop__particles,
+  .tech-backdrop__beam--1,
+  .tech-backdrop__beam--2 {
+    transform: none !important;
+    transition: none;
+  }
+  .tech-backdrop__spotlight {
+    opacity: 0 !important;
   }
   .tech-backdrop__scan {
     display: none;

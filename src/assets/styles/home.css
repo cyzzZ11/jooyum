@@ -271,21 +271,23 @@ svg {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--space-6);
-  height: 64px;
+  height: 72px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-8);
 }
 
 .nav__brand {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  flex-shrink: 0;
 }
 
 .nav__logo {
-  /* width: 36px; */
-  height: 36px;
+  height: 40px;
+  display: flex;
+  align-items: center;
 }
 
 .nav__logo svg {
@@ -305,7 +307,14 @@ svg {
 .nav__menu {
   display: flex;
   align-items: center;
-  gap: var(--space-8);
+  gap: 28px;
+  height: 100%;
+}
+
+.nav__item {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .nav__link {
@@ -314,6 +323,7 @@ svg {
   color: var(--text-secondary);
   position: relative;
   padding: var(--space-2) 0;
+  white-space: nowrap;
   transition: color var(--duration-fast) var(--ease-default);
 }
 
@@ -1430,7 +1440,7 @@ svg {
   .nav__menu {
     display: none;
     position: absolute;
-    top: 64px;
+    top: 72px;
     left: 0;
     right: 0;
     flex-direction: column;
@@ -1443,6 +1453,11 @@ svg {
 
   .nav__menu.is-open {
     display: flex;
+  }
+
+  .nav__item {
+    height: auto;
+    display: block;
   }
 
   .nav__link {
