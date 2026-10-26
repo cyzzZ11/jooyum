@@ -3,7 +3,7 @@
     <header class="company-nav">
       <div class="company-nav__inner">
         <a href="/" class="company-nav__brand" aria-label="松江大学城科创源 首页">
-          <img src="/logo.png" alt />
+          <img :src="`${baseUrl}logo.png`" alt />
           <span>企业介绍</span>
         </a>
         <a href="/" class="company-nav__back">
@@ -237,7 +237,7 @@
 
       <footer id="contact">
         <p>&copy; 2024 公司名称. 保留所有权利.</p>
-        <p>地址：[公司详细地址] |</p>
+        <p>地址：[公司详细地址]</p>
         <p class="footer-back">
           <a href="/">
             <svg
@@ -262,6 +262,9 @@
 
 <script setup>
 import { useSmoothScroll } from '@/composables/useSmoothScroll'
+
+// 子目录部署时的静态资源前缀（如 /dxckc/）
+const baseUrl = import.meta.env.BASE_URL
 
 useSmoothScroll({ offset: 76 })
 </script>

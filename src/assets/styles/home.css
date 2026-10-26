@@ -429,6 +429,40 @@ svg {
   background-position: center;
 }
 
+/* 轮播底图统一存放于本地，避免依赖外网图床 */
+.carousel__image--1 {
+  background-image: linear-gradient(
+      135deg,
+      rgba(14, 165, 233, 0.15) 0%,
+      rgba(99, 102, 241, 0.15) 100%
+    ),
+    url('../images/hero-slide-1.jpg');
+}
+.carousel__image--2 {
+  background-image: linear-gradient(
+      135deg,
+      rgba(56, 189, 248, 0.15) 0%,
+      rgba(14, 165, 233, 0.15) 100%
+    ),
+    url('../images/hero-slide-2.jpg');
+}
+.carousel__image--3 {
+  background-image: linear-gradient(
+      135deg,
+      rgba(99, 102, 241, 0.15) 0%,
+      rgba(56, 189, 248, 0.15) 100%
+    ),
+    url('../images/hero-slide-3.jpg');
+}
+.carousel__image--4 {
+  background-image: linear-gradient(
+      135deg,
+      rgba(14, 165, 233, 0.2) 0%,
+      rgba(99, 102, 241, 0.2) 100%
+    ),
+    url('../images/hero-slide-4.jpg');
+}
+
 .carousel__overlay {
   position: absolute;
   inset: 0;
