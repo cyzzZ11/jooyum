@@ -1,5 +1,24 @@
 <template>
   <div class="page page--home" :class="{ 'fp-on': fpEnabled }">
+    <!-- 科技感光标：带尾巴的三角箭头 + 蓝色泛光 + JS 惯性跟随 -->
+    <div class="cursor-layer" aria-hidden="true">
+      <!-- 主图形：带尾巴的三角箭头（参考图标） -->
+      <span class="cursor-arrow">
+        <span class="cursor-glow">
+          <svg viewBox="0 0 28 28" width="100%" height="100%">
+            <defs>
+              <linearGradient id="arrG" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#0ea5e9"/>
+                <stop offset="55%" stop-color="#38bdf8"/>
+                <stop offset="100%" stop-color="#67e8f9"/>
+              </linearGradient>
+            </defs>
+            <path d="M3 2 L25 14 L25 26 L11 26 L7 22 Z" fill="url(#arrG)" stroke="#38bdf8" stroke-width="1.2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </span>
+    </div>
+
     <!-- 首屏弹窗 -->
     <div class="scroll-progress" aria-hidden="true">
       <span :style="{ transform: `scaleX(${progressValue})` }"></span>
@@ -212,6 +231,16 @@
               <span class="tech-backdrop__ring tech-backdrop__ring--2"></span>
             </div>
             <div class="container">
+              <!-- 轮播上方的艺术字标语 -->
+              <header class="hero-slogan" data-cursor="hover" aria-label="开放共享赋能 创新创业筑梦">
+                <span class="hero-slogan__line" aria-hidden="true"></span>
+                <h1 class="hero-slogan__title">
+                  <span class="hero-slogan__text">开放共享赋能</span>
+                  <i class="hero-slogan__diamond" aria-hidden="true"></i>
+                  <span class="hero-slogan__text">创新创业筑梦</span>
+                </h1>
+                <span class="hero-slogan__line" aria-hidden="true"></span>
+              </header>
               <div class="news-wrap">
                 <!-- 左侧轮播（70%） -->
                 <div class="carousel" id="carousel">
@@ -1799,20 +1828,116 @@ useTiltCards('.activity-card, .stat-card')
   box-sizing: border-box;
   min-height: calc(100vh - var(--home-nav-h, 64px));
   min-height: calc(var(--home-viewport-h, 100vh) - var(--home-nav-h, 64px));
-  padding: clamp(20px, 4vh, 48px) 0 0;
+  padding: clamp(28px, 6vh, 72px) 0 0;
   overflow: hidden;
 }
 .page--home .news-section > .container {
   position: relative;
   z-index: 1;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: clamp(10px, 1.8vh, 22px);
   flex: 1;
   width: 100%;
+}
+
+/* ---- 轮播上方艺术字标语 ---- */
+.hero-slogan {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 1.6vw, 26px);
+}
+.hero-slogan__title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.2vw, 22px);
+  margin: 0;
+  font-size: clamp(28px, 3.4vw, 56px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+}
+/* 悬停时文字背后的柔光底 */
+.hero-slogan__title::before {
+  content: '';
+  position: absolute;
+  inset: -35% -8%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(56, 189, 248, 0.3),
+    rgba(99, 102, 241, 0.12) 45%,
+    transparent 72%
+  );
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 320ms ease, transform 320ms ease;
+  pointer-events: none;
+  z-index: -1;
+}
+.hero-slogan__title:hover::before {
+  opacity: 0.12;
+  transform: scale(1);
+}
+.hero-slogan__text {
+  background-image: linear-gradient(
+    100deg,
+    #075985 0%,
+    #0284c7 34%,
+    #0ea5e9 62%,
+    #4f46e5 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 3px 12px rgba(56, 189, 248, 0.4));
+  transition: filter 320ms ease;
+  animation: sloganShimmer 7s ease-in-out infinite alternate;
+}
+/* 悬停：只有光晕微微变化，文字位置与字形保持不动 */
+.hero-slogan__title:hover .hero-slogan__text {
+  filter: drop-shadow(0 0 7px rgba(56, 189, 248, 0.28));
+  animation-play-state: paused;
+}
+@keyframes sloganShimmer {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+.hero-slogan__diamond {
+  flex: none;
+  width: clamp(5px, 0.5vw, 8px);
+  height: clamp(5px, 0.5vw, 8px);
+  transform: rotate(45deg);
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+}
+.hero-slogan__line {
+  flex: 0 1 clamp(28px, 6vw, 110px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.75));
+}
+.hero-slogan__line:last-child {
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.75), transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-slogan__text {
+    animation: none;
+  }
+  .hero-slogan__title:hover .hero-slogan__text {
+    animation: none;
+  }
 }
 .page--home .news-section .news-wrap {
   width: 100%;
   min-height: 0;
+  /* 与大标语拉开一点距离，同时把轮播 + 新闻整体往下压，减少底部留白 */
+  margin-top: clamp(18px, 5vh, 60px);
 }
 .page--home .news-section .carousel {
   height: clamp(320px, 56vh, 620px);
@@ -2449,6 +2574,14 @@ useTiltCards('.activity-card, .stat-card')
   .page--home .news-section {
     padding-top: 16px;
   }
+  .hero-slogan__line {
+    display: none;
+  }
+  .hero-slogan__title {
+    font-size: clamp(18px, 4.8vw, 26px);
+    letter-spacing: 0.06em;
+    gap: 8px;
+  }
   .page--home .news-section .carousel {
     height: clamp(220px, 40vh, 340px);
   }
@@ -2700,5 +2833,82 @@ useTiltCards('.activity-card, .stat-card')
   .scroll-progress span {
     transition: none;
   }
+}
+</style>
+
+<!-- 科技感双层光标：隐藏原生 + JS 惯性跟随 + 蓝色泛光 -->
+<style>
+.cursor-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+/* 原生光标隐藏 */
+body.has-custom-cursor,
+body.has-custom-cursor * {
+  cursor: none !important;
+}
+
+/* ---- 主图形：只负责位移与尺寸，泛光交给内层，避免每帧重算滤镜 ---- */
+.cursor-arrow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  transition: width 200ms cubic-bezier(0.22, 1, 0.36, 1),
+              height 200ms cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 200ms ease;
+}
+/* 泛光层：位置不动（随父级一起被位移），滤镜结果可复用 */
+.cursor-glow {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: filter 240ms ease;
+  filter:
+    drop-shadow(0 0 6px rgba(14, 165, 233, 0.7))
+    drop-shadow(0 0 14px rgba(56, 189, 248, 0.35));
+}
+.cursor-glow svg {
+  display: block;
+}
+
+/* ---- 鼠标离开视口：淡出 ---- */
+body:not(.cursor-visible) .cursor-arrow {
+  opacity: 0;
+}
+
+/* ---- hover 可交互元素：主图形放大 + 发光更强 ---- */
+body.cursor-hover .cursor-arrow {
+  width: 42px;
+  height: 42px;
+}
+body.cursor-hover .cursor-glow {
+  filter:
+    drop-shadow(0 0 8px rgba(56, 189, 248, 0.9))
+    drop-shadow(0 0 20px rgba(56, 189, 248, 0.5))
+    drop-shadow(0 0 40px rgba(14, 165, 233, 0.3));
+}
+
+/* ---- 鼠标按下：主图形略微缩小 + 发光收敛 ---- */
+body.cursor-press .cursor-arrow {
+  width: 24px;
+  height: 24px;
+  transition-duration: 90ms;
+}
+body.cursor-press .cursor-glow {
+  filter:
+    drop-shadow(0 0 3px rgba(56, 189, 248, 0.8))
+    drop-shadow(0 0 8px rgba(14, 165, 233, 0.4));
+  transition-duration: 90ms;
+}
+
+/* ---- 触屏 / 降低动画 / IE：自动回退 ---- */
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .cursor-layer { display: none !important; }
 }
 </style>

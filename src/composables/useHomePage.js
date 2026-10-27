@@ -324,10 +324,14 @@ export function useHomePage () {
 
   // ===== 鼠标视差 + 光斑跟随（仅首页首屏） =====
   let mouseFrame = null
+  let mouseVarTarget = null
   function initMouseParallax () {
     // 尊重用户偏好：关闭动画时只写入 0，避免所有 transform
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const root = document.documentElement
+    // 这些变量只在首屏背景内部被消费，写到 .tech-backdrop 上，
+    // 避免每帧修改根元素自定义属性触发整页样式重算（会拖慢光标跟手）
+    const root = document.querySelector('.tech-backdrop') || document.documentElement
+    mouseVarTarget = root
     root.style.setProperty('--mouse-x', '50%')
     root.style.setProperty('--mouse-y', '50%')
     root.style.setProperty('--mouse-rx', '0')
@@ -366,6 +370,66 @@ export function useHomePage () {
     on(document, 'mouseleave', reset)
     on(document, 'mouseenter', enter)
     on(window, 'blur', reset)
+  }
+
+  // ===== 自定义科技感双层光标（主图形箭头 + 发光小点，JS 惯性跟随） =====
+  let cursorFrame = null
+  function initCustomCursor() {
+    const isTouch = window.matchMedia('(pointer: coarse)').matches
+    const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const isIE = !!document.documentMode
+    if (isTouch || noMotion || isIE) return
+
+    const arrow = document.querySelector('.cursor-arrow')
+    if (!arrow) return
+
+    document.body.classList.add('has-custom-cursor', 'cursor-visible')
+
+    let mx = window.innerWidth / 2
+    let my = window.innerHeight / 2
+
+    const interactiveSelector = [
+      'a', 'button', '[role="button"]',
+      'input', 'textarea', 'select',
+      '.nav__link', '.carousel__dot', '.news-list__item',
+      '.card', '.activity-card', '.stat-card', '.carousel',
+      '[data-cursor="hover"]',
+    ].join(',')
+
+    const onMove = (e) => {
+      mx = e.clientX; my = e.clientY
+    }
+    const onOver = (e) => {
+      const t = e.target.closest(interactiveSelector)
+      document.body.classList.toggle('cursor-hover', !!t)
+    }
+    const onDown = () => document.body.classList.add('cursor-press')
+    const onUp = () => document.body.classList.remove('cursor-press')
+    const onLeave = () => document.body.classList.remove('cursor-visible')
+    const onEnter = () => document.body.classList.add('cursor-visible')
+
+    on(document, 'mousemove', onMove, { passive: true })
+    on(document, 'mouseover', onOver, { passive: true })
+    on(document, 'mousedown', onDown)
+    on(document, 'mouseup', onUp)
+    on(document, 'mouseleave', onLeave)
+    on(document, 'mouseenter', onEnter)
+
+    let lastX = null
+    let lastY = null
+
+    function loop() {
+      // 位置一变就直接跟上，不做插值，避免任何可感知的延迟
+      if (mx !== lastX || my !== lastY) {
+        lastX = mx
+        lastY = my
+        // 把图形左上角的尖点（SVG 坐标 3,2 / viewBox 28）对准鼠标实际像素，
+        // 用百分比平移，hover / press 改变尺寸时尖点依然锚定在指针上
+        arrow.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-10.7143%, -7.1429%)`
+      }
+      cursorFrame = requestAnimationFrame(loop)
+    }
+    loop()
   }
 
   // ===== 首屏高度：扣掉吸顶导航 =====
@@ -434,6 +498,7 @@ export function useHomePage () {
     initCountUp()
     initScrollReveal()
     initMouseParallax()
+    initCustomCursor()
 
     const modal = document.getElementById('splashModal')
     if (modal) {
@@ -453,13 +518,15 @@ export function useHomePage () {
   onBeforeUnmount(() => {
     if (scrollFrame) cancelAnimationFrame(scrollFrame)
     if (mouseFrame) cancelAnimationFrame(mouseFrame)
+    if (cursorFrame) cancelAnimationFrame(cursorFrame)
+    document.body.classList.remove('has-custom-cursor', 'cursor-hover', 'cursor-press', 'cursor-visible')
     document.documentElement.style.removeProperty('--home-nav-h')
     document.documentElement.style.removeProperty('--home-viewport-h')
-    document.documentElement.style.removeProperty('--mouse-x')
-    document.documentElement.style.removeProperty('--mouse-y')
-    document.documentElement.style.removeProperty('--mouse-rx')
-    document.documentElement.style.removeProperty('--mouse-ry')
-    document.documentElement.style.removeProperty('--mouse-active')
+    if (mouseVarTarget) {
+      ['--mouse-x', '--mouse-y', '--mouse-rx', '--mouse-ry', '--mouse-active']
+        .forEach((name) => mouseVarTarget.style.removeProperty(name))
+      mouseVarTarget = null
+    }
     clearInterval(countdownTimer)
     clearTimeout(revealTimer)
     clearTimeout(hideDisplayTimer)
