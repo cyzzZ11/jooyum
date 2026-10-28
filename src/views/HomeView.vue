@@ -1,5 +1,5 @@
-<template>
-  <div class="page page--home" :class="{ 'fp-on': fpEnabled }">
+﻿﻿<template>
+  <div class="page page--home" :class="{ 'fp-on': fpEnabled, 'theme-dark': isDark }">
     <!-- 科技感光标：带尾巴的三角箭头 + 蓝色泛光 + JS 惯性跟随 -->
     <div class="cursor-layer" aria-hidden="true">
       <!-- 主图形：带尾巴的三角箭头（参考图标） -->
@@ -23,6 +23,51 @@
     <div class="scroll-progress" aria-hidden="true">
       <span :style="{ transform: `scaleX(${progressValue})` }"></span>
     </div>
+
+    <!-- 左侧环形进度 + 当前屏名称 -->
+    <div class="scroll-ring" aria-hidden="true">
+      <span class="scroll-ring__ring">
+        <svg viewBox="0 0 48 48">
+          <circle class="scroll-ring__track" cx="24" cy="24" r="19" />
+          <circle
+            class="scroll-ring__bar"
+            cx="24"
+            cy="24"
+            r="19"
+            :style="{ strokeDashoffset: 119.4 * (1 - progressValue) }"
+          />
+        </svg>
+        <span class="scroll-ring__pct">{{ Math.round(progressValue * 100) }}</span>
+      </span>
+      <span class="scroll-ring__meta">
+        <em>当前屏</em>
+        <strong>{{ currentSectionLabel }}</strong>
+      </span>
+    </div>
+
+    <!-- 返回顶部 -->
+    <button
+      class="back-top"
+      type="button"
+      :class="{ 'is-visible': showBackTop }"
+      aria-label="返回顶部"
+      data-cursor="hover"
+      @click="backToTop"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <line x1="12" y1="19" x2="12" y2="5" />
+        <polyline points="5 12 12 5 19 12" />
+      </svg>
+      <span>顶部</span>
+    </button>
 
     <div
       class="splash-modal"
@@ -196,6 +241,22 @@
             <a href="/company-index" class="nav__link">企业介绍</a>
             <!-- <a href="#contact" class="nav__link nav__link--cta">立即咨询</a> -->
           </nav>
+          <button
+            class="nav__theme"
+            type="button"
+            :aria-label="isDark ? '切换到浅色模式' : '切换到深色模式'"
+            :aria-pressed="String(isDark)"
+            data-cursor="hover"
+            @click="toggleTheme"
+          >
+            <svg v-if="isDark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+              <circle cx="12" cy="12" r="4.2" />
+              <path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6" />
+            </svg>
+            <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.4 14.4A8.4 8.4 0 0 1 9.6 3.6a8.4 8.4 0 1 0 10.8 10.8z" />
+            </svg>
+          </button>
           <button class="nav__toggle" id="navToggle" aria-label="菜单">
             <span></span>
             <span></span>
@@ -211,7 +272,7 @@
           :style="fpEnabled ? { transform: `translate3d(0, -${fpIndex * 100}%, 0)` } : null"
         >
           <!-- 新闻轮播区 -->
-          <section class="news-section fp-section" id="innovation">
+          <section class="news-section fp-section" id="innovation" :class="{ 'is-current': fpIndex === 0 }">
             <div class="tech-backdrop" aria-hidden="true">
               <span class="tech-backdrop__photo"></span>
               <span class="tech-backdrop__grid"></span>
@@ -230,6 +291,25 @@
               <span class="tech-backdrop__ring tech-backdrop__ring--1"></span>
               <span class="tech-backdrop__ring tech-backdrop__ring--2"></span>
             </div>
+
+            <!-- 竖向「需求—成果」关键词数据流 -->
+            <div class="data-stream" aria-hidden="true">
+              <div
+                v-for="(col, ci) in dataStreamColumns"
+                :key="`stream-${ci}`"
+                class="data-stream__col"
+                :style="{
+                  left: ci < 2 ? `${1.6 + ci * 5}%` : null,
+                  right: ci >= 2 ? `${1.6 + (ci - 2) * 5}%` : null,
+                  animationDuration: `${22 + ci * 6}s`,
+                  animationDelay: `${-ci * 5}s`,
+                }"
+              >
+                <span v-for="(word, wi) in col" :key="`w-${ci}-${wi}`" class="data-stream__word">{{ word }}</span>
+                <span v-for="(word, wi) in col" :key="`d-${ci}-${wi}`" class="data-stream__word">{{ word }}</span>
+              </div>
+            </div>
+
             <div class="container">
               <!-- 轮播上方的艺术字标语 -->
               <header class="hero-slogan" data-cursor="hover" aria-label="开放共享赋能 创新创业筑梦">
@@ -385,44 +465,24 @@
                     <h3 class="news-list__title">新闻资讯</h3>
                     <a href="#" class="news-list__more">查看更多 →</a>
                   </div>
-                  <ul class="news-list__items">
-                    <li class="news-item">
-                      <a href="#" class="news-item__link">关于加快推进松江大学城科创源建设的若干政策措施</a>
-                      <div class="news-item__meta">
-                        <span class="news-item__tag news-item__tag--policy">政策发布</span>
-                        <span class="news-item__date">2026-10-24</span>
-                      </div>
-                    </li>
-                    <li class="news-item">
-                      <a href="#" class="news-item__link">2026 年松江区科技成果转化项目申报正式启动</a>
-                      <div class="news-item__meta">
-                        <span class="news-item__tag news-item__tag--event">活动通知</span>
-                        <span class="news-item__date">2026-10-21</span>
-                      </div>
-                    </li>
-                    <li class="news-item">
-                      <a href="#" class="news-item__link">人民日报：松江大学城科创源打造科技成果转化沃土</a>
-                      <div class="news-item__meta">
-                        <span class="news-item__tag news-item__tag--media">媒体关注</span>
-                        <span class="news-item__date">2026-10-18</span>
-                      </div>
-                    </li>
-                    <li class="news-item">
-                      <a href="#" class="news-item__link">校企双向发榜平台上线，首批发布企业技术需求 72 项</a>
-                      <div class="news-item__meta">
-                        <span class="news-item__tag news-item__tag--platform">平台动态</span>
-                        <span class="news-item__date">2026-10-15</span>
-                      </div>
-                    </li>
-                    <li class="news-item">
-                      <a href="#" class="news-item__link">“芯链闭门局”半导体上下游闭门交流会开始报名</a>
-                      <div class="news-item__meta">
-                        <span class="news-item__tag news-item__tag--event">活动通知</span>
-                        <span class="news-item__date">2026-10-12</span>
-                      </div>
+                  <ul class="news-timeline" data-fp-scroll>
+                    <li
+                      v-for="(item, i) in newsItems"
+                      :key="`news-${i}`"
+                      class="news-timeline__item"
+                      :class="{ 'news-timeline__item--latest': i === 0 }"
+                    >
+                      <span class="news-timeline__node" aria-hidden="true"></span>
+                      <div class="news-timeline__date">{{ item.date }}</div>
+                      <a href="#" class="news-timeline__title">{{ item.title }}</a>
+                      <span class="news-item__tag" :class="`news-item__tag--${item.type}`">{{ item.tag }}</span>
                     </li>
                   </ul>
-                  <div class="news-list__count">当前显示 91 条动态</div>
+                  <div class="news-list__count">
+                    当前显示
+                    <span data-count="91">91</span>
+                    条动态
+                  </div>
                 </div>
               </div>
             </div>
@@ -444,9 +504,66 @@
             </div>
           </section>
 
-          <!-- 关于科创源 -->
-          <section class="intro-section fp-section" id="overview">
-            <div class="container">
+          <!-- 科创源信息球：关于 / 四链 / 高校 / 发榜（滚轮顺时针旋转查看） -->
+          <section class="globe-section fp-section" id="globe" :class="{ 'is-current': fpIndex === 1 }">
+            <div class="globe-stage">
+              <!-- 轨道弧线 + 流动光点 -->
+              <svg
+                class="globe-orbit"
+                viewBox="0 0 1200 720"
+                preserveAspectRatio="xMidYMid slice"
+                aria-hidden="true"
+              >
+                <defs>
+                  <linearGradient id="orbitGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="rgba(56,189,248,0.5)" />
+                    <stop offset="100%" stop-color="rgba(99,102,241,0.2)" />
+                  </linearGradient>
+                </defs>
+                <ellipse class="globe-orbit__ring" cx="600" cy="384" rx="540" ry="152" transform="rotate(-8 600 384)" />
+                <ellipse class="globe-orbit__ring globe-orbit__ring--2" cx="600" cy="372" rx="430" ry="112" transform="rotate(11 600 372)" />
+                <ellipse class="globe-orbit__ring globe-orbit__ring--3" cx="600" cy="392" rx="310" ry="76" transform="rotate(-17 600 392)" />
+                <ellipse
+                  class="globe-orbit__flow"
+                  cx="600"
+                  cy="384"
+                  rx="540"
+                  ry="152"
+                  transform="rotate(-8 600 384)"
+                  stroke="url(#orbitGrad)"
+                />
+                <ellipse
+                  class="globe-orbit__flow globe-orbit__flow--2"
+                  cx="600"
+                  cy="372"
+                  rx="430"
+                  ry="112"
+                  transform="rotate(11 600 372)"
+                />
+                <ellipse
+                  class="globe-orbit__flow globe-orbit__flow--3"
+                  cx="600"
+                  cy="392"
+                  rx="310"
+                  ry="76"
+                  transform="rotate(-17 600 392)"
+                />
+                <circle class="globe-orbit__node" cx="132" cy="300" r="3" />
+                <circle class="globe-orbit__node globe-orbit__node--2" cx="1058" cy="430" r="3" />
+                <circle class="globe-orbit__node globe-orbit__node--3" cx="330" cy="470" r="2.5" />
+                <circle class="globe-orbit__node globe-orbit__node--4" cx="900" cy="248" r="2.5" />
+              </svg>
+              <div class="globe-sphere" :style="{ transform: `rotateY(${globeAngle}deg)` }">
+                <div class="globe-core" aria-hidden="true">
+                  <span class="globe-core__ring"></span>
+                  <span class="globe-core__ring globe-core__ring--2"></span>
+                  <span class="globe-core__ring globe-core__ring--3"></span>
+                  <span class="globe-core__glow"></span>
+                </div>
+
+                <!-- 面板1：关于科创源 -->
+                <div class="globe-panel globe-panel--1" :class="{ 'is-face': globeStep === 0 }">
+                  <div class="container">
               <div class="section-header">
                 <span class="section-header__eyebrow">ABOUT</span>
                 <h2 class="section-header__title">关于科创源</h2>
@@ -525,33 +642,33 @@
 
                 <div class="intro-facts">
                   <div class="intro-fact">
-                    <strong>5.5</strong>
+                    <strong data-count="5.5" data-decimals="1">5.5</strong>
                     <span>平方公里</span>
                     <em>核心区面积</em>
                   </div>
                   <div class="intro-fact">
-                    <strong>8</strong>
+                    <strong data-count="8">8</strong>
                     <span>所</span>
                     <em>高校汇聚</em>
                   </div>
                   <div class="intro-fact">
-                    <strong>12<small>万+</small></strong>
+                    <strong><i data-count="12">12</i><small>万+</small></strong>
                     <span>名</span>
                     <em>在校师生</em>
                   </div>
                   <div class="intro-fact">
-                    <strong>19</strong>
+                    <strong data-count="19">19</strong>
                     <span>个</span>
                     <em>功能性平台</em>
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
+                  </div>
+                </div>
 
-          <!-- 四链融合 · 发展目标 -->
-          <section class="roadmap-section fp-section" id="roadmap">
-            <div class="container">
+                <!-- 面板2：四链融合 -->
+                <div class="globe-panel globe-panel--2" :class="{ 'is-face': globeStep === 1 }">
+                  <div class="container">
               <div class="section-header">
                 <span class="section-header__eyebrow">ROADMAP</span>
                 <h2 class="section-header__title">四链融合 · 发展目标</h2>
@@ -600,12 +717,12 @@
                   <p>全面建成具有全球影响力的大学科创中心，成为区域创新策源的核心引擎。</p>
                 </li>
               </ol>
-            </div>
-          </section>
+                  </div>
+                </div>
 
-          <!-- 八所高校矩阵 -->
-          <section class="universities-section fp-section" id="universities">
-            <div class="container">
+                <!-- 面板3：八所高校矩阵 -->
+                <div class="globe-panel globe-panel--3" :class="{ 'is-face': globeStep === 2 }">
+                  <div class="container">
               <div class="section-header">
                 <span class="section-header__eyebrow">UNIVERSITIES</span>
                 <h2 class="section-header__title">八所高校 · 同城协同</h2>
@@ -695,12 +812,12 @@
                   >上海交通大学医学院松江研究院</a>
                 </div>
               </div>
-            </div>
-          </section>
+                  </div>
+                </div>
 
-          <!-- 校企双向发榜成果 -->
-          <section class="results-section fp-section" id="results">
-            <div class="container">
+                <!-- 面板4：校企双向发榜成果 -->
+                <div class="globe-panel globe-panel--4" :class="{ 'is-face': globeStep === 3 }">
+                  <div class="container">
               <div class="section-header">
                 <span class="section-header__eyebrow">MATCHING</span>
                 <h2 class="section-header__title">校企双向发榜</h2>
@@ -711,19 +828,19 @@
 
               <div class="results-stats">
                 <div class="results-stat">
-                  <strong>72</strong>
+                  <strong data-count="72">72</strong>
                   <span>项高校科研成果</span>
                 </div>
                 <div class="results-stat">
-                  <strong>66</strong>
+                  <strong data-count="66">66</strong>
                   <span>项企业研发需求</span>
                 </div>
                 <div class="results-stat">
-                  <strong>46</strong>
+                  <strong data-count="46">46</strong>
                   <span>个促成合作</span>
                 </div>
                 <div class="results-stat">
-                  <strong>3000<small>万元</small></strong>
+                  <strong><i data-count="3000">3000</i><small>万元</small></strong>
                   <span>累计合作金额</span>
                 </div>
               </div>
@@ -750,11 +867,28 @@
                 <a class="btn results-cta__main" href="/cgzh-qy/tech-demand-platform">企业发榜</a>
                 <a class="btn btn--outline" href="/cgzh-gx/university-tech-demand">高校发榜</a>
               </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 球面进度 + 操作提示 -->
+              <div class="globe-indicator" aria-hidden="true">
+                <span
+                  v-for="n in 4"
+                  :key="`globe-dot-${n}`"
+                  class="globe-indicator__dot"
+                  :class="{ 'is-active': globeStep === n - 1 }"
+                ></span>
+              </div>
+              <p class="globe-hint" aria-hidden="true">
+                滚动滚轮 · 顺时针旋转查看　{{ globeStep + 1 }} / 4
+              </p>
             </div>
+            <div class="globe-spacer" aria-hidden="true"></div>
           </section>
 
           <!-- 活动报名 -->
-          <section class="activities-section fp-section" id="startup">
+          <section class="activities-section fp-section" id="startup" :class="{ 'is-current': fpIndex === 2 }">
             <div class="container" style="position: relative;">
               <div class="section-header" style="margin-bottom: 0;">
                 <span class="section-header__eyebrow">STARTUP</span>
@@ -778,589 +912,81 @@
               <!-- 活动卡片网格（滚动容器） -->
               <div class="activity-grid-scroll">
                 <div class="activity-grid" id="activityGrid">
-                  <!-- 卡片1 -->
-                  <article class="activity-card">
-                    <!-- <div class="activity-card__badge">
-                  <span class="badge badge--hot">热门</span>
-                    </div>-->
-                    <!-- <div class="activity-card__image">
-                  <div class="activity-card__img-bg" style="background: linear-gradient(135deg, #e0f2fe 0%, #ddd6fe 100%);"></div>
-                  <svg class="activity-card__icon" viewBox="0 0 64 64" fill="none">
-                    <circle cx="32" cy="32" r="28" stroke="url(#iconGrad1)" stroke-width="2" fill="rgba(255,255,255,0.5)"/>
-                    <path d="M20 32L28 40L44 24" stroke="url(#iconGrad1)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <defs>
-                      <linearGradient id="iconGrad1" x1="0" y1="0" x2="64" y2="64">
-                        <stop offset="0%" stop-color="#0ea5e9"/>
-                        <stop offset="100%" stop-color="#6366f1"/>
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                    </div>-->
+                  <article
+                    v-for="(item, i) in activities"
+                    :key="`activity-${i}`"
+                    class="activity-card"
+                    :class="{ 'activity-card--ended': item.status === 'ended' }"
+                  >
+                    <!-- 正面 -->
                     <div class="activity-card__body">
                       <div class="activity-card__meta">
                         <span>
-                          <span class="badge badge--hot">报名中</span>
-                          <span class="activity-card__type">医工融合</span>
+                          <span
+                            class="badge"
+                            :class="item.status === 'ended' ? 'badge--ended' : 'badge--hot'"
+                          >{{ item.status === 'ended' ? '已结束' : '报名中' }}</span>
+                          <span class="activity-card__type">{{ item.type }}</span>
                         </span>
-                        <span class="activity-card__date">2026.10.31</span>
+                        <span class="activity-card__date">{{ item.date }}</span>
                       </div>
-                      <h3 class="activity-card__title">数智康复 · 医工融合——打造“智能康复新质生产力”</h3>
-                      <p class="activity-card__desc">主办单位：中国康复医学会康复工程与产业促进专业委员会 · 规模 500 人</p>
+                      <h3 class="activity-card__title">{{ item.title }}</h3>
+                      <p class="activity-card__desc">{{ item.desc }}</p>
                       <div class="activity-card__footer">
-                        <div class="activity-card__stats">
-                          <span class="activity-card__stat">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                            >
-                              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                              <circle cx="9" cy="7" r="4" />
-                              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                            </svg>
-                            2,341人报名
-                          </span>
-                          <span class="activity-card__stat">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                            >
-                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                              <circle cx="12" cy="10" r="3" />
-                            </svg>
-                            北京
-                          </span>
-                        </div>
                         <a href="#" class="activity-card__btn">
-                          立即报名
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                          >
+                          {{ item.status === 'ended' ? '查看回顾' : '立即报名' }}
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <line x1="5" y1="12" x2="19" y2="12" />
                             <polyline points="12 5 19 12 12 19" />
                           </svg>
                         </a>
                       </div>
                     </div>
-                  </article>
 
-                  <!-- 卡片2 -->
-                  <article class="activity-card">
-                    <!-- <div class="activity-card__badge">
-                  <span class="badge badge--upcoming">即将开始</span>
-                    </div>-->
-                    <!-- <div class="activity-card__image">
-                  <div class="activity-card__img-bg" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);"></div>
-                  <svg class="activity-card__icon" viewBox="0 0 64 64" fill="none">
-                    <rect x="8" y="14" width="48" height="36" rx="4" stroke="url(#iconGrad2)" stroke-width="2" fill="rgba(255,255,255,0.5)"/>
-                    <path d="M16 8v6M48 8v6M8 24h48" stroke="url(#iconGrad2)" stroke-width="2" stroke-linecap="round"/>
-                    <circle cx="24" cy="36" r="3" fill="url(#iconGrad2)"/>
-                    <path d="M30 36h14" stroke="url(#iconGrad2)" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M30 42h10" stroke="url(#iconGrad2)" stroke-width="2" stroke-linecap="round"/>
-                    <defs>
-                      <linearGradient id="iconGrad2" x1="0" y1="0" x2="64" y2="64">
-                        <stop offset="0%" stop-color="#38bdf8"/>
-                        <stop offset="100%" stop-color="#0ea5e9"/>
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                    </div>-->
-                    <div class="activity-card__body">
-                      <div class="activity-card__meta">
-                        <span>
-                          <span class="badge badge--hot">报名中</span>
-                          <span class="activity-card__type">半导体</span>
-                        </span>
-                        <span class="activity-card__date">2026.10.30</span>
-                      </div>
-                      <h3 class="activity-card__title">“芯链闭门局”——半导体上下游闭门交流会</h3>
-                      <p class="activity-card__desc">主办单位：松江大学城科创源 · 上海绿之岸碳科技有限公司 · 规模 30 人</p>
-                      <div class="activity-card__footer">
-                        <div class="activity-card__stats">
-                          <span class="activity-card__stat">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                            >
-                              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                              <line x1="3" y1="9" x2="21" y2="9" />
-                              <line x1="9" y1="21" x2="9" y2="9" />
-                            </svg>
-                            86家企业
-                          </span>
-                          <span class="activity-card__stat">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                            >
-                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                              <circle cx="12" cy="10" r="3" />
-                            </svg>
-                            上海
-                          </span>
+                    <!-- 背面：主办 / 规模 / 二维码占位 -->
+                    <div
+                      class="activity-card__back"
+                      :class="{ 'activity-card__back--ended': item.status === 'ended' }"
+                      aria-hidden="true"
+                    >
+                      <span class="activity-card__back-tag">
+                        {{ item.status === 'ended' ? '活动已结束' : '扫码报名' }}
+                      </span>
+                      <dl class="activity-card__back-list">
+                        <div>
+                          <dt>主办单位</dt>
+                          <dd>{{ item.organizer }}</dd>
                         </div>
-                        <a href="#" class="activity-card__btn">
-                          立即报名
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                          >
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                            <polyline points="12 5 19 12 12 19" />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
-                  </article>
-
-                  <!-- 卡片3 -->
-                  <article class="activity-card">
-                    <!-- <div class="activity-card__badge">
-                  <span class="badge badge--hot">热门</span>
-                    </div>-->
-                    <!-- <div class="activity-card__image">
-                  <div class="activity-card__img-bg" style="background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);"></div>
-                  <svg class="activity-card__icon" viewBox="0 0 64 64" fill="none">
-                    <circle cx="32" cy="24" r="10" stroke="url(#iconGrad3)" stroke-width="2" fill="rgba(255,255,255,0.5)"/>
-                    <path d="M12 52c0-11 9-20 20-20s20 9 20 20" stroke="url(#iconGrad3)" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M42 18l6-6M50 22l6-6" stroke="url(#iconGrad3)" stroke-width="2" stroke-linecap="round"/>
-                    <defs>
-                      <linearGradient id="iconGrad3" x1="0" y1="0" x2="64" y2="64">
-                        <stop offset="0%" stop-color="#6366f1"/>
-                        <stop offset="100%" stop-color="#8b5cf6"/>
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                    </div>-->
-                    <div class="activity-card__body">
-                      <div class="activity-card__meta">
-                        <span>
-                          <span class="badge badge--hot">报名中</span>
-                          <span class="activity-card__type">人工智能</span>
-                        </span>
-                        <span class="activity-card__date">2026.10.29</span>
-                      </div>
-                      <h3 class="activity-card__title">数智赋能——松江区 AI 赋能产业转型沙龙</h3>
-                      <p class="activity-card__desc">主办单位：松江区数据局 · 规模 30 人</p>
-                      <div class="activity-card__footer">
-                        <div class="activity-card__stats">
-                          <span class="activity-card__stat">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                            >
-                              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                              <circle cx="9" cy="7" r="4" />
-                              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                            </svg>
-                            1,256人报名
-                          </span>
-                          <span class="activity-card__stat">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                            >
-                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                              <circle cx="12" cy="10" r="3" />
-                            </svg>
-                            深圳
-                          </span>
+                        <div>
+                          <dt>活动规模</dt>
+                          <dd>{{ item.scale }} · {{ item.city }}</dd>
                         </div>
-                        <a href="#" class="activity-card__btn">
-                          立即报名
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                          >
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                            <polyline points="12 5 19 12 12 19" />
+                      </dl>
+                      <div v-if="item.status === 'open'" class="activity-card__qr">
+                        <span class="activity-card__qr-box">
+                          <svg viewBox="0 0 40 40" aria-hidden="true">
+                            <rect x="3" y="3" width="12" height="12" rx="1.5" />
+                            <rect x="25" y="3" width="12" height="12" rx="1.5" />
+                            <rect x="3" y="25" width="12" height="12" rx="1.5" />
+                            <rect x="7.5" y="7.5" width="3" height="3" />
+                            <rect x="29.5" y="7.5" width="3" height="3" />
+                            <rect x="7.5" y="29.5" width="3" height="3" />
+                            <rect x="19" y="6" width="2.5" height="2.5" />
+                            <rect x="19" y="12" width="2.5" height="2.5" />
+                            <rect x="19" y="19" width="2.5" height="2.5" />
+                            <rect x="25" y="19" width="2.5" height="2.5" />
+                            <rect x="31" y="19" width="2.5" height="2.5" />
+                            <rect x="19" y="25" width="2.5" height="2.5" />
+                            <rect x="25" y="29" width="2.5" height="2.5" />
+                            <rect x="31" y="25" width="2.5" height="2.5" />
                           </svg>
-                        </a>
-                      </div>
-                    </div>
-                  </article>
-
-                  <!-- 卡片4 -->
-                  <article class="activity-card activity-card--ended">
-                    <!-- <div class="activity-card__badge">
-                  <span class="badge badge--upcoming">即将开始</span>
-                    </div>-->
-                    <!-- <div class="activity-card__image">
-                  <div class="activity-card__img-bg" style="background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);"></div>
-                  <svg class="activity-card__icon" viewBox="0 0 64 64" fill="none">
-                    <rect x="10" y="14" width="44" height="36" rx="3" stroke="url(#iconGrad4)" stroke-width="2" fill="rgba(255,255,255,0.5)"/>
-                    <line x1="18" y1="24" x2="46" y2="24" stroke="url(#iconGrad4)" stroke-width="2" stroke-linecap="round"/>
-                    <circle cx="22" cy="34" r="4" stroke="url(#iconGrad4)" stroke-width="2"/>
-                    <path d="M34 30h12M34 38h8" stroke="url(#iconGrad4)" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M10 22l22-8 22 8" stroke="url(#iconGrad4)" stroke-width="2" stroke-linejoin="round"/>
-                    <defs>
-                      <linearGradient id="iconGrad4" x1="0" y1="0" x2="64" y2="64">
-                        <stop offset="0%" stop-color="#10b981"/>
-                        <stop offset="100%" stop-color="#38bdf8"/>
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                    </div>-->
-                    <div class="activity-card__body">
-                      <div class="activity-card__meta">
-                        <span>
-                          <span class="badge badge--ended">已结束</span>
-                          <span class="activity-card__type">数字孪生</span>
                         </span>
-                        <span class="activity-card__date">2026.10.27</span>
-                      </div>
-                      <h3 class="activity-card__title">3D 高斯与数字孪生培训和发展论坛</h3>
-                      <p class="activity-card__desc">主办单位：深圳市其域创新科技股份有限公司 · 规模 80 人</p>
-                      <div class="activity-card__footer">
-                        <div class="activity-card__stats">
-                          <span class="activity-card__stat">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                            >
-                              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                              <line x1="3" y1="9" x2="21" y2="9" />
-                              <line x1="9" y1="21" x2="9" y2="9" />
-                            </svg>
-                            52家企业
-                          </span>
-                          <span class="activity-card__stat">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                            >
-                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                              <circle cx="12" cy="10" r="3" />
-                            </svg>
-                            杭州
-                          </span>
-                        </div>
-                        <a href="#" class="activity-card__btn">
-                          立即报名
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                          >
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                            <polyline points="12 5 19 12 12 19" />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
-                  </article>
-
-                  <!-- 卡片5 -->
-                  <article class="activity-card activity-card--ended">
-                    <!-- <div class="activity-card__image">
-                  <div class="activity-card__img-bg" style="background: linear-gradient(135deg, #fef3c7 0%, #e0f2fe 100%);"></div>
-                  <svg class="activity-card__icon" viewBox="0 0 64 64" fill="none">
-                    <circle cx="32" cy="32" r="24" stroke="url(#iconGrad5)" stroke-width="2" fill="rgba(255,255,255,0.5)"/>
-                    <path d="M32 18v14l10 6" stroke="url(#iconGrad5)" stroke-width="2.5" stroke-linecap="round"/>
-                    <defs>
-                      <linearGradient id="iconGrad5" x1="0" y1="0" x2="64" y2="64">
-                        <stop offset="0%" stop-color="#f59e0b"/>
-                        <stop offset="100%" stop-color="#38bdf8"/>
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                    </div>-->
-                    <div class="activity-card__body">
-                      <div class="activity-card__meta">
-                        <span>
-                          <span class="badge badge--ended">已结束</span>
-                          <span class="activity-card__type">创业沙龙</span>
+                        <span class="activity-card__qr-text">
+                          扫码进入报名页
+                          <em>名额有限 · 报名从速</em>
                         </span>
-                        <span class="activity-card__date">2026.10.27</span>
                       </div>
-                      <h3 class="activity-card__title">奉贤区退役军人创业沙龙 · 金海街道专场</h3>
-                      <p class="activity-card__desc">主办单位：上海市奉贤区人民政府金海街道办事处 · 松江大学城科创源 · 规模 40 人</p>
-                      <div class="activity-card__footer">
-                        <div class="activity-card__stats">
-                          <span class="activity-card__stat">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                            >
-                              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                              <circle cx="9" cy="7" r="4" />
-                              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                            </svg>
-                            856人报名
-                          </span>
-                          <span class="activity-card__stat">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                            >
-                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                              <circle cx="12" cy="10" r="3" />
-                            </svg>
-                            线上
-                          </span>
-                        </div>
-                        <a href="#" class="activity-card__btn">
-                          立即报名
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                          >
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                            <polyline points="12 5 19 12 12 19" />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
-                  </article>
-
-                  <!-- 卡片6 -->
-                  <article class="activity-card activity-card--ended">
-                    <!-- <div class="activity-card__badge">
-                  <span class="badge badge--hot">热门</span>
-                </div>
-                <div class="activity-card__image">
-                  <div class="activity-card__img-bg" style="background: linear-gradient(135deg, #dbeafe 0%, #ede9fe 100%);"></div>
-                  <svg class="activity-card__icon" viewBox="0 0 64 64" fill="none">
-                    <path d="M12 48V24l20-12 20 12v24" stroke="url(#iconGrad6)" stroke-width="2" stroke-linejoin="round" fill="rgba(255,255,255,0.5)"/>
-                    <path d="M22 48V32h20v16" stroke="url(#iconGrad6)" stroke-width="2"/>
-                    <path d="M32 40v8" stroke="url(#iconGrad6)" stroke-width="2" stroke-linecap="round"/>
-                    <defs>
-                      <linearGradient id="iconGrad6" x1="0" y1="0" x2="64" y2="64">
-                        <stop offset="0%" stop-color="#3b82f6"/>
-                        <stop offset="100%" stop-color="#6366f1"/>
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                    </div>-->
-                    <div class="activity-card__body">
-                      <div class="activity-card__meta">
-                        <span>
-                          <span class="badge badge--ended">已结束</span>
-                          <span class="activity-card__type">城市沙龙</span>
-                        </span>
-                        <span class="activity-card__date">2026.10.23</span>
-                      </div>
-                      <h3 class="activity-card__title">GOPC 城市沙龙</h3>
-                      <p class="activity-card__desc">主办单位：同橙科创产业发展集团有限公司 · 规模 20 人</p>
-                      <div class="activity-card__footer">
-                        <div class="activity-card__stats">
-                          <span class="activity-card__stat">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                            >
-                              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                              <line x1="3" y1="9" x2="21" y2="9" />
-                              <line x1="9" y1="21" x2="9" y2="9" />
-                            </svg>
-                            128家企业
-                          </span>
-                          <span class="activity-card__stat">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                            >
-                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                              <circle cx="12" cy="10" r="3" />
-                            </svg>
-                            广州
-                          </span>
-                        </div>
-                        <a href="#" class="activity-card__btn">
-                          立即报名
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                          >
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                            <polyline points="12 5 19 12 12 19" />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
-                  </article>
-
-                  <!-- 卡片7 -->
-                  <article class="activity-card activity-card--ended">
-                    <!-- <div class="activity-card__badge">
-                  <span class="badge badge--upcoming">即将开始</span>
-                </div>
-                <div class="activity-card__image">
-                  <div class="activity-card__img-bg" style="background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);"></div>
-                  <svg class="activity-card__icon" viewBox="0 0 64 64" fill="none">
-                    <path d="M32 8l20 12v24L32 56 12 44V20L32 8z" stroke="url(#iconGrad7)" stroke-width="2" fill="rgba(255,255,255,0.5)" stroke-linejoin="round"/>
-                    <path d="M32 28v16M24 36h16" stroke="url(#iconGrad7)" stroke-width="2" stroke-linecap="round"/>
-                    <defs>
-                      <linearGradient id="iconGrad7" x1="0" y1="0" x2="64" y2="64">
-                        <stop offset="0%" stop-color="#f97316"/>
-                        <stop offset="100%" stop-color="#f59e0b"/>
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                    </div>-->
-                    <div class="activity-card__body">
-                      <div class="activity-card__meta">
-                        <span>
-                          <span class="badge badge--ended">已结束</span>
-                          <span class="activity-card__type">政策宣讲</span>
-                        </span>
-                        <span class="activity-card__date">2026.10.20</span>
-                      </div>
-                      <h3 class="activity-card__title">高水平大学城科创源赋能新质生产力发展先行区建设</h3>
-                      <p class="activity-card__desc">主办单位：区委党校 · 规模 60 人</p>
-                      <div class="activity-card__footer">
-                        <div class="activity-card__stats">
-                          <span class="activity-card__stat">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                            >
-                              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                              <circle cx="9" cy="7" r="4" />
-                              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                            </svg>
-                            634人报名
-                          </span>
-                          <span class="activity-card__stat">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                            >
-                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                              <circle cx="12" cy="10" r="3" />
-                            </svg>
-                            成都
-                          </span>
-                        </div>
-                        <a href="#" class="activity-card__btn">
-                          立即报名
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                          >
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                            <polyline points="12 5 19 12 12 19" />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
-                  </article>
-
-                  <!-- 卡片8 -->
-                  <article class="activity-card activity-card--ended">
-                    <!-- <div class="activity-card__image">
-                  <div class="activity-card__img-bg" style="background: linear-gradient(135deg, #cffafe 0%, #e0f2fe 100%);"></div>
-                  <svg class="activity-card__icon" viewBox="0 0 64 64" fill="none">
-                    <rect x="12" y="12" width="40" height="40" rx="4" stroke="url(#iconGrad8)" stroke-width="2" fill="rgba(255,255,255,0.5)"/>
-                    <circle cx="26" cy="28" r="5" stroke="url(#iconGrad8)" stroke-width="2"/>
-                    <path d="M20 44c0-4 3-7 6-7s6 3 6 7" stroke="url(#iconGrad8)" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="38" y1="24" x2="46" y2="24" stroke="url(#iconGrad8)" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="38" y1="32" x2="46" y2="32" stroke="url(#iconGrad8)" stroke-width="2" stroke-linecap="round"/>
-                    <defs>
-                      <linearGradient id="iconGrad8" x1="0" y1="0" x2="64" y2="64">
-                        <stop offset="0%" stop-color="#06b6d4"/>
-                        <stop offset="100%" stop-color="#38bdf8"/>
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                    </div>-->
-                    <div class="activity-card__body">
-                      <div class="activity-card__meta">
-                        <span>
-                          <span class="badge badge--ended">已结束</span>
-                          <span class="activity-card__type">国际交流</span>
-                        </span>
-                        <span class="activity-card__date">2026.10.20</span>
-                      </div>
-                      <h3 class="activity-card__title">中国国际青年交流中心拉美青年商业领袖调研活动</h3>
-                      <p class="activity-card__desc">主办单位：团区委</p>
-                      <div class="activity-card__footer">
-                        <div class="activity-card__stats">
-                          <span class="activity-card__stat">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                            >
-                              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                              <circle cx="9" cy="7" r="4" />
-                              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                            </svg>
-                            1,872人报名
-                          </span>
-                          <span class="activity-card__stat">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                            >
-                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                              <circle cx="12" cy="10" r="3" />
-                            </svg>
-                            北京
-                          </span>
-                        </div>
-                        <a href="#" class="activity-card__btn">
-                          立即报名
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                          >
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                            <polyline points="12 5 19 12 12 19" />
-                          </svg>
-                        </a>
-                      </div>
+                      <p v-else class="activity-card__back-note">活动已结束，敬请关注下一期</p>
                     </div>
                   </article>
                 </div>
@@ -1369,7 +995,7 @@
           </section>
 
           <!-- 公司简介与合作伙伴 -->
-          <section class="about-section fp-section" id="about">
+          <section class="about-section fp-section" id="about" :class="{ 'is-current': fpIndex === 3 }">
             <div class="container">
               <div class="about-header">
                 <!-- <span class="section-tag">关于我们</span> -->
@@ -1379,6 +1005,125 @@
                   汇聚创新资源、连接产业需求、培育科技人才，助力创新创业高质量发展。
                 </p>
               </div>
+
+              <div class="about-body">
+                <!-- 手绘风大学城地图：5.5km² · 8 所高校 -->
+                <div class="campus-map">
+                  <svg
+                    class="campus-map__art"
+                    viewBox="0 0 640 420"
+                    preserveAspectRatio="xMidYMid slice"
+                    aria-hidden="true"
+                  >
+                    <defs>
+                      <linearGradient id="mapLand" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="rgba(56,189,248,0.14)" />
+                        <stop offset="100%" stop-color="rgba(99,102,241,0.1)" />
+                      </linearGradient>
+                      <pattern id="mapDots" width="16" height="16" patternUnits="userSpaceOnUse">
+                        <circle cx="2" cy="2" r="1" fill="rgba(14,165,233,0.14)" />
+                      </pattern>
+                    </defs>
+                    <rect width="640" height="420" fill="url(#mapDots)" />
+                    <!-- 核心区边界（手绘虚线） -->
+                    <path
+                      d="M 62 116 C 118 62 232 44 352 58 C 452 70 566 104 588 186 C 610 266 542 330 428 352 C 320 372 178 366 108 306 C 58 264 26 160 62 116 Z"
+                      fill="url(#mapLand)"
+                      stroke="rgba(14,165,233,0.45)"
+                      stroke-width="1.8"
+                      stroke-dasharray="8 7"
+                      stroke-linejoin="round"
+                    />
+                    <!-- 河道（手绘双线） -->
+                    <path
+                      d="M 26 318 C 108 300 168 336 246 316 C 322 296 378 258 466 274 C 528 286 586 302 626 288"
+                      fill="none"
+                      stroke="rgba(56,189,248,0.28)"
+                      stroke-width="12"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M 26 318 C 108 300 168 336 246 316 C 322 296 378 258 466 274 C 528 286 586 302 626 288"
+                      fill="none"
+                      stroke="rgba(56,189,248,0.45)"
+                      stroke-width="1.4"
+                      stroke-dasharray="14 10"
+                    />
+                    <!-- 文汇路主轴 -->
+                    <path
+                      d="M 58 226 C 160 210 288 204 404 212 C 482 217 546 228 600 242"
+                      fill="none"
+                      stroke="rgba(100,116,139,0.34)"
+                      stroke-width="7"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M 58 226 C 160 210 288 204 404 212 C 482 217 546 228 600 242"
+                      fill="none"
+                      stroke="rgba(148,163,184,0.55)"
+                      stroke-width="1.2"
+                      stroke-dasharray="9 9"
+                    />
+                    <!-- 支路 -->
+                    <path
+                      d="M 232 60 C 246 140 250 210 258 316"
+                      fill="none"
+                      stroke="rgba(100,116,139,0.22)"
+                      stroke-width="4"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M 428 70 C 420 150 432 224 424 344"
+                      fill="none"
+                      stroke="rgba(100,116,139,0.22)"
+                      stroke-width="4"
+                      stroke-linecap="round"
+                    />
+                    <!-- 高校地块（手绘方块） -->
+                    <rect x="120" y="146" width="66" height="46" rx="8" fill="none" stroke="rgba(14,165,233,0.28)" stroke-width="1.4" transform="rotate(-6 153 169)" />
+                    <rect x="222" y="126" width="70" height="50" rx="8" fill="none" stroke="rgba(99,102,241,0.26)" stroke-width="1.4" transform="rotate(4 257 151)" />
+                    <rect x="318" y="178" width="66" height="44" rx="8" fill="none" stroke="rgba(14,165,233,0.26)" stroke-width="1.4" transform="rotate(-3 351 200)" />
+                    <rect x="398" y="132" width="64" height="46" rx="8" fill="none" stroke="rgba(99,102,241,0.26)" stroke-width="1.4" transform="rotate(5 430 155)" />
+                    <rect x="440" y="214" width="70" height="46" rx="8" fill="none" stroke="rgba(14,165,233,0.26)" stroke-width="1.4" transform="rotate(-4 475 237)" />
+                    <rect x="516" y="148" width="62" height="46" rx="8" fill="none" stroke="rgba(99,102,241,0.24)" stroke-width="1.4" transform="rotate(6 547 171)" />
+                    <rect x="242" y="248" width="66" height="44" rx="8" fill="none" stroke="rgba(14,165,233,0.24)" stroke-width="1.4" transform="rotate(-5 275 270)" />
+                    <rect x="326" y="262" width="60" height="42" rx="8" fill="none" stroke="rgba(99,102,241,0.22)" stroke-width="1.4" transform="rotate(4 356 283)" />
+                    <!-- 手写标注 -->
+                    <text class="map-anno" x="62" y="212" transform="rotate(-2 62 212)">文汇路</text>
+                    <text class="map-anno map-anno--soft" x="452" y="404">5.5 km² 核心区</text>
+                    <text class="map-anno map-anno--soft" x="30" y="28">松江大学城</text>
+                    <!-- 指北针 -->
+                    <g class="map-compass" transform="translate(594 46)">
+                      <circle r="16" fill="none" stroke="rgba(148,163,184,0.45)" stroke-width="1.2" />
+                      <path d="M 0 -11 L 5 4 L 0 1 L -5 4 Z" fill="rgba(14,165,233,0.6)" />
+                      <text x="0" y="-19" text-anchor="middle">N</text>
+                    </g>
+                  </svg>
+
+                  <a
+                    v-for="uni in campusPoints"
+                    :key="uni.name"
+                    class="map-pin"
+                    :class="{ 'map-pin--right': uni.x > 78 }"
+                    :style="{ left: `${uni.x}%`, top: `${uni.y}%` }"
+                    :href="uni.url"
+                    target="_blank"
+                    rel="noopener"
+                    data-cursor="hover"
+                  >
+                    <span class="map-pin__dot" aria-hidden="true"></span>
+                    <span class="map-pin__name">{{ uni.short }}</span>
+                    <span class="map-pin__tip">
+                      <strong>{{ uni.name }}</strong>
+                      <em>{{ uni.tag }}</em>
+                      <span class="map-pin__link">访问官网 →</span>
+                    </span>
+                  </a>
+
+                  <span class="campus-map__legend">
+                    8 所高校 · 12 万余名师生 · 5.5 平方公里
+                  </span>
+                </div>
 
               <div class="about-stats">
                 <div class="stat-card">
@@ -1463,6 +1208,7 @@
                   <div class="stat-desc">链接头部投资机构赋能早期项目</div>
                 </div>
               </div>
+              </div>
 
               <!-- <div class="about-partners">
               <div class="partners-header">
@@ -1488,7 +1234,10 @@
           </section>
 
           <!-- 页脚 -->
-          <footer class="footer fp-section" id="contact">
+          <footer class="footer fp-section" id="contact" :class="{ 'is-current': fpIndex === 4 }">
+            <div class="footer__giant" aria-hidden="true">
+              <span>松江大学城科创源</span>
+            </div>
             <div class="container">
               <div class="footer__grid">
                 <div class="footer__brand">
@@ -1621,7 +1370,7 @@
 </template>
 
 <script setup>
-import { computed, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useFullPage } from '@/composables/useFullPage'
 import { useHomePage } from '@/composables/useHomePage'
 import { useTiltCards } from '@/composables/useTiltCards'
@@ -1635,23 +1384,267 @@ const { index: fpIndex, enabled: fpEnabled, settling: fpSettling, goTo: fpGoTo }
 
 const fpSections = [
   { id: 'innovation', label: '新闻资讯' },
-  { id: 'overview', label: '关于科创源' },
-  { id: 'roadmap', label: '四链融合' },
-  { id: 'universities', label: '高校矩阵' },
-  { id: 'results', label: '发榜成果' },
+  { id: 'globe', label: '科创源' },
   { id: 'startup', label: '活动报名' },
   { id: 'about', label: '关于我们' },
   { id: 'contact', label: '联系我们' },
 ]
+
+// 首屏新闻（时间轴）
+const newsItems = [
+  { title: '关于加快推进松江大学城科创源建设的若干政策措施', date: '2026-10-24', tag: '政策发布', type: 'policy' },
+  { title: '2026 年松江区科技成果转化项目申报正式启动', date: '2026-10-21', tag: '活动通知', type: 'event' },
+  { title: '人民日报：松江大学城科创源打造科技成果转化沃土', date: '2026-10-18', tag: '媒体关注', type: 'media' },
+  { title: '校企双向发榜平台上线，首批发布企业技术需求 72 项', date: '2026-10-15', tag: '平台动态', type: 'platform' },
+  { title: '“芯链闭门局”半导体上下游闭门交流会开始报名', date: '2026-10-12', tag: '活动通知', type: 'event' },
+]
+
+// 首屏竖向关键词数据流（每列滚动两组相同内容实现无缝循环）
+const dataStreamColumns = [
+  ['技术需求', '成果转化', '揭榜挂帅', '概念验证', '中试熟化', '校企对接'],
+  ['专利共享', '联合实验室', '样机试制', '技术经理人', '需求发榜', '产业孵化'],
+  ['科研成果', '人才共育', '产业场景', '资金链', '创新创业', '成果评价'],
+  ['学科交叉', '区域协同', '项目路演', '知识产权', '平台共建', '开放共享'],
+]
+
+// 活动报名（正面信息 + 翻转背面信息）
+const activities = [
+  {
+    status: 'open',
+    type: '医工融合',
+    date: '2026.10.31',
+    title: '数智康复 · 医工融合——打造“智能康复新质生产力”',
+    desc: '主办单位：中国康复医学会康复工程与产业促进专业委员会 · 规模 500 人',
+    organizer: '中国康复医学会康复工程与产业促进专业委员会',
+    scale: '500 人',
+    city: '北京',
+  },
+  {
+    status: 'open',
+    type: '半导体',
+    date: '2026.10.30',
+    title: '“芯链闭门局”——半导体上下游闭门交流会',
+    desc: '主办单位：松江大学城科创源 · 上海绿之岸碳科技有限公司 · 规模 30 人',
+    organizer: '松江大学城科创源 · 上海绿之岸碳科技有限公司',
+    scale: '30 人',
+    city: '上海',
+  },
+  {
+    status: 'open',
+    type: '人工智能',
+    date: '2026.10.29',
+    title: '数智赋能——松江区 AI 赋能产业转型沙龙',
+    desc: '主办单位：松江区数据局 · 规模 30 人',
+    organizer: '松江区数据局',
+    scale: '30 人',
+    city: '上海',
+  },
+  {
+    status: 'ended',
+    type: '数字孪生',
+    date: '2026.10.27',
+    title: '3D 高斯与数字孪生培训和发展论坛',
+    desc: '主办单位：深圳市其域创新科技股份有限公司 · 规模 80 人',
+    organizer: '深圳市其域创新科技股份有限公司',
+    scale: '80 人',
+    city: '深圳',
+  },
+  {
+    status: 'ended',
+    type: '创业沙龙',
+    date: '2026.10.27',
+    title: '奉贤区退役军人创业沙龙 · 金海街道专场',
+    desc: '主办单位：上海市奉贤区人民政府金海街道办事处 · 松江大学城科创源 · 规模 40 人',
+    organizer: '上海市奉贤区人民政府金海街道办事处 · 松江大学城科创源',
+    scale: '40 人',
+    city: '线上',
+  },
+  {
+    status: 'ended',
+    type: '城市沙龙',
+    date: '2026.10.23',
+    title: 'GOPC 城市沙龙',
+    desc: '主办单位：同橙科创产业发展集团有限公司 · 规模 20 人',
+    organizer: '同橙科创产业发展集团有限公司',
+    scale: '20 人',
+    city: '广州',
+  },
+  {
+    status: 'ended',
+    type: '政策宣讲',
+    date: '2026.10.20',
+    title: '高水平大学城科创源赋能新质生产力发展先行区建设',
+    desc: '主办单位：区委党校 · 规模 60 人',
+    organizer: '区委党校',
+    scale: '60 人',
+    city: '成都',
+  },
+  {
+    status: 'ended',
+    type: '国际交流',
+    date: '2026.10.20',
+    title: '中国国际青年交流中心拉美青年商业领袖调研活动',
+    desc: '主办单位：团区委',
+    organizer: '团区委',
+    scale: '规模待定',
+    city: '北京',
+  },
+]
+
+// 手绘地图上的 8 所高校点位（百分比定位）
+const campusPoints = [
+  { name: '上海外国语大学', short: '上外', tag: '语言科技 · 国际传播', url: 'https://www.shisu.edu.cn', x: 23, y: 45 },
+  { name: '东华大学', short: '东华', tag: '新材料 · 纺织服装', url: 'https://www.dhu.edu.cn', x: 36, y: 34 },
+  { name: '华东政法大学', short: '华政', tag: '法治营商 · 知识产权', url: 'https://www.ecupl.edu.cn', x: 48, y: 52 },
+  { name: '上海对外经贸大学', short: '对外经贸', tag: '经贸金融 · 数字贸易', url: 'https://www.suibe.edu.cn', x: 58, y: 39 },
+  { name: '上海立信会计金融学院', short: '立信', tag: '会计金融 · 数据审计', url: 'https://www.lixin.edu.cn', x: 68, y: 57 },
+  { name: '上海工程技术大学', short: '工程大', tag: '智能制造 · 轨道交通', url: 'https://www.sues.edu.cn', x: 78, y: 41 },
+  { name: '上海视觉艺术学院', short: '视觉', tag: '视觉设计 · 数字文创', url: 'https://www.siva.edu.cn', x: 85, y: 66 },
+  { name: '上海体育大学', short: '体育', tag: '运动健康 · 体育科技', url: 'https://www.sus.edu.cn', x: 39, y: 68 },
+]
+
+/*
+ * 科创源信息球：四块内容（关于 / 四链 / 高校 / 发榜）贴在球面四周，
+ * 滚轮在这个屏内滚动时驱动球体顺时针旋转（0 → -270°），
+ * 滚到发榜面板（-270°）即触发该屏的内滚动到底，之后由整屏翻页接管。
+ */
+const globeAngle = ref(0)
+const globeStep = computed(() => {
+  const step = Math.round(Math.abs(globeAngle.value) / 90)
+  return Math.min(3, Math.max(0, step))
+})
+
+let globeEl = null
+
+function syncGlobe() {
+  if (!globeEl) return
+  const max = globeEl.scrollHeight - globeEl.clientHeight
+  if (max <= 0) {
+    globeAngle.value = 0
+    return
+  }
+  const progress = Math.min(Math.max(globeEl.scrollTop / max, 0), 1)
+  globeAngle.value = -270 * progress
+}
+
+// ===== 深色模式 =====
+const THEME_KEY = 'sckcy-theme'
+const isDark = ref(false)
+
+function applyTheme (dark) {
+  isDark.value = dark
+  document.documentElement.classList.toggle('theme-dark', dark)
+  try {
+    localStorage.setItem(THEME_KEY, dark ? 'dark' : 'light')
+  } catch (e) {
+    /* 隐私模式下忽略存储失败 */
+  }
+}
+
+function toggleTheme () {
+  applyTheme(!isDark.value)
+}
+
+// ===== 数字滚动 =====
+function animateCount (el) {
+  if (el.dataset.counted) return
+  const target = Number.parseFloat(el.dataset.count)
+  if (Number.isNaN(target)) return
+  el.dataset.counted = 'true'
+  const decimals = Number(el.dataset.decimals || 0)
+  const duration = 1500
+  const startTime = performance.now()
+  const render = (value) => {
+    el.textContent = decimals ? value.toFixed(decimals) : Math.round(value).toLocaleString('en-US')
+  }
+  const tick = (now) => {
+    const progress = Math.min((now - startTime) / duration, 1)
+    render(target * (1 - Math.pow(1 - progress, 3)))
+    if (progress < 1) requestAnimationFrame(tick)
+    else render(target)
+  }
+  requestAnimationFrame(tick)
+}
+
+function animateCounts (scope) {
+  const root = typeof scope === 'string' ? document.querySelector(scope) : scope
+  root?.querySelectorAll('[data-count]').forEach(animateCount)
+}
+
+// ===== 页脚巨字横向视差 =====
+let footerEl = null
+function onFooterMove (event) {
+  if (!footerEl) return
+  const ratio = event.clientX / window.innerWidth - 0.5
+  footerEl.style.setProperty('--footer-shift', `${(-ratio * 60).toFixed(1)}px`)
+}
+
+onMounted(() => {
+  globeEl = document.getElementById('globe')
+  globeEl?.addEventListener('scroll', syncGlobe, { passive: true })
+  // 小屏回退为普通滚动时由 window 驱动
+  window.addEventListener('scroll', syncGlobe, { passive: true })
+  syncGlobe()
+
+  footerEl = document.querySelector('.footer')
+  window.addEventListener('mousemove', onFooterMove, { passive: true })
+
+  try {
+    if (localStorage.getItem(THEME_KEY) === 'dark') applyTheme(true)
+  } catch (e) {
+    /* 隐私模式下忽略读取失败 */
+  }
+})
+
+onBeforeUnmount(() => {
+  globeEl?.removeEventListener('scroll', syncGlobe)
+  window.removeEventListener('scroll', syncGlobe)
+  window.removeEventListener('mousemove', onFooterMove)
+  footerEl = null
+})
 
 const progressValue = computed(() => {
   if (!fpEnabled.value) return scrollProgress.value
   return (fpIndex.value + 1) / fpSections.length
 })
 
+const currentSectionLabel = computed(() => {
+  if (fpEnabled.value) return fpSections[fpIndex.value]?.label || ''
+  const ratio = Math.min(Math.max(scrollProgress.value, 0), 0.999)
+  return fpSections[Math.floor(ratio * fpSections.length)]?.label || ''
+})
+
+// ===== 返回顶部 =====
+const showBackTop = computed(() => {
+  if (fpEnabled.value) return fpIndex.value > 0
+  return scrollProgress.value > 0.06
+})
+
+function backToTop () {
+  if (fpEnabled.value) {
+    fpGoTo(0)
+    return
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
 // 整屏切换时把焦点移出可能被裁切的元素，避免键盘 Tab 落到屏幕外
-watch(fpIndex, () => {
+watch(fpIndex, (index) => {
   if (fpEnabled.value) document.activeElement?.blur?.()
+  if (index === 1) animateCounts('.globe-panel--1')
+  if (index === 3) animateCounts('.about-stats')
+})
+
+// 转到发榜面板时再触发数字滚动
+watch(globeStep, (step) => {
+  if (step === 3) animateCounts('.globe-panel--4')
+})
+
+// 首屏内容出现后再开始滚动数字
+watch(appVisible, (visible) => {
+  if (!visible) return
+  animateCounts('.news-list')
+  if (!fpEnabled.value) document.querySelectorAll('[data-count]').forEach(animateCount)
 })
 
 const techKeywords = [
@@ -1667,7 +1660,7 @@ const techKeywords = [
   '低碳技术',
 ]
 
-useTiltCards('.activity-card, .stat-card')
+useTiltCards('.activity-card, .stat-card, .uni-card, .case-card')
 </script>
 
 <style scoped src="../assets/styles/home.css"></style>
@@ -2279,11 +2272,37 @@ useTiltCards('.activity-card, .stat-card')
   /* 与大标语拉开一点距离，同时把轮播 + 新闻整体往下压，减少底部留白 */
   margin-top: clamp(18px, 5vh, 60px);
 }
+/* 轮播与右侧资讯用同一高度变量，保证两者底部严格对齐 */
+.page--home .news-section {
+  --news-block-h: clamp(320px, 56vh, 620px);
+}
 .page--home .news-section .carousel {
-  height: clamp(320px, 56vh, 620px);
+  height: var(--news-block-h);
 }
 .page--home .news-section .news-list {
   min-height: 0;
+}
+/* 整屏模式下给资讯面板定高，超出的时间轴在面板内部滚动 */
+.page--home.fp-on .news-section .news-list {
+  height: var(--news-block-h);
+}
+.page--home .news-section .news-timeline {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(56, 189, 248, 0.4) transparent;
+  overscroll-behavior: contain;
+}
+.page--home .news-section .news-timeline::-webkit-scrollbar {
+  width: 5px;
+}
+.page--home .news-section .news-timeline::-webkit-scrollbar-track {
+  background: transparent;
+}
+.page--home .news-section .news-timeline::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.32);
+  border-radius: 3px;
+}
+.page--home .news-section .news-timeline::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.6);
 }
 .page--home .news-section .news-list__items {
   overflow-y: auto;
@@ -2996,8 +3015,8 @@ useTiltCards('.activity-card, .stat-card')
     letter-spacing: 0.06em;
     gap: 8px;
   }
-  .page--home .news-section .carousel {
-    height: clamp(220px, 40vh, 340px);
+  .page--home .news-section {
+    --news-block-h: clamp(220px, 40vh, 340px);
   }
   .carousel-hud {
     display: none;
@@ -3013,8 +3032,8 @@ useTiltCards('.activity-card, .stat-card')
 
 /* 矮窗口：精简资讯条数，保证首屏仍是一屏 */
 @media (min-width: 769px) and (max-height: 700px) {
-  .page--home .news-section .carousel {
-    height: clamp(240px, 46vh, 400px);
+  .page--home .news-section {
+    --news-block-h: clamp(240px, 46vh, 400px);
   }
   .page--home .news-item:nth-child(n + 4) {
     display: none;
@@ -3249,36 +3268,178 @@ useTiltCards('.activity-card, .stat-card')
   }
 }
 
-/* ===== 新增板块：关于科创源 / 四链融合 / 高校矩阵 / 发榜成果 ===== */
-.intro-section,
-.roadmap-section,
-.universities-section,
-.results-section {
+/* ===== 科创源信息球：关于 / 四链 / 高校 / 发榜 ===== */
+.globe-section {
   position: relative;
+  padding: 0;
+}
+
+/* 舞台吸顶：球体固定，滚动只驱动旋转 */
+.globe-stage {
+  --globe-r: clamp(460px, 30vw, 600px);
+  position: sticky;
+  top: 0;
+  z-index: 1;
   display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  min-height: calc(var(--home-viewport-h, 100vh) - var(--home-nav-h, 72px));
-  padding: clamp(24px, 4.4vh, 56px) 0;
+  align-items: center;
+  justify-content: center;
+  height: calc(var(--home-viewport-h, 100vh) - var(--home-nav-h, 72px));
+  overflow: hidden;
   background:
     radial-gradient(900px 420px at 12% 0%, rgba(56, 189, 248, 0.09), transparent 68%),
     radial-gradient(760px 380px at 90% 100%, rgba(99, 102, 241, 0.08), transparent 68%),
     var(--bg-primary);
 }
 
-/* 用 auto 外边距实现垂直居中：内容超高时自动从顶部开始，避免顶部被裁切且无法滚动上去 */
-.intro-section > .container,
-.roadmap-section > .container,
-.universities-section > .container,
-.results-section > .container {
-  margin-block: auto;
+/* 提供 3 屏的滚轮行程：面板1→2→3→4 */
+.globe-spacer {
+  height: 300vh;
 }
 
-.intro-section .section-header,
-.roadmap-section .section-header,
-.universities-section .section-header,
-.results-section .section-header {
-  margin-bottom: clamp(18px, 3vh, 34px);
+/* 小屏回退为普通滚动时，吸顶位置要让开导航栏 */
+.page--home:not(.fp-on) .globe-stage {
+  top: var(--home-nav-h, 72px);
+}
+
+.globe-sphere {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* 球心：经纬线 + 光核 */
+.globe-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--globe-r) * 1.15);
+  height: calc(var(--globe-r) * 1.15);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(56, 189, 248, 0.16),
+    rgba(56, 189, 248, 0.04) 46%,
+    transparent 68%
+  );
+}
+.globe-core__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(56, 189, 248, 0.18);
+}
+.globe-core__ring--2 {
+  inset: 14%;
+  border-color: rgba(99, 102, 241, 0.2);
+  transform: rotateY(62deg);
+}
+.globe-core__ring--3 {
+  inset: 14%;
+  border-color: rgba(56, 189, 248, 0.14);
+  transform: rotateX(66deg);
+}
+.globe-core__glow {
+  position: absolute;
+  inset: 30%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.28), transparent 70%);
+  filter: blur(18px);
+  animation: globePulse 6s ease-in-out infinite;
+}
+@keyframes globePulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.04);
+  }
+}
+
+/* 球面面板：四块内容按 90° 均匀分布 */
+.globe-panel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(880px, 74vw);
+  max-height: calc(100% - 72px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  padding: clamp(18px, 2.4vh, 30px) clamp(20px, 2.2vw, 34px);
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--border-light);
+  border-radius: 24px;
+  box-shadow: var(--shadow-large);
+  backface-visibility: hidden;
+  transform-origin: center center;
+}
+.globe-panel::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+.globe-panel--1 {
+  transform: translate(-50%, -50%) rotateY(0deg) translateZ(var(--globe-r));
+}
+.globe-panel--2 {
+  transform: translate(-50%, -50%) rotateY(90deg) translateZ(var(--globe-r));
+}
+.globe-panel--3 {
+  transform: translate(-50%, -50%) rotateY(180deg) translateZ(var(--globe-r));
+}
+.globe-panel--4 {
+  transform: translate(-50%, -50%) rotateY(270deg) translateZ(var(--globe-r));
+}
+
+.globe-panel .container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+.globe-panel .section-header {
+  margin-bottom: clamp(14px, 2.2vh, 26px);
+}
+
+/* 进度点 + 操作提示 */
+.globe-indicator {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 3;
+}
+.globe-indicator__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(14, 165, 233, 0.25);
+  transition: all var(--duration-base) var(--ease-default);
+}
+.globe-indicator__dot.is-active {
+  height: 22px;
+  border-radius: 4px;
+  background: var(--accent-gradient);
+}
+.globe-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  z-index: 3;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  pointer-events: none;
 }
 
 /* 服务快捷入口 */
@@ -3673,6 +3834,12 @@ useTiltCards('.activity-card, .stat-card')
 }
 
 @media (max-width: 1100px) {
+  .globe-stage {
+    --globe-r: clamp(380px, 42vw, 480px);
+  }
+  .globe-panel {
+    width: min(760px, 88vw);
+  }
   .intro-grid {
     grid-template-columns: 1fr;
   }
@@ -3690,12 +3857,20 @@ useTiltCards('.activity-card, .stat-card')
 }
 
 @media (max-width: 768px) {
-  .intro-section,
-  .roadmap-section,
-  .universities-section,
-  .results-section {
-    min-height: 0;
-    padding: 48px 0;
+  .globe-stage {
+    --globe-r: clamp(300px, 62vw, 400px);
+  }
+  .globe-panel {
+    width: 92vw;
+    max-height: calc(100% - 96px);
+    border-radius: 18px;
+  }
+  .globe-indicator {
+    right: 12px;
+  }
+  .globe-hint {
+    bottom: 12px;
+    font-size: 11px;
   }
   .intro-meta {
     grid-template-columns: 1fr;
@@ -3714,10 +3889,838 @@ useTiltCards('.activity-card, .stat-card')
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================================
+ * 本次改造：环形进度 / 数据流 / 时间轴 / 翻转卡 / 地图 / 轨道 / 巨字 / 深色
+ * ============================================================ */
+
+/* ---- 左侧环形滚动进度 ---- */
+.scroll-ring {
+  position: fixed;
+  left: 26px;
+  bottom: 28px;
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+}
+.scroll-ring__ring {
+  position: relative;
+  display: block;
+  width: 56px;
+  height: 56px;
+}
+.scroll-ring__ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.scroll-ring__track,
+.scroll-ring__bar {
+  fill: none;
+  stroke-width: 3;
+}
+.scroll-ring__track {
+  stroke: rgba(148, 163, 184, 0.28);
+}
+.scroll-ring__bar {
+  stroke: var(--accent-ice);
+  stroke-linecap: round;
+  stroke-dasharray: 119.4;
+  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.55));
+  transition: stroke-dashoffset 520ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.scroll-ring__pct {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+}
+.scroll-ring__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.scroll-ring__meta em {
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+}
+.scroll-ring__meta strong {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+@media (max-width: 900px) {
+  .scroll-ring {
+    display: none;
+  }
+}
+
+/* ---- 返回顶部 ---- */
+.back-top {
+  position: fixed;
+  right: 26px;
+  bottom: 28px;
+  z-index: 400;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-light);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-soft);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity var(--duration-base) var(--ease-default),
+    transform var(--duration-base) var(--ease-default),
+    visibility var(--duration-base) var(--ease-default),
+    color var(--duration-fast) var(--ease-default),
+    border-color var(--duration-fast) var(--ease-default),
+    box-shadow var(--duration-fast) var(--ease-default);
+}
+.back-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-top svg {
+  width: 17px;
+  height: 17px;
+}
+.back-top span {
+  font-size: 9.5px;
+  line-height: 1;
+  letter-spacing: 1.5px;
+}
+.back-top:hover {
+  color: var(--accent-deep);
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-3px);
+}
+@media (max-width: 900px) {
+  .back-top {
+    right: 16px;
+    bottom: 16px;
+    width: 46px;
+    height: 46px;
+  }
+}
+
+/* ---- 深色模式切换按钮 ---- */
+.nav__theme {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  transition: color var(--duration-base) var(--ease-default),
+    border-color var(--duration-base) var(--ease-default),
+    transform var(--duration-base) var(--ease-default),
+    box-shadow var(--duration-base) var(--ease-default);
+}
+.nav__theme svg {
+  width: 18px;
+  height: 18px;
+}
+.nav__theme:hover {
+  color: var(--accent-deep);
+  border-color: var(--border-glow);
+  transform: rotate(20deg);
+  box-shadow: var(--shadow-soft);
+}
+
+/* ---- 分屏入场：子元素依次上浮 ---- */
+@keyframes fpRise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.page--home .fp-section.is-current > .container > * {
+  animation: fpRise 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page--home .fp-section.is-current > .container > *:nth-child(2) {
+  animation-delay: 80ms;
+}
+.page--home .fp-section.is-current > .container > *:nth-child(3) {
+  animation-delay: 160ms;
+}
+.page--home .fp-section.is-current > .container > *:nth-child(4) {
+  animation-delay: 240ms;
+}
+.page--home .fp-section.is-current > .container > *:nth-child(5) {
+  animation-delay: 320ms;
+}
+.page--home .globe-section.is-current .globe-panel.is-face > .container > * {
+  animation: fpRise 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page--home .globe-section.is-current .globe-panel.is-face > .container > *:nth-child(2) {
+  animation-delay: 90ms;
+}
+.page--home .globe-section.is-current .globe-panel.is-face > .container > *:nth-child(3) {
+  animation-delay: 180ms;
+}
+.page--home .globe-section.is-current .globe-panel.is-face > .container > *:nth-child(4) {
+  animation-delay: 260ms;
+}
+
+/* ---- 首屏竖向关键词数据流 ---- */
+.data-stream {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 18%, #000 78%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 18%, #000 78%, transparent);
+}
+.data-stream__col {
+  position: absolute;
+  top: -26%;
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(11px, 0.85vw, 13px);
+  letter-spacing: 5px;
+  color: rgba(14, 165, 233, 0.34);
+  animation-name: dataStream;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+.data-stream__col:nth-child(2),
+.data-stream__col:nth-child(4) {
+  color: rgba(99, 102, 241, 0.28);
+}
+.data-stream__word {
+  display: block;
+  padding: 13px 0;
+  white-space: nowrap;
+}
+@keyframes dataStream {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+/* ---- 新闻资讯：竖向时间轴 ---- */
+.news-timeline {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin: 0;
+  padding: 12px 20px 12px 44px;
+  list-style: none;
+  overflow-y: auto;
+}
+.news-timeline::before {
+  content: '';
+  position: absolute;
+  left: 30px;
+  top: 18px;
+  bottom: 18px;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.55), rgba(99, 102, 241, 0.14));
+}
+.news-timeline__item {
+  position: relative;
+  padding: 8px 0 14px;
+}
+.news-timeline__node {
+  position: absolute;
+  left: -18.5px;
+  top: 13px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 2px solid var(--accent-ice);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.45);
+  transition: transform var(--duration-base) var(--ease-default),
+    background var(--duration-base) var(--ease-default);
+}
+.news-timeline__item--latest .news-timeline__node {
+  background: var(--accent-ice);
+  animation: newsNodePulse 2.4s ease-in-out infinite;
+}
+@keyframes newsNodePulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.5);
+  }
+  60% {
+    box-shadow: 0 0 0 6px rgba(56, 189, 248, 0);
+  }
+}
+.news-timeline__date {
+  font-size: 11.5px;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+.news-timeline__title {
+  display: -webkit-box;
+  margin: 2px 0 6px;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--text-primary);
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color var(--duration-fast) var(--ease-default);
+}
+.news-timeline__title:hover {
+  color: var(--accent-deep);
+}
+.news-timeline__item:hover .news-timeline__node {
+  transform: scale(1.3);
+  background: var(--accent-ice);
+}
+
+/* ---- 活动卡：悬停 3D 翻转（背面 = 主办 / 规模 / 二维码） ---- */
+.activity-card {
+  perspective: 1100px;
+}
+.activity-card__body {
+  position: relative;
+  z-index: 1;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: transform 640ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.activity-card:hover .activity-card__body {
+  transform: rotateY(180deg);
+}
+.activity-card__back {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 16px;
+  border-radius: inherit;
+  background: linear-gradient(150deg, #eef9ff 0%, #eef0ff 100%);
+  border: 1px solid var(--border-glow);
+  transform: rotateY(-180deg);
+  backface-visibility: hidden;
+  transition: transform 640ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.activity-card:hover .activity-card__back {
+  transform: rotateY(0deg);
+}
+.activity-card__back-tag {
+  align-self: flex-start;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-white);
+  background: linear-gradient(135deg, var(--accent-ice), var(--accent-purple));
+}
+.activity-card__back--ended .activity-card__back-tag {
+  color: var(--text-secondary);
+  background: rgba(148, 163, 184, 0.22);
+}
+.activity-card__back-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin: 0;
+}
+.activity-card__back-list div {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.activity-card__back-list dt {
+  flex: none;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.activity-card__back-list dd {
+  display: -webkit-box;
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--text-primary);
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.activity-card__qr {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 9px;
+  border-top: 1px dashed var(--border-light);
+}
+.activity-card__qr-box {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  padding: 3px;
+  border-radius: 6px;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+}
+.activity-card__qr-box svg {
+  width: 100%;
+  height: 100%;
+}
+.activity-card__qr-box rect {
+  fill: #0f172a;
+}
+.activity-card__qr-box rect[rx] {
+  fill: none;
+  stroke: #0f172a;
+  stroke-width: 2.4;
+}
+.activity-card__qr-text {
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+.activity-card__qr-text em {
+  display: block;
+  font-style: normal;
+  font-size: 10.5px;
+  color: var(--text-muted);
+}
+.activity-card__back-note {
+  margin-top: auto;
+  padding-top: 9px;
+  border-top: 1px dashed var(--border-light);
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+/* ---- 关于屏：手绘地图 + 紧凑数据卡 ---- */
+.about-body {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr);
+  gap: clamp(14px, 1.8vw, 26px);
+  align-items: stretch;
+}
+.campus-map {
+  position: relative;
+  min-height: clamp(300px, 44vh, 430px);
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-secondary);
+  box-shadow: var(--shadow-soft);
+}
+.campus-map__art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.map-anno {
+  font-family: 'STKaiti', 'KaiTi', 'PingFang SC', var(--font-family);
+  font-size: 13px;
+  letter-spacing: 2px;
+  fill: var(--text-secondary);
+  opacity: 0.85;
+}
+.map-anno--soft {
+  font-size: 11px;
+  letter-spacing: 3px;
+  fill: var(--text-muted);
+}
+.map-compass text {
+  font-size: 9px;
+  letter-spacing: 1px;
+  fill: var(--text-muted);
+}
+.map-pin {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  transform: translate(-50%, -50%);
+}
+.map-pin__dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 2px solid var(--accent-deep);
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.14);
+  transition: transform var(--duration-base) var(--ease-default),
+    background var(--duration-base) var(--ease-default);
+}
+.map-pin__name {
+  padding: 1px 6px;
+  font-size: 11px;
+  line-height: 1.5;
+  white-space: nowrap;
+  color: var(--text-secondary);
+  background: var(--bg-glass);
+  border-radius: 6px;
+}
+.map-pin:hover .map-pin__dot {
+  transform: scale(1.3);
+  background: var(--accent-ice);
+}
+.map-pin__tip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  width: 178px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  text-align: left;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-glow);
+  box-shadow: var(--shadow-medium);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 6px);
+  transition: opacity var(--duration-base) var(--ease-default),
+    transform var(--duration-base) var(--ease-default);
+}
+.map-pin:hover .map-pin__tip {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+.map-pin--right .map-pin__tip {
+  left: auto;
+  right: -6px;
+  transform: translate(0, 6px);
+}
+.map-pin--right:hover .map-pin__tip {
+  transform: translate(0, 0);
+}
+.map-pin__tip strong {
+  display: block;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--text-primary);
+}
+.map-pin__tip em {
+  display: block;
+  margin: 3px 0 6px;
+  font-style: normal;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.map-pin__link {
+  font-size: 11.5px;
+  color: var(--accent-deep);
+}
+.campus-map__legend {
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  z-index: 3;
+  padding: 4px 10px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+}
+.about-body .about-stats {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 0;
+  align-content: center;
+}
+.about-body .stat-card {
+  padding: 18px 16px;
+  text-align: left;
+}
+.about-body .stat-icon {
+  width: 38px;
+  height: 38px;
+  margin: 0 0 10px;
+  border-radius: 10px;
+}
+.about-body .stat-icon svg {
+  width: 20px;
+  height: 20px;
+}
+.about-body .stat-number {
+  margin-bottom: 4px;
+  font-size: 28px;
+}
+.about-body .stat-label {
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+.about-body .stat-desc {
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+.page--home.fp-on .about-header {
+  margin-bottom: clamp(14px, 2.4vh, 24px);
+}
+
+/* ---- 信息球：轨道弧线与流动光点 ---- */
+.globe-orbit {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.globe-sphere {
+  z-index: 1;
+}
+.globe-orbit__ring {
+  fill: none;
+  stroke: rgba(56, 189, 248, 0.14);
+  stroke-width: 1;
+}
+.globe-orbit__ring--2 {
+  stroke: rgba(99, 102, 241, 0.18);
+  stroke-dasharray: 4 9;
+}
+.globe-orbit__ring--3 {
+  stroke: rgba(56, 189, 248, 0.12);
+  stroke-dasharray: 2 12;
+}
+.globe-orbit__flow {
+  fill: none;
+  stroke: rgba(56, 189, 248, 0.65);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-dasharray: 1 34;
+  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.7));
+  animation: orbitFlow 9s linear infinite;
+}
+.globe-orbit__flow--2 {
+  stroke: rgba(129, 140, 248, 0.7);
+  stroke-dasharray: 1 26;
+  animation-duration: 7s;
+  animation-direction: reverse;
+}
+.globe-orbit__flow--3 {
+  stroke: rgba(103, 232, 249, 0.65);
+  stroke-dasharray: 1 18;
+  animation-duration: 5.4s;
+}
+@keyframes orbitFlow {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -420;
+  }
+}
+.globe-orbit__node {
+  fill: var(--accent-ice);
+  animation: orbitNode 3.6s ease-in-out infinite;
+}
+.globe-orbit__node--2 {
+  animation-delay: 0.9s;
+}
+.globe-orbit__node--3 {
+  animation-delay: 1.8s;
+}
+.globe-orbit__node--4 {
+  animation-delay: 2.7s;
+}
+@keyframes orbitNode {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ---- 页脚巨型描边字（横向视差） ---- */
+.footer {
+  position: relative;
+  overflow: hidden;
+}
+.footer__giant {
+  position: absolute;
+  left: 50%;
+  bottom: -0.4vw;
+  width: 130%;
+  z-index: 0;
+  transform: translateX(-50%);
+  text-align: center;
+  pointer-events: none;
+}
+.footer__giant span {
+  display: inline-block;
+  font-size: clamp(72px, 12vw, 200px);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1.2px rgba(56, 189, 248, 0.24);
+  transform: translateX(var(--footer-shift, 0px));
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.footer .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- 深色模式 ---- */
+.page--home.theme-dark {
+  --bg-primary: #070d18;
+  --bg-secondary: #0e1a2b;
+  --bg-glass: rgba(14, 26, 43, 0.72);
+  --text-primary: #e6eefb;
+  --text-secondary: #9fb3cc;
+  --text-muted: #6d8299;
+  --border-light: #1d2b40;
+  --border-glow: rgba(56, 189, 248, 0.32);
+  --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-large: 0 16px 48px rgba(0, 0, 0, 0.55);
+  color-scheme: dark;
+}
+.page--home.theme-dark .nav {
+  background: rgba(7, 13, 24, 0.82);
+}
+.page--home.theme-dark .globe-panel {
+  background: rgba(14, 26, 43, 0.96);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(56, 189, 248, 0.08);
+}
+.page--home.theme-dark .news-list__header {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);
+}
+.page--home.theme-dark .news-list__count {
+  background: rgba(14, 26, 43, 0.6);
+}
+.page--home.theme-dark .fp-nav__label {
+  background: rgba(14, 26, 43, 0.92);
+}
+.page--home.theme-dark .footer {
+  background: #04080f;
+}
+.page--home.theme-dark .footer__giant span {
+  -webkit-text-stroke-color: rgba(56, 189, 248, 0.3);
+}
+.page--home.theme-dark .tech-backdrop::after {
+  background: linear-gradient(
+    180deg,
+    rgba(7, 13, 24, 0.76) 0%,
+    rgba(7, 13, 24, 0.42) 38%,
+    rgba(7, 13, 24, 0.88) 100%
+  );
+}
+.page--home.theme-dark .tech-backdrop__photo {
+  opacity: 0.16;
+}
+.page--home.theme-dark .tech-ticker {
+  border-top-color: var(--border-light);
+}
+.page--home.theme-dark .hero-slogan__text {
+  background-image: linear-gradient(100deg, #7dd3fc 0%, #38bdf8 42%, #a5b4fc 100%);
+}
+.page--home.theme-dark .data-stream__col {
+  color: rgba(125, 211, 252, 0.3);
+}
+.page--home.theme-dark .activity-card__back {
+  background: linear-gradient(150deg, #0f2233 0%, #131b33 100%);
+}
+.page--home.theme-dark .activity-card__qr-box {
+  background: #e6eefb;
+}
+.page--home.theme-dark .map-pin__name {
+  background: rgba(14, 26, 43, 0.88);
+}
+.page--home.theme-dark .map-pin__tip {
+  background: rgba(14, 26, 43, 0.98);
+}
+.page--home.theme-dark .stat-card:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+}
+
+@media (max-width: 1100px) {
+  .about-body {
+    grid-template-columns: 1fr;
+  }
+  .campus-map {
+    min-height: 300px;
+  }
+  .about-body .about-stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 768px) {
+  .about-body .about-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .data-stream {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .data-stream__col,
+  .globe-orbit__flow,
+  .globe-orbit__node,
+  .news-timeline__item--latest .news-timeline__node,
+  .page--home .fp-section.is-current > .container > *,
+  .page--home .globe-section.is-current .globe-panel.is-face > .container > * {
+    animation: none !important;
+  }
+  .activity-card__body,
+  .activity-card__back,
+  .footer__giant span {
+    transition: none;
+  }
+}
 </style>
 
 <!-- 科技感双层光标：隐藏原生 + JS 惯性跟随 + 蓝色泛光 -->
 <style>
+/* 深色模式：页面根背景（scoped 令牌无法影响 html/body） */
+html.theme-dark,
+html.theme-dark body {
+  background: #070d18;
+  color-scheme: dark;
+}
+
 .cursor-layer {
   position: fixed;
   inset: 0;

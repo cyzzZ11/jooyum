@@ -61,12 +61,24 @@ export function useFullPage({
   const next = () => goTo(index.value + 1)
   const prev = () => goTo(index.value - 1)
 
+  /** 该容器在当前滚动方向上还能不能继续滚 */
+  function canScroll(el, delta) {
+    if (!el || el.scrollHeight <= el.clientHeight + 1) return false
+    const atTop = el.scrollTop <= 0
+    const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1
+    return delta > 0 ? !atBottom : !atTop
+  }
+
+  /** 滚轮目标落在标注了 data-fp-scroll 的子容器里时，优先交给它自己滚动 */
+  function findInnerScroller(target, section) {
+    if (!section || !(target instanceof Element)) return null
+    const el = target.closest('[data-fp-scroll]')
+    return el && section.contains(el) ? el : null
+  }
+
   /** 当前屏内容超出可视高度时，先让内部滚动消费滚轮 */
   function isInnerScrollable(section, delta) {
-    if (!section || section.scrollHeight <= section.clientHeight + 1) return false
-    const atTop = section.scrollTop <= 0
-    const atBottom = section.scrollTop + section.clientHeight >= section.scrollHeight - 1
-    return delta > 0 ? !atBottom : !atTop
+    return canScroll(section, delta)
   }
 
   function onWheel(event) {
@@ -74,7 +86,15 @@ export function useFullPage({
     if (document.body.style.overflow === 'hidden') return
 
     const delta = wheelAccum + event.deltaY
-    if (isInnerScrollable(sections[index.value], event.deltaY)) {
+    const section = sections[index.value]
+    // 屏内标注了 data-fp-scroll 的容器优先消费滚轮，滚到头就直接翻屏
+    const inner = findInnerScroller(event.target, section)
+    if (inner) {
+      if (canScroll(inner, event.deltaY)) {
+        wheelAccum = 0
+        return
+      }
+    } else if (isInnerScrollable(section, event.deltaY)) {
       wheelAccum = 0
       return
     }
