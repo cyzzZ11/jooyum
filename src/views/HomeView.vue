@@ -374,6 +374,9 @@
                     <i></i>
                     <i></i>
                   </div>
+
+                  <!-- 实拍图来源标注 -->
+                  <span class="carousel__credit">图片来源：松江区融媒体中心</span>
                 </div>
 
                 <!-- 右侧新闻资讯（30%） -->
@@ -384,31 +387,42 @@
                   </div>
                   <ul class="news-list__items">
                     <li class="news-item">
-                      <!-- <span class="news-item__tag">平台动态</span> -->
-                      <a href="#" class="news-item__link">科技创新服务平台正式上线</a>
-                      <span class="news-item__date">2026-08-10</span>
+                      <a href="#" class="news-item__link">关于加快推进松江大学城科创源建设的若干政策措施</a>
+                      <div class="news-item__meta">
+                        <span class="news-item__tag news-item__tag--policy">政策发布</span>
+                        <span class="news-item__date">2026-10-24</span>
+                      </div>
                     </li>
                     <li class="news-item">
-                      <!-- <span class="news-item__tag">行业资讯</span> -->
-                      <a href="#" class="news-item__link">产学研合作创新论坛成功举办</a>
-                      <span class="news-item__date">2026-08-09</span>
+                      <a href="#" class="news-item__link">2026 年松江区科技成果转化项目申报正式启动</a>
+                      <div class="news-item__meta">
+                        <span class="news-item__tag news-item__tag--event">活动通知</span>
+                        <span class="news-item__date">2026-10-21</span>
+                      </div>
                     </li>
                     <li class="news-item">
-                      <!-- <span class="news-item__tag">政策更新</span> -->
-                      <a href="#" class="news-item__link">高新技术企业认定申报指南发布</a>
-                      <span class="news-item__date">2026-08-08</span>
+                      <a href="#" class="news-item__link">人民日报：松江大学城科创源打造科技成果转化沃土</a>
+                      <div class="news-item__meta">
+                        <span class="news-item__tag news-item__tag--media">媒体关注</span>
+                        <span class="news-item__date">2026-10-18</span>
+                      </div>
                     </li>
                     <li class="news-item">
-                      <!-- <span class="news-item__tag">活动通知</span> -->
-                      <a href="#" class="news-item__link">第三期创业训练营开始招募</a>
-                      <span class="news-item__date">2026-08-07</span>
+                      <a href="#" class="news-item__link">校企双向发榜平台上线，首批发布企业技术需求 72 项</a>
+                      <div class="news-item__meta">
+                        <span class="news-item__tag news-item__tag--platform">平台动态</span>
+                        <span class="news-item__date">2026-10-15</span>
+                      </div>
                     </li>
                     <li class="news-item">
-                      <!-- <span class="news-item__tag">活动通知</span> -->
-                      <a href="#" class="news-item__link">第二期科创论坛成功举办</a>
-                      <span class="news-item__date">2026-08-07</span>
+                      <a href="#" class="news-item__link">“芯链闭门局”半导体上下游闭门交流会开始报名</a>
+                      <div class="news-item__meta">
+                        <span class="news-item__tag news-item__tag--event">活动通知</span>
+                        <span class="news-item__date">2026-10-12</span>
+                      </div>
                     </li>
                   </ul>
+                  <div class="news-list__count">当前显示 91 条动态</div>
                 </div>
               </div>
             </div>
@@ -426,6 +440,315 @@
                     >{{ word }}</span>
                   </template>
                 </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 关于科创源 -->
+          <section class="intro-section fp-section" id="overview">
+            <div class="container">
+              <div class="section-header">
+                <span class="section-header__eyebrow">ABOUT</span>
+                <h2 class="section-header__title">关于科创源</h2>
+                <p class="section-header__desc">
+                  以上海松江大学城高校区域为核心的创新策源地与产学研协同发展平台
+                </p>
+              </div>
+
+              <!-- 服务快捷入口 -->
+              <div class="service-strip">
+                <a class="service-chip" href="/cgzh-qy/tech-demand-platform">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 20V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v14" />
+                    <path d="M4 20h16" />
+                    <path d="M16 10h2a2 2 0 0 1 2 2v8" />
+                    <path d="M8 8h4M8 12h4" />
+                  </svg>
+                  <span>校企双向发榜</span>
+                </a>
+                <a class="service-chip" href="https://www.sjdxckcy.com/resource/index" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="16" rx="2" />
+                    <path d="M3 10h18M9 10v10" />
+                  </svg>
+                  <span>载体资源</span>
+                </a>
+                <a class="service-chip" href="https://www.sjdxckcy.com/home/publicService" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="12" rx="2" />
+                    <path d="M8 20h8M12 16v4" />
+                  </svg>
+                  <span>数字公共服务驿站</span>
+                </a>
+                <a class="service-chip" href="/sjkczcjs">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+                    <path d="M14 3v5h5M9 13h6M9 17h4" />
+                  </svg>
+                  <span>政策支持</span>
+                </a>
+                <a class="service-chip" href="/sjqrcfw">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="4" />
+                    <path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1" />
+                  </svg>
+                  <span>人才服务</span>
+                </a>
+              </div>
+
+              <div class="intro-grid">
+                <div class="intro-story">
+                  <p class="intro-story__lead">
+                    为贯彻落实市委、市政府关于松江大学城优化提升的部署要求，松江区在市级工作机制领导下，
+                    按照“高、新、特、实”的发展理念推进科创源建设，集聚政府、技术、市场、产业等各方资源要素，
+                    打造服务科技成果转化的沃土、汇聚创新创业的热土、开放共享的乐土。
+                  </p>
+                  <p class="intro-story__text">
+                    2025 年 12 月 20 日，松江大学城科创源正式揭牌，进入实体化运行阶段。以 5.5 平方公里高校区域为核心空间，
+                    汇聚 8 所高校、12 万余名师生，推动科技创新与产业创新深度融合，加快实现新质生产力发展先行区目标。
+                  </p>
+                  <dl class="intro-meta">
+                    <div>
+                      <dt>建设推动</dt>
+                      <dd>上海市教育委员会 · 松江区人民政府</dd>
+                    </div>
+                    <div>
+                      <dt>运营主体</dt>
+                      <dd>上海松江高创源科技服务有限公司</dd>
+                    </div>
+                    <div>
+                      <dt>实体化运行</dt>
+                      <dd>2025 年 12 月 20 日</dd>
+                    </div>
+                  </dl>
+                </div>
+
+                <div class="intro-facts">
+                  <div class="intro-fact">
+                    <strong>5.5</strong>
+                    <span>平方公里</span>
+                    <em>核心区面积</em>
+                  </div>
+                  <div class="intro-fact">
+                    <strong>8</strong>
+                    <span>所</span>
+                    <em>高校汇聚</em>
+                  </div>
+                  <div class="intro-fact">
+                    <strong>12<small>万+</small></strong>
+                    <span>名</span>
+                    <em>在校师生</em>
+                  </div>
+                  <div class="intro-fact">
+                    <strong>19</strong>
+                    <span>个</span>
+                    <em>功能性平台</em>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 四链融合 · 发展目标 -->
+          <section class="roadmap-section fp-section" id="roadmap">
+            <div class="container">
+              <div class="section-header">
+                <span class="section-header__eyebrow">ROADMAP</span>
+                <h2 class="section-header__title">四链融合 · 发展目标</h2>
+                <p class="section-header__desc">
+                  创新链、产业链、资金链、人才链协同发力，分三步建成大学科创中心
+                </p>
+              </div>
+
+              <div class="chain-grid">
+                <article class="chain-card">
+                  <span class="chain-card__no">01</span>
+                  <h3>创新链</h3>
+                  <p>高校科研成果与企业技术需求双向发榜，逐项比对匹配，全程跟踪至合同、样机、中试与产业化。</p>
+                </article>
+                <article class="chain-card">
+                  <span class="chain-card__no">02</span>
+                  <h3>产业链</h3>
+                  <p>聚焦新材料、仪器仪表、“6G + AI + 卫星互联网”等方向，推动实验室成果对接真实产业场景。</p>
+                </article>
+                <article class="chain-card">
+                  <span class="chain-card__no">03</span>
+                  <h3>资金链</h3>
+                  <p>与长三角国家技术创新中心共建 3 亿元“拨投结合”专项资金池，5 年内支持不少于 30 个科技创业项目。</p>
+                </article>
+                <article class="chain-card">
+                  <span class="chain-card__no">04</span>
+                  <h3>人才链</h3>
+                  <p>技术经理人按普及型、骨干型、高端型三梯度培养，科创训练营以“3+3+3”体系支持师生创业。</p>
+                </article>
+              </div>
+
+              <ol class="roadmap">
+                <li class="roadmap__item">
+                  <span class="roadmap__year">2027</span>
+                  <h4>夯基筑台</h4>
+                  <p>集聚不少于 3 个产教融合实训基地，百余门特色微专业课程实现跨校选课、学分互认。</p>
+                </li>
+                <li class="roadmap__item">
+                  <span class="roadmap__year">2030</span>
+                  <h4>四基地成型</h4>
+                  <p>建成科技成果转化基地、产业人才培育基地、师生创新创业基地与开放共享合作基地。</p>
+                </li>
+                <li class="roadmap__item">
+                  <span class="roadmap__year">2035</span>
+                  <h4>大学科创中心</h4>
+                  <p>全面建成具有全球影响力的大学科创中心，成为区域创新策源的核心引擎。</p>
+                </li>
+              </ol>
+            </div>
+          </section>
+
+          <!-- 八所高校矩阵 -->
+          <section class="universities-section fp-section" id="universities">
+            <div class="container">
+              <div class="section-header">
+                <span class="section-header__eyebrow">UNIVERSITIES</span>
+                <h2 class="section-header__title">八所高校 · 同城协同</h2>
+                <p class="section-header__desc">
+                  8 所高校、12 万余名师生同处 5.5 平方公里，学科互补、课程共享、成果互通
+                </p>
+              </div>
+
+              <div class="uni-grid">
+                <a class="uni-card" href="https://www.shisu.edu.cn" target="_blank" rel="noopener">
+                  <span class="uni-card__badge">01</span>
+                  <h3 class="uni-card__name">上海外国语大学</h3>
+                  <p class="uni-card__tag">语言科技 · 国际传播</p>
+                  <span class="uni-card__go">访问官网</span>
+                </a>
+                <a class="uni-card" href="https://www.dhu.edu.cn" target="_blank" rel="noopener">
+                  <span class="uni-card__badge">02</span>
+                  <h3 class="uni-card__name">东华大学</h3>
+                  <p class="uni-card__tag">新材料 · 纺织服装</p>
+                  <span class="uni-card__go">访问官网</span>
+                </a>
+                <a class="uni-card" href="https://www.ecupl.edu.cn" target="_blank" rel="noopener">
+                  <span class="uni-card__badge">03</span>
+                  <h3 class="uni-card__name">华东政法大学</h3>
+                  <p class="uni-card__tag">法治营商 · 知识产权</p>
+                  <span class="uni-card__go">访问官网</span>
+                </a>
+                <a class="uni-card" href="https://www.suibe.edu.cn" target="_blank" rel="noopener">
+                  <span class="uni-card__badge">04</span>
+                  <h3 class="uni-card__name">上海对外经贸大学</h3>
+                  <p class="uni-card__tag">经贸金融 · 数字贸易</p>
+                  <span class="uni-card__go">访问官网</span>
+                </a>
+                <a class="uni-card" href="https://www.lixin.edu.cn" target="_blank" rel="noopener">
+                  <span class="uni-card__badge">05</span>
+                  <h3 class="uni-card__name">上海立信会计金融学院</h3>
+                  <p class="uni-card__tag">会计金融 · 数据审计</p>
+                  <span class="uni-card__go">访问官网</span>
+                </a>
+                <a class="uni-card" href="https://www.sues.edu.cn" target="_blank" rel="noopener">
+                  <span class="uni-card__badge">06</span>
+                  <h3 class="uni-card__name">上海工程技术大学</h3>
+                  <p class="uni-card__tag">智能制造 · 轨道交通</p>
+                  <span class="uni-card__go">访问官网</span>
+                </a>
+                <a class="uni-card" href="https://www.siva.edu.cn" target="_blank" rel="noopener">
+                  <span class="uni-card__badge">07</span>
+                  <h3 class="uni-card__name">上海视觉艺术学院</h3>
+                  <p class="uni-card__tag">视觉设计 · 数字文创</p>
+                  <span class="uni-card__go">访问官网</span>
+                </a>
+                <a class="uni-card" href="https://www.sus.edu.cn" target="_blank" rel="noopener">
+                  <span class="uni-card__badge">08</span>
+                  <h3 class="uni-card__name">上海体育大学</h3>
+                  <p class="uni-card__tag">运动健康 · 体育科技</p>
+                  <span class="uni-card__go">访问官网</span>
+                </a>
+              </div>
+
+              <!-- 合作机构 -->
+              <div class="uni-partners">
+                <span class="uni-partners__label">合作机构</span>
+                <div class="uni-partners__list">
+                  <a
+                    class="partner-card"
+                    href="https://www.lidapoly.edu.cn"
+                    target="_blank"
+                    rel="noopener"
+                  >上海立达学院</a>
+                  <a
+                    class="partner-card"
+                    href="http://www.shafc.edu.cn"
+                    target="_blank"
+                    rel="noopener"
+                  >上海农林职业技术学院</a>
+                  <a
+                    class="partner-card"
+                    href="http://www.shtivc.edu.cn"
+                    target="_blank"
+                    rel="noopener"
+                  >上海科创职业技术学院</a>
+                  <a
+                    class="partner-card"
+                    href="https://www.shsmu.edu.cn/sri"
+                    target="_blank"
+                    rel="noopener"
+                  >上海交通大学医学院松江研究院</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 校企双向发榜成果 -->
+          <section class="results-section fp-section" id="results">
+            <div class="container">
+              <div class="section-header">
+                <span class="section-header__eyebrow">MATCHING</span>
+                <h2 class="section-header__title">校企双向发榜</h2>
+                <p class="section-header__desc">
+                  让高校成果找到产业场景，让企业需求找到技术答案
+                </p>
+              </div>
+
+              <div class="results-stats">
+                <div class="results-stat">
+                  <strong>72</strong>
+                  <span>项高校科研成果</span>
+                </div>
+                <div class="results-stat">
+                  <strong>66</strong>
+                  <span>项企业研发需求</span>
+                </div>
+                <div class="results-stat">
+                  <strong>46</strong>
+                  <span>个促成合作</span>
+                </div>
+                <div class="results-stat">
+                  <strong>3000<small>万元</small></strong>
+                  <span>累计合作金额</span>
+                </div>
+              </div>
+
+              <div class="results-cases">
+                <article class="case-card">
+                  <span class="case-card__tag">新材料</span>
+                  <h4>东华大学 × 上海朗亿功能材料</h4>
+                  <p>固态电池电解质项目已产出实验室小样；AI 分散剂项目完成基础模型搭建，进入企业内部试用。</p>
+                </article>
+                <article class="case-card">
+                  <span class="case-card__tag">智能制造</span>
+                  <h4>上海工程技术大学 × 科海华泰船舶电气</h4>
+                  <p>联合开展大型船舶电气绝缘智能检测技术攻关，推动检测环节由人工判断向智能判定升级。</p>
+                </article>
+                <article class="case-card">
+                  <span class="case-card__tag">绿色低碳</span>
+                  <h4>东华大学 × 泽耀环保科技</h4>
+                  <p>“低碳源污水处理装置”完成技术转让，绿色低碳技术在园区内加速落地。</p>
+                </article>
+              </div>
+
+              <div class="results-cta">
+                <a class="btn results-cta__main" href="/cgzh-qy/tech-demand-platform">企业发榜</a>
+                <a class="btn btn--outline" href="/cgzh-gx/university-tech-demand">高校发榜</a>
               </div>
             </div>
           </section>
@@ -476,13 +799,13 @@
                     <div class="activity-card__body">
                       <div class="activity-card__meta">
                         <span>
-                          <span class="badge badge--hot">热门</span>
-                          <span class="activity-card__type">创新创业</span>
+                          <span class="badge badge--hot">报名中</span>
+                          <span class="activity-card__type">医工融合</span>
                         </span>
-                        <span class="activity-card__date">2026.12.15</span>
+                        <span class="activity-card__date">2026.10.31</span>
                       </div>
-                      <h3 class="activity-card__title">2026创新创业大赛</h3>
-                      <p class="activity-card__desc">面向全国创业者的顶级赛事，百万奖金池，专业导师辅导</p>
+                      <h3 class="activity-card__title">数智康复 · 医工融合——打造“智能康复新质生产力”</h3>
+                      <p class="activity-card__desc">主办单位：中国康复医学会康复工程与产业促进专业委员会 · 规模 500 人</p>
                       <div class="activity-card__footer">
                         <div class="activity-card__stats">
                           <span class="activity-card__stat">
@@ -552,13 +875,13 @@
                     <div class="activity-card__body">
                       <div class="activity-card__meta">
                         <span>
-                          <span class="badge badge--upcoming">即将开始</span>
-                          <span class="activity-card__type">产业对接</span>
+                          <span class="badge badge--hot">报名中</span>
+                          <span class="activity-card__type">半导体</span>
                         </span>
-                        <span class="activity-card__date">2026.12.20</span>
+                        <span class="activity-card__date">2026.10.30</span>
                       </div>
-                      <h3 class="activity-card__title">人工智能产业对接会</h3>
-                      <p class="activity-card__desc">企业团体专场，链接上下游资源，促成产业合作</p>
+                      <h3 class="activity-card__title">“芯链闭门局”——半导体上下游闭门交流会</h3>
+                      <p class="activity-card__desc">主办单位：松江大学城科创源 · 上海绿之岸碳科技有限公司 · 规模 30 人</p>
                       <div class="activity-card__footer">
                         <div class="activity-card__stats">
                           <span class="activity-card__stat">
@@ -625,13 +948,13 @@
                     <div class="activity-card__body">
                       <div class="activity-card__meta">
                         <span>
-                          <span class="badge badge--hot">热门</span>
-                          <span class="activity-card__type">研学交流</span>
+                          <span class="badge badge--hot">报名中</span>
+                          <span class="activity-card__type">人工智能</span>
                         </span>
-                        <span class="activity-card__date">2026.12.18</span>
+                        <span class="activity-card__date">2026.10.29</span>
                       </div>
-                      <h3 class="activity-card__title">顶尖实验室研学营</h3>
-                      <p class="activity-card__desc">走进国家级重点实验室，与顶尖科学家面对面交流</p>
+                      <h3 class="activity-card__title">数智赋能——松江区 AI 赋能产业转型沙龙</h3>
+                      <p class="activity-card__desc">主办单位：松江区数据局 · 规模 30 人</p>
                       <div class="activity-card__footer">
                         <div class="activity-card__stats">
                           <span class="activity-card__stat">
@@ -678,7 +1001,7 @@
                   </article>
 
                   <!-- 卡片4 -->
-                  <article class="activity-card">
+                  <article class="activity-card activity-card--ended">
                     <!-- <div class="activity-card__badge">
                   <span class="badge badge--upcoming">即将开始</span>
                     </div>-->
@@ -701,13 +1024,13 @@
                     <div class="activity-card__body">
                       <div class="activity-card__meta">
                         <span>
-                          <span class="badge badge--upcoming">即将开始</span>
-                          <span class="activity-card__type">产业对接</span>
+                          <span class="badge badge--ended">已结束</span>
+                          <span class="activity-card__type">数字孪生</span>
                         </span>
-                        <span class="activity-card__date">2026.12.25</span>
+                        <span class="activity-card__date">2026.10.27</span>
                       </div>
-                      <h3 class="activity-card__title">绿色能源产业峰会</h3>
-                      <p class="activity-card__desc">新能源企业专场，探讨双碳目标下的产业机遇与挑战</p>
+                      <h3 class="activity-card__title">3D 高斯与数字孪生培训和发展论坛</h3>
+                      <p class="activity-card__desc">主办单位：深圳市其域创新科技股份有限公司 · 规模 80 人</p>
                       <div class="activity-card__footer">
                         <div class="activity-card__stats">
                           <span class="activity-card__stat">
@@ -753,7 +1076,7 @@
                   </article>
 
                   <!-- 卡片5 -->
-                  <article class="activity-card">
+                  <article class="activity-card activity-card--ended">
                     <!-- <div class="activity-card__image">
                   <div class="activity-card__img-bg" style="background: linear-gradient(135deg, #fef3c7 0%, #e0f2fe 100%);"></div>
                   <svg class="activity-card__icon" viewBox="0 0 64 64" fill="none">
@@ -769,11 +1092,14 @@
                     </div>-->
                     <div class="activity-card__body">
                       <div class="activity-card__meta">
-                        <span class="activity-card__type">创新创业</span>
-                        <span class="activity-card__date">2026.12.28</span>
+                        <span>
+                          <span class="badge badge--ended">已结束</span>
+                          <span class="activity-card__type">创业沙龙</span>
+                        </span>
+                        <span class="activity-card__date">2026.10.27</span>
                       </div>
-                      <h3 class="activity-card__title">创业基础训练营</h3>
-                      <p class="activity-card__desc">从零开始学创业，商业模式、融资路演一站式掌握</p>
+                      <h3 class="activity-card__title">奉贤区退役军人创业沙龙 · 金海街道专场</h3>
+                      <p class="activity-card__desc">主办单位：上海市奉贤区人民政府金海街道办事处 · 松江大学城科创源 · 规模 40 人</p>
                       <div class="activity-card__footer">
                         <div class="activity-card__stats">
                           <span class="activity-card__stat">
@@ -820,7 +1146,7 @@
                   </article>
 
                   <!-- 卡片6 -->
-                  <article class="activity-card">
+                  <article class="activity-card activity-card--ended">
                     <!-- <div class="activity-card__badge">
                   <span class="badge badge--hot">热门</span>
                 </div>
@@ -840,11 +1166,14 @@
                     </div>-->
                     <div class="activity-card__body">
                       <div class="activity-card__meta">
-                        <span class="activity-card__type">企业服务</span>
-                        <span class="activity-card__date">2025.01.05</span>
+                        <span>
+                          <span class="badge badge--ended">已结束</span>
+                          <span class="activity-card__type">城市沙龙</span>
+                        </span>
+                        <span class="activity-card__date">2026.10.23</span>
                       </div>
-                      <h3 class="activity-card__title">企业数字化转型论坛</h3>
-                      <p class="activity-card__desc">聚焦企业数字化转型实践，分享成功案例与方法论</p>
+                      <h3 class="activity-card__title">GOPC 城市沙龙</h3>
+                      <p class="activity-card__desc">主办单位：同橙科创产业发展集团有限公司 · 规模 20 人</p>
                       <div class="activity-card__footer">
                         <div class="activity-card__stats">
                           <span class="activity-card__stat">
@@ -890,7 +1219,7 @@
                   </article>
 
                   <!-- 卡片7 -->
-                  <article class="activity-card">
+                  <article class="activity-card activity-card--ended">
                     <!-- <div class="activity-card__badge">
                   <span class="badge badge--upcoming">即将开始</span>
                 </div>
@@ -909,11 +1238,14 @@
                     </div>-->
                     <div class="activity-card__body">
                       <div class="activity-card__meta">
-                        <span class="activity-card__type">创新创业</span>
-                        <span class="activity-card__date">2025.01.10</span>
+                        <span>
+                          <span class="badge badge--ended">已结束</span>
+                          <span class="activity-card__type">政策宣讲</span>
+                        </span>
+                        <span class="activity-card__date">2026.10.20</span>
                       </div>
-                      <h3 class="activity-card__title">产品经理进阶工坊</h3>
-                      <p class="activity-card__desc">从0到1打造爆款产品，实战案例深度拆解与方法论梳理</p>
+                      <h3 class="activity-card__title">高水平大学城科创源赋能新质生产力发展先行区建设</h3>
+                      <p class="activity-card__desc">主办单位：区委党校 · 规模 60 人</p>
                       <div class="activity-card__footer">
                         <div class="activity-card__stats">
                           <span class="activity-card__stat">
@@ -960,7 +1292,7 @@
                   </article>
 
                   <!-- 卡片8 -->
-                  <article class="activity-card">
+                  <article class="activity-card activity-card--ended">
                     <!-- <div class="activity-card__image">
                   <div class="activity-card__img-bg" style="background: linear-gradient(135deg, #cffafe 0%, #e0f2fe 100%);"></div>
                   <svg class="activity-card__icon" viewBox="0 0 64 64" fill="none">
@@ -979,11 +1311,14 @@
                     </div>-->
                     <div class="activity-card__body">
                       <div class="activity-card__meta">
-                        <span class="activity-card__type">研学交流</span>
-                        <span class="activity-card__date">2025.01.18</span>
+                        <span>
+                          <span class="badge badge--ended">已结束</span>
+                          <span class="activity-card__type">国际交流</span>
+                        </span>
+                        <span class="activity-card__date">2026.10.20</span>
                       </div>
-                      <h3 class="activity-card__title">AI前沿技术研修班</h3>
-                      <p class="activity-card__desc">大模型、AIGC、智能体技术深度解析，一线专家亲授</p>
+                      <h3 class="activity-card__title">中国国际青年交流中心拉美青年商业领袖调研活动</h3>
+                      <p class="activity-card__desc">主办单位：团区委</p>
                       <div class="activity-card__footer">
                         <div class="activity-card__stats">
                           <span class="activity-card__stat">
@@ -1181,10 +1516,10 @@
                       </defs>
                     </svg>
                   </div>
-                  <h4 class="footer__name">科技服务平台</h4>
+                  <h4 class="footer__name">松江大学城科创源</h4>
                   <p class="footer__desc">
-                    聚焦创新创业，赋能产业发展
-                    <br />打造产学研一体化科技服务生态
+                    服务科技成果转化的沃土
+                    <br />汇聚创新创业的热土 · 开放共享的乐土
                   </p>
                 </div>
                 <div class="footer__col">
@@ -1236,7 +1571,7 @@
                           d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
                         />
                       </svg>
-                      400-888-8888
+                      021-3773 5673
                     </li>
                     <li>
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1245,20 +1580,21 @@
                         />
                         <polyline points="22,6 12,13 2,6" />
                       </svg>
-                      contact@techplatform.com
+                      service@sjdxckcy.com
                     </li>
                     <li>
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                         <circle cx="12" cy="10" r="3" />
                       </svg>
-                      北京市海淀区中关村科技园
+                      松江区文汇路 699 号德稻大师楼 11 层
                     </li>
                   </ul>
                 </div>
               </div>
               <div class="footer__bottom">
-                <p>© 2026 科技服务平台 版权所有 | 京ICP备XXXXXXXX号</p>
+                <p>主办单位：松江大学城科创源　|　运营单位：上海松江高创源科技服务有限公司</p>
+                <p>© 2026 松江大学城科创源 版权所有　|　沪ICP备2025000000号-1</p>
               </div>
             </div>
           </footer>
@@ -1299,6 +1635,10 @@ const { index: fpIndex, enabled: fpEnabled, settling: fpSettling, goTo: fpGoTo }
 
 const fpSections = [
   { id: 'innovation', label: '新闻资讯' },
+  { id: 'overview', label: '关于科创源' },
+  { id: 'roadmap', label: '四链融合' },
+  { id: 'universities', label: '高校矩阵' },
+  { id: 'results', label: '发榜成果' },
   { id: 'startup', label: '活动报名' },
   { id: 'about', label: '关于我们' },
   { id: 'contact', label: '联系我们' },
@@ -1947,6 +2287,80 @@ useTiltCards('.activity-card, .stat-card')
 }
 .page--home .news-section .news-list__items {
   overflow-y: auto;
+}
+
+/* 资讯条：标题在上，分类标签 + 日期在同一行 */
+.news-item__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.news-item__meta .news-item__date::before {
+  content: '·';
+  margin-right: 8px;
+  color: var(--border-light);
+}
+.news-item__tag--policy {
+  color: #0ea5e9;
+  background: rgba(14, 165, 233, 0.1);
+}
+.news-item__tag--event {
+  color: #6366f1;
+  background: rgba(99, 102, 241, 0.1);
+}
+.news-item__tag--media {
+  color: #0f9d76;
+  background: rgba(16, 185, 129, 0.12);
+}
+.news-item__tag--platform {
+  color: #b45309;
+  background: rgba(245, 158, 11, 0.14);
+}
+.news-list__count {
+  padding: 10px 20px;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  border-top: 1px solid var(--border-light);
+  background: rgba(248, 250, 252, 0.6);
+}
+
+/* 活动卡：人数/城市统计已并入摘要（主办单位 · 规模），隐藏原统计区 */
+.activity-card__stats {
+  display: none;
+}
+.activity-card__footer {
+  justify-content: flex-end;
+}
+.badge--ended {
+  background: rgba(148, 163, 184, 0.18);
+  color: var(--text-secondary);
+}
+.activity-card--ended {
+  opacity: 0.8;
+}
+.activity-card--ended .activity-card__footer {
+  display: none;
+}
+
+/* 页脚底部信息：主办 / 运营 / 版权备案分两行 */
+.footer__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* 轮播底图来源标注 */
+.carousel__credit {
+  position: absolute;
+  right: 14px;
+  bottom: 10px;
+  z-index: 3;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.62);
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 4px rgba(15, 23, 42, 0.6);
+  pointer-events: none;
 }
 
 /* ---- 极光 / 网格 / 扫描线 ---- */
@@ -2832,6 +3246,472 @@ useTiltCards('.activity-card, .stat-card')
   }
   .scroll-progress span {
     transition: none;
+  }
+}
+
+/* ===== 新增板块：关于科创源 / 四链融合 / 高校矩阵 / 发榜成果 ===== */
+.intro-section,
+.roadmap-section,
+.universities-section,
+.results-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: calc(var(--home-viewport-h, 100vh) - var(--home-nav-h, 72px));
+  padding: clamp(24px, 4.4vh, 56px) 0;
+  background:
+    radial-gradient(900px 420px at 12% 0%, rgba(56, 189, 248, 0.09), transparent 68%),
+    radial-gradient(760px 380px at 90% 100%, rgba(99, 102, 241, 0.08), transparent 68%),
+    var(--bg-primary);
+}
+
+/* 用 auto 外边距实现垂直居中：内容超高时自动从顶部开始，避免顶部被裁切且无法滚动上去 */
+.intro-section > .container,
+.roadmap-section > .container,
+.universities-section > .container,
+.results-section > .container {
+  margin-block: auto;
+}
+
+.intro-section .section-header,
+.roadmap-section .section-header,
+.universities-section .section-header,
+.results-section .section-header {
+  margin-bottom: clamp(18px, 3vh, 34px);
+}
+
+/* 服务快捷入口 */
+.service-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: clamp(16px, 2.4vh, 26px);
+}
+.service-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  font-size: 13px;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--duration-base) var(--ease-default),
+              border-color var(--duration-base) var(--ease-default),
+              box-shadow var(--duration-base) var(--ease-default),
+              color var(--duration-base) var(--ease-default);
+}
+.service-chip svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent-ice);
+  transition: color var(--duration-base) var(--ease-default);
+}
+.service-chip:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-glow);
+  color: var(--accent-deep);
+  box-shadow: var(--shadow-medium);
+}
+.service-chip:hover svg {
+  color: var(--accent-deep);
+}
+
+/* 关于科创源 */
+.intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 44px);
+  align-items: center;
+}
+.intro-story__lead {
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.9;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+.intro-story__text {
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--text-muted);
+}
+.intro-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: clamp(16px, 2.6vh, 26px);
+}
+.intro-meta div {
+  padding: 12px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+}
+.intro-meta dt {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.intro-meta dd {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+
+.intro-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 1.4vw, 16px);
+}
+.intro-fact {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(16px, 1.9vw, 24px);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  box-shadow: var(--shadow-soft);
+}
+.intro-fact::after {
+  content: '';
+  position: absolute;
+  right: -22%;
+  bottom: -58%;
+  width: 130px;
+  height: 130px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.18), transparent 70%);
+}
+.intro-fact strong {
+  display: inline-block;
+  font-size: clamp(26px, 2.6vw, 40px);
+  font-weight: 700;
+  line-height: 1.1;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.intro-fact small {
+  font-size: 0.45em;
+}
+.intro-fact span {
+  margin-left: 4px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.intro-fact em {
+  display: block;
+  margin-top: 8px;
+  font-style: normal;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+/* 四链融合 */
+.chain-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(10px, 1.2vw, 16px);
+}
+.chain-card {
+  padding: clamp(16px, 1.8vw, 22px);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--duration-base) var(--ease-default),
+              box-shadow var(--duration-base) var(--ease-default),
+              border-color var(--duration-base) var(--ease-default);
+}
+.chain-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-medium);
+}
+.chain-card__no {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--accent-ice);
+}
+.chain-card h3 {
+  margin: 8px 0 10px;
+  font-size: 17px;
+  color: var(--text-primary);
+}
+.chain-card p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.roadmap {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(10px, 1.2vw, 16px);
+  margin-top: clamp(14px, 2.4vh, 26px);
+  padding: 0;
+}
+.roadmap__item {
+  list-style: none;
+  padding: clamp(14px, 1.6vw, 20px);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-light);
+  border-left: 3px solid var(--accent-ice);
+  border-radius: 12px;
+}
+.roadmap__year {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--accent-gradient-soft);
+  border: 1px solid var(--border-glow);
+  color: var(--accent-deep);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.roadmap__item h4 {
+  margin: 8px 0 6px;
+  font-size: 15px;
+  color: var(--text-primary);
+}
+.roadmap__item p {
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+/* 八所高校矩阵 */
+.uni-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(10px, 1.2vw, 16px);
+}
+.uni-card {
+  display: block;
+  padding: clamp(16px, 1.8vw, 22px);
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--duration-base) var(--ease-default),
+              box-shadow var(--duration-base) var(--ease-default),
+              border-color var(--duration-base) var(--ease-default);
+}
+.uni-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-medium);
+}
+.uni-card__badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--accent-ice);
+}
+.uni-card__name {
+  margin: 6px 0 8px;
+  font-size: clamp(14px, 1.05vw, 16px);
+  color: var(--text-primary);
+}
+.uni-card__tag {
+  font-size: 12px;
+  letter-spacing: 0.3px;
+  color: var(--text-muted);
+}
+.uni-card__go {
+  display: block;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--accent-deep);
+  opacity: 0.6;
+  transition: opacity var(--duration-base) var(--ease-default),
+              transform var(--duration-base) var(--ease-default);
+}
+.uni-card:hover .uni-card__go {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+/* 合作机构 */
+.uni-partners {
+  margin-top: clamp(14px, 1.8vh, 22px);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.uni-partners__label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+.uni-partners__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.partner-card {
+  padding: 6px 14px;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  transition: color var(--duration-base) var(--ease-default),
+              border-color var(--duration-base) var(--ease-default),
+              transform var(--duration-base) var(--ease-default);
+}
+.partner-card:hover {
+  color: var(--accent-deep);
+  border-color: var(--border-glow);
+  transform: translateY(-2px);
+}
+
+/* 校企双向发榜 */
+.results-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(10px, 1.2vw, 16px);
+}
+.results-stat {
+  text-align: center;
+  padding: clamp(12px, 1.5vw, 20px);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  box-shadow: var(--shadow-soft);
+}
+.results-stat strong {
+  display: inline-block;
+  font-size: clamp(26px, 2.6vw, 38px);
+  font-weight: 700;
+  line-height: 1.15;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.results-stat small {
+  font-size: 12px;
+}
+.results-stat span {
+  display: block;
+  margin-top: 6px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.results-cases {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(10px, 1.2vw, 16px);
+  margin-top: clamp(12px, 2vh, 22px);
+}
+.case-card {
+  padding: clamp(14px, 1.7vw, 20px);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  box-shadow: var(--shadow-soft);
+  transition: border-color var(--duration-base) var(--ease-default),
+              box-shadow var(--duration-base) var(--ease-default);
+}
+.case-card:hover {
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-medium);
+}
+.case-card__tag {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  color: var(--accent-deep);
+  background: rgba(56, 189, 248, 0.12);
+}
+.case-card h4 {
+  margin: 8px 0 6px;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+.case-card p {
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.results-cta {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: clamp(14px, 2.2vh, 26px);
+}
+.results-cta__main {
+  padding: 11px 30px;
+  border-radius: 999px;
+  color: var(--text-white);
+  background: var(--accent-gradient);
+  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.32);
+}
+.results-cta__main:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(56, 189, 248, 0.42);
+}
+.results-cta .btn--outline {
+  padding: 11px 30px;
+  border-radius: 999px;
+}
+
+@media (max-width: 1100px) {
+  .intro-grid {
+    grid-template-columns: 1fr;
+  }
+  .chain-grid,
+  .uni-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .results-stats,
+  .results-cases {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .roadmap {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .intro-section,
+  .roadmap-section,
+  .universities-section,
+  .results-section {
+    min-height: 0;
+    padding: 48px 0;
+  }
+  .intro-meta {
+    grid-template-columns: 1fr;
+  }
+  .service-strip {
+    gap: 8px;
+  }
+  .service-chip {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  .results-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .results-cases {
+    grid-template-columns: 1fr;
   }
 }
 </style>
