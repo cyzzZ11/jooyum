@@ -23,5 +23,7 @@ export default defineConfig({
     outDir: 'dist',
     emptyOutDir: true,
     assetsDir: 'assets',
+    // 载体资源静态数据量较大（resource.js 约 900KB），放宽分块体积告警阈值
+    chunkSizeWarningLimit: 1500,
   },
 })
