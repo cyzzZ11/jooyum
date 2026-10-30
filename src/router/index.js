@@ -18,6 +18,13 @@ const routes = [
     meta: { title: '公司介绍' },
   },
   {
+    path: '/finance-support',
+
+    name: 'finance-support',
+    component: () => import('@/views/FinanceSupportView.vue'),
+    meta: { title: '金融服务 · 松江区融资服务中心', description: '松江区融资服务中心 — 金融政策解读、金融需求咨询、金融方案设计一站式服务，聚焦基金、银行、保险等金融机构资源。' },
+  },
+  {
     path: '/cxybm',
 
     name: 'cxybm',

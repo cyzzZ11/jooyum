@@ -231,7 +231,7 @@
             </div>
             <!-- <a href="#space" class="nav__link">载体资源</a> -->
             <a href="/cxybm" class="nav__link">产学研</a>
-            <a href="#finance" class="nav__link">金融服务</a>
+            <a href="/finance-support" class="nav__link">金融服务</a>
             <a href="https://www.sjdxckcy.com/resource/index" class="nav__link" target="_blank">载体资源</a>
             <a
               href="https://www.sjdxckcy.com/home/publicService"
@@ -1287,7 +1287,7 @@
                       <a href="#research">产学研</a>
                     </li>
                     <li>
-                      <a href="#finance">金融服务</a>
+                      <a href="/finance-support">金融服务</a>
                     </li>
                     <li>
                       <a href="#digital">数字公共服务驿站</a>
@@ -1515,6 +1515,8 @@ const globeStep = computed(() => {
 })
 
 let globeEl = null
+// 球体转到首/尾后继续滚轮时，翻屏锁（与整屏过渡时长一致）
+let globeFlipLock = 0
 
 function syncGlobe() {
   if (!globeEl) return
@@ -1525,6 +1527,38 @@ function syncGlobe() {
   }
   const progress = Math.min(Math.max(globeEl.scrollTop / max, 0), 1)
   globeAngle.value = -270 * progress
+}
+
+/**
+ * 光标落在球面面板上时，面板自身会消费滚轮（面板内容可滚动导致球体不转）。
+ * 这里统一把面板内的滚轮转交给整屏滚动容器，保证任何位置滚轮都能驱动球体旋转；
+ * 转到底/顶后继续滚轮，则直接翻到下一屏/上一屏。
+ */
+function onGlobeWheel(event) {
+  if (!globeEl || !fpEnabled.value || fpIndex.value !== 1) return
+  if (!(event.target instanceof Element) || !event.target.closest('.globe-panel')) return
+  const max = globeEl.scrollHeight - globeEl.clientHeight
+  if (max <= 0) return
+  event.preventDefault()
+
+  const next = globeEl.scrollTop + event.deltaY
+  if (next <= 0) {
+    flipGlobe(-1)
+    return
+  }
+  if (next >= max) {
+    globeEl.scrollTop = max
+    flipGlobe(1)
+    return
+  }
+  globeEl.scrollTop = next
+}
+
+function flipGlobe(direction) {
+  const now = Date.now()
+  if (now < globeFlipLock) return
+  globeFlipLock = now + 820
+  fpGoTo(fpIndex.value + direction)
 }
 
 // ===== 深色模式 =====
@@ -1582,6 +1616,7 @@ function onFooterMove (event) {
 onMounted(() => {
   globeEl = document.getElementById('globe')
   globeEl?.addEventListener('scroll', syncGlobe, { passive: true })
+  globeEl?.addEventListener('wheel', onGlobeWheel, { passive: false })
   // 小屏回退为普通滚动时由 window 驱动
   window.addEventListener('scroll', syncGlobe, { passive: true })
   syncGlobe()
@@ -1598,6 +1633,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   globeEl?.removeEventListener('scroll', syncGlobe)
+  globeEl?.removeEventListener('wheel', onGlobeWheel)
   window.removeEventListener('scroll', syncGlobe)
   window.removeEventListener('mousemove', onFooterMove)
   footerEl = null
@@ -2362,11 +2398,13 @@ useTiltCards('.activity-card, .stat-card, .uni-card, .case-card')
   display: none;
 }
 
-/* 页脚底部信息：主办 / 运营 / 版权备案分两行 */
+/* 页脚底部信息：主办 / 运营 / 版权备案分两行，整体居中 */
 .footer__bottom {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 6px;
+  text-align: center;
 }
 
 /* 轮播底图来源标注 */
@@ -3090,10 +3128,15 @@ useTiltCards('.activity-card, .stat-card, .uni-card, .case-card')
 
 /* 各屏在整屏模式下垂直居中 */
 .page--home.fp-on .activities-section.fp-section,
-.page--home.fp-on .about-section.fp-section,
-.page--home.fp-on .footer.fp-section {
+.page--home.fp-on .about-section.fp-section {
   display: flex;
   align-items: flex-start;
+}
+/* 页脚：水印在上、主体贴底，剩余空白由两个 auto 边距平分，水印自然落在上部中间 */
+.page--home.fp-on .footer.fp-section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 .page--home.fp-on .activities-section .activity-grid-scroll {
   max-height: calc(
@@ -3124,10 +3167,15 @@ useTiltCards('.activity-card, .stat-card, .uni-card, .case-card')
 }
 /* margin:auto 双向居中；内容超高时自动退化为顶部对齐，避免顶部被裁掉 */
 .page--home.fp-on .activities-section > .container,
-.page--home.fp-on .about-section > .container,
-.page--home.fp-on .footer.fp-section > .container {
+.page--home.fp-on .about-section > .container {
   width: 100%;
   margin: auto;
+}
+/* 页脚内容贴底：主办单位 / 备案号始终落在屏幕底部 */
+.page--home.fp-on .footer.fp-section > .container {
+  width: 100%;
+  margin: auto auto 0;
+  padding-bottom: clamp(18px, 2.6vh, 34px);
 }
 /* 整屏模式下每屏一进入就完整可见，避免滚动渐显动画在切屏时卡住 */
 .page--home.fp-on .fade-in-up {
@@ -4570,30 +4618,29 @@ useTiltCards('.activity-card, .stat-card, .uni-card, .case-card')
   }
 }
 
-/* ---- 页脚巨型描边字（横向视差） ---- */
+/* ---- 页脚巨型水印：作为「联系我们」整块的背景图（横向轻微视差） ---- */
 .footer {
   position: relative;
   overflow: hidden;
 }
 .footer__giant {
-  position: absolute;
-  left: 50%;
-  bottom: -0.4vw;
-  width: 130%;
+  position: relative;
   z-index: 0;
-  transform: translateX(-50%);
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
   pointer-events: none;
 }
 .footer__giant span {
   display: inline-block;
-  font-size: clamp(72px, 12vw, 200px);
+  font-size: clamp(36px, 10.5vw, 240px);
   font-weight: 800;
-  line-height: 0.9;
+  line-height: 1.04;
   letter-spacing: 0.06em;
   white-space: nowrap;
-  color: transparent;
-  -webkit-text-stroke: 1.2px rgba(56, 189, 248, 0.24);
+  padding-bottom: 0.04em;
+  color: rgba(56, 189, 248, 0.04);
+  -webkit-text-stroke: 1.1px rgba(56, 189, 248, 0.14);
   transform: translateX(var(--footer-shift, 0px));
   transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -4637,7 +4684,8 @@ useTiltCards('.activity-card, .stat-card, .uni-card, .case-card')
   background: #04080f;
 }
 .page--home.theme-dark .footer__giant span {
-  -webkit-text-stroke-color: rgba(56, 189, 248, 0.3);
+  color: rgba(56, 189, 248, 0.045);
+  -webkit-text-stroke-color: rgba(56, 189, 248, 0.2);
 }
 .page--home.theme-dark .tech-backdrop::after {
   background: linear-gradient(
