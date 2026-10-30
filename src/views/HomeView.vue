@@ -119,152 +119,6 @@
     </div>
 
     <div id="site-app" :class="{ 'is-visible': appVisible }">
-      <!-- 导航栏 -->
-      <header class="nav">
-        <div class="nav__inner">
-          <div class="nav__brand">
-            <div class="nav__logo">
-              <img
-                :src="`${baseUrl}logo.png`"
-                alt="松江大学城科创源"
-                style="height: 100%; object-fit: contain;"
-              />
-            </div>
-          </div>
-          <nav class="nav__menu">
-            <div class="nav__item nav__item--dropdown" id="navFinance">
-              <a class="nav__link nav__dropdown-trigger" aria-haspopup="true" aria-expanded="false">
-                科技成果转化
-                <svg
-                  class="nav__dropdown-caret"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </a>
-              <div class="nav__dropdown-menu" role="menu">
-                <div
-                  class="nav__dropdown-item nav__dropdown-item--has-sub"
-                  role="menuitem"
-                  aria-haspopup="true"
-                >
-                  <span>双向发榜</span>
-                  <svg
-                    class="arrow"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                  <!-- 三级面板 -->
-                  <div class="nav__submenu" role="menu">
-                    <a
-                      href="/cgzh-gx/university-tech-demand"
-                      class="nav__submenu-item"
-                      role="menuitem"
-                    >
-                      <span class="dot"></span>
-                      <span>高校</span>
-                    </a>
-                    <a
-                      href="/cgzh-qy/tech-demand-platform"
-                      class="nav__submenu-item"
-                      role="menuitem"
-                    >
-                      <span class="dot"></span>
-                      <span>企业</span>
-                    </a>
-                  </div>
-                </div>
-                <a href="/platform-index" class="nav__dropdown-item" role="menuitem">
-                  <span>高能级平台介绍</span>
-                </a>
-                <a href="/tech-manager-intro" class="nav__dropdown-item" role="menuitem">
-                  <span>技术经理团队</span>
-                </a>
-                <a href="#finance-subsidy" class="nav__dropdown-item" role="menuitem">
-                  <span>科创服务中心</span>
-                </a>
-                <a href="/zlgxc" class="nav__dropdown-item" role="menuitem">
-                  <span>专利共享池</span>
-                </a>
-              </div>
-            </div>
-            <div class="nav__item nav__item--dropdown" id="navFinance">
-              <a class="nav__link nav__dropdown-trigger" aria-haspopup="true" aria-expanded="false">
-                创新创业
-                <svg
-                  class="nav__dropdown-caret"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </a>
-              <div class="nav__dropdown-menu" role="menu">
-                <a href="/sjqrcfw" class="nav__dropdown-item" role="menuitem">
-                  <span>人才服务</span>
-                </a>
-                <a href="/songjiang-employment-service" class="nav__dropdown-item" role="menuitem">
-                  <span>就业服务</span>
-                </a>
-                <a href="/sjkczcjs" class="nav__dropdown-item" role="menuitem">
-                  <span>政策</span>
-                </a>
-              </div>
-            </div>
-            <!-- <a href="#space" class="nav__link">载体资源</a> -->
-            <a href="/cxybm" class="nav__link">产学研</a>
-            <a href="/finance-support" class="nav__link">金融服务</a>
-            <a href="https://www.sjdxckcy.com/resource/index" class="nav__link" target="_blank">载体资源</a>
-            <a
-              href="https://www.sjdxckcy.com/home/publicService"
-              class="nav__link"
-              target="_blank"
-            >数字公共服务驿站</a>
-            <a href="/company-index" class="nav__link">企业介绍</a>
-            <!-- <a href="#contact" class="nav__link nav__link--cta">立即咨询</a> -->
-          </nav>
-          <button
-            class="nav__theme"
-            type="button"
-            :aria-label="isDark ? '切换到浅色模式' : '切换到深色模式'"
-            :aria-pressed="String(isDark)"
-            data-cursor="hover"
-            @click="toggleTheme"
-          >
-            <svg v-if="isDark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-              <circle cx="12" cy="12" r="4.2" />
-              <path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6" />
-            </svg>
-            <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20.4 14.4A8.4 8.4 0 0 1 9.6 3.6a8.4 8.4 0 1 0 10.8 10.8z" />
-            </svg>
-          </button>
-          <button class="nav__toggle" id="navToggle" aria-label="菜单">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-        </div>
-      </header>
-
       <div class="fp-viewport">
         <main
           class="fp-track"
@@ -1373,6 +1227,7 @@
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useFullPage } from '@/composables/useFullPage'
 import { useHomePage } from '@/composables/useHomePage'
+import { useTheme } from '@/composables/useTheme'
 import { useTiltCards } from '@/composables/useTiltCards'
 
 // 子目录部署时的静态资源前缀（如 /dxckc/）
@@ -1561,23 +1416,8 @@ function flipGlobe(direction) {
   fpGoTo(fpIndex.value + direction)
 }
 
-// ===== 深色模式 =====
-const THEME_KEY = 'sckcy-theme'
-const isDark = ref(false)
-
-function applyTheme (dark) {
-  isDark.value = dark
-  document.documentElement.classList.toggle('theme-dark', dark)
-  try {
-    localStorage.setItem(THEME_KEY, dark ? 'dark' : 'light')
-  } catch (e) {
-    /* 隐私模式下忽略存储失败 */
-  }
-}
-
-function toggleTheme () {
-  applyTheme(!isDark.value)
-}
+// ===== 深色模式：状态由全站导航统一维护 =====
+const { isDark } = useTheme()
 
 // ===== 数字滚动 =====
 function animateCount (el) {
@@ -1623,12 +1463,6 @@ onMounted(() => {
 
   footerEl = document.querySelector('.footer')
   window.addEventListener('mousemove', onFooterMove, { passive: true })
-
-  try {
-    if (localStorage.getItem(THEME_KEY) === 'dark') applyTheme(true)
-  } catch (e) {
-    /* 隐私模式下忽略读取失败 */
-  }
 })
 
 onBeforeUnmount(() => {

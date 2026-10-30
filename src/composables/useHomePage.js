@@ -234,94 +234,6 @@ export function useHomePage () {
     elements.forEach((el) => revealObserver.observe(el))
   }
 
-  // ===== 移动端导航 =====
-  function initMobileNav () {
-    const toggle = document.getElementById('navToggle')
-    const menu = document.querySelector('.nav__menu')
-    if (!toggle || !menu) return
-
-    const close = () => {
-      menu.classList.remove('is-open')
-      toggle.classList.remove('is-active')
-    }
-
-    on(toggle, 'click', () => {
-      menu.classList.toggle('is-open')
-      toggle.classList.toggle('is-active')
-    })
-    menu.querySelectorAll('.nav__link').forEach((link) => on(link, 'click', close))
-    on(document, 'click', (event) => {
-      if (!menu.contains(event.target) && !toggle.contains(event.target)) close()
-    })
-  }
-
-  // ===== 下拉菜单 =====
-  function initDropdowns () {
-    const dropdowns = Array.from(document.querySelectorAll('.nav__item--dropdown'))
-    if (!dropdowns.length) return
-
-    const isMobile = () => window.matchMedia('(max-width: 768px)').matches
-
-    const closeRoot = (root) => {
-      root.classList.remove('is-open')
-      root.querySelector('.nav__dropdown-trigger')?.setAttribute('aria-expanded', 'false')
-      root.querySelectorAll('.nav__dropdown-item--has-sub.is-open').forEach((el) => el.classList.remove('is-open'))
-    }
-
-    const closeAll = (except) => {
-      dropdowns.forEach((root) => {
-        if (root !== except) closeRoot(root)
-      })
-    }
-
-    dropdowns.forEach((root) => {
-      const trigger = root.querySelector('.nav__dropdown-trigger')
-      if (trigger) {
-        on(trigger, 'click', (event) => {
-          event.preventDefault()
-          event.stopPropagation()
-          const willOpen = !root.classList.contains('is-open')
-          if (willOpen && !isMobile()) closeAll(root)
-          root.classList.toggle('is-open', willOpen)
-          trigger.setAttribute('aria-expanded', String(willOpen))
-          if (!willOpen) {
-            root.querySelectorAll('.nav__dropdown-item--has-sub.is-open').forEach((el) => el.classList.remove('is-open'))
-          }
-        })
-      }
-
-      root.querySelectorAll('.nav__dropdown-item--has-sub').forEach((item) => {
-        on(item, 'click', (event) => {
-          if (!isMobile()) return
-          event.preventDefault()
-          event.stopPropagation()
-          const parentMenu = item.parentElement
-          parentMenu.querySelectorAll(':scope > .nav__dropdown-item--has-sub.is-open').forEach((el) => {
-            if (el !== item) el.classList.remove('is-open')
-          })
-          item.classList.toggle('is-open')
-        })
-      })
-    })
-
-    on(document, 'click', (event) => {
-      dropdowns.forEach((root) => {
-        if (!root.contains(event.target)) closeRoot(root)
-      })
-    })
-    on(document, 'keydown', (event) => {
-      if (event.key === 'Escape') dropdowns.forEach(closeRoot)
-    })
-
-    const toggle = document.getElementById('navToggle')
-    const menu = document.querySelector('.nav__menu')
-    if (toggle && menu) {
-      on(toggle, 'click', () => {
-        if (!menu.classList.contains('is-open')) dropdowns.forEach(closeRoot)
-      })
-    }
-  }
-
   // ===== 鼠标视差 + 光斑跟随（仅首页首屏） =====
   let mouseFrame = null
   let mouseVarTarget = null
@@ -434,7 +346,7 @@ export function useHomePage () {
 
   // ===== 首屏高度：扣掉吸顶导航 =====
   function initViewportFit () {
-    const nav = document.querySelector('.nav')
+    const nav = document.querySelector('.site-nav')
     const sync = () => {
       const height = nav ? nav.offsetHeight : 64
       document.documentElement.style.setProperty('--home-nav-h', `${height}px`)
@@ -474,7 +386,7 @@ export function useHomePage () {
       }
       if (!target) return
       event.preventDefault()
-      const navHeight = document.querySelector('.nav')?.offsetHeight ?? 72
+      const navHeight = document.querySelector('.site-nav')?.offsetHeight ?? 72
       window.scrollTo({ top: target.offsetTop - navHeight, behavior: 'smooth' })
     })
   }
@@ -492,8 +404,6 @@ export function useHomePage () {
     initViewportFit()
     initScrollProgress()
     initCarousel()
-    initMobileNav()
-    initDropdowns()
     initSmoothScroll()
     initCountUp()
     initScrollReveal()

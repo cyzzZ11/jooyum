@@ -25,6 +25,27 @@ const routes = [
     meta: { title: '金融服务 · 松江区融资服务中心', description: '松江区融资服务中心 — 金融政策解读、金融需求咨询、金融方案设计一站式服务，聚焦基金、银行、保险等金融机构资源。' },
   },
   {
+    path: '/resource',
+
+    name: 'resource',
+    component: () => import('@/views/ResourceView.vue'),
+    meta: { title: '载体资源 · 松江大学城科创源', description: '松江区载体资源平台 — 园区、孵化器、高校资源一图纵览，房源面积、租金、配套设施一站式查询。' },
+  },
+  {
+    path: '/resource/park/:id',
+
+    name: 'resource-park',
+    component: () => import('@/views/ResourceParkView.vue'),
+    meta: { title: '园区详情 · 载体资源' },
+  },
+  {
+    path: '/resource/house/:id',
+
+    name: 'resource-house',
+    component: () => import('@/views/ResourceHouseView.vue'),
+    meta: { title: '房源详情 · 载体资源' },
+  },
+  {
     path: '/cxybm',
 
     name: 'cxybm',

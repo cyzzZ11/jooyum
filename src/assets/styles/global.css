@@ -51,3 +51,17 @@ body textarea,
 body [contenteditable='true'] {
   cursor: text;
 }
+
+/* ===== 全站统一顶部导航（SiteNav）高度 ===== */
+:root {
+  --site-nav-h: 72px;
+}
+
+/* 接入公共导航的子页面，其二级吸顶栏需让位到公共导航下方 */
+body .page--cxybm .site-header,
+body .page--zlgxc .site-header,
+body .page--sjqrcfw .nav,
+body .page--songjiang-employment-service .site-header,
+body .page--platform-index .nav-bar {
+  top: var(--site-nav-h, 72px);
+}

@@ -1,29 +1,5 @@
 <template>
   <div class="page page--company-index">
-    <header class="company-nav">
-      <div class="company-nav__inner">
-        <a href="/" class="company-nav__brand" aria-label="松江大学城科创源 首页">
-          <img :src="`${baseUrl}logo.png`" alt />
-          <span>企业介绍</span>
-        </a>
-        <a href="/" class="company-nav__back">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <line x1="19" y1="12" x2="5" y2="12" />
-            <polyline points="12 19 5 12 12 5" />
-          </svg>
-          返回首页
-        </a>
-      </div>
-    </header>
-
     <main>
       <header>
         <h1>公司名称</h1>
@@ -263,9 +239,6 @@
 <script setup>
 import { useSmoothScroll } from '@/composables/useSmoothScroll'
 
-// 子目录部署时的静态资源前缀（如 /dxckc/）
-const baseUrl = import.meta.env.BASE_URL
-
 useSmoothScroll({ offset: 76 })
 </script>
 
@@ -304,86 +277,6 @@ useSmoothScroll({ offset: 76 })
   line-height: 1.6;
   color: var(--color-ink);
   background-color: var(--color-canvas);
-}
-
-/* ===== 顶部返回栏 ===== */
-.company-nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background-color: oklch(99% 0.005 240 / 0.82);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--color-rule);
-}
-
-.company-nav__inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 10px clamp(1rem, 4vw, 2rem);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-sm);
-}
-
-.company-nav__brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 0;
-  text-decoration: none;
-  color: var(--color-ink);
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.95rem;
-  letter-spacing: 0.02em;
-}
-
-.company-nav__brand img {
-  height: 30px;
-  width: auto;
-  display: block;
-  flex: none;
-}
-
-.company-nav__brand span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.company-nav__back {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  flex: none;
-  padding: 7px 16px;
-  border-radius: 999px;
-  border: 1px solid var(--color-rule);
-  color: var(--color-primary-dark);
-  font-size: 0.875rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background-color 0.2s ease, border-color 0.2s ease,
-    color 0.2s ease, transform 0.2s ease;
-}
-
-.company-nav__back svg {
-  width: 16px;
-  height: 16px;
-}
-
-.company-nav__back:hover {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  color: #fff;
-  transform: translateX(-2px);
-}
-
-.company-nav__back:focus-visible {
-  outline: 3px solid var(--color-primary);
-  outline-offset: 2px;
 }
 
 main {
@@ -832,7 +725,6 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   .service-item,
   .service-item__cta,
-  .company-nav__back,
   .services-cta {
     transition: none;
   }
