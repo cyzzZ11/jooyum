@@ -1,4 +1,4 @@
-﻿﻿<template>
+﻿﻿﻿﻿﻿﻿<template>
   <div class="page page--home" :class="{ 'fp-on': fpEnabled, 'theme-dark': isDark }">
     <!-- 科技感光标：带尾巴的三角箭头 + 蓝色泛光 + JS 惯性跟随 -->
     <div class="cursor-layer" aria-hidden="true">

@@ -233,6 +233,26 @@ const routes = [
     component: () => import('@/views/CgzhQyDemandDetailView.vue'),
     meta: { title: '项目详情 - 基于大模型的工业质检缺陷检测系统开发' },
   },
+  {
+    path: '/cgzh/laboratory',
+
+    name: 'cgzh-laboratory',
+    component: () => import('@/views/LaboratoryView.vue'),
+    meta: {
+      title: '共享实验室（设备） · 双向发榜',
+      description: '松江区共享实验室（设备）平台 — 汇聚东华大学、上海工程技术大学、上海农林职业技术学院的科研仪器，支持按高校与关键词查询设备型号、技术指标、主要功能与服务内容。',
+    },
+  },
+  {
+    path: '/cgzh/ecnu-platform',
+
+    name: 'cgzh-ecnu-platform',
+    component: () => import('@/views/EcnuPlatformView.vue'),
+    meta: {
+      title: '华东师范大学公共创新服务平台 · 双向发榜',
+      description: '华东师范大学公共创新服务平台入口汇总 — 公共创新服务平台、大型仪器共享管理平台、实验动物管理系统（闵行 / 普陀）。',
+    },
+  },
 
   // ?????????????????? .html ????????
   { path: '/:pathMatch(.*)*', name: 'not-found' },

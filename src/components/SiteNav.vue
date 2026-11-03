@@ -63,6 +63,14 @@
                   <span class="dot"></span>
                   <span>企业</span>
                 </a>
+                <a href="/cgzh/laboratory" class="site-nav__submenu-item" role="menuitem">
+                  <span class="dot"></span>
+                  <span>共享实验室（设备）</span>
+                </a>
+                <a href="/cgzh/ecnu-platform" class="site-nav__submenu-item" role="menuitem">
+                  <span class="dot"></span>
+                  <span>华东师大公共创新服务平台</span>
+                </a>
               </div>
             </div>
             <a href="/platform-index" class="site-nav__dropdown-item" role="menuitem">

@@ -297,7 +297,7 @@ html.theme-dark .site-nav {
   position: absolute;
   top: -9px;
   left: calc(100% + 6px);
-  min-width: 190px;
+  min-width: 234px;
   padding: 8px;
   background: #fff;
   backdrop-filter: blur(16px);
