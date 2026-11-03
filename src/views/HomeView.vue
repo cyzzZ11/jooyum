@@ -1090,7 +1090,7 @@
           <!-- 页脚 -->
           <footer class="footer fp-section" id="contact" :class="{ 'is-current': fpIndex === 4 }">
             <div class="footer__giant" aria-hidden="true">
-              <span>松江大学城科创源</span>
+              <!-- <span>松江大学城科创源</span> -->
             </div>
             <div class="container">
               <div class="footer__grid">
