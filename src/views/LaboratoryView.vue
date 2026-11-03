@@ -124,6 +124,9 @@
 
       <!-- 分页 -->
       <footer v-if="!loading && pageCount > 1" class="lb-pager">
+        <button type="button" class="lb-pager__nav" :disabled="page === 1" @click="goPage(1)">
+          首页
+        </button>
         <button type="button" class="lb-pager__nav" :disabled="page === 1" @click="goPage(page - 1)">
           上一页
         </button>
@@ -139,6 +142,9 @@
         </button>
         <button type="button" class="lb-pager__nav" :disabled="page === pageCount" @click="goPage(page + 1)">
           下一页
+        </button>
+        <button type="button" class="lb-pager__nav" :disabled="page === pageCount" @click="goPage(pageCount)">
+          尾页
         </button>
       </footer>
 
