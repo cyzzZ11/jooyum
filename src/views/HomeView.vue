@@ -358,8 +358,8 @@
             </div>
           </section>
 
-          <!-- 科创源信息球：关于 / 四链 / 高校 / 发榜（滚轮顺时针旋转查看） -->
-          <section class="globe-section fp-section" id="globe" :class="{ 'is-current': fpIndex === 1 }">
+          <!-- 科创源信息球：暂时隐藏 v-if="false" 恢复时改回 v-if="true" 或删掉 -->
+          <section class="globe-section fp-section" id="globe" v-if="false" :class="{ 'is-current': fpIndex === 1 }">
             <div class="globe-stage">
               <!-- 轨道弧线 + 流动光点 -->
               <svg
@@ -742,7 +742,7 @@
           </section>
 
           <!-- 活动报名 -->
-          <section class="activities-section fp-section" id="startup" :class="{ 'is-current': fpIndex === 2 }">
+          <section class="activities-section fp-section" id="startup" :class="{ 'is-current': fpIndex === 1 }">
             <div class="container" style="position: relative;">
               <div class="section-header" style="margin-bottom: 0;">
                 <span class="section-header__eyebrow">STARTUP</span>
@@ -849,7 +849,7 @@
           </section>
 
           <!-- 公司简介与合作伙伴 -->
-          <section class="about-section fp-section" id="about" :class="{ 'is-current': fpIndex === 3 }">
+          <section class="about-section fp-section" id="about" :class="{ 'is-current': fpIndex === 2 }">
             <div class="container">
               <div class="about-header">
                 <!-- <span class="section-tag">关于我们</span> -->
@@ -1088,7 +1088,7 @@
           </section>
 
           <!-- 页脚 -->
-          <footer class="footer fp-section" id="contact" :class="{ 'is-current': fpIndex === 4 }">
+          <footer class="footer fp-section" id="contact" :class="{ 'is-current': fpIndex === 3 }">
             <div class="footer__giant" aria-hidden="true">
               <!-- <span>松江大学城科创源</span> -->
             </div>
@@ -1239,7 +1239,7 @@ const { index: fpIndex, enabled: fpEnabled, settling: fpSettling, goTo: fpGoTo }
 
 const fpSections = [
   { id: 'innovation', label: '新闻资讯' },
-  { id: 'globe', label: '科创源' },
+  // { id: 'globe', label: '科创源' }, // 暂时隐藏
   { id: 'startup', label: '活动报名' },
   { id: 'about', label: '关于我们' },
   { id: 'contact', label: '联系我们' },
@@ -4086,19 +4086,11 @@ useTiltCards('.activity-card, .stat-card, .uni-card, .case-card')
   background: var(--accent-ice);
 }
 
-/* ---- 活动卡：悬停 3D 翻转（背面 = 主办 / 规模 / 二维码） ---- */
-.activity-card {
-  perspective: 1100px;
-}
+/* ---- 活动卡：取消 3D 翻转，改为 hover 淡入背面 ---- */
 .activity-card__body {
   position: relative;
   z-index: 1;
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
-  transition: transform 640ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-.activity-card:hover .activity-card__body {
-  transform: rotateY(180deg);
+  transition: opacity 360ms ease;
 }
 .activity-card__back {
   position: absolute;
@@ -4111,12 +4103,13 @@ useTiltCards('.activity-card, .stat-card, .uni-card, .case-card')
   border-radius: inherit;
   background: linear-gradient(150deg, #eef9ff 0%, #eef0ff 100%);
   border: 1px solid var(--border-glow);
-  transform: rotateY(-180deg);
-  backface-visibility: hidden;
-  transition: transform 640ms cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 360ms ease;
 }
 .activity-card:hover .activity-card__back {
-  transform: rotateY(0deg);
+  opacity: 1;
+  pointer-events: auto;
 }
 .activity-card__back-tag {
   align-self: flex-start;

@@ -408,7 +408,7 @@ export function useHomePage () {
     initCountUp()
     initScrollReveal()
     initMouseParallax()
-    initCustomCursor()
+    // initCustomCursor() // 关闭自定义光标，恢复系统默认
 
     const modal = document.getElementById('splashModal')
     if (modal) {

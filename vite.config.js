@@ -14,10 +14,13 @@ export default defineConfig({
   server: {
     port: 5173,
     host: true,
+    // 允许 cloudflared quick tunnel 等任意 host 代理请求（内网穿透预览用）
+    allowedHosts: true,
   },
   preview: {
     port: 4173,
     host: true,
+    allowedHosts: true,
   },
   build: {
     outDir: 'dist',

@@ -226,7 +226,7 @@ onBeforeUnmount(() => {
   z-index: 400;
   width: 84px;
   height: 96px;
-  cursor: grab;
+  cursor: default;
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
@@ -235,7 +235,6 @@ onBeforeUnmount(() => {
   transition: filter 0.25s ease;
 }
 .rp.is-dragging {
-  cursor: grabbing;
   filter: drop-shadow(0 16px 26px rgba(3, 12, 24, 0.44));
 }
 .rp:focus-visible {
