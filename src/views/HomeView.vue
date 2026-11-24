@@ -796,52 +796,6 @@
                         </a>
                       </div>
                     </div>
-
-                    <!-- 背面：主办 / 规模 / 二维码占位 -->
-                    <div
-                      class="activity-card__back"
-                      :class="{ 'activity-card__back--ended': item.status === 'ended' }"
-                      aria-hidden="true"
-                    >
-                      <span class="activity-card__back-tag">
-                        {{ item.status === 'ended' ? '活动已结束' : '扫码报名' }}
-                      </span>
-                      <dl class="activity-card__back-list">
-                        <div>
-                          <dt>主办单位</dt>
-                          <dd>{{ item.organizer }}</dd>
-                        </div>
-                        <div>
-                          <dt>活动规模</dt>
-                          <dd>{{ item.scale }} · {{ item.city }}</dd>
-                        </div>
-                      </dl>
-                      <div v-if="item.status === 'open'" class="activity-card__qr">
-                        <span class="activity-card__qr-box">
-                          <svg viewBox="0 0 40 40" aria-hidden="true">
-                            <rect x="3" y="3" width="12" height="12" rx="1.5" />
-                            <rect x="25" y="3" width="12" height="12" rx="1.5" />
-                            <rect x="3" y="25" width="12" height="12" rx="1.5" />
-                            <rect x="7.5" y="7.5" width="3" height="3" />
-                            <rect x="29.5" y="7.5" width="3" height="3" />
-                            <rect x="7.5" y="29.5" width="3" height="3" />
-                            <rect x="19" y="6" width="2.5" height="2.5" />
-                            <rect x="19" y="12" width="2.5" height="2.5" />
-                            <rect x="19" y="19" width="2.5" height="2.5" />
-                            <rect x="25" y="19" width="2.5" height="2.5" />
-                            <rect x="31" y="19" width="2.5" height="2.5" />
-                            <rect x="19" y="25" width="2.5" height="2.5" />
-                            <rect x="25" y="29" width="2.5" height="2.5" />
-                            <rect x="31" y="25" width="2.5" height="2.5" />
-                          </svg>
-                        </span>
-                        <span class="activity-card__qr-text">
-                          扫码进入报名页
-                          <em>名额有限 · 报名从速</em>
-                        </span>
-                      </div>
-                      <p v-else class="activity-card__back-note">活动已结束，敬请关注下一期</p>
-                    </div>
                   </article>
                 </div>
               </div>
@@ -1093,9 +1047,10 @@
               <!-- <span>松江大学城科创源</span> -->
             </div>
             <div class="container">
+              <!-- 第一块：四列 grid（品牌 + 快速链接 + 关于我们 + 联系我们） -->
               <div class="footer__grid">
                 <div class="footer__brand">
-                  <div class="footer__logo">
+                  <div class="footer__logo-mark">
                     <svg viewBox="0 0 32 32" fill="none">
                       <circle
                         cx="16"
@@ -1195,9 +1150,51 @@
                   </ul>
                 </div>
               </div>
+
+              <!-- 中间：老站品牌大图 + slogan + 友情链接 -->
+              <div class="footer__header">
+                <img
+                  class="footer__logo-img"
+                  src="https://www.sjdxckcy.com/assets/sjdxckcy-Bjv9YgYF.png"
+                  alt="松江大学城科创源"
+                  @error="($event.target.style.display = 'none')"
+                />
+                <div class="footer__slogan">
+                  <span class="footer__slogan-line" aria-hidden="true"></span>
+                  <span class="footer__slogan-text">开放共享赋能</span>
+                  <span class="footer__slogan-dot">·</span>
+                  <span class="footer__slogan-text">创新创业筑梦</span>
+                  <span class="footer__slogan-line" aria-hidden="true"></span>
+                </div>
+                <div class="footer__friend">
+                  <span class="footer__friend-label">友情链接</span>
+                  <a href="https://fgw.sh.gov.cn" target="_blank" rel="noopener">上海市发改委</a>
+                  <a href="https://jyj.sh.gov.cn" target="_blank" rel="noopener">上海市教委</a>
+                  <a href="https://stcsm.sh.gov.cn" target="_blank" rel="noopener">上海市科委</a>
+                </div>
+              </div>
+
               <div class="footer__bottom">
-                <p>主办单位：松江大学城科创源　|　运营单位：上海松江高创源科技服务有限公司</p>
-                <p>© 2026 松江大学城科创源 版权所有　|　沪ICP备2025000000号-1</p>
+                <div class="footer__row footer__row--tech">
+                  <span class="footer__row-label">技术支持</span>
+                  <img
+                    src="https://www.sjdxckcy.com/assets/footerLogo1-CLKKCv7m.png"
+                    alt="技术支持"
+                    class="footer__tech-logo"
+                    @error="($event.target.style.display = 'none')"
+                  />
+                </div>
+                <div class="footer__row footer__row--copy">
+                  <span>版权所有© 2025 上海松江高创源科技服务有限公司</span>
+                  <span class="footer__gap">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener">沪ICP备2025156731号</a>
+                  <span class="footer__gap">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <a
+                    href="https://beian.mps.gov.cn/#/query/webSearch?code=31011702891211"
+                    target="_blank"
+                    rel="noopener"
+                  >沪公网安备31011702891211号</a>
+                </div>
               </div>
             </div>
           </footer>
@@ -1530,7 +1527,7 @@ const techKeywords = [
   '低碳技术',
 ]
 
-useTiltCards('.activity-card, .stat-card, .uni-card, .case-card')
+useTiltCards('.stat-card, .uni-card, .case-card')
 </script>
 
 <style scoped src="../assets/styles/home.css"></style>
@@ -2232,13 +2229,223 @@ useTiltCards('.activity-card, .stat-card, .uni-card, .case-card')
   display: none;
 }
 
-/* 页脚底部信息：主办 / 运营 / 版权备案分两行，整体居中 */
+/* ---- footer 强制深色背景 + 浅色文字（home.css 用 --text-primary 做背景） ---- */
+.footer {
+  background: #0f172a !important;
+  color: #e6eefb;
+}
+.footer :is(.footer__name, .footer__title) {
+  color: #e6eefb;
+}
+.footer :is(.footer__desc, .footer__slogan-text, .footer__friend, .footer__links a, .footer__contact li, .footer__row) {
+  color: #9fb3cc;
+}
+.footer .footer__links a:hover,
+.footer .footer__friend a:hover {
+  color: var(--accent-ice);
+}
+
+/* ---- 中间：四列 grid ---- */
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+  gap: 40px;
+  padding: 0 0 20px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.16);
+}
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer__logo-mark {
+  width: 40px;
+  height: 40px;
+}
+.footer__logo-mark svg {
+  width: 100%;
+  height: 100%;
+}
+.footer__name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+.footer__desc {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+}
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.footer__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.3px;
+  margin: 0;
+}
+.footer__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.footer__links a {
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+}
+.footer__links a:hover {
+  color: var(--accent-ice);
+  transform: translateX(2px);
+}
+.footer__contact {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer__contact li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.footer__contact svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--accent-ice);
+  opacity: 0.85;
+}
+
+/* ---- 页脚顶部：logo + slogan + 友情链接，与老站一致 ---- */
+.footer__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 18px;
+}
+.footer__logo-img {
+  height: 52px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(14, 165, 233, 0.12));
+}
+.footer__slogan {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  letter-spacing: 1.2px;
+}
+.footer__slogan-line {
+  display: inline-block;
+  width: 36px;
+  height: 1px;
+  background: var(--border-glow);
+  opacity: 0.5;
+}
+.footer__slogan-text {
+  font-weight: 500;
+}
+.footer__slogan-dot {
+  opacity: 0.6;
+}
+.footer__friend {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.footer__friend-label {
+  font-weight: 600;
+  color: var(--text-secondary);
+  opacity: 0.9;
+  letter-spacing: 0.5px;
+}
+.footer__friend a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.footer__friend a:hover {
+  color: var(--accent-ice);
+}
+
+/* 页脚底部：技术支持 / 版权备案 */
 .footer__bottom {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 4px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(148, 163, 184, 0.18);
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.footer__row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  line-height: 1.9;
+}
+.footer__row-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+  opacity: 0.85;
+}
+.footer__row a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.footer__row a:hover {
+  color: var(--accent-ice);
+}
+.footer__row--tech {
+  gap: 14px;
+}
+.footer__tech-logo {
+  height: 18px;
+  width: auto;
+  vertical-align: middle;
+  filter: grayscale(0.15);
+}
+.footer__row--copy {
   gap: 6px;
-  text-align: center;
+}
+.footer__gap {
+  display: inline-block;
+}
+.footer__row--copy a {
+  letter-spacing: 0.2px;
 }
 
 /* 轮播底图来源标注 */

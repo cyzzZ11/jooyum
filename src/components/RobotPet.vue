@@ -2,12 +2,14 @@
   <div
     ref="petEl"
     class="rp"
-    :class="{ 'is-dragging': dragging, 'is-near': near, 'is-left': pos.x < 220 }"
-    :style="{ left: `${pos.x}px`, top: `${pos.y}px` }"
+    :class="{ 'is-near': near, 'is-peek': peekOut, 'is-hover': hover }"
+    :style="{ top: `${pos.y}px`, right: `${posRight}px` }"
     role="button"
     tabindex="0"
-    aria-label="科创源桌宠小创，可拖动，点击打招呼"
-    @pointerdown="onPointerDown"
+    aria-label="科创源桌宠小创，鼠标悬停探出，点击打招呼"
+    @pointerenter="onPointerEnter"
+    @pointerleave="onPointerLeave"
+    @click="togglePeek"
     @keydown.enter.prevent="greet"
     @keydown.space.prevent="greet"
   >
@@ -73,21 +75,27 @@
 </template>
 
 <script setup>
-import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
 
-const STORAGE_KEY = 'sckcy-pet-pos'
 const PET_W = 84
 const PET_H = 96
-const NEAR_RADIUS = 320
+const NEAR_RADIUS = 280
+const PEEK_VISIBLE = 18 // 默认只露出 18px（探头）
+const PEEK_OUT = 24    // 完全滑出时距右边缘 24px
+const AVOID_TOP_BTN = 180 // 避开右下角"返回顶部"按钮的距离
 
 const petEl = ref(null)
-const pos = reactive({ x: 0, y: 0 })
-const dragging = ref(false)
+const pos = reactive({ y: 0 })
+const hover = ref(false)
+const peekOut = ref(false) // 点击锁定滑出
 const near = ref(false)
 const bubble = ref('')
 const eyeX = ref(0)
 const eyeY = ref(0)
 const tilt = ref(0)
+
+const peekTimer = ref(null)
+let bubbleTimer = null
 
 const headStyle = computed(() => ({
   transform: `rotate(${tilt.value}deg)`,
@@ -97,65 +105,38 @@ const eyeStyle = computed(() => ({
   transform: `translate(${eyeX.value}px, ${eyeY.value}px)`,
 }))
 
-let dragStart = null
-let moved = false
-let bubbleTimer = null
-let pointerMoveHandler = null
-let pointerUpHandler = null
+// 固定在右侧，不探头
+const posRight = computed(() => PEEK_OUT)
 
-function clampPos (x, y) {
-  const maxX = Math.max(8, window.innerWidth - PET_W - 8)
+function clampY (y) {
   const maxY = Math.max(8, window.innerHeight - PET_H - 8)
-  return {
-    x: Math.min(Math.max(8, x), maxX),
-    y: Math.min(Math.max(8, y), maxY),
+  return Math.min(Math.max(8, y), maxY)
+}
+
+function placePet () {
+  // 避开右下角返回顶部按钮：从底部上移 AVOID_TOP_BTN 像素
+  pos.y = clampY(window.innerHeight - PET_H - AVOID_TOP_BTN)
+}
+
+function onPointerEnter () {
+  hover.value = true
+  clearTimeout(peekTimer.value)
+}
+function onPointerLeave () {
+  hover.value = false
+  // 如果没有点击锁定，离手后 1.2s 自动缩回
+  if (!peekOut.value) {
+    peekTimer.value = setTimeout(() => {
+      // 自然缩回（transition 会处理）
+    }, 1200)
   }
 }
 
-function setPos (x, y) {
-  const next = clampPos(x, y)
-  pos.x = next.x
-  pos.y = next.y
-}
-
-function finishDrag () {
-  dragging.value = false
-  dragStart = null
-  if (pointerMoveHandler) window.removeEventListener('pointermove', pointerMoveHandler)
-  if (pointerUpHandler) {
-    window.removeEventListener('pointerup', pointerUpHandler)
-    window.removeEventListener('pointercancel', pointerUpHandler)
+function togglePeek () {
+  peekOut.value = !peekOut.value
+  if (peekOut.value) {
+    greet()
   }
-  pointerMoveHandler = null
-  pointerUpHandler = null
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ x: pos.x, y: pos.y }))
-  } catch (err) {
-    /* localStorage 不可用时忽略 */
-  }
-}
-
-function onPointerDown (e) {
-  if (e.pointerType === 'mouse' && e.button !== 0) return
-  e.preventDefault()
-  dragging.value = true
-  moved = false
-  dragStart = { x: e.clientX, y: e.clientY, ox: pos.x, oy: pos.y }
-
-  pointerMoveHandler = (ev) => {
-    if (!dragStart) return
-    const dx = ev.clientX - dragStart.x
-    const dy = ev.clientY - dragStart.y
-    if (Math.abs(dx) > 4 || Math.abs(dy) > 4) moved = true
-    setPos(dragStart.ox + dx, dragStart.oy + dy)
-  }
-  pointerUpHandler = () => {
-    finishDrag()
-    if (!moved) greet()
-  }
-  window.addEventListener('pointermove', pointerMoveHandler)
-  window.addEventListener('pointerup', pointerUpHandler)
-  window.addEventListener('pointercancel', pointerUpHandler)
 }
 
 function greet () {
@@ -167,11 +148,32 @@ function greet () {
 }
 
 function onMouseMove (e) {
-  if (dragging.value) {
+  if (!hover.value && !peekOut.value) {
+    // 缩着的时候只在非常靠近右边缘时才动眼睛（小互动感）
+    if (e.clientX > window.innerWidth - 120) {
+      const cx = window.innerWidth - PET_W / 2
+      const cy = pos.y + PET_H / 2 - 8
+      const dx = e.clientX - cx
+      const dy = e.clientY - cy
+      const dist = Math.hypot(dx, dy)
+      if (dist < NEAR_RADIUS) {
+        const nx = dx / (dist || 1)
+        const ny = dy / (dist || 1)
+        const strength = Math.min(0.7, 0.3 + (NEAR_RADIUS - dist) / NEAR_RADIUS * 0.4)
+        eyeX.value = nx * 3.4 * strength
+        eyeY.value = ny * 2.6 * strength
+        tilt.value = Math.max(-7, Math.min(7, nx * 9 * strength))
+        near.value = true
+        return
+      }
+    }
     near.value = false
+    eyeX.value = 0
+    eyeY.value = 0
+    tilt.value = 0
     return
   }
-  const cx = pos.x + PET_W / 2
+  const cx = window.innerWidth - PET_W / 2
   const cy = pos.y + PET_H / 2 - 8
   const dx = e.clientX - cx
   const dy = e.clientY - cy
@@ -193,21 +195,11 @@ function onMouseMove (e) {
 }
 
 function onResize () {
-  setPos(pos.x, pos.y)
+  placePet()
 }
 
 onMounted(() => {
-  let saved = null
-  try {
-    saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null')
-  } catch (err) {
-    saved = null
-  }
-  if (saved && Number.isFinite(saved.x) && Number.isFinite(saved.y)) {
-    setPos(saved.x, saved.y)
-  } else {
-    setPos(window.innerWidth - PET_W - 26, window.innerHeight - PET_H - 40)
-  }
+  placePet()
   window.addEventListener('mousemove', onMouseMove, { passive: true })
   window.addEventListener('resize', onResize)
 })
@@ -215,8 +207,8 @@ onMounted(() => {
 onBeforeUnmount(() => {
   window.removeEventListener('mousemove', onMouseMove)
   window.removeEventListener('resize', onResize)
-  finishDrag()
   clearTimeout(bubbleTimer)
+  clearTimeout(peekTimer.value)
 })
 </script>
 
@@ -226,16 +218,20 @@ onBeforeUnmount(() => {
   z-index: 400;
   width: 84px;
   height: 96px;
-  cursor: default;
-  touch-action: none;
+  cursor: pointer;
+  touch-action: manipulation;
   user-select: none;
   -webkit-user-select: none;
   outline: none;
   filter: drop-shadow(0 10px 18px rgba(3, 12, 24, 0.34));
-  transition: filter 0.25s ease;
+  /* 滑出动画：右侧定位 + 流畅 ease-out */
+  transition:
+    right 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.25s ease;
 }
-.rp.is-dragging {
-  filter: drop-shadow(0 16px 26px rgba(3, 12, 24, 0.44));
+.rp.is-hover,
+.rp.is-peek {
+  filter: drop-shadow(0 14px 24px rgba(3, 12, 24, 0.44)) drop-shadow(-2px 0 10px rgba(41, 171, 226, 0.18));
 }
 .rp:focus-visible {
   filter: drop-shadow(0 0 0.5px #29abe2) drop-shadow(0 0 12px rgba(41, 171, 226, 0.7));
@@ -248,8 +244,10 @@ onBeforeUnmount(() => {
   overflow: visible;
   animation: rp-float 3.4s ease-in-out infinite;
 }
-.rp.is-dragging .rp__stage {
-  animation: none;
+.rp.is-hover .rp__stage,
+.rp.is-peek .rp__stage {
+  animation-duration: 2.2s;
+  animation-timing-function: ease-in-out;
 }
 
 .rp__head,
@@ -326,15 +324,6 @@ onBeforeUnmount(() => {
   border-bottom: 1px solid rgba(41, 171, 226, 0.42);
   transform: rotate(-45deg);
 }
-.rp.is-left .rp__bubble {
-  right: auto;
-  left: 78px;
-}
-.rp.is-left .rp__bubble::after {
-  right: auto;
-  left: -6px;
-  transform: rotate(135deg);
-}
 
 .rp-pop-enter-active,
 .rp-pop-leave-active {
@@ -347,6 +336,9 @@ onBeforeUnmount(() => {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .rp {
+    transition: none;
+  }
   .rp__stage,
   .rp__antenna,
   .rp__arm--l,
