@@ -79,7 +79,7 @@
             <a href="/tech-manager-intro" class="site-nav__dropdown-item" role="menuitem">
               <span>技术经理团队</span>
             </a>
-            <a href="/#finance-subsidy" class="site-nav__dropdown-item" role="menuitem">
+            <a href="/service-center" class="site-nav__dropdown-item" role="menuitem">
               <span>科创服务中心</span>
             </a>
             <a href="/zlgxc" class="site-nav__dropdown-item" role="menuitem">

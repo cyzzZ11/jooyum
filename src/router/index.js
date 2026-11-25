@@ -105,6 +105,13 @@ const routes = [
     meta: { title: '技术经理人 — 科技成果转化的关键桥梁' },
   },
   {
+    path: '/service-center',
+
+    name: 'service-center',
+    component: () => import('@/views/ServiceCenterView.vue'),
+    meta: { title: '科创服务中心 · 松江大学城科创源', description: '科创服务中心 — 一口受理企业创新需求，科技成果转化、金融支持、数字公共服务、载体资源、政策服务、人才服务一站式办理。' },
+  },
+  {
     path: '/zlgxc',
 
     name: 'zlgxc',
