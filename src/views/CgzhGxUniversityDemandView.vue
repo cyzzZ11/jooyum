@@ -648,7 +648,7 @@
             <div class="sidebar-budget-label">合作预算</div>
             <div class="sidebar-budget-value">¥ 30-50万</div>
           </div>
-          <button class="sidebar-btn-primary">申请合作</button>
+          <button class="sidebar-btn-primary">我要揭榜</button>
           <button class="sidebar-btn-secondary">收藏需求</button>
         </div>
 
