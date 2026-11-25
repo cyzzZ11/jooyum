@@ -33,7 +33,7 @@
             <span class="dot"></span>
             FINANCE SUPPORT · 金融支持
           </span>
-          <h1 class="fx-hero__title">融资服务</h1>
+          <h1 class="fx-hero__title">金融服务</h1>
           <div class="fx-hero__badge">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
               <path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" />
@@ -62,8 +62,8 @@
           <header class="fx-head fx-reveal">
             <span class="fx-head__index">02</span>
             <div class="fx-head__text">
-              <h2>基金</h2>
-              <p>FUND · {{ funds.length }} 家合作基金机构</p>
+              <h2>投融资</h2>
+              <p>INVESTMENT AND FINANCING‌ · {{ funds.length }} 家合作投融资机构</p>
             </div>
             <span class="fx-head__count">{{ String(funds.length).padStart(2, '0') }}</span>
           </header>
@@ -189,12 +189,12 @@
 
       <footer class="fx-footer">
         <div class="fx-footer__glow" aria-hidden="true"></div>
-        <p class="fx-footer__title">一站式金融服务中心</p>
-        <p class="fx-footer__desc">金融政策解读 · 金融需求咨询 · 金融方案设计</p>
-        <div class="fx-footer__actions">
+        <!-- <p class="fx-footer__title">一站式金融服务中心</p>
+        <p class="fx-footer__desc">金融政策解读 · 金融需求咨询 · 金融方案设计</p> -->
+        <!-- <div class="fx-footer__actions">
           <a href="#service" class="fx-btn fx-btn--ghost">了解融资服务</a>
           <a href="/" class="fx-btn fx-btn--primary">返回首页</a>
-        </div>
+        </div> -->
         <p class="fx-footer__copy">松江大学城科创源 · 金融服务</p>
       </footer>
     </main>
@@ -1273,18 +1273,16 @@ onBeforeUnmount(() => {
 }
 
 .fx-logo-card__info {
+  /* hover 不再切换卡片，机构信息在桌面端隐藏 */
+  display: none;
   position: absolute;
   inset: 0;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 4px;
   padding: 14px 18px;
   background: linear-gradient(160deg, rgba(7, 16, 30, 0.96), rgba(10, 26, 45, 0.94));
   border-left: 2px solid var(--fx-cyan);
-  transform: translateY(100%);
-  opacity: 0;
-  transition: transform 340ms cubic-bezier(0.22, 1, 0.36, 1), opacity 260ms ease;
 }
 
 .fx-logo-card__info p {
@@ -1308,22 +1306,11 @@ onBeforeUnmount(() => {
   font-weight: 600;
 }
 
+/* hover 仅保留阴影/发光，不再位移与切换内容 */
 .fx-logo-card:hover,
 .fx-logo-card:focus-visible {
-  transform: translateY(-3px);
   border-color: rgba(103, 232, 249, 0.42);
   box-shadow: 0 18px 44px -26px rgba(56, 189, 248, 0.7);
-}
-
-.fx-logo-card:hover .fx-logo-plate,
-.fx-logo-card:focus-visible .fx-logo-plate {
-  transform: scale(1.04);
-}
-
-.fx-logo-card:hover .fx-logo-card__info,
-.fx-logo-card:focus-visible .fx-logo-card__info {
-  transform: translateY(0);
-  opacity: 1;
 }
 
 /* ═══ 底部 ═══ */
@@ -1526,9 +1513,8 @@ onBeforeUnmount(() => {
 
   /* 触屏无 hover：机构信息常驻显示 */
   .fx-logo-card__info {
+    display: flex;
     position: static;
-    transform: none;
-    opacity: 1;
     margin-top: 4px;
     padding: 10px 0 0;
     border-left: none;
