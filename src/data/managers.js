@@ -1,7 +1,11 @@
 // 由 build/migrate-legacy.mjs 从 legacy/tech-manager-intro.html 提取
+const portrait = (prompt) =>
+  `https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=${encodeURIComponent(prompt)}&image_size=square_hd`
+
 export const managers = [
   {
     name: '陈志远', initial: '陈', level: '金牌', color: '#1b4a8a',
+    avatar: portrait('professional corporate headshot of a Chinese man in his 50s, short gray-black hair, glasses, navy suit, light blue studio background, natural lighting, photorealistic'),
     title: '金牌技术经理人 · 教授级高工',
     org: '西安交通大学技术转移中心',
     fields: ['新材料', '新能源'],
@@ -12,6 +16,7 @@ export const managers = [
   },
   {
     name: '林晓薇', initial: '林', level: '金牌', color: '#0d9488',
+    avatar: portrait('professional corporate headshot of a Chinese woman in her 40s, shoulder-length black hair, white blazer, soft teal studio background, photorealistic'),
     title: '金牌技术经理人 · 高级经济师',
     org: '上海市科技成果转化中心',
     fields: ['生物医药', '农业科技'],
@@ -22,6 +27,7 @@ export const managers = [
   },
   {
     name: '王建国', initial: '王', level: '优秀', color: '#2563b0',
+    avatar: portrait('professional corporate headshot of a Chinese man in his 40s, short black hair, gray suit, neutral dark blue background, photorealistic'),
     title: '优秀技术经理人 · 高级工程师',
     org: '西北工业大学 aerospace 技术转移中心',
     fields: ['智能制造', '航空航天'],
@@ -32,6 +38,7 @@ export const managers = [
   },
   {
     name: '赵敏', initial: '赵', level: '优秀', color: '#7c3aed',
+    avatar: portrait('professional corporate headshot of a Chinese woman in her 30s, black hair tied back, purple blouse, light gray background, photorealistic'),
     title: '优秀技术经理人 · 知识产权师',
     org: '西安高新区科技创新服务中心',
     fields: ['电子信息', '人工智能'],
@@ -42,6 +49,7 @@ export const managers = [
   },
   {
     name: '刘海涛', initial: '刘', level: '高级', color: '#e8733a',
+    avatar: portrait('professional corporate headshot of a Chinese man in his 30s, short black hair, white shirt, warm gray background, photorealistic'),
     title: '高级技术经理人 · 工程师',
     org: '上海韦伯灵动科技服务有限公司',
     fields: ['智能制造', '新能源'],
@@ -52,6 +60,7 @@ export const managers = [
   },
   {
     name: '张雪琴', initial: '张', level: '高级', color: '#059669',
+    avatar: portrait('professional corporate headshot of a Chinese woman in her 40s, black hair, dark green blazer, soft light background, photorealistic'),
     title: '高级技术经理人 · 律师',
     org: '西安交通大学法学院技术转移工作站',
     fields: ['生物医药', '新材料'],
@@ -62,6 +71,7 @@ export const managers = [
   },
   {
     name: '孙明阳', initial: '孙', level: '高级', color: '#6366f1',
+    avatar: portrait('professional corporate headshot of a Chinese man in his 40s, glasses, black suit, indigo background, photorealistic'),
     title: '高级技术经理人 · 高级技术经纪人',
     org: '上海市技术经理人协会',
     fields: ['新材料', '智能制造'],
@@ -72,6 +82,7 @@ export const managers = [
   },
   {
     name: '李婉清', initial: '李', level: '优秀', color: '#dc2626',
+    avatar: portrait('professional corporate headshot of a Chinese woman in her 30s, long black hair, beige blazer, soft light background, photorealistic'),
     title: '优秀技术经理人 · 副教授',
     org: '西北大学化工学院技术转移办公室',
     fields: ['生物医药', '精细化工'],

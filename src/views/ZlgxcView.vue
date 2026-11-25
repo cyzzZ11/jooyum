@@ -126,6 +126,7 @@
       <article class="patent-card">
         <div class="patent-meta">
           <span class="patent-tag">人工智能</span>
+          <span class="patent-tag share">开放许可</span>
           <span class="patent-tag new">新入池</span>
           <span class="patent-date">2026-08-22</span>
         </div>
@@ -142,6 +143,7 @@
       <article class="patent-card">
         <div class="patent-meta">
           <span class="patent-tag">新能源</span>
+          <span class="patent-tag share">作价入股</span>
           <span class="patent-tag hot">热门</span>
           <span class="patent-date">2026-08-18</span>
         </div>
@@ -158,6 +160,7 @@
       <article class="patent-card">
         <div class="patent-meta">
           <span class="patent-tag">生物医药</span>
+          <span class="patent-tag share">技术转让</span>
           <span class="patent-date">2026-08-15</span>
         </div>
         <h3 class="patent-title">靶向PD-L1的新型双特异性抗体及其用途</h3>
@@ -173,6 +176,7 @@
       <article class="patent-card">
         <div class="patent-meta">
           <span class="patent-tag">半导体</span>
+          <span class="patent-tag share">开放许可</span>
           <span class="patent-tag new">新入池</span>
           <span class="patent-date">2026-08-20</span>
         </div>
@@ -189,6 +193,7 @@
       <article class="patent-card">
         <div class="patent-meta">
           <span class="patent-tag">智能制造</span>
+          <span class="patent-tag share">作价入股</span>
           <span class="patent-tag hot">热门</span>
           <span class="patent-date">2026-08-10</span>
         </div>
@@ -205,6 +210,7 @@
       <article class="patent-card">
         <div class="patent-meta">
           <span class="patent-tag">新材料</span>
+          <span class="patent-tag share">许可使用</span>
           <span class="patent-date">2026-08-08</span>
         </div>
         <h3 class="patent-title">超轻高强镁锂合金板材及其制备方法</h3>
@@ -723,6 +729,7 @@ img { max-width: 100%; display: block; }
 }
 .patent-tag.new { background: #ECFDF5; color: #059669; }
 .patent-tag.hot { background: #FEF2F2; color: #DC2626; }
+.patent-tag.share { background: #EFF6FF; color: #2563EB; border: 1px solid #BFDBFE; }
 .patent-date { font-size: .75rem; color: var(--color-text-3); margin-left: auto; }
 .patent-title { font-size: 1rem; font-weight: 700; color: var(--color-text); line-height: 1.5; margin-bottom: 8px; }
 .patent-abstract { font-size: .85rem; color: var(--color-text-2); line-height: 1.65; margin-bottom: 16px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }

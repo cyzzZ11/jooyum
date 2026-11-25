@@ -278,10 +278,25 @@ onMounted(() => {
     return `<span class="roster-tag" style="background:${c.bg};color:${c.text}">${f}</span>`
   }).join('')
 
+  // 动态插入的 DOM 不带 scoped 属性，需手动补上，否则组件内样式不生效
+  const stampScope = (root) => {
+    const attr = Array.from(grid.attributes)
+      .map((a) => a.name)
+      .find((n) => n.startsWith('data-v-'))
+    if (!attr) return
+    root.setAttribute(attr, '')
+    root.querySelectorAll('*').forEach((node) => node.setAttribute(attr, ''))
+  }
+
   const openModal = (idx) => {
     const m = managers[idx]
     document.getElementById('modalAvatar').style.background = m.color
-    document.getElementById('modalAvatar').textContent = m.initial
+    if (m.avatar) {
+      document.getElementById('modalAvatar').innerHTML = `<img src="${m.avatar}" alt="${m.name}">`
+      stampScope(document.getElementById('modalAvatar'))
+    } else {
+      document.getElementById('modalAvatar').textContent = m.initial
+    }
     document.getElementById('modalName').textContent = m.name
     document.getElementById('modalTitle').textContent = m.title
     document.getElementById('modalOrg').textContent = m.org
@@ -313,6 +328,7 @@ onMounted(() => {
         <ul>${m.cases.map((item) => `<li>${item}</li>`).join('')}</ul>
       </div>
     `
+    stampScope(modalBody)
     overlay.classList.add('visible')
     document.body.style.overflow = 'hidden'
   }
@@ -336,7 +352,7 @@ onMounted(() => {
 
       card.innerHTML = `
         <div class="roster-card-header">
-          <div class="roster-avatar" style="background:${m.color}">${m.initial}</div>
+          <div class="roster-avatar" style="background:${m.color}">${m.avatar ? `<img src="${m.avatar}" alt="${m.name}" loading="lazy">` : m.initial}</div>
           <div>
             <div class="roster-name">${m.name}</div>
             <div class="roster-title">${m.level}技术经理人</div>
@@ -349,6 +365,7 @@ onMounted(() => {
         <div class="roster-tags">${tagHtml(m.fields)}</div>
         <div class="roster-card-action">查看详情<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
       `
+      stampScope(card)
       card.addEventListener('click', () => openModal(idx))
       card.addEventListener('keydown', (e) => { if (e.key === 'Enter') openModal(idx) })
       grid.appendChild(card)
@@ -684,6 +701,14 @@ section + section { border-top: 1px solid var(--color-rule); }
   font-weight: 700;
   color: #fff;
   flex-shrink: 0;
+  overflow: hidden;
+}
+.roster-avatar img,
+.roster-modal-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .roster-name {
   font-size: 1.1rem;
@@ -780,6 +805,7 @@ section + section { border-top: 1px solid var(--color-rule); }
   font-weight: 700;
   color: #fff;
   flex-shrink: 0;
+  overflow: hidden;
 }
 .roster-modal-info h2 {
   font-size: 1.4rem;

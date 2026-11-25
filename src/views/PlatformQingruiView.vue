@@ -3,7 +3,7 @@
 <!-- ===== DETAIL HERO ===== -->
 <section class="detail-hero">
   <div class="detail-hero-content">
-    <a href="/" class="back-link">← 返回总览</a>
+    <router-link to="/platform-index" class="back-link">← 返回总览</router-link>
     <div class="detail-hero-grid">
       <div class="platform-visual color-qingrui">
           <div class="platform-visual-bg">QINGRUI</div>
@@ -99,7 +99,7 @@
     <div>
       <h3>快速导航</h3>
       <ul class="footer-links">
-        <li><a href="/">← 返回总览</a></li>
+        <li><router-link to="/platform-index">← 返回总览</router-link></li>
         <li><a href="/#synergy">协同格局</a></li>
       </ul>
     </div>

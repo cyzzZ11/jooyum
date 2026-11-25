@@ -77,7 +77,8 @@
             >
               <div class="fx-fund__top">
                 <div class="fx-logo-plate fx-logo-plate--fund">
-                  <img :src="`${baseUrl}finance/${fund.logo}`" :alt="fund.name" loading="lazy" />
+                  <img v-if="fund.logo" :src="`${baseUrl}finance/${fund.logo}`" :alt="fund.name" loading="lazy" />
+                  <span v-else class="fx-logo-initial">{{ fund.name.slice(0, 2) }}</span>
                 </div>
                 <div class="fx-fund__titles">
                   <h3>{{ fund.name }}</h3>
@@ -1126,6 +1127,13 @@ onBeforeUnmount(() => {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+}
+
+.fx-logo-initial {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #1e5f96;
 }
 
 .fx-logo-plate--fund {
