@@ -526,10 +526,12 @@ useScrollReveal('.fade-in', { className: 'visible' })
 /* ===== HERO ===== */
 .hero {
   position: relative;
-  min-height: 100vh;
+  /* 刚好占满首屏（扣除吸顶导航），下方卡片不露头 */
+  min-height: calc(100vh - var(--site-nav-h, 72px));
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  padding: clamp(28px, 5vh, 64px) 0 clamp(56px, 7vh, 88px);
   background: linear-gradient(
     135deg,
     #e8f4f8 0%,
