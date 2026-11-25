@@ -150,12 +150,7 @@
     <p class="section-desc">汇聚高校、科研院所与产业一线的专业技术经理人，点击卡片查看详细履历与代表案例。</p>
     <div class="roster-toolbar" id="rosterToolbar">
       <button class="roster-filter-btn active" data-filter="all">全部</button>
-      <button class="roster-filter-btn" data-filter="金牌">金牌</button>
-      <button class="roster-filter-btn" data-filter="优秀">优秀</button>
-      <button class="roster-filter-btn" data-filter="高级">高级</button>
-      <button class="roster-filter-btn" data-filter="新材料">新材料</button>
-      <button class="roster-filter-btn" data-filter="智能制造">智能制造</button>
-      <button class="roster-filter-btn" data-filter="生物医药">生物医药</button>
+      <button v-for="f in managerFields" :key="f" class="roster-filter-btn" :data-filter="f">{{ f }}</button>
     </div>
     <div class="roster-grid" id="rosterGrid"></div>
   </div>
@@ -261,7 +256,7 @@
 <script setup>
 import { onBeforeUnmount, onMounted } from 'vue'
 import { useSmoothScroll } from '@/composables/useSmoothScroll'
-import { managers, tagColors, defaultTagColor } from '@/data/managers'
+import { managers, managerFields, tagColors, defaultTagColor } from '@/data/managers'
 
 useSmoothScroll()
 
@@ -307,6 +302,7 @@ onMounted(() => {
         <div class="modal-section-label">个人简介</div>
         <p>${m.bio}</p>
       </div>
+      ${m.stats ? `
       <div class="modal-section">
         <div class="modal-section-label">核心数据</div>
         <div class="modal-stats">
@@ -314,19 +310,22 @@ onMounted(() => {
           <div class="modal-stat-item"><div class="modal-stat-value">${m.stats.years}年</div><div class="modal-stat-label">从业年限</div></div>
           <div class="modal-stat-item"><div class="modal-stat-value">${m.stats.amount}</div><div class="modal-stat-label">促成交易额</div></div>
         </div>
-      </div>
+      </div>` : ''}
+      ${m.fields.length ? `
       <div class="modal-section">
         <div class="modal-section-label">专业领域</div>
         <div class="modal-tags">${m.fields.map((f) => `<span class="modal-tag" style="background:${c(f).bg};color:${c(f).text}">${f}</span>`).join('')}</div>
-      </div>
+      </div>` : ''}
+      ${m.achievements.length ? `
       <div class="modal-section">
         <div class="modal-section-label">主要成就</div>
         <ul>${m.achievements.map((a) => `<li>${a}</li>`).join('')}</ul>
-      </div>
+      </div>` : ''}
+      ${m.cases.length ? `
       <div class="modal-section">
         <div class="modal-section-label">代表案例</div>
         <ul>${m.cases.map((item) => `<li>${item}</li>`).join('')}</ul>
-      </div>
+      </div>` : ''}
     `
     stampScope(modalBody)
     overlay.classList.add('visible')
@@ -340,7 +339,7 @@ onMounted(() => {
 
   const renderCards = (filter) => {
     grid.innerHTML = ''
-    const filtered = filter === 'all' ? managers : managers.filter((m) => m.level === filter || m.fields.includes(filter))
+    const filtered = filter === 'all' ? managers : managers.filter((m) => m.title === filter || m.fields.includes(filter))
     filtered.forEach((m) => {
       const idx = managers.indexOf(m)
       const card = document.createElement('div')
@@ -355,14 +354,11 @@ onMounted(() => {
           <div class="roster-avatar" style="background:${m.color}">${m.avatar ? `<img src="${m.avatar}" alt="${m.name}" loading="lazy">` : m.initial}</div>
           <div>
             <div class="roster-name">${m.name}</div>
-            <div class="roster-title">${m.level}技术经理人</div>
+            <div class="roster-title">${m.title}</div>
           </div>
         </div>
-        <div class="roster-org">
-          <svg viewBox="0 0 24 24"><path d="M3 21h18M3 7v14m6-14v14m6-14v14m6-14v14M3 7l9-4 9 4"/></svg>
-          ${m.org}
-        </div>
-        <div class="roster-tags">${tagHtml(m.fields)}</div>
+        ${m.org ? `<div class="roster-org"><svg viewBox="0 0 24 24"><path d="M3 21h18M3 7v14m6-14v14m6-14v14m6-14v14M3 7l9-4 9 4"/></svg>${m.org}</div>` : ''}
+        ${m.fields.length ? `<div class="roster-tags">${tagHtml(m.fields)}</div>` : ''}
         <div class="roster-card-action">查看详情<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
       `
       stampScope(card)
