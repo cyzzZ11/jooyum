@@ -129,7 +129,7 @@
         <a href="/cxybm" class="site-nav__link" :class="{ 'is-active': activePath === '/cxybm' }">产学研</a>
         <a href="/finance-support" class="site-nav__link" :class="{ 'is-active': activePath === '/finance-support' }">金融服务</a>
         <a href="/resource" class="site-nav__link" :class="{ 'is-active': activePath.startsWith('/resource') }">载体资源</a>
-        <a href="https://www.sjdxckcy.com/home/publicService" class="site-nav__link" target="_blank">数字公共服务驿站</a>
+        <a href="/public-service" class="site-nav__link" :class="{ 'is-active': activePath === '/public-service' }">数字公共服务驿站</a>
         <a href="/company-index" class="site-nav__link" :class="{ 'is-active': activePath === '/company-index' }">企业介绍</a>
       </nav>
 

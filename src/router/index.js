@@ -25,6 +25,13 @@ const routes = [
     meta: { title: '金融服务 · 松江区融资服务中心', description: '松江区融资服务中心 — 金融政策解读、金融需求咨询、金融方案设计一站式服务，聚焦基金、银行、保险等金融机构资源。' },
   },
   {
+    path: '/public-service',
+
+    name: 'public-service',
+    component: () => import('@/views/PublicServiceView.vue'),
+    meta: { title: '数字公共服务体系 · 松江大学城科创源', description: '围绕算力、模型、数据、软件等数字能力，为科创源企业提供低成本、低门槛、高可信、高可用的数字公共服务，数字服务官全程对接。' },
+  },
+  {
     path: '/resource',
 
     name: 'resource',

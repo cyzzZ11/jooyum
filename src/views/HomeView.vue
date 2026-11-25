@@ -434,7 +434,7 @@
                   </svg>
                   <span>载体资源</span>
                 </a>
-                <a class="service-chip" href="https://www.sjdxckcy.com/home/publicService" target="_blank" rel="noopener">
+                <a class="service-chip" href="/public-service">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="4" width="18" height="12" rx="2" />
                     <path d="M8 20h8M12 16v4" />
@@ -1089,7 +1089,7 @@
                       <a href="/finance-support">金融服务</a>
                     </li>
                     <li>
-                      <a href="#digital">数字公共服务驿站</a>
+                      <a href="/public-service">数字公共服务驿站</a>
                     </li>
                   </ul>
                 </div>
