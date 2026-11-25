@@ -137,7 +137,9 @@
               class="fx-logo-card fx-reveal"
               :style="{ transitionDelay: `${Math.min(index, 12) * 35}ms` }"
               tabindex="0"
-              :aria-label="`${bank.branch}，联系人 ${bank.contactUser}，电话 ${bank.contactMobile}`"
+              :aria-label="`${bank.branch}，联系人 ${bank.contactUser}，电话 ${bank.contactMobile}，点击查看信贷产品`"
+              @click="openBank(bank)"
+              @keydown.enter.prevent="openBank(bank)"
             >
               <div class="fx-logo-plate">
                 <img :src="`${baseUrl}finance/${bank.logo}`" :alt="bank.name" loading="lazy" />
@@ -212,14 +214,53 @@
         <polyline points="5 12 12 5 19 12" />
       </svg>
     </button>
+
+    <!-- 银行信贷产品弹窗 -->
+    <div v-if="selectedBank" class="bk-modal" @click.self="closeBank">
+      <div class="bk-modal__panel" role="dialog" aria-modal="true" :aria-label="`${selectedBank.branch} 信贷产品`">
+        <header class="bk-modal__head">
+          <div>
+            <h3>{{ selectedBank.branch }}</h3>
+            <p>
+              <span v-if="selectedBank.contactUser">联系人 {{ selectedBank.contactUser }}</span>
+              <span v-if="selectedBank.contactMobile"> · {{ selectedBank.contactMobile }}</span>
+            </p>
+          </div>
+          <button class="bk-modal__close" type="button" aria-label="关闭" @click="closeBank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <line x1="6" y1="6" x2="18" y2="18" />
+              <line x1="18" y1="6" x2="6" y2="18" />
+            </svg>
+          </button>
+        </header>
+        <div class="bk-modal__body">
+          <p v-if="!selectedGroups.length" class="bk-modal__empty">该银行产品信息整理中，可先联系上方联系人咨询。</p>
+          <section v-for="group in selectedGroups" :key="group.type" class="bk-group">
+            <h4>{{ group.type }}<span>{{ group.items.length }} 款</span></h4>
+            <div class="bk-grid">
+              <article v-for="p in group.items" :key="p.name" class="bk-card">
+                <h5>{{ p.name }}</h5>
+                <dl>
+                  <div v-if="p.rate"><dt>利率区间</dt><dd>{{ p.rate }}</dd></div>
+                  <div v-if="p.credit"><dt>授信额度</dt><dd>{{ p.credit }}</dd></div>
+                  <div v-if="p.term"><dt>产品期限</dt><dd>{{ p.term }}</dd></div>
+                  <div v-if="p.guarantee"><dt>担保方式</dt><dd>{{ p.guarantee }}</dd></div>
+                </dl>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useSmoothScroll } from '@/composables/useSmoothScroll'
 import { useTheme } from '@/composables/useTheme'
 import { banks, financeIntro, funds, insurances } from '@/data/finance'
+import { bankProducts } from '@/data/bankProducts'
 
 const baseUrl = import.meta.env.BASE_URL
 
@@ -232,6 +273,26 @@ const navItems = [
   { id: 'bank', label: '银行' },
   { id: 'insurance', label: '保险' },
 ]
+
+// ═══ 银行信贷产品弹窗 ═══
+const selectedBank = ref(null)
+const selectedGroups = computed(() => {
+  const bank = selectedBank.value
+  if (!bank) return []
+  return bankProducts[bank.branch] || bankProducts[bank.name] || []
+})
+
+const openBank = (bank) => {
+  selectedBank.value = bank
+}
+
+const closeBank = () => {
+  selectedBank.value = null
+}
+
+const onEsc = (e) => {
+  if (e.key === 'Escape') closeBank()
+}
 
 const stats = [
   { value: String(funds.length), label: '合作基金' },
@@ -288,12 +349,14 @@ onMounted(() => {
   })
 
   window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('keydown', onEsc)
 })
 
 onBeforeUnmount(() => {
   revealObserver?.disconnect()
   spyObserver?.disconnect()
   window.removeEventListener('scroll', onScroll)
+  window.removeEventListener('keydown', onEsc)
 })
 </script>
 
@@ -1545,6 +1608,225 @@ onBeforeUnmount(() => {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+}
+
+/* ═══ 银行信贷产品弹窗 ═══ */
+.bk-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(3, 8, 18, 0.74);
+  backdrop-filter: blur(6px);
+}
+
+.bk-modal__panel {
+  display: flex;
+  flex-direction: column;
+  width: min(1080px, 100%);
+  max-height: 86vh;
+  overflow: hidden;
+  background: #0a1526;
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  border-radius: 18px;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.55);
+}
+
+.bk-modal__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.12);
+}
+
+.bk-modal__head h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #e6eefb;
+}
+
+.bk-modal__head p {
+  margin: 0;
+  font-size: 12.5px;
+  color: #8fa6c4;
+}
+
+.bk-modal__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: #9fb3cc;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(56, 189, 248, 0.16);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+
+.bk-modal__close:hover {
+  color: #fff;
+  background: rgba(56, 189, 248, 0.16);
+}
+
+.bk-modal__close svg {
+  width: 16px;
+  height: 16px;
+}
+
+.bk-modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px 24px 28px;
+  overflow-y: auto;
+}
+
+.bk-modal__empty {
+  margin: 0;
+  padding: 28px 0;
+  font-size: 13px;
+  color: #8fa6c4;
+  text-align: center;
+}
+
+.bk-group h4 {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #e6eefb;
+}
+
+.bk-group h4 span {
+  font-size: 12px;
+  font-weight: 400;
+  color: #7f96b5;
+}
+
+.bk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.bk-card {
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(56, 189, 248, 0.12);
+  border-radius: 12px;
+}
+
+.bk-card h5 {
+  margin: 0 0 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #d8e8ff;
+}
+
+.bk-card dl {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+}
+
+.bk-card dl div {
+  display: flex;
+  gap: 8px;
+  font-size: 12.5px;
+  line-height: 1.65;
+}
+
+.bk-card dt {
+  flex: 0 0 62px;
+  color: #7f96b5;
+}
+
+.bk-card dd {
+  flex: 1;
+  margin: 0;
+  color: #c3d4e8;
+}
+
+.theme-light .bk-modal {
+  background: rgba(15, 23, 42, 0.32);
+}
+
+.theme-light .bk-modal__panel {
+  background: #fff;
+  border-color: rgba(30, 95, 150, 0.14);
+  box-shadow: 0 28px 70px rgba(15, 40, 70, 0.25);
+}
+
+.theme-light .bk-modal__head {
+  border-bottom-color: rgba(30, 95, 150, 0.1);
+}
+
+.theme-light .bk-modal__head h3 {
+  color: #13304f;
+}
+
+.theme-light .bk-modal__head p,
+.theme-light .bk-group h4 span,
+.theme-light .bk-card dt {
+  color: #6b7f96;
+}
+
+.theme-light .bk-modal__close {
+  color: #4b6178;
+  background: #f2f6fb;
+  border-color: rgba(30, 95, 150, 0.14);
+}
+
+.theme-light .bk-modal__close:hover {
+  color: #13304f;
+  background: #e6eff9;
+}
+
+.theme-light .bk-group h4,
+.theme-light .bk-card h5 {
+  color: #13304f;
+}
+
+.theme-light .bk-card {
+  background: #f6f9fd;
+  border-color: rgba(30, 95, 150, 0.12);
+}
+
+.theme-light .bk-card dd {
+  color: #33475f;
+}
+
+@media (max-width: 720px) {
+  .bk-modal {
+    padding: 12px;
+  }
+
+  .bk-modal__panel {
+    max-height: 92vh;
+  }
+
+  .bk-modal__head,
+  .bk-modal__body {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .bk-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
