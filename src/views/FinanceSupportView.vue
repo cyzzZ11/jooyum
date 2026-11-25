@@ -295,7 +295,7 @@ const onEsc = (e) => {
 }
 
 const stats = [
-  { value: String(funds.length), label: '合作基金' },
+  { value: String(funds.length), label: '合作投融资机构' },
   { value: String(banks.length), label: '合作银行' },
   { value: String(insurances.length), label: '合作保险' },
   { value: '40', label: '金融机构' },
