@@ -357,6 +357,10 @@ onMounted(() => {
             <div class="roster-title">${m.title}</div>
           </div>
         </div>
+        ${(m.education || m.politics) ? `<div class="roster-meta">
+          ${m.education ? `<span><em>学历</em>${m.education}</span>` : ''}
+          ${m.politics ? `<span><em>政治身份</em>${m.politics}</span>` : ''}
+        </div>` : ''}
         ${m.org ? `<div class="roster-org"><svg viewBox="0 0 24 24"><path d="M3 21h18M3 7v14m6-14v14m6-14v14m6-14v14M3 7l9-4 9 4"/></svg>${m.org}</div>` : ''}
         ${m.fields.length ? `<div class="roster-tags">${tagHtml(m.fields)}</div>` : ''}
         <div class="roster-card-action">查看详情<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
@@ -724,6 +728,29 @@ section + section { border-top: 1px solid var(--color-rule); }
   display: flex;
   align-items: center;
   gap: 6px;
+}
+.roster-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.roster-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--color-rule);
+  background: var(--color-surface-alt, rgba(37, 99, 176, 0.05));
+  font-size: 0.72rem;
+  color: var(--color-muted);
+  line-height: 1.4;
+}
+.roster-meta em {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--color-accent);
 }
 .roster-org svg { width: 14px; height: 14px; stroke: var(--color-light); fill: none; stroke-width: 2; flex-shrink: 0; }
 .roster-tags {
