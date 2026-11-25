@@ -165,16 +165,6 @@
             </div>
 
             <div class="container">
-              <!-- 轮播上方的艺术字标语 -->
-              <header class="hero-slogan" data-cursor="hover" aria-label="开放共享赋能 创新创业筑梦">
-                <span class="hero-slogan__line" aria-hidden="true"></span>
-                <h1 class="hero-slogan__title">
-                  <span class="hero-slogan__text">开放共享赋能</span>
-                  <i class="hero-slogan__diamond" aria-hidden="true"></i>
-                  <span class="hero-slogan__text">创新创业筑梦</span>
-                </h1>
-                <span class="hero-slogan__line" aria-hidden="true"></span>
-              </header>
               <div class="news-wrap">
                 <!-- 左侧轮播（70%） -->
                 <div class="carousel" id="carousel">
@@ -2136,12 +2126,12 @@ useTiltCards('.stat-card, .uni-card, .case-card')
 .page--home .news-section .news-wrap {
   width: 100%;
   min-height: 0;
-  /* 与大标语拉开一点距离，同时把轮播 + 新闻整体往下压，减少底部留白 */
-  margin-top: clamp(18px, 5vh, 60px);
+  /* 标语移除后，轮播 + 新闻整体上提并放大 */
+  margin-top: clamp(8px, 2vh, 24px);
 }
 /* 轮播与右侧资讯用同一高度变量，保证两者底部严格对齐 */
 .page--home .news-section {
-  --news-block-h: clamp(320px, 56vh, 620px);
+  --news-block-h: clamp(340px, 62vh, 700px);
 }
 .page--home .news-section .carousel {
   height: var(--news-block-h);
@@ -3123,6 +3113,13 @@ useTiltCards('.stat-card, .uni-card, .case-card')
        * 整屏滚动（full-page scroll）
        * 仅在 .fp-on 下生效，小屏自动回退为普通滚动
        * ============================================================ */
+/* 整屏模式下内容区恰好一屏，避免多出导航高度导致右侧出现滚动条 */
+.page--home.fp-on {
+  min-height: calc(var(--home-viewport-h, 100vh) - var(--home-nav-h, 64px));
+}
+.page--home.fp-on #site-app {
+  min-height: calc(var(--home-viewport-h, 100vh) - var(--home-nav-h, 64px));
+}
 .page--home.fp-on .fp-viewport {
   height: calc(100vh - var(--home-nav-h, 64px));
   height: calc(var(--home-viewport-h, 100vh) - var(--home-nav-h, 64px));
