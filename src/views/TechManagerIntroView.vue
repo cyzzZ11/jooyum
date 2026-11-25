@@ -669,6 +669,8 @@ section + section { border-top: 1px solid var(--color-rule); }
   gap: 20px;
 }
 .roster-card {
+  display: flex;
+  flex-direction: column;
   background: var(--color-surface-solid);
   border: 1px solid var(--color-rule);
   border-radius: var(--radius-md);
@@ -731,7 +733,8 @@ section + section { border-top: 1px solid var(--color-rule); }
 }
 .roster-meta {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 6px;
   margin-bottom: 10px;
 }
@@ -772,7 +775,9 @@ section + section { border-top: 1px solid var(--color-rule); }
   font-size: 0.82rem;
   color: var(--color-primary);
   font-weight: 600;
-  margin-top: 4px;
+  margin-top: auto;
+  padding-top: 8px;
+  align-self: flex-end;
 }
 .roster-card-action svg { width: 14px; height: 14px; stroke: var(--color-primary); fill: none; stroke-width: 2; }
 

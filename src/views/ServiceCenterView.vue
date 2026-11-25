@@ -943,6 +943,11 @@ main {
   background-clip: text;
   color: transparent;
 }
+.theme-light .sc-hero__stats {
+  background: linear-gradient(160deg, #ffffff, #eef5fc);
+  border-color: rgba(37, 99, 176, 0.16);
+  box-shadow: 0 10px 28px rgba(37, 99, 176, 0.08);
+}
 .theme-light .sc-hero__stats li {
   border-left-color: rgba(37, 99, 176, 0.14);
 }
