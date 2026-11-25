@@ -2018,7 +2018,8 @@ useTiltCards('.stat-card, .uni-card, .case-card')
   box-sizing: border-box;
   min-height: calc(100vh - var(--home-nav-h, 64px));
   min-height: calc(var(--home-viewport-h, 100vh) - var(--home-nav-h, 64px));
-  padding: clamp(28px, 6vh, 72px) 0 0;
+  /* 底部预留：跑马灯固定在页面最底部，其上留出滚动进度的位置 */
+  padding: clamp(28px, 6vh, 72px) 0 clamp(100px, 11vh, 116px);
   overflow: hidden;
 }
 .page--home .news-section > .container {
@@ -2031,6 +2032,8 @@ useTiltCards('.stat-card, .uni-card, .case-card')
   gap: clamp(10px, 1.8vh, 22px);
   flex: 1;
   width: 100%;
+  /* 左右留白收窄，轮播与资讯尽量铺满 */
+  max-width: 94vw;
 }
 
 /* ---- 轮播上方艺术字标语 ---- */
@@ -2126,7 +2129,8 @@ useTiltCards('.stat-card, .uni-card, .case-card')
 .page--home .news-section .news-wrap {
   width: 100%;
   min-height: 0;
-  /* 标语移除后，轮播 + 新闻整体上提并放大 */
+  /* 撑满首屏剩余高度，底部不留白 */
+  flex: 1;
   margin-top: clamp(8px, 2vh, 24px);
 }
 /* 轮播与右侧资讯用同一高度变量，保证两者底部严格对齐 */
@@ -2134,14 +2138,16 @@ useTiltCards('.stat-card, .uni-card, .case-card')
   --news-block-h: clamp(340px, 62vh, 700px);
 }
 .page--home .news-section .carousel {
-  height: var(--news-block-h);
+  height: auto;
+  min-height: var(--news-block-h);
 }
 .page--home .news-section .news-list {
   min-height: 0;
 }
-/* 整屏模式下给资讯面板定高，超出的时间轴在面板内部滚动 */
+/* 资讯面板随轮播一起撑满，超出的时间轴在面板内部滚动 */
 .page--home.fp-on .news-section .news-list {
-  height: var(--news-block-h);
+  height: auto;
+  min-height: var(--news-block-h);
 }
 .page--home .news-section .news-timeline {
   scrollbar-width: thin;
@@ -2889,9 +2895,11 @@ useTiltCards('.stat-card, .uni-card, .case-card')
 
 /* ---- 科技关键词跑马灯 ---- */
 .tech-ticker {
-  position: relative;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 1;
-  margin-top: auto;
   overflow: hidden;
   border-top: 1px solid rgba(226, 232, 240, 0.9);
   background: linear-gradient(
@@ -3984,7 +3992,8 @@ useTiltCards('.stat-card, .uni-card, .case-card')
 .scroll-ring {
   position: fixed;
   left: 26px;
-  bottom: 28px;
+  /* 抬到底部跑马灯上方，避免被遮挡 */
+  bottom: 46px;
   z-index: 400;
   display: flex;
   align-items: center;
